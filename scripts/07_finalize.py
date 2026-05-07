@@ -389,6 +389,17 @@ def main() -> None:
     gold_n = int(gold_meta.get("total", 0) - gold_meta.get("parse_error", 0))
     gold_s = int(gold_meta.get("correct", 0))
     add_stat("acc_gold_overall", gold_s, gold_n)
+    gold_src = {"PLOS": {"n": 0, "s": 0}, "eLife": {"n": 0, "s": 0}}
+    for r in gold_results:
+        if r.get("parse_error", False):
+            continue
+        src = str(q_by_id.get(r.get("question_id", ""), {}).get("source_dataset", ""))
+        if src in gold_src:
+            gold_src[src]["n"] += 1
+            if r.get("is_correct", False):
+                gold_src[src]["s"] += 1
+    add_stat("acc_gold_plos", gold_src["PLOS"]["s"], gold_src["PLOS"]["n"])
+    add_stat("acc_gold_elife", gold_src["eLife"]["s"], gold_src["eLife"]["n"])
 
     blind41_n = int(blind_41_meta.get("total", 0) - blind_41_meta.get("parse_error", 0))
     blind41_s = int(blind_41_meta.get("correct", 0))
@@ -466,8 +477,8 @@ BioLaySumm 2025 PLOS + eLife, each 20 validation articles, seed=42.
 ### 3.3 Setup Gold (Stage 3)
 | Source | n | Correct | ACC | 95% CI |
 |---|---:|---:|---:|---:|
-| PLOS | {int(gold_meta.get('total',0))} | {int(gold_meta.get('correct',0))} | {acc_gold_plos:.4f} | {stats_payload['acc_gold_overall']['ci_lower']:.4f}-{stats_payload['acc_gold_overall']['ci_upper']:.4f} |
-| eLife | {int(gold_meta.get('total',0))} | {int(gold_meta.get('correct',0))} | {acc_gold_elife:.4f} | {stats_payload['acc_gold_overall']['ci_lower']:.4f}-{stats_payload['acc_gold_overall']['ci_upper']:.4f} |
+| PLOS | {gold_src['PLOS']['n']} | {gold_src['PLOS']['s']} | {_acc(gold_src['PLOS']['s'], gold_src['PLOS']['n']):.4f} | {stats_payload['acc_gold_plos']['ci_lower']:.4f}-{stats_payload['acc_gold_plos']['ci_upper']:.4f} |
+| eLife | {gold_src['eLife']['n']} | {gold_src['eLife']['s']} | {_acc(gold_src['eLife']['s'], gold_src['eLife']['n']):.4f} | {stats_payload['acc_gold_elife']['ci_lower']:.4f}-{stats_payload['acc_gold_elife']['ci_upper']:.4f} |
 | Overall | {gold_n} | {gold_s} | {acc_gold_overall:.4f} | {stats_payload['acc_gold_overall']['ci_lower']:.4f}-{stats_payload['acc_gold_overall']['ci_upper']:.4f} |
 
 ### 3.4 Setup Blind (Stage 4)
