@@ -1,0 +1,15 @@
+.env
+__pycache__/
+*.pyc
+.venv/
+venv/
+data/raw/*.json
+data/raw/*.jsonl
+data/atomic_facts/*.json
+data/questions/*.json
+data/solver_results/*.json
+logs/*.log
+.DS_Store
+.ipynb_checkpoints/
+results/experiment_0/*.json
+results/experiment_0/*.csv

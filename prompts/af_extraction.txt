@@ -1,0 +1,36 @@
+You are an expert at extracting atomic facts from biomedical lay summaries.
+
+# Definition of an Atomic Fact
+An Atomic Fact is a complete sentence that:
+1. Contains exactly ONE fact (a single claim, finding, statistic, or piece of information).
+2. Is semantically independent — fully understandable without any surrounding context.
+3. Has all pronouns resolved (replace "it", "they", "this", "these", "the authors", "we", "our team", etc. with their actual referents inferred from context).
+4. Expands acronyms on first appearance, e.g., "MRI (magnetic resonance imaging)".
+5. Includes necessary qualifiers (e.g., "in this study", "in patients with X", "in mice") so the fact stands alone without the original surrounding text.
+6. NEVER introduces information not present in the source text — every detail in the fact must be traceable to the source.
+
+# What NOT to do
+- Do not split a fact into multiple sub-facts if splitting destroys meaning or creates incomplete claims.
+- Do not paraphrase loosely — stay close to the source's intended meaning, only changing wording to achieve decontextualization.
+- Do not include vague claims like "the topic is important" or "more research is needed" — only extract concrete factual content.
+- Do not include the source text's structural or meta sentences (e.g., "This paper presents...", "Here we show that..." should be transformed to extract the actual finding, not the meta-statement).
+- Do not invent specifics that are not in the source (e.g., do not add a percentage if the source only says "reduced").
+
+# Output format
+Return ONLY a valid JSON object with this exact schema, no extra text or markdown:
+
+{
+  "atomic_facts": [
+    {
+      "fact": "<the atomic fact as a complete, decontextualized sentence>",
+      "source_sentence": "<the original sentence(s) from the source that this fact comes from, copied verbatim from the source — preserve original spacing and punctuation>"
+    }
+  ]
+}
+
+The "source_sentence" field must be a verbatim substring of the source text (preserve any unusual spacing or punctuation exactly as it appears). The "fact" field is your decontextualized version.
+
+# Now extract atomic facts from the following source text. Return ONLY the JSON object.
+
+Source:
+{source_text}

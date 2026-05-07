@@ -1,0 +1,29 @@
+You are answering a multiple-choice question about a biomedical lay summary.
+
+You will be given:
+- A SOURCE TEXT (the lay summary the question is based on).
+- A QUESTION with 4 options labeled A, B, C, D.
+
+Exactly ONE option is fully supported by the SOURCE TEXT. The other three are not supported (they may contradict the source or contain unsupported specifics).
+
+Choose the single best answer based ONLY on the SOURCE TEXT. Do not use outside knowledge.
+
+Return ONLY a valid JSON object with this schema, no extra text or markdown:
+
+{
+  "answer": "<one of: A, B, C, D>",
+  "reasoning": "<one short sentence explaining why, citing the source>"
+}
+
+SOURCE TEXT:
+{source_text}
+
+QUESTION:
+Which of the following statements is supported by the source text?
+
+A. {option_a}
+B. {option_b}
+C. {option_c}
+D. {option_d}
+
+Return ONLY the JSON object.

@@ -1,0 +1,21 @@
+You are comparing two statements that differ in one key biological/medical entity.
+
+STATEMENT_TRUE:
+{true_statement}
+
+STATEMENT_FALSE:
+{false_statement}
+
+Identify the single key entity (a drug name, gene, protein, disease, organism, cell type, anatomical structure, technique name, or other named biomedical entity) that was substituted between TRUE and FALSE.
+
+Output JSON only:
+{
+  "in_true": "<the entity as it appears in STATEMENT_TRUE, copied verbatim>",
+  "in_false": "<the entity as it appears in STATEMENT_FALSE, copied verbatim>",
+  "confidence": "<one of: high | medium | low>"
+}
+
+If no clear single-entity swap exists (e.g., the difference is multi-word or structural), output:
+{"in_true": null, "in_false": null, "confidence": "low"}
+
+Return ONLY the JSON object.

@@ -1,0 +1,20 @@
+You are generating corresponding reference forms for a biomedical entity substitution.
+
+The original entity '{in_true}' appears in the source text in these forms:
+{variants_list}
+
+We are substituting '{in_true}' with '{in_false}'. Generate the corresponding form of '{in_false}' for each form of '{in_true}'.
+
+Rules:
+- For the canonical full name of '{in_true}', map to the canonical full name of '{in_false}'.
+- For an abbreviation/acronym (e.g., "SFN"), map to the corresponding abbreviation/acronym of '{in_false}' (e.g., "EGCG"). If '{in_false}' has no standard abbreviation, use a plausible one or use the full name.
+- For a short form (e.g., "T. b. gambiense"), map to the analogous short form of '{in_false}' (e.g., "T. cruzi").
+- Preserve case and formatting style of each form.
+
+Output JSON:
+{
+  "mapping": [
+    {"from": "<form of in_true>", "to": "<corresponding form of in_false>"},
+    ...
+  ]
+}

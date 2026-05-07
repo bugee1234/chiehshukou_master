@@ -1,0 +1,117 @@
+{"question_id": "plos_001_af_010_q", "skip_reason": "entity_not_found", "details": "Entity 'multisubunit E3 ligase complexes' not found in lay_summary."}
+{"question_id": "plos_002_af_001_q", "skip_reason": "entity_not_found", "details": "Entity 'environment' not found in lay_summary."}
+{"question_id": "plos_002_af_003_q", "skip_reason": "entity_not_found", "details": "Entity 'spiky-to-round continuum' not found in lay_summary."}
+{"question_id": "plos_003_af_010_q", "skip_reason": "entity_not_found", "details": "Entity 'a widely available dietary compound' not found in lay_summary."}
+{"question_id": "plos_004_af_004_q", "skip_reason": "entity_not_found", "details": "Entity 'Clumping factor B (ClfB)' not found in lay_summary."}
+{"question_id": "plos_004_af_006_q", "skip_reason": "entity_not_found", "details": "Entity 'Clumping factor B (ClfB)' not found in lay_summary."}
+{"question_id": "plos_005_af_001_q", "skip_reason": "entity_not_found", "details": "Entity 'human immunodeficiency virus (HIV)' not found in lay_summary."}
+{"question_id": "plos_005_af_002_q", "skip_reason": "entity_not_found", "details": "Entity 'human immunodeficiency virus (HIV)' not found in lay_summary."}
+{"question_id": "plos_005_af_003_q", "skip_reason": "entity_not_found", "details": "Entity 'human immunodeficiency virus (HIV)' not found in lay_summary."}
+{"question_id": "plos_005_af_007_q", "skip_reason": "entity_not_found", "details": "Entity 'HIV virus' not found in lay_summary."}
+{"question_id": "plos_005_af_008_q", "skip_reason": "entity_not_found", "details": "Entity 'genetic data' not found in lay_summary."}
+{"question_id": "plos_005_af_010_q", "skip_reason": "no_clean_swap", "details": "Swap pair has null entity values (confidence=low)."}
+{"question_id": "plos_006_af_001_q", "skip_reason": "entity_not_found", "details": "Entity 'stem cells' not found in lay_summary."}
+{"question_id": "plos_006_af_002_q", "skip_reason": "entity_not_found", "details": "Entity 'germline stem cells' not found in lay_summary."}
+{"question_id": "plos_006_af_007_q", "skip_reason": "entity_not_found", "details": "Entity 'cell type' not found in lay_summary."}
+{"question_id": "plos_006_af_008_q", "skip_reason": "entity_not_found", "details": "Entity 'germline stem cells' not found in lay_summary."}
+{"question_id": "plos_007_af_001_q", "skip_reason": "low_confidence", "details": "Swap confidence is low for pair physical impairment, reduced ability to work, and social exclusion -> cognitive decline, increased healthcare costs, and familial isolation."}
+{"question_id": "plos_007_af_003_q", "skip_reason": "entity_not_found", "details": "Entity 'countries where neglected tropical diseases are common' not found in lay_summary."}
+{"question_id": "plos_007_af_008_q", "skip_reason": "entity_not_found", "details": "Entity 'countries where neglected tropical diseases are prevalent and resources are limited' not found in lay_summary."}
+{"question_id": "plos_009_af_002_q", "skip_reason": "entity_not_found", "details": "Entity 'Dengue virus (DENV)' not found in lay_summary."}
+{"question_id": "plos_009_af_003_q", "skip_reason": "entity_not_found", "details": "Entity 'dengue fever (DF)' not found in lay_summary."}
+{"question_id": "plos_009_af_004_q", "skip_reason": "entity_not_found", "details": "Entity 'serum' not found in lay_summary."}
+{"question_id": "plos_009_af_005_q", "skip_reason": "entity_not_found", "details": "Entity 'dengue fever (DF)' not found in lay_summary."}
+{"question_id": "plos_009_af_007_q", "skip_reason": "entity_not_found", "details": "Entity 'dengue hemorrhagic fever (DHF)' not found in lay_summary."}
+{"question_id": "plos_010_af_009_q", "skip_reason": "entity_not_found", "details": "Entity 'Public health media campaigns' not found in lay_summary."}
+{"question_id": "plos_011_af_001_q", "skip_reason": "no_variant_mapping", "details": "No usable variants found in source text."}
+{"question_id": "plos_011_af_005_q", "skip_reason": "no_clean_swap", "details": "Swap pair has null entity values (confidence=low)."}
+{"question_id": "plos_012_af_004_q", "skip_reason": "entity_not_found", "details": "Entity 'recombinant DENV NS1 protein' not found in lay_summary."}
+{"question_id": "plos_013_af_001_q", "skip_reason": "entity_not_found", "details": "Entity 'multiple species' not found in lay_summary."}
+{"question_id": "plos_013_af_002_q", "skip_reason": "no_entity_swap", "details": "No entity_swap distractor in false_statements."}
+{"question_id": "plos_013_af_003_q", "skip_reason": "entity_not_found", "details": "Entity 'Caenorhabditis elegans' not found in lay_summary."}
+{"question_id": "plos_013_af_004_q", "skip_reason": "entity_not_found", "details": "Entity 'target of rapamycin (TOR)' not found in lay_summary."}
+{"question_id": "plos_013_af_005_q", "skip_reason": "entity_not_found", "details": "Entity 'target of rapamycin (TOR)' not found in lay_summary."}
+{"question_id": "plos_013_af_006_q", "skip_reason": "entity_not_found", "details": "Entity 'hypoxia-inducible factor-1 (HIF-1)' not found in lay_summary."}
+{"question_id": "plos_013_af_007_q", "skip_reason": "entity_not_found", "details": "Entity 'hypoxia-inducible factor-1 (HIF-1)' not found in lay_summary."}
+{"question_id": "plos_013_af_008_q", "skip_reason": "entity_not_found", "details": "Entity 'hypoxia-inducible factor-1 (HIF-1)' not found in lay_summary."}
+{"question_id": "plos_013_af_009_q", "skip_reason": "entity_not_found", "details": "Entity 'inositol-requiring protein-1 (IRE-1)' not found in lay_summary."}
+{"question_id": "plos_013_af_010_q", "skip_reason": "entity_not_found", "details": "Entity 'hypoxia-inducible factor-1 (HIF-1)' not found in lay_summary."}
+{"question_id": "plos_013_af_012_q", "skip_reason": "entity_not_found", "details": "Entity 'hypoxia-inducible factor-1 (HIF-1)' not found in lay_summary."}
+{"question_id": "plos_014_af_001_q", "skip_reason": "entity_not_found", "details": "Entity 'neuronal activity' not found in lay_summary."}
+{"question_id": "plos_014_af_002_q", "skip_reason": "entity_not_found", "details": "Entity 'increased neuronal activity' not found in lay_summary."}
+{"question_id": "plos_014_af_003_q", "skip_reason": "entity_not_found", "details": "Entity 'extracellular space shrinkage' not found in lay_summary."}
+{"question_id": "plos_014_af_004_q", "skip_reason": "entity_not_found", "details": "Entity 'potassium ions (K+)' not found in lay_summary."}
+{"question_id": "plos_014_af_005_q", "skip_reason": "entity_not_found", "details": "Entity 'potassium ions (K+)' not found in lay_summary."}
+{"question_id": "plos_015_af_005_q", "skip_reason": "entity_not_found", "details": "Entity 'hearing impairment' not found in lay_summary."}
+{"question_id": "plos_015_af_007_q", "skip_reason": "entity_not_found", "details": "Entity 'cerebral cortex' not found in lay_summary."}
+{"question_id": "plos_016_af_002_q", "skip_reason": "entity_not_found", "details": "Entity 'white adipose tissue' not found in lay_summary."}
+{"question_id": "plos_016_af_004_q", "skip_reason": "entity_not_found", "details": "Entity 'white adipose tissue' not found in lay_summary."}
+{"question_id": "plos_016_af_005_q", "skip_reason": "entity_not_found", "details": "Entity 'organic cation transporter 3 (Oct3)' not found in lay_summary."}
+{"question_id": "plos_016_af_006_q", "skip_reason": "entity_not_found", "details": "Entity 'organic cation transporter 3 (OCT3) gene' not found in lay_summary."}
+{"question_id": "plos_018_af_001_q", "skip_reason": "entity_not_found", "details": "Entity 'within cells' not found in lay_summary."}
+{"question_id": "plos_018_af_009_q", "skip_reason": "entity_not_found", "details": "Entity 'amyloid fibrils' not found in lay_summary."}
+{"question_id": "plos_019_af_001_q", "skip_reason": "entity_not_found", "details": "Entity 'water environments' not found in lay_summary."}
+{"question_id": "plos_019_af_006_q", "skip_reason": "entity_not_found", "details": "Entity 'sterol biosynthesis pathways' not found in lay_summary."}
+{"question_id": "plos_019_af_007_q", "skip_reason": "entity_not_found", "details": "Entity 'sterol 14-demethylase (CYP51)' not found in lay_summary."}
+{"question_id": "plos_020_af_005_q", "skip_reason": "entity_not_found", "details": "Entity 'specific gene variants' not found in lay_summary."}
+{"question_id": "plos_020_af_006_q", "skip_reason": "entity_not_found", "details": "Entity 'genetic information' not found in lay_summary."}
+{"question_id": "elife_001_af_001_q", "skip_reason": "entity_not_found", "details": "Entity 'electrical impulses' not found in lay_summary."}
+{"question_id": "elife_001_af_007_q", "skip_reason": "entity_not_found", "details": "Entity 'calcium fluorescence signals' not found in lay_summary."}
+{"question_id": "elife_001_af_008_q", "skip_reason": "entity_not_found", "details": "Entity 'spiking activity' not found in lay_summary."}
+{"question_id": "elife_001_af_009_q", "skip_reason": "entity_not_found", "details": "Entity 'simultaneous calcium imaging and electrical recording' not found in lay_summary."}
+{"question_id": "elife_001_af_016_q", "skip_reason": "entity_not_found", "details": "Entity 'neuronal populations in the mammalian brain' not found in lay_summary."}
+{"question_id": "elife_001_af_018_q", "skip_reason": "entity_not_found", "details": "Entity 'neuronal spikes' not found in lay_summary."}
+{"question_id": "elife_002_af_002_q", "skip_reason": "entity_not_found", "details": "Entity 'noisy environments like restaurants' not found in lay_summary."}
+{"question_id": "elife_002_af_006_q", "skip_reason": "entity_not_found", "details": "Entity 'biological indicators' not found in lay_summary."}
+{"question_id": "elife_002_af_008_q", "skip_reason": "entity_not_found", "details": "Entity 'biological indicators' not found in lay_summary."}
+{"question_id": "elife_002_af_009_q", "skip_reason": "low_confidence", "details": "Swap confidence is low for pair the level of mental effort they must exert to concentrate on the task -> how well they can detect subtle changes in sound frequency."}
+{"question_id": "elife_002_af_011_q", "skip_reason": "entity_not_found", "details": "Entity 'specific sound features' not found in lay_summary."}
+{"question_id": "elife_003_af_004_q", "skip_reason": "entity_not_found", "details": "Entity 'Visual' not found in lay_summary."}
+{"question_id": "elife_004_af_003_q", "skip_reason": "no_entity_swap", "details": "No entity_swap distractor in false_statements."}
+{"question_id": "elife_004_af_005_q", "skip_reason": "no_entity_swap", "details": "No entity_swap distractor in false_statements."}
+{"question_id": "elife_004_af_019_q", "skip_reason": "entity_not_found", "details": "Entity 'human genetic disorders' not found in lay_summary."}
+{"question_id": "elife_005_af_004_q", "skip_reason": "entity_not_found", "details": "Entity 'plant species' not found in lay_summary."}
+{"question_id": "elife_005_af_007_q", "skip_reason": "low_confidence", "details": "Swap confidence is low for pair short stamens and an elongated style -> long stamens and a short style."}
+{"question_id": "elife_005_af_010_q", "skip_reason": "no_entity_swap", "details": "No entity_swap distractor in false_statements."}
+{"question_id": "elife_006_af_002_q", "skip_reason": "entity_not_found", "details": "Entity 'the precise reason' not found in lay_summary."}
+{"question_id": "elife_006_af_005_q", "skip_reason": "low_confidence", "details": "Swap confidence is low for pair Reactive oxygen species -> Superoxide and nitric oxide, rather than hydrogen peroxide and peroxynitrite."}
+{"question_id": "elife_006_af_007_q", "skip_reason": "no_entity_swap", "details": "No entity_swap distractor in false_statements."}
+{"question_id": "elife_006_af_008_q", "skip_reason": "entity_not_found", "details": "Entity 'protein carbonylation' not found in lay_summary."}
+{"question_id": "elife_006_af_009_q", "skip_reason": "entity_not_found", "details": "Entity 'protein carbonylation' not found in lay_summary."}
+{"question_id": "elife_006_af_023_q", "skip_reason": "entity_not_found", "details": "Entity 'Limiting calorie intake' not found in lay_summary."}
+{"question_id": "elife_007_af_010_q", "skip_reason": "entity_not_found", "details": "Entity 'hypothalamic' not found in lay_summary."}
+{"question_id": "elife_008_af_005_q", "skip_reason": "entity_not_found", "details": "Entity 'eukaryotic cells' not found in lay_summary."}
+{"question_id": "elife_009_af_005_q", "skip_reason": "no_entity_swap", "details": "No entity_swap distractor in false_statements."}
+{"question_id": "elife_009_af_007_q", "skip_reason": "entity_not_found", "details": "Entity 'KCNQ1 protein subunits' not found in lay_summary."}
+{"question_id": "elife_009_af_016_q", "skip_reason": "entity_not_found", "details": "Entity 'adult heart muscle cells' not found in lay_summary."}
+{"question_id": "elife_010_af_006_q", "skip_reason": "entity_not_found", "details": "Entity 'eye fixation points' not found in lay_summary."}
+{"question_id": "elife_010_af_009_q", "skip_reason": "low_confidence", "details": "Swap confidence is low for pair imperfect vision and inaccuracies in the movements themselves -> slow neural processing and limited memory capacity."}
+{"question_id": "elife_011_af_016_q", "skip_reason": "entity_not_found", "details": "Entity 'proliferation' not found in lay_summary."}
+{"question_id": "elife_011_af_024_q", "skip_reason": "entity_not_found", "details": "Entity 'liver, intestine, and muscles' not found in lay_summary."}
+{"question_id": "elife_012_af_002_q", "skip_reason": "entity_not_found", "details": "Entity 'Messenger RNAs (mRNAs)' not found in lay_summary."}
+{"question_id": "elife_012_af_004_q", "skip_reason": "entity_not_found", "details": "Entity 'protein translation' not found in lay_summary."}
+{"question_id": "elife_012_af_013_q", "skip_reason": "entity_not_found", "details": "Entity 'proteins that are important for the virus, like those involved in energy production' not found in lay_summary."}
+{"question_id": "elife_013_af_001_q", "skip_reason": "low_confidence", "details": "Swap confidence is low for pair cataracts, intellectual impairment, and problems with kidney function -> hearing loss, muscle weakness, and liver dysfunction."}
+{"question_id": "elife_013_af_004_q", "skip_reason": "entity_not_found", "details": "Entity 'the molecules being internalized' not found in lay_summary."}
+{"question_id": "elife_013_af_005_q", "skip_reason": "no_entity_swap", "details": "No entity_swap distractor in false_statements."}
+{"question_id": "elife_014_af_003_q", "skip_reason": "entity_not_found", "details": "Entity 'human gut' not found in lay_summary."}
+{"question_id": "elife_015_af_004_q", "skip_reason": "entity_not_found", "details": "Entity 'C-type lectin receptors (CLRs)' not found in lay_summary."}
+{"question_id": "elife_016_af_002_q", "skip_reason": "entity_not_found", "details": "Entity 'messenger RNA (mRNA)' not found in lay_summary."}
+{"question_id": "elife_016_af_004_q", "skip_reason": "entity_not_found", "details": "Entity 'messenger RNA' not found in lay_summary."}
+{"question_id": "elife_016_af_006_q", "skip_reason": "entity_not_found", "details": "Entity 'neurological disorders' not found in lay_summary."}
+{"question_id": "elife_016_af_008_q", "skip_reason": "entity_not_found", "details": "Entity 'protein function' not found in lay_summary."}
+{"question_id": "elife_016_af_011_q", "skip_reason": "entity_not_found", "details": "Entity 'ADR-2 protein' not found in lay_summary."}
+{"question_id": "elife_017_af_006_q", "skip_reason": "entity_not_found", "details": "Entity 'higher visual regions' not found in lay_summary."}
+{"question_id": "elife_017_af_009_q", "skip_reason": "entity_not_found", "details": "Entity 'leaping between perches' not found in lay_summary."}
+{"question_id": "elife_017_af_013_q", "skip_reason": "entity_not_found", "details": "Entity 'higher visual regions' not found in lay_summary."}
+{"question_id": "elife_017_af_017_q", "skip_reason": "entity_not_found", "details": "Entity 'primate species' not found in lay_summary."}
+{"question_id": "elife_018_af_004_q", "skip_reason": "no_entity_swap", "details": "No entity_swap distractor in false_statements."}
+{"question_id": "elife_018_af_012_q", "skip_reason": "entity_not_found", "details": "Entity 'SWI/SNF protein complex' not found in lay_summary."}
+{"question_id": "elife_018_af_015_q", "skip_reason": "entity_not_found", "details": "Entity 'how effective drug treatments are' not found in lay_summary."}
+{"question_id": "elife_019_af_002_q", "skip_reason": "entity_not_found", "details": "Entity 'young children, pregnant women, elderly individuals, and people with compromised immune systems' not found in lay_summary."}
+{"question_id": "elife_019_af_003_q", "skip_reason": "entity_not_found", "details": "Entity 'gastrointestinal tract' not found in lay_summary."}
+{"question_id": "elife_020_af_001_q", "skip_reason": "entity_not_found", "details": "Entity 'synaptic gaps' not found in lay_summary."}
+{"question_id": "elife_020_af_002_q", "skip_reason": "entity_not_found", "details": "Entity 'neurotransmitter chemicals' not found in lay_summary."}
+{"question_id": "elife_020_af_005_q", "skip_reason": "no_entity_swap", "details": "No entity_swap distractor in false_statements."}
+{"question_id": "elife_020_af_013_q", "skip_reason": "low_confidence", "details": "Swap confidence is low for pair calcium channels -> neurotransmitter packaging within vesicles."}
+{"question_id": "elife_020_af_015_q", "skip_reason": "entity_not_found", "details": "Entity 'multiple calcium channel partners' not found in lay_summary."}

@@ -1,0 +1,28 @@
+You are analyzing a biomedical lay summary to find all references to a specific entity, including its variants.
+
+ENTITY:
+{entity}
+
+SOURCE TEXT:
+{source_text}
+
+List ALL distinct ways the ENTITY is referenced in the SOURCE TEXT, including:
+- The full canonical name (verbatim from source)
+- Acronyms or abbreviations (e.g., "MRI" for "magnetic resonance imaging")
+- Short forms (e.g., "T. b. gambiense" for "Trypanosoma brucei gambiense")
+- Partial names if used (e.g., "BRCA" for "BRCA1" — only include if it clearly refers to the same entity)
+- Any other variant that explicitly co-references the ENTITY
+
+Rules:
+- Only include forms that ACTUALLY APPEAR in the SOURCE TEXT (verbatim substring match).
+- Do NOT include generic terms (e.g., "the protein", "the gene") unless they are uniquely tied to this entity in context.
+- Do NOT include forms not in the source.
+- The full canonical name MUST be the first item if it appears in the source.
+
+Output JSON:
+{
+  "variants": ["<form 1>", "<form 2>", ...]
+}
+
+If only the canonical form appears in the source, return:
+{"variants": ["<canonical>"]}

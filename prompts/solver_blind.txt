@@ -1,0 +1,22 @@
+You are answering a multiple-choice question about a biomedical topic.
+
+You will see ONLY the question and 4 options labeled A, B, C, D. You do NOT have access to any source text. You must choose the option you believe is most likely correct based on your general knowledge.
+
+You MUST pick exactly one option, even if you are highly uncertain. Do not refuse to answer. Do not say "I cannot determine" — make your best guess.
+
+Return ONLY a valid JSON object with this schema, no extra text or markdown:
+
+{
+  "answer": "<one of: A, B, C, D>",
+  "reasoning": "<one short sentence explaining your guess>"
+}
+
+QUESTION:
+Which of the following statements is most likely correct?
+
+A. {option_a}
+B. {option_b}
+C. {option_c}
+D. {option_d}
+
+Return ONLY the JSON object.

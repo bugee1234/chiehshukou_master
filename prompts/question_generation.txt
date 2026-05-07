@@ -1,0 +1,72 @@
+You are creating high-difficulty multiple-choice questions for a research project on biomedical fact verification.
+
+# Input
+You will receive:
+- A SOURCE PARAGRAPH (a lay summary of biomedical research).
+- An ATOMIC FACT extracted from that paragraph.
+
+# Critical context: how your output will be tested
+Each question will be answered by a strong LLM (e.g., GPT-4.1) under TWO conditions:
+1. WITH the source paragraph as context — the LLM should easily identify the TRUE statement.
+2. WITHOUT any context — the LLM should have NO RELIABLE WAY to identify the true statement using only its prior biomedical knowledge.
+
+If a knowledgeable LLM can pick the correct answer in condition (2) using only training data, your distractors are TOO WEAK. This is the primary failure mode you must avoid.
+
+# Your task
+Generate ONE multiple-choice item with exactly 4 options:
+- 1 TRUE statement: a faithful paraphrase of the atomic fact, supported by the source paragraph. Rephrase wording while preserving meaning. If the atomic fact has anaphoric references (e.g., "the ion flow", "this technique") that the source paragraph clarifies, INCLUDE the specific entity in the TRUE statement so it stands alone.
+- 3 FALSE distractors: each must be subtle enough that a knowledgeable LLM cannot eliminate it without reading the source paragraph.
+
+# Strong distractor design
+
+## What makes a STRONG distractor
+- Targets a SPECIFIC finding of this particular paper, not general textbook knowledge.
+- Substitutes entities, numbers, mechanisms, or qualifiers that are PLAUSIBLE — close enough to truth that an LLM has no strong prior preference between the distractor and the true statement.
+- Could pass as a correct answer to someone biomedically literate who has not read this specific paper.
+
+## What makes a WEAK distractor (AVOID THESE)
+- Contradicts a textbook-level fact (e.g., "genes are made of RNA" — every LLM knows this is wrong).
+- Replaces a number with one in a wildly different magnitude (e.g., "30%" → "95%" — model recognizes the canonical value).
+- Swaps an entity for one in a clearly different category (e.g., "DNA" → "lipid" — too obvious).
+- Reverses a relationship that is well-known in the field (e.g., "vaccines cause immunity" → "vaccines suppress immunity").
+
+## Subtle perturbation strategies
+The 3 distractors MUST collectively use 3 DIFFERENT strategies from this list. Apply each strategy with subtlety:
+
+1. numerical_perturbation — change a number to a PLAUSIBLE alternative value (within roughly 0.5x to 2x of the original, or matching a different but related statistic). Good: "30%" → "22%". Bad: "30%" → "90%".
+
+2. entity_swap — replace an entity with one from the SAME functional class (same protein family, related disease, related cell type, related organism). Good: "BRCA1" → "BRCA2". Bad: "BRCA1" → "insulin".
+
+3. direction_reversal — reverse a CONTEXT-SPECIFIC relationship that the source paper specifically discovered, NOT a textbook canonical one. Good: reverse a finding unique to this paper. Bad: reverse a fundamental biological law.
+
+4. detail_fabrication — add a specific qualifier, condition, mechanism, or scope NOT supported by the source but PLAUSIBLE for the topic. Good: add a population-specific qualifier ("only in elderly patients") that the source does not state. Bad: add an absurd or off-topic qualifier.
+
+# Self-check before finalizing
+For each distractor, mentally answer:
+1. "If the source paragraph were removed, could a knowledgeable biomedical LLM still rule this out using only training data?" — If YES, the distractor is too weak. Revise it.
+2. "Does this distractor match the TRUE statement in length, specificity, and technical level?" — If NO, revise.
+3. "Is this distractor genuinely UNSUPPORTED by the source paragraph (not accidentally true based on another part of the source)?" — If NO (i.e., the source actually supports the distractor), revise.
+
+The 3 distractors MUST use 3 distinct strategies overall.
+
+# Output format
+Return ONLY a valid JSON object, no extra text or markdown fences:
+
+{
+  "true_statement": "<paraphrased true statement>",
+  "false_statements": [
+    {"text": "<distractor 1>", "strategy": "<one of: numerical_perturbation | entity_swap | direction_reversal | detail_fabrication>"},
+    {"text": "<distractor 2>", "strategy": "<one of the above>"},
+    {"text": "<distractor 3>", "strategy": "<one of the above>"}
+  ]
+}
+
+The "false_statements" array MUST contain exactly 3 items. The "strategy" field MUST be exactly one of the four lowercase strings above.
+
+# Now generate the question for the following input. Return ONLY the JSON object.
+
+SOURCE PARAGRAPH:
+{source_paragraph}
+
+ATOMIC FACT:
+{atomic_fact}
