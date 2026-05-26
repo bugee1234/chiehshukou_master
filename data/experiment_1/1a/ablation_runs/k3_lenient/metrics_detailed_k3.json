@@ -1,0 +1,172 @@
+{
+  "k": 3,
+  "pilot_first_n": 10,
+  "setups": {
+    "A": {
+      "overall": {
+        "tp": 13,
+        "tn": 45,
+        "fp": 7,
+        "fn": 11,
+        "precision": 0.65,
+        "recall": 0.5417,
+        "f1": 0.5909,
+        "accuracy": 0.7632
+      },
+      "by_type": {
+        "F_del": {
+          "n": 10,
+          "correct_rate": 0.6,
+          "pred_hallucination_rate": 0.6,
+          "tp": 6,
+          "tn": 0,
+          "fp": 0,
+          "fn": 4,
+          "precision": 1.0,
+          "recall": 0.6,
+          "f1": 0.75,
+          "accuracy": 0.6
+        },
+        "F_error": {
+          "n": 14,
+          "correct_rate": 0.5,
+          "pred_hallucination_rate": 0.5,
+          "tp": 7,
+          "tn": 0,
+          "fp": 0,
+          "fn": 7,
+          "precision": 1.0,
+          "recall": 0.5,
+          "f1": 0.6667,
+          "accuracy": 0.5
+        },
+        "F_kept": {
+          "n": 52,
+          "correct_rate": 0.8654,
+          "pred_hallucination_rate": 0.1346,
+          "tp": 0,
+          "tn": 45,
+          "fp": 7,
+          "fn": 0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "accuracy": 0.8654
+        }
+      }
+    },
+    "B": {
+      "overall": {
+        "tp": 8,
+        "tn": 46,
+        "fp": 6,
+        "fn": 16,
+        "precision": 0.5714,
+        "recall": 0.3333,
+        "f1": 0.4211,
+        "accuracy": 0.7105
+      },
+      "by_type": {
+        "F_del": {
+          "n": 10,
+          "correct_rate": 0.3,
+          "pred_hallucination_rate": 0.3,
+          "tp": 3,
+          "tn": 0,
+          "fp": 0,
+          "fn": 7,
+          "precision": 1.0,
+          "recall": 0.3,
+          "f1": 0.4615,
+          "accuracy": 0.3
+        },
+        "F_error": {
+          "n": 14,
+          "correct_rate": 0.3571,
+          "pred_hallucination_rate": 0.3571,
+          "tp": 5,
+          "tn": 0,
+          "fp": 0,
+          "fn": 9,
+          "precision": 1.0,
+          "recall": 0.3571,
+          "f1": 0.5263,
+          "accuracy": 0.3571
+        },
+        "F_kept": {
+          "n": 52,
+          "correct_rate": 0.8846,
+          "pred_hallucination_rate": 0.1154,
+          "tp": 0,
+          "tn": 46,
+          "fp": 6,
+          "fn": 0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "accuracy": 0.8846
+        }
+      }
+    },
+    "C": {
+      "overall": {
+        "tp": 13,
+        "tn": 47,
+        "fp": 5,
+        "fn": 11,
+        "precision": 0.7222,
+        "recall": 0.5417,
+        "f1": 0.619,
+        "accuracy": 0.7895
+      },
+      "by_type": {
+        "F_del": {
+          "n": 10,
+          "correct_rate": 0.5,
+          "pred_hallucination_rate": 0.5,
+          "tp": 5,
+          "tn": 0,
+          "fp": 0,
+          "fn": 5,
+          "precision": 1.0,
+          "recall": 0.5,
+          "f1": 0.6667,
+          "accuracy": 0.5
+        },
+        "F_error": {
+          "n": 14,
+          "correct_rate": 0.5714,
+          "pred_hallucination_rate": 0.5714,
+          "tp": 8,
+          "tn": 0,
+          "fp": 0,
+          "fn": 6,
+          "precision": 1.0,
+          "recall": 0.5714,
+          "f1": 0.7273,
+          "accuracy": 0.5714
+        },
+        "F_kept": {
+          "n": 52,
+          "correct_rate": 0.9038,
+          "pred_hallucination_rate": 0.0962,
+          "tp": 0,
+          "tn": 47,
+          "fp": 5,
+          "fn": 0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "accuracy": 0.9038
+        }
+      },
+      "E_rate_overall": 0.1316,
+      "E_rate_by_type": {
+        "F_del": 0.4,
+        "F_error": 0.2143,
+        "F_kept": 0.0577
+      },
+      "empty_supporting_evidence_rate_when_choose_ABCD": 0.0
+    }
+  }
+}

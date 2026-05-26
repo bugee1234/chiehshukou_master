@@ -1,0 +1,150 @@
+{
+  "k": 5,
+  "pilot_first_n": 200,
+  "tasks": {
+    "omission_detection_F_del": {
+      "A": {
+        "n": 302,
+        "tp": 189,
+        "tn": 0,
+        "fp": 0,
+        "fn": 113,
+        "precision": 1.0,
+        "recall": 0.6258,
+        "f1": 0.7699,
+        "accuracy": 0.6258
+      },
+      "B": {
+        "n": 302,
+        "tp": 59,
+        "tn": 0,
+        "fp": 0,
+        "fn": 243,
+        "precision": 1.0,
+        "recall": 0.1954,
+        "f1": 0.3269,
+        "accuracy": 0.1954
+      },
+      "C": {
+        "n": 302,
+        "tp": 155,
+        "tn": 0,
+        "fp": 0,
+        "fn": 147,
+        "precision": 1.0,
+        "recall": 0.5132,
+        "f1": 0.6783,
+        "accuracy": 0.5132
+      }
+    },
+    "error_detection_F_error": {
+      "A": {
+        "n": 387,
+        "tp": 324,
+        "tn": 0,
+        "fp": 0,
+        "fn": 63,
+        "precision": 1.0,
+        "recall": 0.8372,
+        "f1": 0.9114,
+        "accuracy": 0.8372
+      },
+      "B": {
+        "n": 387,
+        "tp": 157,
+        "tn": 0,
+        "fp": 0,
+        "fn": 230,
+        "precision": 1.0,
+        "recall": 0.4057,
+        "f1": 0.5772,
+        "accuracy": 0.4057
+      },
+      "C": {
+        "n": 387,
+        "tp": 230,
+        "tn": 0,
+        "fp": 0,
+        "fn": 157,
+        "precision": 1.0,
+        "recall": 0.5943,
+        "f1": 0.7455,
+        "accuracy": 0.5943
+      }
+    },
+    "retention_specificity_F_kept": {
+      "A": {
+        "n": 1624,
+        "tp": 0,
+        "tn": 1505,
+        "fp": 119,
+        "fn": 0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "accuracy": 0.9267
+      },
+      "B": {
+        "n": 1624,
+        "tp": 0,
+        "tn": 1590,
+        "fp": 34,
+        "fn": 0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "accuracy": 0.9791
+      },
+      "C": {
+        "n": 1624,
+        "tp": 0,
+        "tn": 1480,
+        "fp": 144,
+        "fn": 0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "accuracy": 0.9113
+      }
+    },
+    "positive_combined_F_del_plus_F_error": {
+      "A": {
+        "n": 689,
+        "tp": 513,
+        "tn": 0,
+        "fp": 0,
+        "fn": 176,
+        "precision": 1.0,
+        "recall": 0.7446,
+        "f1": 0.8536,
+        "accuracy": 0.7446
+      },
+      "B": {
+        "n": 689,
+        "tp": 216,
+        "tn": 0,
+        "fp": 0,
+        "fn": 473,
+        "precision": 1.0,
+        "recall": 0.3135,
+        "f1": 0.4773,
+        "accuracy": 0.3135
+      },
+      "C": {
+        "n": 689,
+        "tp": 385,
+        "tn": 0,
+        "fp": 0,
+        "fn": 304,
+        "precision": 1.0,
+        "recall": 0.5588,
+        "f1": 0.7169,
+        "accuracy": 0.5588
+      }
+    }
+  },
+  "notes": {
+    "setup_B": "Forced-choice baseline without abstain; omission rows may induce random guessing noise.",
+    "interpretation": "Prefer omission_detection_F_del and retention_specificity_F_kept as primary axes for NOTA-enabled setup evaluation."
+  }
+}
