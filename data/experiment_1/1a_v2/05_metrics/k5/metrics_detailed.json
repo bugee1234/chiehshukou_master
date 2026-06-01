@@ -1,0 +1,177 @@
+{
+  "k": 5,
+  "pilot_first_n": 150,
+  "reporting_notes": {
+    "primary_analysis": "Task-wise reporting by perturbation type (F_del hard omission, F_error alteration, F_kept retention).",
+    "aggregate_warning": "Aggregate binary F1 mixes omission and alteration signals; interpret with caution.",
+    "setup_B_positioning": "Setup B is forced-choice 1T3F without abstain (E), treated as an ablation baseline."
+  },
+  "setups": {
+    "A": {
+      "overall": {
+        "tp": 290,
+        "tn": 1290,
+        "fp": 60,
+        "fn": 61,
+        "precision": 0.8286,
+        "recall": 0.8262,
+        "f1": 0.8274,
+        "accuracy": 0.9289
+      },
+      "by_type": {
+        "F_del": {
+          "n": 153,
+          "correct_rate": 0.7059,
+          "pred_hallucination_rate": 0.7059,
+          "tp": 108,
+          "tn": 0,
+          "fp": 0,
+          "fn": 45,
+          "precision": 1.0,
+          "recall": 0.7059,
+          "f1": 0.8276,
+          "accuracy": 0.7059
+        },
+        "F_error": {
+          "n": 198,
+          "correct_rate": 0.9192,
+          "pred_hallucination_rate": 0.9192,
+          "tp": 182,
+          "tn": 0,
+          "fp": 0,
+          "fn": 16,
+          "precision": 1.0,
+          "recall": 0.9192,
+          "f1": 0.9579,
+          "accuracy": 0.9192
+        },
+        "F_kept": {
+          "n": 1350,
+          "correct_rate": 0.9556,
+          "pred_hallucination_rate": 0.0444,
+          "tp": 0,
+          "tn": 1290,
+          "fp": 60,
+          "fn": 0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "accuracy": 0.9556
+        }
+      }
+    },
+    "B": {
+      "overall": {
+        "tp": 180,
+        "tn": 1185,
+        "fp": 165,
+        "fn": 171,
+        "precision": 0.5217,
+        "recall": 0.5128,
+        "f1": 0.5172,
+        "accuracy": 0.8025
+      },
+      "by_type": {
+        "F_del": {
+          "n": 153,
+          "correct_rate": 0.4052,
+          "pred_hallucination_rate": 0.4052,
+          "tp": 62,
+          "tn": 0,
+          "fp": 0,
+          "fn": 91,
+          "precision": 1.0,
+          "recall": 0.4052,
+          "f1": 0.5767,
+          "accuracy": 0.4052
+        },
+        "F_error": {
+          "n": 198,
+          "correct_rate": 0.596,
+          "pred_hallucination_rate": 0.596,
+          "tp": 118,
+          "tn": 0,
+          "fp": 0,
+          "fn": 80,
+          "precision": 1.0,
+          "recall": 0.596,
+          "f1": 0.7468,
+          "accuracy": 0.596
+        },
+        "F_kept": {
+          "n": 1350,
+          "correct_rate": 0.8778,
+          "pred_hallucination_rate": 0.1222,
+          "tp": 0,
+          "tn": 1185,
+          "fp": 165,
+          "fn": 0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "accuracy": 0.8778
+        }
+      }
+    },
+    "C": {
+      "overall": {
+        "tp": 311,
+        "tn": 1101,
+        "fp": 249,
+        "fn": 40,
+        "precision": 0.5554,
+        "recall": 0.886,
+        "f1": 0.6828,
+        "accuracy": 0.8301
+      },
+      "by_type": {
+        "F_del": {
+          "n": 153,
+          "correct_rate": 0.8497,
+          "pred_hallucination_rate": 0.8497,
+          "tp": 130,
+          "tn": 0,
+          "fp": 0,
+          "fn": 23,
+          "precision": 1.0,
+          "recall": 0.8497,
+          "f1": 0.9187,
+          "accuracy": 0.8497
+        },
+        "F_error": {
+          "n": 198,
+          "correct_rate": 0.9141,
+          "pred_hallucination_rate": 0.9141,
+          "tp": 181,
+          "tn": 0,
+          "fp": 0,
+          "fn": 17,
+          "precision": 1.0,
+          "recall": 0.9141,
+          "f1": 0.9551,
+          "accuracy": 0.9141
+        },
+        "F_kept": {
+          "n": 1350,
+          "correct_rate": 0.8156,
+          "pred_hallucination_rate": 0.1844,
+          "tp": 0,
+          "tn": 1101,
+          "fp": 249,
+          "fn": 0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "accuracy": 0.8156
+        }
+      },
+      "E_rate_overall": 0.2775,
+      "E_rate_by_type": {
+        "F_del": 0.8301,
+        "F_error": 0.5707,
+        "F_kept": 0.1719
+      },
+      "empty_supporting_evidence_rate_when_choose_ABCD": 0.0
+    }
+  }
+}

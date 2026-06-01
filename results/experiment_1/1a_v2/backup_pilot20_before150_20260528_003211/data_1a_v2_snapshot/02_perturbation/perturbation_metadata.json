@@ -1,0 +1,19 @@
+{
+  "time": "2026-05-27T16:56:47",
+  "seed": 20260703,
+  "ratio_del": 0.2,
+  "ratio_error": 0.2,
+  "model": "gpt-4.1-mini",
+  "total_af": 227,
+  "F_del": 17,
+  "F_error": 27,
+  "F_kept": 183,
+  "hallucination_positive": 44,
+  "hallucination_negative": 183,
+  "sentence_match_failure_count": 0,
+  "error_fallback_count": 7,
+  "rewrite_failure_count": 48,
+  "del_verification_failure_count": 29,
+  "error_verification_failure_count": 19,
+  "error_downgrade_non_contradiction_count": 0
+}

@@ -1,0 +1,37 @@
+{
+  "time": "2026-05-27T16:41:24",
+  "model": "gpt-4.1-mini",
+  "articles_total": 20,
+  "articles_failed": 0,
+  "failed_items": [],
+  "total_afs": 227,
+  "afs_per_article": {
+    "exp1v2_plos_005": 8,
+    "exp1v2_plos_004": 9,
+    "exp1v2_plos_019": 8,
+    "exp1v2_plos_010": 5,
+    "exp1v2_plos_007": 6,
+    "exp1v2_plos_002": 8,
+    "exp1v2_plos_020": 6,
+    "exp1v2_plos_006": 12,
+    "exp1v2_plos_018": 8,
+    "exp1v2_plos_014": 10,
+    "exp1v2_elife_006": 20,
+    "exp1v2_elife_018": 17,
+    "exp1v2_elife_020": 18,
+    "exp1v2_elife_017": 13,
+    "exp1v2_elife_008": 11,
+    "exp1v2_elife_002": 11,
+    "exp1v2_elife_005": 15,
+    "exp1v2_elife_001": 15,
+    "exp1v2_elife_004": 12,
+    "exp1v2_elife_007": 15
+  },
+  "afs_per_source": {
+    "PLOS": 80,
+    "eLife": 147
+  },
+  "total_input_tokens": 16312,
+  "total_output_tokens": 16842,
+  "total_tokens": 33154
+}

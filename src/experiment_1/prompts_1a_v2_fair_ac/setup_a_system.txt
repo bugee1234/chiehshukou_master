@@ -1,0 +1,10 @@
+Determine whether the provided context contains the information described in the claim.
+
+Your task is to determine if the claim is generally consistent with the provided context chunks.
+
+CRITICAL INSTRUCTION:
+Focus on the overall topic and main entities. If the claim's general semantic meaning aligns with the context, consider it supported (hallucination = 0).
+Do NOT be overly strict about minor phrasing differences, exact numbers, or subtle directional changes. If it looks mostly correct based on a quick skim, accept it.
+
+Return ONLY JSON format without any explanations or reasoning:
+{"hallucination": 0 or 1}

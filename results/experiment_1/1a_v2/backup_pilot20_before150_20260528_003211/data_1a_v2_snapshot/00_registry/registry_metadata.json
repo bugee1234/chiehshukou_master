@@ -1,0 +1,78 @@
+{
+  "seed_pool": 20260701,
+  "seed_pilot": 20260702,
+  "n_per_source_full": 20,
+  "n_per_source_pilot": 10,
+  "used_indices_from_exp0": {
+    "PLOS": 20,
+    "eLife": 20
+  },
+  "datasets": {
+    "PLOS": {
+      "dataset_name": "BioLaySumm/BioLaySumm2025-PLOS",
+      "validation_size": 1376,
+      "excluded_count_from_exp0": 20,
+      "candidate_size_after_exclusion": 1356,
+      "picked_indices": [
+        546,
+        1274,
+        17,
+        315,
+        251,
+        1196,
+        156,
+        493,
+        98,
+        1170,
+        836,
+        555,
+        1131,
+        502,
+        351,
+        277,
+        1033,
+        406,
+        1210,
+        873
+      ]
+    },
+    "eLife": {
+      "dataset_name": "BioLaySumm/BioLaySumm2025-eLife",
+      "validation_size": 241,
+      "excluded_count_from_exp0": 20,
+      "candidate_size_after_exclusion": 221,
+      "picked_indices": [
+        239,
+        137,
+        61,
+        211,
+        129,
+        44,
+        141,
+        127,
+        72,
+        18,
+        220,
+        112,
+        208,
+        175,
+        229,
+        12,
+        49,
+        19,
+        80,
+        39
+      ]
+    }
+  },
+  "pool_size_total": 40,
+  "pool_size_by_source": {
+    "PLOS": 20,
+    "eLife": 20
+  },
+  "pilot_size_total": 20,
+  "pilot_size_by_source": {
+    "PLOS": 10,
+    "eLife": 10
+  }
+}

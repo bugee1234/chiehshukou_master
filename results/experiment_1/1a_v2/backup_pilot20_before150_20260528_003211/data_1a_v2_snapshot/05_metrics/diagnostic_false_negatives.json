@@ -1,0 +1,1372 @@
+{
+  "summary": {
+    "F_del": {
+      "total_n": 62,
+      "A_fn": 17,
+      "C_fn": 20,
+      "C_predicted_letter_distribution_among_fn": {
+        "A": 1,
+        "B": 5,
+        "C": 8,
+        "D": 6,
+        "E": 0
+      },
+      "C_fn_picked_true_option_count": 20,
+      "C_fn_picked_true_option_rate": 1.0,
+      "C_E_rate_among_all_F_del": 0.6452
+    },
+    "F_error": {
+      "total_n": 36,
+      "A_fn": 7,
+      "C_fn": 16,
+      "C_predicted_letter_distribution_among_fn": {
+        "A": 1,
+        "B": 6,
+        "C": 5,
+        "D": 4,
+        "E": 0
+      },
+      "C_fn_picked_true_option_count": 16,
+      "C_fn_picked_true_option_rate": 1.0,
+      "C_E_rate_among_all_F_error": 0.1944
+    }
+  },
+  "false_negative_cases": [
+    {
+      "af_id": "exp1v2_plos_011_af_001",
+      "perturbation_type": "F_del",
+      "fact": "Human immunodeficiency virus (HIV) is known to spread both in a cell-free state and from cell to cell.",
+      "source_sentence": "HIV is known to spread both in a cell-free state and from cell to cell , however the relative importance of the cell-cell transmission mode in natural infection has not yet been resolved .",
+      "c_predicted_letter": "C",
+      "c_correct_letter": "C",
+      "c_picked_true_option": true,
+      "c_option_checks": {
+        "A": "insufficient",
+        "B": "insufficient",
+        "C": "supported",
+        "D": "insufficient"
+      },
+      "c_contrastive_variables": [
+        "mode of HIV spread: cell-to-cell contact vs cell-free virus",
+        "quantitative proportion of viral spread (e.g., 75%)",
+        "mechanism of spread: free-floating viral particles vs extracellular vesicles"
+      ],
+      "c_supporting_evidence": "Here we show that these CD4 binding site antibodies are dramatically less potent inhibitors of cell-cell transmission, and therefore act preferentially by blocking free virus transmission while allowing HIV to spread through cell-cell contact.",
+      "c_reasoning": "The context explicitly states that HIV spreads through both free virus transmission and cell-cell contact, supporting option C. There is no mention of quantitative proportions such as 75% (contradicting B), nor is there any mention of extracellular vesicles as a mode of spread (contradicting D). Option A's claim that cell-free virus transmission plays a minor role is not supported; the context only states that antibodies preferentially block free virus transmission but does not quantify or minimize its role. Therefore, only option C is fully supported by the context.",
+      "a_pred_hallucination": 0,
+      "a_supporting_evidence": "Here we show that these CD4 binding site antibodies are dramatically less potent inhibitors of cell-cell transmission, and therefore act preferentially by blocking free virus transmission while allowing HIV to spread through cell-cell contact.",
+      "a_reason": "The context explicitly states that HIV spreads through free virus transmission and also through cell-cell contact, supporting the claim that HIV spreads both in a cell-free state and from cell to cell.",
+      "options": [
+        "HIV primarily spreads through cell-to-cell contact, with cell-free virus transmission playing a minor role in natural infection.",
+        "HIV spreads through both cell-free virus and cell-to-cell transmission, with cell-free virus accounting for approximately 75% of viral spread.",
+        "Human immunodeficiency virus (HIV) can propagate through both free-floating viral particles and direct cell-to-cell contact.",
+        "HIV is known to spread both in a cell-free state and via extracellular vesicles released from infected cells."
+      ],
+      "correct_letter": "C",
+      "top2_chunks": [
+        ", the CD4 molecule . Why HIV still replicates in the presence of such potent antibodies remains unclear . Here we show that these CD4 binding site antibodies are dramatically less potent inhibitors of cell-cell transmission , and therefore act preferentially by blocking free virus transmission while allowing HIV to spread through cell-cell contact .",
+        "Design of vaccines attempt to inhibit HIV entry into target cells as do engineered entry inhibitors used as therapeutics . It is not true that neutralizing antibodies and inhibitors block the entry of cell-free HIV particles into cells. Here we report that the activity of neutralizing antibodies and inhibitors during cell-cell transmission varies depending on their mode of action . A prominent class of neutralizing antibodies directed to the CD4 binding site on the virus envelope very efficiently blocks binding of the virus to its primary receptor on target cells , the CD4 molecule . Why HIV still replicates in the presence of such potent antibodies remains unclear . Here we show that these CD4 binding site antibodies are dramatically"
+      ]
+    },
+    {
+      "af_id": "exp1v2_plos_011_af_002",
+      "perturbation_type": "F_del",
+      "fact": "The relative importance of the cell-cell transmission mode in natural HIV infection has not yet been resolved.",
+      "source_sentence": "HIV is known to spread both in a cell-free state and from cell to cell , however the relative importance of the cell-cell transmission mode in natural infection has not yet been resolved .",
+      "c_predicted_letter": "C",
+      "c_correct_letter": "C",
+      "c_picked_true_option": true,
+      "c_option_checks": {
+        "A": "contradicted",
+        "B": "contradicted",
+        "C": "supported",
+        "D": "contradicted"
+      },
+      "c_contrastive_variables": [
+        "mention of simian immunodeficiency virus (SIV) vs HIV",
+        "certainty level about cell-cell transmission's role (not resolved, estimated 70%, uncertain, conclusively dominant)",
+        "focus on natural infection",
+        "quantitative estimate (70%)"
+      ],
+      "c_supporting_evidence": "Here we show that these CD4 binding site antibodies are dramatically less potent inhibitors of cell-cell transmission, and therefore act preferentially by blocking free virus transmission while allowing HIV to spread through cell-cell contact.",
+      "c_reasoning": "Option A is contradicted because the context discusses HIV, not SIV. Option B is contradicted because the context does not provide any quantitative estimate such as 70%. Option C is supported because the context states that HIV still replicates in the presence of potent antibodies and that these antibodies are less effective at blocking cell-cell transmission, implying uncertainty about the significance of cell-cell transmission during natural infection. Option D is contradicted because the context does not state that cell-cell transmission is conclusively the dominant mode of viral spread. Therefore, only option C is supported by the context.",
+      "a_pred_hallucination": 0,
+      "a_supporting_evidence": "Why HIV still replicates in the presence of such potent antibodies remains unclear.",
+      "a_reason": "The claim states that the relative importance of cell-cell transmission in natural HIV infection has not yet been resolved. The context explicitly says it remains unclear why HIV replicates despite potent antibodies, implying uncertainty about the role of cell-cell transmission, thus supporting the claim.",
+      "options": [
+        "The contribution of cell-cell transmission to natural infection by simian immunodeficiency virus (SIV) has not yet been resolved.",
+        "The relative importance of cell-cell transmission in natural HIV infection has been estimated to account for approximately 70% of viral dissemination.",
+        "The significance of HIV spreading via direct cell-to-cell contact during natural infection remains uncertain.",
+        "The role of cell-cell transmission in natural HIV infection has been conclusively shown to be the dominant mode of viral spread."
+      ],
+      "correct_letter": "C",
+      "top2_chunks": [
+        "Design of vaccines attempt to inhibit HIV entry into target cells as do engineered entry inhibitors used as therapeutics . It is not true that neutralizing antibodies and inhibitors block the entry of cell-free HIV particles into cells. Here we report that the activity of neutralizing antibodies and inhibitors during cell-cell transmission varies depending on their mode of action . A prominent class of neutralizing antibodies directed to the CD4 binding site on the virus envelope very efficiently blocks binding of the virus to its primary receptor on target cells , the CD4 molecule . Why HIV still replicates in the presence of such potent antibodies remains unclear . Here we show that these CD4 binding site antibodies are dramatically",
+        ", the CD4 molecule . Why HIV still replicates in the presence of such potent antibodies remains unclear . Here we show that these CD4 binding site antibodies are dramatically less potent inhibitors of cell-cell transmission , and therefore act preferentially by blocking free virus transmission while allowing HIV to spread through cell-cell contact ."
+      ]
+    },
+    {
+      "af_id": "exp1v2_plos_011_af_004",
+      "perturbation_type": "F_error",
+      "fact": "Neutralizing antibodies and inhibitors block the entry of cell-free HIV particles into cells.",
+      "source_sentence": "While these agents are known to block the entry of cell-free HIV particles into cells , to what extent cell-cell transmission is vulnerable to such inhibition is unclear .",
+      "c_predicted_letter": "D",
+      "c_correct_letter": "D",
+      "c_picked_true_option": true,
+      "c_option_checks": {
+        "A": "contradicted",
+        "B": "contradicted",
+        "C": "contradicted",
+        "D": "supported"
+      },
+      "c_contrastive_variables": [
+        "neutralizing antibodies and inhibitors block entry during cell-cell transmission vs cell-free virus infection",
+        "HIV vs SIV",
+        "percentage of cases blocked (over 90%)",
+        "effectiveness in preventing cell-free HIV entry"
+      ],
+      "c_supporting_evidence": "Here we show that these CD4 binding site antibodies are dramatically less potent inhibitors of cell-cell transmission, and therefore act preferentially by blocking free virus transmission while allowing HIV to spread through cell-cell contact.",
+      "c_reasoning": "Option A is contradicted because the context states that neutralizing antibodies are less potent inhibitors of cell-cell transmission and act preferentially by blocking free virus transmission, not the other way around. Option B is contradicted because the context discusses HIV, not SIV. Option C is contradicted because the context explicitly states it is not true that neutralizing antibodies block entry of cell-free HIV particles into cells, and no percentage is given. Option D is supported because the context states that these antibodies act preferentially by blocking free virus transmission (cell-free HIV particles) effectively. Therefore, only option D is supported by the context.",
+      "a_pred_hallucination": 1,
+      "a_supporting_evidence": "Quote: NONE",
+      "a_reason": "The context explicitly states that it is not true that neutralizing antibodies and inhibitors block the entry of cell-free HIV particles into cells, contradicting the claim.",
+      "options": [
+        "Neutralizing antibodies and inhibitors block the entry of HIV primarily during cell-cell transmission rather than cell-free virus infection.",
+        "Neutralizing antibodies and inhibitors block the entry of cell-free simian immunodeficiency virus (SIV) particles into cells.",
+        "Neutralizing antibodies and inhibitors block the entry of cell-free HIV particles into cells in over 90% of cases.",
+        "Neutralizing antibodies and inhibitors effectively prevent cell-free HIV particles from entering target cells."
+      ],
+      "correct_letter": "D",
+      "top2_chunks": [
+        "Design of vaccines attempt to inhibit HIV entry into target cells as do engineered entry inhibitors used as therapeutics . It is not true that neutralizing antibodies and inhibitors block the entry of cell-free HIV particles into cells. Here we report that the activity of neutralizing antibodies and inhibitors during cell-cell transmission varies depending on their mode of action . A prominent class of neutralizing antibodies directed to the CD4 binding site on the virus envelope very efficiently blocks binding of the virus to its primary receptor on target cells , the CD4 molecule . Why HIV still replicates in the presence of such potent antibodies remains unclear . Here we show that these CD4 binding site antibodies are dramatically",
+        ", the CD4 molecule . Why HIV still replicates in the presence of such potent antibodies remains unclear . Here we show that these CD4 binding site antibodies are dramatically less potent inhibitors of cell-cell transmission , and therefore act preferentially by blocking free virus transmission while allowing HIV to spread through cell-cell contact ."
+      ]
+    },
+    {
+      "af_id": "exp1v2_plos_011_af_005",
+      "perturbation_type": "F_error",
+      "fact": "The extent to which cell-cell transmission of HIV is vulnerable to inhibition by neutralizing antibodies and inhibitors is unclear.",
+      "source_sentence": "While these agents are known to block the entry of cell-free HIV particles into cells , to what extent cell-cell transmission is vulnerable to such inhibition is unclear .",
+      "c_predicted_letter": "B",
+      "c_correct_letter": "B",
+      "c_picked_true_option": true,
+      "c_option_checks": {
+        "A": "contradicted",
+        "B": "supported",
+        "C": "contradicted",
+        "D": "contradicted"
+      },
+      "c_contrastive_variables": [
+        "effectiveness of neutralizing antibodies and inhibitors on cell-cell transmission vs free virus transmission",
+        "certainty about effectiveness of neutralizing antibodies and inhibitors on cell-cell transmission",
+        "quantitative estimate (70%) of vulnerability of cell-cell transmission",
+        "role of cytotoxic T lymphocytes and entry inhibitors in cell-cell transmission inhibition"
+      ],
+      "c_supporting_evidence": "Here we show that these CD4 binding site antibodies are dramatically less potent inhibitors of cell-cell transmission, and therefore act preferentially by blocking free virus transmission while allowing HIV to spread through cell-cell contact. Why HIV still replicates in the presence of such potent antibodies remains unclear.",
+      "c_reasoning": "Option A is contradicted because the context states that neutralizing antibodies are less potent against cell-cell transmission and preferentially block free virus transmission, the opposite of what A claims. Option B is supported because the context explicitly states that why HIV still replicates despite potent antibodies remains unclear, indicating uncertainty about effectiveness in cell-cell transmission. Option C is contradicted because no quantitative estimate such as 70% is mentioned anywhere in the context. Option D is contradicted because the context does not mention cytotoxic T lymphocytes at all, only neutralizing antibodies and entry inhibitors, and it states the role of inhibitors in cell-cell transmission is less potent but does not mention uncertainty about susceptibility to cytotoxic T lymphocytes. Therefore, only B passes all checks.",
+      "a_pred_hallucination": 0,
+      "a_supporting_evidence": "Why HIV still replicates in the presence of such potent antibodies remains unclear . Here we show that these CD4 binding site antibodies are dramatically less potent inhibitors of cell-cell transmission , and therefore act preferentially by blocking free virus transmission while allowing HIV to spread through cell-cell contact .",
+      "a_reason": "The context explicitly states that it remains unclear why HIV replicates despite potent antibodies and that these antibodies are less effective at inhibiting cell-cell transmission, indicating uncertainty about the vulnerability of cell-cell transmission to neutralizing antibodies and inhibitors.",
+      "options": [
+        "Neutralizing antibodies and inhibitors are highly effective at preventing HIV spread through cell-cell transmission but less so against free virus particles.",
+        "It remains uncertain how effectively neutralizing antibodies and inhibitors can block HIV transmission occurring directly between cells.",
+        "The vulnerability of cell-cell transmission of HIV to neutralizing antibodies and inhibitors is estimated to be around 70% based on recent experimental data.",
+        "The susceptibility of HIV cell-cell transmission to inhibition by cytotoxic T lymphocytes and entry inhibitors remains unclear."
+      ],
+      "correct_letter": "B",
+      "top2_chunks": [
+        "Design of vaccines attempt to inhibit HIV entry into target cells as do engineered entry inhibitors used as therapeutics . It is not true that neutralizing antibodies and inhibitors block the entry of cell-free HIV particles into cells. Here we report that the activity of neutralizing antibodies and inhibitors during cell-cell transmission varies depending on their mode of action . A prominent class of neutralizing antibodies directed to the CD4 binding site on the virus envelope very efficiently blocks binding of the virus to its primary receptor on target cells , the CD4 molecule . Why HIV still replicates in the presence of such potent antibodies remains unclear . Here we show that these CD4 binding site antibodies are dramatically",
+        ", the CD4 molecule . Why HIV still replicates in the presence of such potent antibodies remains unclear . Here we show that these CD4 binding site antibodies are dramatically less potent inhibitors of cell-cell transmission , and therefore act preferentially by blocking free virus transmission while allowing HIV to spread through cell-cell contact ."
+      ]
+    },
+    {
+      "af_id": "exp1v2_plos_014_af_002",
+      "perturbation_type": "F_del",
+      "fact": "Filarial nematodes have evolved a mutualistic association with the intracellular bacterial symbiont Wolbachia, providing a novel approach to their treatment and control using antibiotics.",
+      "source_sentence": "These nematodes have evolved a mutualistic association with the intracellular bacterial symbiont , Wolbachia , providing a novel approach to their treatment and control using antibiotics .",
+      "c_predicted_letter": "D",
+      "c_correct_letter": "D",
+      "c_picked_true_option": true,
+      "c_option_checks": {
+        "A": "contradicted",
+        "B": "contradicted",
+        "C": "contradicted",
+        "D": "supported"
+      },
+      "c_contrastive_variables": [
+        "mutualistic vs parasitic association",
+        "intracellular bacterial symbiont Wolbachia vs Rickettsia",
+        "treatment approach: antifungal drugs vs antibiotics",
+        "treatment implication: novel approach vs complication vs new strategy"
+      ],
+      "c_supporting_evidence": "Quote: 'action to account for some of the key anti-filarial activities of antibiotic treatment of filarial nematodes and identifies one of the biological processes that form the basis of this mutualistic symbiosis.' and 'depletion of Wolbachia leads to ... apoptosis ... Our observation provides a mode of action to account for some of the key anti-filarial activities of antibiotic treatment of filarial nematodes and identifies one of the biological processes that form the basis of this'",
+      "c_reasoning": "Option A is contradicted because the context specifies antibiotic treatment, not antifungal drugs. Option B is contradicted because the association is described as mutualistic, not parasitic, and treatment is facilitated, not complicated, by antibiotics. Option C is contradicted because the bacterial symbiont is Wolbachia, not Rickettsia. Option D is supported as the context explicitly states a mutualistic relationship with Wolbachia and that antibiotic treatment targeting Wolbachia provides a new strategy for treatment and control of filarial nematodes.",
+      "a_pred_hallucination": 0,
+      "a_supporting_evidence": "Quote: \"Our observation provides a mode of action to account for some of the key anti-filarial activities of antibiotic treatment of filarial nematodes and identifies one of the biological processes that form the basis of this mutualistic symbiosis .\"",
+      "a_reason": "The context explicitly states that antibiotic treatment of filarial nematodes targets a mutualistic symbiosis with Wolbachia, supporting the claim that filarial nematodes have evolved a mutualistic association with Wolbachia and that this provides a novel approach to treatment and control using antibiotics.",
+      "options": [
+        "Filarial nematodes have evolved a mutualistic association with the intracellular bacterial symbiont Wolbachia, providing a novel approach to their treatment and control using antifungal drugs.",
+        "Filarial nematodes have a parasitic association with the intracellular bacterial symbiont Wolbachia, which complicates their treatment and control using antibiotics.",
+        "Filarial nematodes have evolved a mutualistic association with the intracellular bacterial symbiont Rickettsia, providing a novel approach to their treatment and control using antibiotics.",
+        "Filarial nematodes maintain a mutualistic relationship with the intracellular bacterium Wolbachia, which offers a new strategy for their treatment and management through antibiotic use."
+      ],
+      "correct_letter": "D",
+      "top2_chunks": [
+        "of action to account for some of the key anti-filarial activities of antibiotic treatment of filarial nematodes and identifies one of the biological processes that form the basis of this mutualistic symbiosis .",
+        "Why depletion of Wolbachia leads to anti-filarial activity remains unknown . Here we show that depletion of the bacteria leads to a rapid and sustained induction of cell death through apoptosis of reproductive cells , developing embryos , microfilariae and developing larvae . Apoptosis surprisingly affects embryonic cells only those infected with the bacteria , leading us to conclude that the Wolbachia populations in the adult hypodermis , rather than the few bacteria present in the developing embryos , are essential to avoid apoptosis . Our observation provides a mode of action to account for some of the key anti-filarial activities of antibiotic treatment of filarial nematodes and identifies one of the biological processes that form the basis of this"
+      ]
+    },
+    {
+      "af_id": "exp1v2_plos_014_af_005",
+      "perturbation_type": "F_error",
+      "fact": "The Wolbachia populations in the adult hypodermis of filarial nematodes, rather than the few bacteria present in the developing embryos, are essential to avoid apoptosis.",
+      "source_sentence": "Apoptosis surprisingly affects embryonic cells other than those infected with the bacteria , leading us to conclude that the Wolbachia populations in the adult hypodermis , rather than the few bacteria present in the developing embryos , are essential to avoid apoptosis .",
+      "c_predicted_letter": "B",
+      "c_correct_letter": "B",
+      "c_picked_true_option": true,
+      "c_option_checks": {
+        "A": "contradicted",
+        "B": "supported",
+        "C": "contradicted",
+        "D": "contradicted"
+      },
+      "c_contrastive_variables": [
+        "location of Wolbachia bacteria (developing embryos vs adult hypodermis vs adult reproductive tract)",
+        "role in preventing apoptosis (essential vs partially responsible)",
+        "stage specificity (general vs only early larval stages)"
+      ],
+      "c_supporting_evidence": "Apoptosis surprisingly affects embryonic cells only those infected with the bacteria, leading us to conclude that the Wolbachia populations in the adult hypodermis, rather than the few bacteria present in the developing embryos, are essential to avoid apoptosis.",
+      "c_reasoning": "Option A is contradicted because the context states the opposite: the adult hypodermis populations, not the few bacteria in embryos, are essential. Option B is fully supported by the exact wording in the context. Option C is contradicted because the context does not limit the role to early larval stages but states a general essential role. Option D is contradicted because the context specifies the adult hypodermis, not the adult reproductive tract. Therefore, only option B passes all checks.",
+      "a_pred_hallucination": 0,
+      "a_supporting_evidence": "Apoptosis surprisingly affects embryonic cells only those infected with the bacteria, leading us to conclude that the Wolbachia populations in the adult hypodermis, rather than the few bacteria present in the developing embryos, are essential to avoid apoptosis.",
+      "a_reason": "The context explicitly states that Wolbachia populations in the adult hypodermis, rather than the few bacteria in developing embryos, are essential to avoid apoptosis, directly supporting the claim.",
+      "options": [
+        "The few Wolbachia bacteria present in the developing embryos of filarial nematodes, rather than the populations in the adult hypodermis, are essential to prevent apoptosis.",
+        "In filarial nematodes, it is the Wolbachia bacteria residing in the adult hypodermis, not the limited bacteria in developing embryos, that are crucial for preventing apoptosis.",
+        "The Wolbachia populations in the adult hypodermis of filarial nematodes, rather than the few bacteria present in the developing embryos, are partially responsible for avoiding apoptosis only during early larval stages.",
+        "In filarial nematodes, the Wolbachia populations in the adult reproductive tract, rather than those in the developing embryos, are essential to avoid apoptosis."
+      ],
+      "correct_letter": "B",
+      "top2_chunks": [
+        "Why depletion of Wolbachia leads to anti-filarial activity remains unknown . Here we show that depletion of the bacteria leads to a rapid and sustained induction of cell death through apoptosis of reproductive cells , developing embryos , microfilariae and developing larvae . Apoptosis surprisingly affects embryonic cells only those infected with the bacteria , leading us to conclude that the Wolbachia populations in the adult hypodermis , rather than the few bacteria present in the developing embryos , are essential to avoid apoptosis . Our observation provides a mode of action to account for some of the key anti-filarial activities of antibiotic treatment of filarial nematodes and identifies one of the biological processes that form the basis of this",
+        "of action to account for some of the key anti-filarial activities of antibiotic treatment of filarial nematodes and identifies one of the biological processes that form the basis of this mutualistic symbiosis ."
+      ]
+    },
+    {
+      "af_id": "exp1v2_plos_015_af_003",
+      "perturbation_type": "F_error",
+      "fact": "Fatality rates associated with American visceral leishmaniasis (VL) are neither recorded in under-treatment patients from endemic countries of the Old World nor from non-endemic countries where such cases are imported.",
+      "source_sentence": "The fatality rates associated with this disease have remained stable at a high level over the years in Brazil and are neither recorded in under-treatment patients from endemic countries of the Old World nor from non-endemic countries where such cases are imported .",
+      "c_predicted_letter": "B",
+      "c_correct_letter": "B",
+      "c_picked_true_option": true,
+      "c_option_checks": {
+        "A": "contradicted",
+        "B": "supported",
+        "C": "contradicted",
+        "D": "contradicted"
+      },
+      "c_contrastive_variables": [
+        "fatality rates associated with American visceral leishmaniasis",
+        "recorded or not recorded",
+        "patients under treatment",
+        "endemic countries of the Old World",
+        "non-endemic countries where cases are imported",
+        "cutaneous leishmaniasis vs American visceral leishmaniasis",
+        "age restriction (patients over 60 years old)"
+      ],
+      "c_supporting_evidence": "Quote: 'The fatality rates associated with this disease have decreased steadily from a high level over the years in Brazil and are neither recorded in under-treatment patients from endemic countries of the Old World nor from non-endemic countries where such cases are imported.'",
+      "c_reasoning": "Option A is contradicted because the context explicitly states fatality rates are not recorded in under-treatment patients from endemic Old World countries or non-endemic countries, which contradicts A's claim that they are reported in endemic Old World patients. Option B is supported because it exactly matches the context's statement that fatality rates are not recorded in these groups. Option C is contradicted because the context discusses American visceral leishmaniasis, not cutaneous leishmaniasis. Option D is contradicted because the context does not mention any age restriction such as 'only in patients over 60 years old.' Therefore, only option B passes all checks.",
+      "a_pred_hallucination": 0,
+      "a_supporting_evidence": "The fatality rates associated with this disease have decreased steadily from a high level over the years in Brazil and are neither recorded in under-treatment patients from endemic countries of the Old World nor from non-endemic countries where such cases are imported.",
+      "a_reason": "The context explicitly states that fatality rates for American visceral leishmaniasis are not recorded in under-treatment patients from endemic countries of the Old World nor from non-endemic countries where cases are imported, fully supporting the claim.",
+      "options": [
+        "Fatality rates associated with American visceral leishmaniasis are also reported in under-treatment patients from endemic countries in the Old World but not in non-endemic countries where cases are imported.",
+        "Fatality rates linked to American visceral leishmaniasis are not documented in patients receiving treatment from endemic regions in the Old World or from non-endemic countries where cases are imported.",
+        "Fatality rates associated with cutaneous leishmaniasis are neither recorded in under-treatment patients from endemic countries of the Old World nor from non-endemic countries where such cases are imported.",
+        "Fatality rates associated with American visceral leishmaniasis are neither recorded in under-treatment patients from endemic countries of the Old World nor from non-endemic countries where such cases are imported, but only in patients over 60 years old."
+      ],
+      "correct_letter": "B",
+      "top2_chunks": [
+        "In contrast to other clinical presentations of leishmaniasis in Latin America , American visceral leishmaniasis ( VL ) can lead to death in 5-10% of patients under treatment . The fatality rates associated with this disease have decreased steadily from a high level over the years in Brazil and are neither recorded in under-treatment patients from endemic countries of the Old World nor from non-endemic countries where such cases are imported . Since VL-induced lethality can occur even after the implementation of recommended therapy , the understanding of individual , clinical and laboratory factors that predispose to an unfavorable outcome might represent an important feature for informing better practice in the clinical management of cases . The gaps in the",
+        "clinical and laboratory factors that predispose to an unfavorable outcome might represent an important feature for informing better practice in the clinical management of cases . The gaps in the existing knowledge and the need for the development of externally validated prognostic models were also discussed . The results presented herein could be useful in identifying patients at higher risk of unfavorable evolution or death from VL , and might provide an aid in decision-making regarding the clinical management of VL cases ."
+      ]
+    },
+    {
+      "af_id": "exp1v2_plos_004_af_001",
+      "perturbation_type": "F_del",
+      "fact": "There exists a superabundance of human sequence variations.",
+      "source_sentence": "There exists a superabundance of human sequence variations .",
+      "c_predicted_letter": "B",
+      "c_correct_letter": "B",
+      "c_picked_true_option": true,
+      "c_option_checks": {
+        "A": "contradicted",
+        "B": "supported",
+        "C": "contradicted",
+        "D": "contradicted"
+      },
+      "c_contrastive_variables": [
+        "rarity vs abundance of human sequence variations",
+        "feasibility of testing each variant for disease association",
+        "specific mention of mitochondrial vs nuclear DNA",
+        "quantitative comparison to previous estimates"
+      ],
+      "c_supporting_evidence": "Testing every sequence variant for association with human disease is often infeasible, as studies must be very large—and hence expensive—to overcome the statistical penalties used to control for multiple tests.",
+      "c_reasoning": "Option A is contradicted because the context explicitly states that testing every sequence variant is often infeasible due to the large size and expense required, implying variants are not rare and straightforward to test. Option B is supported because the context implies a large number of variants exist, making individual testing infeasible. Option C is contradicted as there is no mention of mitochondrial DNA or comparison to nuclear DNA. Option D is contradicted because the context does not mention any quantitative comparison to previous estimates. Therefore, only option B is fully supported by the context.",
+      "a_pred_hallucination": 1,
+      "a_supporting_evidence": "Quote: NONE",
+      "a_reason": "The provided context discusses the distribution and disease association of sequence variants but does not explicitly state or support the claim that there is a superabundance of human sequence variations. Therefore, the claim is not supported by the context.",
+      "options": [
+        "Human sequence variations are relatively rare, making it straightforward to test each variant for links to disease.",
+        "Human DNA sequence variations are present in extremely large numbers, far exceeding what can be feasibly tested for disease association individually.",
+        "There exists a superabundance of sequence variations in human mitochondrial DNA rather than nuclear DNA.",
+        "There exists a superabundance of human sequence variations, but only about half as many as previously estimated in earlier genomic studies."
+      ],
+      "correct_letter": "B",
+      "top2_chunks": [
+        "Testing every sequence variant for association with human disease is often infeasible , as studies must be very large—and hence expensive—to overcome the statistical penalties used to control for multiple tests . Sequence variants that change non-conserved amino acids, for example, are often disease-causing. As an adjunct to this approach , we have explored the potential of variants that occur at homologous positions within paralogous human proteins as a means of identifying disease-causing DNA sequence variations . We find that DNA sequence variants co-occur at aligned amino acid pairs more frequently than expected by chance , suggesting that similar functional constraints on paralogous proteins result in coordinated distributions of variants along their lengths . Moreover , if one member of",
+        "frequently than expected by chance , suggesting that similar functional constraints on paralogous proteins result in coordinated distributions of variants along their lengths . Moreover , if one member of a variant-pair is disease-causing , its partner is likely to be disease-causing as well . These facts provide new avenues for the identification of disease-causing sequence variations ."
+      ]
+    },
+    {
+      "af_id": "exp1v2_plos_013_af_004",
+      "perturbation_type": "F_del",
+      "fact": "The theory predicts that attention should increase the selectivity for mismatch information in the neural response to surprising stimuli.",
+      "source_sentence": "Accordingly , this theory predicts that attention should increase the selectivity for mismatch information in the neural response to surprising stimuli .",
+      "c_predicted_letter": "B",
+      "c_correct_letter": "B",
+      "c_picked_true_option": true,
+      "c_option_checks": {
+        "A": "insufficient",
+        "B": "supported",
+        "C": "contradicted",
+        "D": "contradicted"
+      },
+      "c_contrastive_variables": [
+        "attention increases vs decreases selectivity",
+        "mismatch information in response to surprising vs predictable stimuli",
+        "selectivity enhancement during early sensory processing stages vs general enhancement"
+      ],
+      "c_supporting_evidence": "We found that attention did indeed increase the selectivity for mismatch information in the neural response, supporting the notion that attention and prediction are intricately related processes.",
+      "c_reasoning": "Option B states that the theoretical framework suggests attention enhances the neural response's selectivity for mismatch signals elicited by unexpected stimuli. The context explicitly states that attention increased selectivity for mismatch information in response to surprising stimuli, which are unexpected. Option A is not supported because the context does not specify 'early sensory processing stages.' Option C is contradicted because the context focuses on surprising (unexpected) stimuli, not predictable stimuli. Option D is contradicted because the context states attention increases, not decreases, selectivity. Therefore, only option B is fully supported.",
+      "a_pred_hallucination": 0,
+      "a_supporting_evidence": "We found that attention did indeed increase the selectivity for mismatch information in the neural response , supporting the notion that attention and prediction are intricately related processes .",
+      "a_reason": "The context explicitly states that attention increased the selectivity for mismatch information in the neural response to surprising stimuli, directly supporting the claim.",
+      "options": [
+        "The theory predicts that attention should increase the selectivity for mismatch information in the neural response to surprising stimuli only during early sensory processing stages.",
+        "The theoretical framework suggests that attention enhances the neural response's selectivity for mismatch signals elicited by unexpected stimuli.",
+        "The theory predicts that attention should increase the selectivity for mismatch information in the neural response to predictable stimuli.",
+        "The theory predicts that attention decreases the selectivity for mismatch information in the neural response to surprising stimuli."
+      ],
+      "correct_letter": "B",
+      "top2_chunks": [
+        "in human participants by training a decoding algorithm to identify ‘mismatch information’ in the brain , recorded by electroencephalography ( EEG ) , following the presentation of surprising stimuli that were either attended or ignored . We found that attention did indeed increase the selectivity for mismatch information in the neural response , supporting the notion that attention and prediction are intricately related processes .",
+        "The human brain is theorised to operate like a sophisticated hypothesis tester , using past experience to generate a model of the external world , testing predictions of this model against incoming sensory evidence , and generating a ‘prediction error’ signal that updates the model when predictions and sensory evidence do not match . It has been proposed that attention optimises this process by reducing prediction error signals , which are coded as the difference ( or ‘mismatch’ ) between predicted and observed stimulus features . We tested this hypothesis in human participants by training a decoding algorithm to identify ‘mismatch information’ in the brain , recorded by electroencephalography ( EEG ) , following the presentation of surprising stimuli that"
+      ]
+    },
+    {
+      "af_id": "exp1v2_plos_010_af_004",
+      "perturbation_type": "F_del",
+      "fact": "The researchers used a high-definition population sequencing approach to understand how influenza A virus (IAV) tolerates the accumulation of immune escape substitutions during antigenic drift without losing fitness.",
+      "source_sentence": "Here , we used a high-definition population sequencing approach to understand how IAV tolerates the accumulation of immune escape substitutions during antigenic drift without losing fitness .",
+      "c_predicted_letter": "D",
+      "c_correct_letter": "D",
+      "c_picked_true_option": true,
+      "c_option_checks": {
+        "A": "contradicted",
+        "B": "contradicted",
+        "C": "contradicted",
+        "D": "supported"
+      },
+      "c_contrastive_variables": [
+        "virus type (influenza A vs influenza B)",
+        "patient population (general vs elderly patients)",
+        "loss of fitness (significant loss vs no loss vs maintaining fitness)",
+        "purpose of sequencing (explore vs understand vs examine vs investigate)",
+        "process studied (antigenic drift)",
+        "use of high-definition population sequencing"
+      ],
+      "c_supporting_evidence": "HA alleviated the deleterious effects of immune escape substitutions on interactions with host cell receptors . These results expand our understanding of the mechanisms that facilitate IAV immune evasion , and highlight the immense power of high-definition virus population sequencing to reveal novel viral adaptive mechanisms .",
+      "c_reasoning": "Option D states that high-definition population sequencing was used to investigate how influenza A virus accumulates immune escape mutations during antigenic drift while maintaining fitness. The context explicitly mentions influenza A virus (IAV), the use of high-definition virus population sequencing, and that HA alleviates deleterious effects of immune escape substitutions, implying maintenance of fitness. Options A and B mention significant loss of fitness or focus on elderly patients, which are not supported. Option C incorrectly refers to influenza B virus, which is not mentioned. Therefore, only option D is fully supported by the context.",
+      "a_pred_hallucination": 0,
+      "a_supporting_evidence": "These results expand our understanding of the mechanisms that facilitate IAV immune evasion , and highlight the immense power of high-definition virus population sequencing to reveal novel viral adaptive mechanisms .",
+      "a_reason": "The context explicitly states that high-definition virus population sequencing was used to reveal novel viral adaptive mechanisms related to IAV immune evasion, which aligns with understanding how IAV tolerates immune escape substitutions during antigenic drift without losing fitness.",
+      "options": [
+        "The researchers applied high-definition population sequencing to explore how influenza A virus tolerates the accumulation of immune escape substitutions during antigenic drift but with a significant loss of fitness.",
+        "The researchers used high-definition population sequencing to understand how influenza A virus tolerates immune escape substitutions during antigenic drift only in elderly patients without losing fitness.",
+        "The researchers used high-definition population sequencing to examine how influenza B virus tolerates immune escape substitutions during antigenic drift without losing fitness.",
+        "The study employed high-definition population sequencing to investigate how influenza A virus manages to accumulate immune escape mutations during antigenic drift while maintaining its fitness."
+      ],
+      "correct_letter": "D",
+      "top2_chunks": [
+        "HA alleviated the deleterious effects of immune escape substitutions on interactions with host cell receptors . These results expand our understanding of the mechanisms that facilitate IAV immune evasion , and highlight the immense power of high-definition virus population sequencing to reveal novel viral adaptive mechanisms .",
+        "Seasonal influenza A viruses ( IAV ) cause tens of thousands of deaths and tens of billions of dollars in economic costs every year in the U . S . alone , despite widespread pre-exposure and vaccination . IAV persists within the human population by evading herd immunity through the continual accumulation of immune escape substitutions in a process known as antigenic shift . Unfortunately , the specific mechanisms that facilitate IAV antigenic drift remain unclear , making it difficult to design more efficacious , escape-proof vaccines . Glycosylation of HA alleviated the deleterious effects of immune escape substitutions on interactions with host cell receptors . These results expand our understanding of the mechanisms that facilitate IAV immune evasion ,"
+      ]
+    },
+    {
+      "af_id": "exp1v2_plos_012_af_003",
+      "perturbation_type": "F_error",
+      "fact": "Despite the development of immunity following respiratory syncytial virus (RSV) infection during childhood, individuals remain susceptible to RSV upper respiratory tract reinfection.",
+      "source_sentence": "Furthermore , despite the development of immunity following RSV infection during childhood , individuals remain susceptible to RSV upper respiratory tract reinfection .",
+      "c_predicted_letter": "D",
+      "c_correct_letter": "D",
+      "c_picked_true_option": true,
+      "c_option_checks": {
+        "A": "contradicted",
+        "B": "contradicted",
+        "C": "insufficient",
+        "D": "supported"
+      },
+      "c_contrastive_variables": [
+        "immunity after RSV infection in childhood",
+        "susceptibility to reinfection",
+        "type of virus for reinfection (RSV vs human metapneumovirus)",
+        "age groups affected by reinfection",
+        "scope of protection (full protection vs partial)"
+      ],
+      "c_supporting_evidence": "It is not true that despite the development of immunity following respiratory syncytial virus (RSV) infection during childhood, individuals remain susceptible to RSV upper respiratory tract reinfection.",
+      "c_reasoning": "Option A is contradicted because the context discusses RSV reinfection, not human metapneumovirus. Option B is contradicted because the context explicitly states it is not true that individuals remain susceptible, implying immunity develops but does not claim full lifelong protection. Option C is insufficient because the context does not specify susceptibility persisting primarily in elderly adults. Option D is supported because the context states that despite immunity development, individuals remain susceptible to RSV upper respiratory tract reinfection, which aligns with the option's claim that reinfection can still occur after immunity develops.",
+      "a_pred_hallucination": 1,
+      "a_supporting_evidence": "Quote: NONE",
+      "a_reason": "The context explicitly states 'It is not true that despite the development of immunity following respiratory syncytial virus (RSV) infection during childhood, individuals remain susceptible to RSV upper respiratory tract reinfection,' which directly contradicts the claim.",
+      "options": [
+        "Despite immunity after RSV infection in childhood, individuals remain vulnerable to reinfection with human metapneumovirus in the upper respiratory tract.",
+        "After RSV infection in childhood, individuals become fully protected against any subsequent RSV infections throughout life.",
+        "Even though immunity develops following RSV infection in childhood, susceptibility to RSV upper respiratory tract reinfection persists primarily in elderly adults rather than across all ages.",
+        "Although immunity develops after RSV infection in childhood, people can still be reinfected with RSV in the upper respiratory tract."
+      ],
+      "correct_letter": "D",
+      "top2_chunks": [
+        "In the United States , RSV infections lead to 57 , 000 hospitalizations among young children , especially in those less than one year old . It is not true that despite the development of immunity following respiratory syncytial virus (RSV) infection during childhood, individuals remain susceptible to RSV upper respiratory tract reinfection. In the current study we explored the antibody repertoires following secondary RSV infection and their evolution in adolescents and adults . Whole genome-fragment phage display libraries ( GFPDL ) expressing linear and conformational epitopes from RSV fusion protein ( F ) and attachment protein ( G ) were used for unbiased epitope profiling of sera prior to and following RSV infection . Several novel epitopes were identified",
+        "protein ( F ) and attachment protein ( G ) were used for unbiased epitope profiling of sera prior to and following RSV infection . Several novel epitopes were identified in pre-fusion F and an immunodominant epitope in F0-p27 . This study identified unlinked evolution of anti-F and anti G responses that could help development of better RSV vaccines and therapies ."
+      ]
+    },
+    {
+      "af_id": "exp1v2_plos_006_af_001",
+      "perturbation_type": "F_error",
+      "fact": "When a species is grown under optimal conditions, the single-knockout of most of its genes is not likely to affect its viability.",
+      "source_sentence": "When a species is grown under optimal conditions the single-knockout of most of its genes is not likely to affect its viability .",
+      "c_predicted_letter": "B",
+      "c_correct_letter": "B",
+      "c_picked_true_option": true,
+      "c_option_checks": {
+        "A": "contradicted",
+        "B": "supported",
+        "C": "contradicted",
+        "D": "contradicted"
+      },
+      "c_contrastive_variables": [
+        "species vs metabolic reactions",
+        "single-knockout of genes vs metabolic reactions",
+        "effect on viability (likely or unlikely to affect)",
+        "quantitative effect (approximately 30%)",
+        "direction of effect (leads to loss vs does not compromise survival)"
+      ],
+      "c_supporting_evidence": "When a species is grown under optimal conditions the single-knockout of few of its genes is not likely to affect its viability.",
+      "c_reasoning": "Option A is contradicted because the context states that single-knockout of few genes is not likely to affect viability, so it does not usually lead to loss of viability. Option B matches exactly the context statement about single-gene knockout under optimal conditions not typically compromising survival. Option C is contradicted because the context refers to genes, not metabolic reactions, in the statement about knockout effects under optimal conditions. Option D is contradicted because the context does not mention any quantitative reduction such as 30%, and states the knockout is not likely to affect viability. Therefore, only option B is fully supported by the context.",
+      "a_pred_hallucination": 1,
+      "a_supporting_evidence": "Quote: NONE",
+      "a_reason": "The context states that under optimal conditions, the single-knockout of few genes is not likely to affect viability, which contradicts the claim that most genes' single-knockout does not affect viability. Therefore, the claim is not supported and is contradicted by the context.",
+      "options": [
+        "When a species is grown under optimal conditions, the single-knockout of most of its genes usually leads to a loss of viability.",
+        "Under optimal growth conditions, deleting a single gene in most species does not typically compromise their survival.",
+        "When a species is grown under optimal conditions, the single-knockout of most of its metabolic reactions is not likely to affect its viability.",
+        "Under optimal conditions, knocking out a single gene in most species reduces their viability by approximately 30%."
+      ],
+      "correct_letter": "B",
+      "top2_chunks": [
+        "When a species is grown under optimal conditions the single-knockout of few of its genes is not likely to affect its viability . Since the deletion of a gene can have varying consequences depending on the environmental conditions , the extent of species' genetic robustness reflects both the range of conditions ( or environments ) in which it can survive as well as the availability of alternative cellular routes ( compensating for a gene's loss of function ) . Here , we developed a computational model for estimating the essentiality of metabolic reactions across natural-like environments and applied it to chart species' level of genetic robustness , providing the first systematic description of genetic robustness across species . Studying robustness",
+        "of metabolic reactions across natural-like environments and applied it to chart species' level of genetic robustness , providing the first systematic description of genetic robustness across species . Studying robustness in various environments allows assessment of different aspects of robustness for each species and contributes to understanding its evolutionary background. Our main finding is that the level of environmental dependent robustness is associated with the lifestyle of a species ( i . e . , specialists versus generalist ) , whereas the level of environmental-independent robustness is associated with its metabolic production capacities ."
+      ]
+    },
+    {
+      "af_id": "exp1v2_plos_006_af_002",
+      "perturbation_type": "F_del",
+      "fact": "The resilience of biological systems to mutations is termed genetic robustness.",
+      "source_sentence": "The resilience of biological systems to mutations is termed genetic robustness and its extent across different species has not yet been systematically described .",
+      "c_predicted_letter": "C",
+      "c_correct_letter": "C",
+      "c_picked_true_option": true,
+      "c_option_checks": {
+        "A": "insufficient",
+        "B": "contradicted",
+        "C": "supported",
+        "D": "contradicted"
+      },
+      "c_contrastive_variables": [
+        "definition of genetic robustness",
+        "association with environmental changes or mutations",
+        "terms used: genetic robustness vs metabolic robustness",
+        "direction of effect: resilience vs vulnerability"
+      ],
+      "c_supporting_evidence": "When a species is grown under optimal conditions the single-knockout of few of its genes is not likely to affect its viability . Since the deletion of a gene can have varying consequences depending on the environmental conditions , the extent of species' genetic robustness reflects both the range of conditions ( or environments ) in which it can survive as well as the availability of alternative cellular routes ( compensating for a gene's loss of function ) .",
+      "c_reasoning": "Option C states that genetic robustness is the ability of biological systems to withstand mutations without loss of viability. The context explicitly states that single-gene knockouts (a form of mutation) do not likely affect viability under optimal conditions, and that genetic robustness reflects the availability of alternative routes compensating for gene loss. This directly supports the definition in C. Option A is insufficient because the context does not define genetic robustness as adaptation to environmental changes but rather as tolerance to gene deletion effects. Option B is contradicted because metabolic robustness is not defined as resilience to mutations; the context distinguishes genetic robustness from metabolic production capacities. Option D is contradicted because genetic robustness is described as robustness (resilience), not vulnerability.",
+      "a_pred_hallucination": 0,
+      "a_supporting_evidence": "Since the deletion of a gene can have varying consequences depending on the environmental conditions, the extent of species' genetic robustness reflects both the range of conditions (or environments) in which it can survive as well as the availability of alternative cellular routes (compensating for a gene's loss of function).",
+      "a_reason": "The context explicitly defines genetic robustness as the ability of a species to survive gene deletions due to alternative cellular routes, which aligns with the claim that genetic robustness is the resilience of biological systems to mutations.",
+      "options": [
+        "The capacity of biological systems to adapt to environmental changes is referred to as genetic robustness.",
+        "The resilience of biological systems to mutations is called metabolic robustness.",
+        "The ability of biological systems to withstand mutations without loss of viability is known as genetic robustness.",
+        "Genetic robustness describes the vulnerability of biological systems to mutations."
+      ],
+      "correct_letter": "C",
+      "top2_chunks": [
+        "When a species is grown under optimal conditions the single-knockout of few of its genes is not likely to affect its viability . Since the deletion of a gene can have varying consequences depending on the environmental conditions , the extent of species' genetic robustness reflects both the range of conditions ( or environments ) in which it can survive as well as the availability of alternative cellular routes ( compensating for a gene's loss of function ) . Here , we developed a computational model for estimating the essentiality of metabolic reactions across natural-like environments and applied it to chart species' level of genetic robustness , providing the first systematic description of genetic robustness across species . Studying robustness",
+        "of metabolic reactions across natural-like environments and applied it to chart species' level of genetic robustness , providing the first systematic description of genetic robustness across species . Studying robustness in various environments allows assessment of different aspects of robustness for each species and contributes to understanding its evolutionary background. Our main finding is that the level of environmental dependent robustness is associated with the lifestyle of a species ( i . e . , specialists versus generalist ) , whereas the level of environmental-independent robustness is associated with its metabolic production capacities ."
+      ]
+    },
+    {
+      "af_id": "exp1v2_elife_017_af_012",
+      "perturbation_type": "F_error",
+      "fact": "Over 40 immune cell types were followed throughout the course of helminth infection, revealing that many first responder immune cells were recruited to the gut early on when the worms were still larvae.",
+      "source_sentence": "Over 40 immune cell types were followed throughout the course of infection , revealing that many ‘first responders’ immune cells were recruited to the gut early on , when the worms were still larvae .",
+      "c_predicted_letter": "C",
+      "c_correct_letter": "C",
+      "c_picked_true_option": true,
+      "c_option_checks": {
+        "A": "contradicted",
+        "B": "contradicted",
+        "C": "supported",
+        "D": "contradicted"
+      },
+      "c_contrastive_variables": [
+        "number of immune cell types monitored (more than 40, over 40, around 25, over 80)",
+        "timing of first responder immune cells recruitment (after worms matured into adults, early on when worms were larvae, early on when worms were in egg stage)",
+        "stage of worms when immune cells recruited (larvae, adults, egg stage)"
+      ],
+      "c_supporting_evidence": "Quote: 'Over 80 immune cell types were followed throughout the course of helminth infection, revealing that many first responder immune cells were recruited to the gut early on when the worms were still larvae.'",
+      "c_reasoning": "Option A is contradicted because the context states that first responder immune cells were recruited early when worms were larvae, not after maturation into adults. Option B is contradicted because the context specifies recruitment at the larval stage, not the egg stage. Option C matches the context exactly: more than 40 (actually over 80) immune cell types were tracked, and many early responder immune cells migrated to the gut at the larval stage. Option D is contradicted because the number of immune cell types tracked was over 80, not around 25. Therefore, only option C is fully supported by the context.",
+      "a_pred_hallucination": 0,
+      "a_supporting_evidence": "Over 80 immune cell types were followed throughout the course of helminth infection, revealing that many first responder immune cells were recruited to the gut early on when the worms were still larvae.",
+      "a_reason": "The context explicitly states that over 80 immune cell types were followed during helminth infection and that many first responder immune cells were recruited to the gut early when the worms were larvae, fully supporting the claim.",
+      "options": [
+        "More than 40 immune cell types were monitored during helminth infection, showing that the majority of first responder immune cells appeared only after the worms matured into adults.",
+        "Over 40 immune cell types were observed during helminth infection, indicating that many initial responder immune cells were recruited to the gut early on when the worms were still in the egg stage.",
+        "Researchers tracked more than 40 distinct immune cell types during helminth infection and found that numerous early responder immune cells migrated to the gut at the larval stage of the worms.",
+        "During helminth infection, around 25 immune cell types were tracked, revealing that many first responder immune cells were recruited to the gut early on when the worms were still larvae."
+      ],
+      "correct_letter": "C",
+      "top2_chunks": [
+        "the infection can last for many years . Scientists study helminth infections in the laboratory by using worms that naturally infect rats. Understanding exactly how the immune system responds to the infection is essential to grasp why it fails to clear the worms . Ferrer-Font et al . therefore methodically refined every step of this method , and finally succeeded in obtaining millions of immune cells from infected guts . Over 80 immune cell types were followed throughout the course of helminth infection, revealing that many first responder immune cells were recruited to the gut early on when the worms were still larvae. However , these cells disappeared once the worms developed into adults . When the adult worms developed",
+        "were recruited to the gut early on when the worms were still larvae. However , these cells disappeared once the worms developed into adults . When the adult worms developed , these cells were replaced by other immune cells , which also decreased the longer the worms were present in the gut . This new extraction process established by Ferrer-Font et al . can also be paired with other technologies that can , for example , reveal which genes are turned on in individual cells . The method could also be useful to extract immune cells from the gut in other challenging scenarios, such as respiratory allergies or inflammatory bowel disorders."
+      ]
+    },
+    {
+      "af_id": "exp1v2_elife_017_af_014",
+      "perturbation_type": "F_del",
+      "fact": "Microscopy confirmed that the first responder immune cells were found around the developing larvae, likely attacking them.",
+      "source_sentence": "These findings were confirmed by microscopy , which also showed that the first responder cells were found around the developing larvae , likely attacking them .",
+      "c_predicted_letter": "C",
+      "c_correct_letter": "C",
+      "c_picked_true_option": true,
+      "c_option_checks": {
+        "A": "contradicted",
+        "B": "contradicted",
+        "C": "supported",
+        "D": "contradicted"
+      },
+      "c_contrastive_variables": [
+        "timing of immune cell presence (early larvae stage vs. late chronic phase vs. adult worms)",
+        "localization of immune cells (around larvae vs. adult worms)",
+        "method of confirmation (microscopy vs. other methods)",
+        "species mentioned (mice vs. rats vs. unspecified)",
+        "immune cells' role (likely attacking or not)"
+      ],
+      "c_supporting_evidence": "Over 80 immune cell types were followed throughout the course of helminth infection, revealing that many first responder immune cells were recruited to the gut early on when the worms were still larvae.",
+      "c_reasoning": "Option C states that microscopic analysis verified that initial immune cells responding to infection localized around developing helminth larvae, suggesting targeting of early-stage parasites. The context explicitly mentions that many first responder immune cells were recruited early when worms were larvae, which supports the timing and localization. Although microscopy is not explicitly mentioned, the context refers to following immune cells and a method to extract immune cells, which implies microscopic or cellular analysis. Options A and B mention mice or late chronic phase, which are not supported by the context that specifies rats and early larvae stage. Option D is contradicted because the context states these early immune cells disappeared once worms developed into adults. Therefore, only option C is fully supported.",
+      "a_pred_hallucination": 1,
+      "a_supporting_evidence": "Quote: NONE",
+      "a_reason": "The context states that many first responder immune cells were recruited to the gut early on when the worms were still larvae, but it does not mention microscopy confirmation or that these immune cells were found around the developing larvae likely attacking them. Therefore, the claim is not fully supported by the provided context.",
+      "options": [
+        "Microscopy confirmed that the first responder immune cells were found around the developing larvae in mice infected with a related nematode species, likely attacking them.",
+        "Microscopy confirmed that the first responder immune cells were found around the developing larvae only during the late chronic phase of infection, likely attacking them.",
+        "Microscopic analysis verified that the initial immune cells responding to infection localized around the developing helminth larvae, suggesting they were targeting these early-stage parasites.",
+        "Microscopy confirmed that the first responder immune cells were found around the adult worms, likely attacking them."
+      ],
+      "correct_letter": "C",
+      "top2_chunks": [
+        "were recruited to the gut early on when the worms were still larvae. However , these cells disappeared once the worms developed into adults . When the adult worms developed , these cells were replaced by other immune cells , which also decreased the longer the worms were present in the gut . This new extraction process established by Ferrer-Font et al . can also be paired with other technologies that can , for example , reveal which genes are turned on in individual cells . The method could also be useful to extract immune cells from the gut in other challenging scenarios, such as respiratory allergies or inflammatory bowel disorders.",
+        "the infection can last for many years . Scientists study helminth infections in the laboratory by using worms that naturally infect rats. Understanding exactly how the immune system responds to the infection is essential to grasp why it fails to clear the worms . Ferrer-Font et al . therefore methodically refined every step of this method , and finally succeeded in obtaining millions of immune cells from infected guts . Over 80 immune cell types were followed throughout the course of helminth infection, revealing that many first responder immune cells were recruited to the gut early on when the worms were still larvae. However , these cells disappeared once the worms developed into adults . When the adult worms developed"
+      ]
+    },
+    {
+      "af_id": "exp1v2_elife_017_af_018",
+      "perturbation_type": "F_error",
+      "fact": "The new immune cell extraction method could also be useful to extract immune cells from the gut in other challenging scenarios such as food allergies or inflammatory bowel disorders.",
+      "source_sentence": "The method could also be useful to extract immune cells from the gut in other challenging scenarios , such food allergies or inflammatory bowel disorders .",
+      "c_predicted_letter": "C",
+      "c_correct_letter": "C",
+      "c_picked_true_option": true,
+      "c_option_checks": {
+        "A": "contradicted",
+        "B": "insufficient",
+        "C": "supported",
+        "D": "contradicted"
+      },
+      "c_contrastive_variables": [
+        "specificity to helminth infections only vs applicability to other conditions",
+        "requirement of combination with gene expression analysis vs standalone use",
+        "mention of food allergies and inflammatory bowel disorders vs other gut conditions like celiac disease or irritable bowel syndrome"
+      ],
+      "c_supporting_evidence": "The method could also be useful to extract immune cells from the gut in other challenging scenarios, such as respiratory allergies or inflammatory bowel disorders.",
+      "c_reasoning": "Option A is contradicted because the context explicitly states the method could be useful beyond helminth infections, including inflammatory bowel disorders. Option B is insufficient because although the method can be paired with gene expression analysis, the context does not say it is only useful when combined with such techniques. Option C is supported as the context explicitly mentions the method's potential applicability to other challenging gut conditions like inflammatory bowel disorders (which is a type of difficult gut condition). Option D is contradicted because the context does not mention celiac disease or irritable bowel syndrome, only respiratory allergies and inflammatory bowel disorders.",
+      "a_pred_hallucination": 1,
+      "a_supporting_evidence": "Quote: NONE",
+      "a_reason": "The context specifically mentions the method being useful for respiratory allergies or inflammatory bowel disorders, but does not mention food allergies. Therefore, the claim that it could be useful for food allergies is not supported by the provided context.",
+      "options": [
+        "The new immune cell extraction method is specifically designed to work only with helminth infections and is not suitable for conditions like food allergies or inflammatory bowel disorders.",
+        "The novel immune cell isolation method might be useful in other challenging gut scenarios, but only when combined with gene expression analysis techniques to study individual cells.",
+        "The improved technique for isolating immune cells from the gut may also be applicable to other difficult conditions like food allergies and inflammatory bowel diseases.",
+        "The refined immune cell extraction protocol could potentially be applied to other gut-related conditions such as celiac disease or irritable bowel syndrome instead of food allergies or inflammatory bowel disorders."
+      ],
+      "correct_letter": "C",
+      "top2_chunks": [
+        "be useful to extract immune cells from the gut in other challenging scenarios, such as respiratory allergies or inflammatory bowel disorders.",
+        "were recruited to the gut early on when the worms were still larvae. However , these cells disappeared once the worms developed into adults . When the adult worms developed , these cells were replaced by other immune cells , which also decreased the longer the worms were present in the gut . This new extraction process established by Ferrer-Font et al . can also be paired with other technologies that can , for example , reveal which genes are turned on in individual cells . The method could also be useful to extract immune cells from the gut in other challenging scenarios, such as respiratory allergies or inflammatory bowel disorders."
+      ]
+    },
+    {
+      "af_id": "exp1v2_elife_013_af_003",
+      "perturbation_type": "F_error",
+      "fact": "When the cell divides, cohesin is cleaved, which allows sister chromatids to separate so that each daughter cell receives one member of each sister chromatid pair and thereby inherits a full complement of genes.",
+      "source_sentence": "When the cell divides , cohesin is cleaved; this allows sister chromatids to separate , so that each daughter cell receives one member of each sister chromatid pair and thereby inherits a full complement of genes .",
+      "c_predicted_letter": "C",
+      "c_correct_letter": "C",
+      "c_picked_true_option": true,
+      "c_option_checks": {
+        "A": "insufficient",
+        "B": "contradicted",
+        "C": "supported",
+        "D": "contradicted"
+      },
+      "c_contrastive_variables": [
+        "which protein complex is cleaved (cohesin vs condensin)",
+        "timing of cleavage (only late stages of mitosis vs general during cell division)",
+        "effect of cleavage (allows separation vs prevents separation)",
+        "result on daughter cells' genetic material (full complement vs incomplete)"
+      ],
+      "c_supporting_evidence": "When the cell divides, cohesin is cleaved; this prevents sister chromatids from separating, so that each daughter cell receives one member of each sister chromatid pair and thereby inherits a full complement of genes.",
+      "c_reasoning": "Option C states that during cell division, the cohesin protein complex is cut, enabling sister chromatids to separate and ensuring each daughter cell inherits one chromatid from each pair, maintaining a complete set of genetic information. The context explicitly states that cohesin is cleaved when the cell divides, which prevents sister chromatids from separating (meaning cleavage allows separation), and that this process ensures each daughter cell receives one member of each sister chromatid pair and inherits a full complement of genes. Option A adds a timing qualifier 'only during late stages of mitosis' which is not specified in the context, so it fails the detail check. Option B contradicts the context by stating cohesin remains intact and prevents separation, which is opposite to the context. Option D incorrectly states that condensin is cleaved, but the context says cohesin is cleaved. Therefore, only option C is fully supported.",
+      "a_pred_hallucination": 1,
+      "a_supporting_evidence": "Quote: NONE",
+      "a_reason": "The context states that when the cell divides, cohesin is cleaved; this prevents sister chromatids from separating, which contradicts the claim that cohesin cleavage allows sister chromatids to separate. Therefore, the claim is contradicted by the context and is not supported.",
+      "options": [
+        "When the cell divides, cohesin is cleaved only during the late stages of mitosis, which allows sister chromatids to separate so that each daughter cell receives one member of each sister chromatid pair and thereby inherits a full complement of genes.",
+        "When the cell divides, cohesin remains intact, preventing sister chromatids from separating and causing daughter cells to inherit incomplete genetic material.",
+        "During cell division, the cohesin protein complex is cut, enabling sister chromatids to separate and ensuring that each daughter cell inherits one chromatid from each pair, thus maintaining a complete set of genetic information.",
+        "At cell division, the condensin complex is cleaved, allowing sister chromatids to separate so that each daughter cell receives one member of each sister chromatid pair and inherits a full complement of genes."
+      ],
+      "correct_letter": "C",
+      "top2_chunks": [
+        "DNA replication copies the genetic information contained in a cell's chromosomes . A ring-like protein complex, condensin, holds together each pair of newly-replicated chromosomes, known as ‘sister chromatids’. When the cell divides, cohesin is cleaved; this prevents sister chromatids from separating, so that each daughter cell receives one member of each sister chromatid pair and thereby inherits a full complement of genes. Defects in this process result in severe developmental abnormalities . The protein complex that loads cohesin onto chromosomes determines this preferential localization . The two components of the loading complex , Scc2 and Scc4 , associate as a 1:1 pair . Hinshaw et al . used a technique called X-ray crystallography to determine the structure of Scc4 bound",
+        "cohesin loads onto chromosomes . These experiments revealed that a region on the surface of Scc4 targets both Scc4 and Scc2 to centromeres . The amino-acid sequence of this centromere-targeting patch on the surface of Scc4 is conserved across species ."
+      ]
+    },
+    {
+      "af_id": "exp1v2_elife_013_af_015",
+      "perturbation_type": "F_del",
+      "fact": "The mechanism by which Scc4 localizes cohesin to centromeres may be similar in all eukaryotic organisms.",
+      "source_sentence": "Thus , the mechanism by which Scc4 localizes cohesin to centromeres may be similar in all eukaryotic organisms .",
+      "c_predicted_letter": "C",
+      "c_correct_letter": "C",
+      "c_picked_true_option": true,
+      "c_option_checks": {
+        "A": "contradicted",
+        "B": "contradicted",
+        "C": "supported",
+        "D": "contradicted"
+      },
+      "c_contrastive_variables": [
+        "amino acid sequence conservation vs variation",
+        "protein complex components (Scc2 and Scc4 vs Scc3 and Scc4)",
+        "scope of conservation (all eukaryotes vs yeast only)",
+        "mechanism uniqueness vs conservation"
+      ],
+      "c_supporting_evidence": "These experiments revealed that a region on the surface of Scc4 targets both Scc4 and Scc2 to centromeres. The amino-acid sequence of this centromere-targeting patch on the surface of Scc4 is conserved across species.",
+      "c_reasoning": "Option A is contradicted because the context explicitly states the amino acid sequence is conserved across species, not varying significantly. Option B is contradicted because the loading complex consists of Scc2 and Scc4, not Scc3 and Scc4. Option C is supported as the context states the amino acid sequence of the centromere-targeting patch on Scc4 is conserved across species, implying conservation of the mechanism across eukaryotes. Option D is contradicted because the mechanism is not unique to yeast but conserved across species. Therefore, only option C passes all checks.",
+      "a_pred_hallucination": 0,
+      "a_supporting_evidence": "The amino-acid sequence of this centromere-targeting patch on the surface of Scc4 is conserved across species .",
+      "a_reason": "The claim that the mechanism by which Scc4 localizes cohesin to centromeres may be similar in all eukaryotic organisms is supported by the evidence that the amino-acid sequence of the centromere-targeting patch on Scc4 is conserved across species, indicating a similar mechanism across eukaryotes.",
+      "options": [
+        "The amino acid sequence responsible for Scc4's centromere targeting varies significantly between different eukaryotic organisms, indicating diverse localization mechanisms.",
+        "The protein complex that loads cohesin onto chromosomes consists of Scc3 and Scc4, which together determine cohesin’s centromere localization across eukaryotes.",
+        "The way Scc4 directs cohesin to centromeres is likely conserved across all eukaryotic species due to the preservation of its centromere-targeting amino acid sequence.",
+        "The mechanism by which Scc4 localizes cohesin to centromeres is unique to yeast and does not apply to other eukaryotes."
+      ],
+      "correct_letter": "C",
+      "top2_chunks": [
+        "cohesin loads onto chromosomes . These experiments revealed that a region on the surface of Scc4 targets both Scc4 and Scc2 to centromeres . The amino-acid sequence of this centromere-targeting patch on the surface of Scc4 is conserved across species .",
+        "loading complex , Scc2 and Scc4 , associate as a 1:1 pair . Hinshaw et al . used a technique called X-ray crystallography to determine the structure of Scc4 bound with a large fragment of Scc2 . The result showed that the elongated Scc4 twists around the fragment of Scc2 , forming an extended groove . Scc2 snakes through the Scc4 groove and emerges at both ends . Hinshaw et al . then performed a series of experiments in yeast cells to probe how Scc4 determines the location at which cohesin loads onto chromosomes . These experiments revealed that a region on the surface of Scc4 targets both Scc4 and Scc2 to centromeres . The amino-acid sequence of this centromere-targeting"
+      ]
+    },
+    {
+      "af_id": "exp1v2_elife_003_af_002",
+      "perturbation_type": "F_error",
+      "fact": "A gene's DNA segment is organized in modules, with coding sections separated by portions of non-coding DNA known as introns.",
+      "source_sentence": "This DNA segment is organized in modules , with coding sections separated by portions of non-coding DNA known as introns .",
+      "c_predicted_letter": "C",
+      "c_correct_letter": "C",
+      "c_picked_true_option": true,
+      "c_option_checks": {
+        "A": "contradicted",
+        "B": "contradicted",
+        "C": "supported",
+        "D": "contradicted"
+      },
+      "c_contrastive_variables": [
+        "whether non-coding DNA segments are called exons or introns",
+        "whether coding sections are separated by exons or introns",
+        "whether the DNA segment is continuous or interrupted",
+        "specific mention of percentages (60%)"
+      ],
+      "c_supporting_evidence": "A gene is a segment of DNA that usually carries the information required to build a protein , the molecules responsible for most of life’s processes . This DNA segment is organized in modules, with coding sections separated by portions of non-coding DNA known as exons.",
+      "c_reasoning": "Option A is contradicted because the context does not mention 60% of genes or introns separating coding sections; it states coding sections are separated by exons, not introns. Option B is contradicted because it incorrectly states non-coding regions are called exons separating coding sections, whereas the context says coding sections are separated by non-coding DNA known as exons, which is a mismatch. Option C is supported because it correctly states that protein-coding regions are interrupted by non-coding sequences called introns, which aligns with the context's explanation of gene organization (though the context uses 'exons' as non-coding, the standard and the context's implication about spliceosomes working on introns supports this). Option D is contradicted because the context explicitly states the DNA segment is organized in modules with interruptions by non-coding DNA, not continuous coding sequences. Therefore, only option C passes all checks.",
+      "a_pred_hallucination": 1,
+      "a_supporting_evidence": "Quote: NONE",
+      "a_reason": "The context states that coding sections are separated by portions of non-coding DNA known as exons, which contradicts the claim that these non-coding sections are known as introns. Therefore, the claim is not supported and is contradicted by the context.",
+      "options": [
+        "A gene's DNA segment is organized in modules, with coding sections separated by non-coding DNA called introns in about 60% of genes.",
+        "A gene's DNA segment is organized into modules where non-coding regions called exons separate the coding sections.",
+        "A gene's DNA sequence is arranged in segments where protein-coding regions are interrupted by non-coding sequences called introns.",
+        "A gene's DNA segment is organized in continuous coding sequences without interruption by non-coding introns."
+      ],
+      "correct_letter": "C",
+      "top2_chunks": [
+        "A gene is a segment of DNA that usually carries the information required to build a protein , the molecules responsible for most of life’s processes . This DNA segment is organized in modules, with coding sections separated by portions of non-coding DNA known as exons. When a gene is ‘turned on’ , it gets faithfully copied into a molecule of pre-messenger RNA ( pre-mRNA ) , which contains the alternating coding and non-coding modules . If this delicate process goes wrong , inaccurate protein templates are produced that may be damaging for the cell . Braun et al . designed a new method that allows them to ‘tag’ spliceosomes extracted from a human cell and follow them as they",
+        "be damaging for the cell . Braun et al . designed a new method that allows them to ‘tag’ spliceosomes extracted from a human cell and follow them as they come together . The experiments show that spliceosomes working on different introns in the same pre-mRNA actually help each other out . As one assembles , this helps the spliceosome that processes the neighboring intron to get built . In particular , the U1 snRNPs processing nearby introns collaborate to promote the assembly and activity of the spliceosomes . This teamwork is likely important to guarantee that multiple exons are cut out quickly and accurately ."
+      ]
+    },
+    {
+      "af_id": "exp1v2_elife_003_af_004",
+      "perturbation_type": "F_del",
+      "fact": "Before pre-messenger RNA (pre-mRNA) can serve as a template to create a protein, the pre-mRNA must be processed and all the introns removed by a structure called the spliceosome.",
+      "source_sentence": "Before it can serve as a template to create a protein , this pre-mRNA must be processed and all the introns removed by a structure called the spliceosome .",
+      "c_predicted_letter": "D",
+      "c_correct_letter": "D",
+      "c_picked_true_option": true,
+      "c_option_checks": {
+        "A": "contradicted",
+        "B": "contradicted",
+        "C": "insufficient",
+        "D": "supported"
+      },
+      "c_contrastive_variables": [
+        "timing of spliceosome processing relative to protein synthesis",
+        "whether exons or introns are removed",
+        "whether all or only some introns are removed",
+        "whether pre-mRNA is used as a template before or after splicing"
+      ],
+      "c_supporting_evidence": "Context [2]: 'This DNA segment is organized in modules, with coding sections separated by portions of non-coding DNA known as exons. When a gene is ‘turned on’, it gets faithfully copied into a molecule of pre-messenger RNA (pre-mRNA), which contains the alternating coding and non-coding modules.' Context [1]: 'spliceosomes working on different introns in the same pre-mRNA actually help each other out... teamwork is likely important to guarantee that multiple exons are cut out quickly and accurately.'",
+      "c_reasoning": "Option A is contradicted because the context indicates spliceosome acts on pre-mRNA before it is used as a template for protein synthesis, not after. Option B is contradicted because the context states exons are coding sections and introns are non-coding; spliceosomes remove introns, not exons. Option C is insufficient because the context does not specify that only some introns are removed; it implies multiple introns are processed collaboratively but does not limit to only some. Option D is supported because the context explains that pre-mRNA contains coding exons separated by non-coding introns and that spliceosomes process introns to ensure accurate exon joining before the pre-mRNA can serve as a protein template.",
+      "a_pred_hallucination": 1,
+      "a_supporting_evidence": "Quote: NONE",
+      "a_reason": "The context mentions spliceosomes working on introns in pre-mRNA and their collaborative assembly, but it does not explicitly state that pre-mRNA must be processed and all introns removed by the spliceosome before serving as a template to create a protein. Therefore, the claim is not fully supported by the provided context.",
+      "options": [
+        "The spliceosome processes pre-mRNA after it has already been used as a template to create a protein.",
+        "Pre-messenger RNA requires removal of exons by the spliceosome before it can function as a protein template.",
+        "Before pre-mRNA can be translated into protein, only some introns need to be removed by the spliceosome during processing.",
+        "Pre-messenger RNA must undergo processing to remove all introns by the spliceosome before it can be used as a template for protein synthesis."
+      ],
+      "correct_letter": "D",
+      "top2_chunks": [
+        "be damaging for the cell . Braun et al . designed a new method that allows them to ‘tag’ spliceosomes extracted from a human cell and follow them as they come together . The experiments show that spliceosomes working on different introns in the same pre-mRNA actually help each other out . As one assembles , this helps the spliceosome that processes the neighboring intron to get built . In particular , the U1 snRNPs processing nearby introns collaborate to promote the assembly and activity of the spliceosomes . This teamwork is likely important to guarantee that multiple exons are cut out quickly and accurately .",
+        "A gene is a segment of DNA that usually carries the information required to build a protein , the molecules responsible for most of life’s processes . This DNA segment is organized in modules, with coding sections separated by portions of non-coding DNA known as exons. When a gene is ‘turned on’ , it gets faithfully copied into a molecule of pre-messenger RNA ( pre-mRNA ) , which contains the alternating coding and non-coding modules . If this delicate process goes wrong , inaccurate protein templates are produced that may be damaging for the cell . Braun et al . designed a new method that allows them to ‘tag’ spliceosomes extracted from a human cell and follow them as they"
+      ]
+    },
+    {
+      "af_id": "exp1v2_elife_003_af_007",
+      "perturbation_type": "F_del",
+      "fact": "The spliceosome is a complex molecular machine formed of numerous parts, including one known as U1 small nuclear ribonucleoprotein (U1 snRNP), that must come together.",
+      "source_sentence": "The spliceosome is a complex molecular machine formed of numerous parts – including one known as U1 snRNP – that must come together .",
+      "c_predicted_letter": "A",
+      "c_correct_letter": "A",
+      "c_picked_true_option": true,
+      "c_option_checks": {
+        "A": "supported",
+        "B": "contradicted",
+        "C": "contradicted",
+        "D": "contradicted"
+      },
+      "c_contrastive_variables": [
+        "U1 snRNP vs U2 snRNP",
+        "presence in all cells vs only neuronal cells",
+        "components assemble vs disassemble before splicing"
+      ],
+      "c_supporting_evidence": "In particular, the U1 snRNPs processing nearby introns collaborate to promote the assembly and activity of the spliceosomes.",
+      "c_reasoning": "Option A states that the spliceosome includes U1 snRNP as an essential part and that these components assemble together to function. The context explicitly mentions U1 snRNPs collaborating to promote assembly and activity of spliceosomes, supporting this. Option B is contradicted because the context does not limit spliceosome assembly to neuronal cells; it refers to human cells generally. Option C is contradicted because the context mentions U1 snRNP, not U2 snRNP. Option D is contradicted because the context indicates that U1 snRNPs promote assembly and activity, not disassemble before splicing. Therefore, only option A is fully supported.",
+      "a_pred_hallucination": 0,
+      "a_supporting_evidence": "The experiments show that spliceosomes working on different introns in the same pre-mRNA actually help each other out. As one assembles, this helps the spliceosome that processes the neighboring intron to get built. In particular, the U1 snRNPs processing nearby introns collaborate to promote the assembly and activity of the spliceosomes.",
+      "a_reason": "The context explicitly states that U1 snRNPs are parts of spliceosomes and that they collaborate to promote the assembly of spliceosomes, supporting the claim that the spliceosome is a complex molecular machine formed of numerous parts including U1 snRNP that must come together.",
+      "options": [
+        "The spliceosome is a multi-component molecular complex that includes the U1 small nuclear ribonucleoprotein (U1 snRNP) as one of its essential parts, which assemble together to function.",
+        "The spliceosome is a complex molecular machine formed of numerous parts, including U1 small nuclear ribonucleoprotein (U1 snRNP), which only assemble in neuronal cells during splicing.",
+        "The spliceosome is a complex molecular machine composed of several parts, including the U2 small nuclear ribonucleoprotein (U2 snRNP), that must assemble to operate.",
+        "The spliceosome is a complex molecular machine formed of numerous parts, including U1 small nuclear ribonucleoprotein (U1 snRNP), but these components disassemble before the splicing process begins."
+      ],
+      "correct_letter": "A",
+      "top2_chunks": [
+        "be damaging for the cell . Braun et al . designed a new method that allows them to ‘tag’ spliceosomes extracted from a human cell and follow them as they come together . The experiments show that spliceosomes working on different introns in the same pre-mRNA actually help each other out . As one assembles , this helps the spliceosome that processes the neighboring intron to get built . In particular , the U1 snRNPs processing nearby introns collaborate to promote the assembly and activity of the spliceosomes . This teamwork is likely important to guarantee that multiple exons are cut out quickly and accurately .",
+        "A gene is a segment of DNA that usually carries the information required to build a protein , the molecules responsible for most of life’s processes . This DNA segment is organized in modules, with coding sections separated by portions of non-coding DNA known as exons. When a gene is ‘turned on’ , it gets faithfully copied into a molecule of pre-messenger RNA ( pre-mRNA ) , which contains the alternating coding and non-coding modules . If this delicate process goes wrong , inaccurate protein templates are produced that may be damaging for the cell . Braun et al . designed a new method that allows them to ‘tag’ spliceosomes extracted from a human cell and follow them as they"
+      ]
+    },
+    {
+      "af_id": "exp1v2_elife_003_af_008",
+      "perturbation_type": "F_del",
+      "fact": "When a pre-messenger RNA (pre-mRNA) has several introns, a spliceosome assembles anew for each of the introns.",
+      "source_sentence": "When a pre-mRNA has several introns , a spliceosome assembles anew for each of them .",
+      "c_predicted_letter": "C",
+      "c_correct_letter": "C",
+      "c_picked_true_option": true,
+      "c_option_checks": {
+        "A": "contradicted",
+        "B": "contradicted",
+        "C": "supported",
+        "D": "contradicted"
+      },
+      "c_contrastive_variables": [
+        "number of spliceosomes assembling per pre-mRNA molecule",
+        "whether a single spliceosome removes all introns simultaneously or multiple spliceosomes assemble",
+        "which snRNP (U1 or U2) is primarily involved in spliceosome assembly",
+        "whether spliceosomes assemble independently or collaboratively",
+        "proportion of introns with new spliceosome assembly (all, half, or other)"
+      ],
+      "c_supporting_evidence": "The experiments show that spliceosomes working on different introns in the same pre-mRNA actually help each other out. As one assembles, this helps the spliceosome that processes the neighboring intron to get built. In particular, the U1 snRNPs processing nearby introns collaborate to promote the assembly and activity of the spliceosomes.",
+      "c_reasoning": "Option A is contradicted because the context states multiple spliceosomes work on different introns rather than a single spliceosome removing all introns simultaneously. Option B is contradicted because the context specifically highlights the role of U1 snRNPs in spliceosome assembly and collaboration, not U2 snRNP. Option C is supported because the context implies that for each intron, a spliceosome assembles (multiple spliceosomes on different introns), though they collaborate. Option D is contradicted because there is no mention of only half of the introns having new spliceosome assembly; the context suggests all introns have spliceosomes assembling, with collaboration. Therefore, only option C passes all checks.",
+      "a_pred_hallucination": 1,
+      "a_supporting_evidence": "Quote: NONE",
+      "a_reason": "The context describes that spliceosomes working on different introns in the same pre-mRNA help each other and collaborate during assembly, but it does not explicitly state that a spliceosome assembles anew for each intron. Therefore, the claim that a spliceosome assembles anew for each intron is not explicitly supported by the provided context.",
+      "options": [
+        "A single spliceosome assembles on a pre-mRNA and simultaneously removes all introns present in that molecule.",
+        "The spliceosome complex responsible for intron removal is primarily formed around the U2 snRNP rather than the U1 snRNP during assembly on pre-mRNA introns.",
+        "For each intron present in a pre-messenger RNA molecule, a new spliceosome assembles independently to remove it.",
+        "When a pre-mRNA contains multiple introns, a spliceosome assembles anew for approximately half of the introns rather than all of them."
+      ],
+      "correct_letter": "C",
+      "top2_chunks": [
+        "be damaging for the cell . Braun et al . designed a new method that allows them to ‘tag’ spliceosomes extracted from a human cell and follow them as they come together . The experiments show that spliceosomes working on different introns in the same pre-mRNA actually help each other out . As one assembles , this helps the spliceosome that processes the neighboring intron to get built . In particular , the U1 snRNPs processing nearby introns collaborate to promote the assembly and activity of the spliceosomes . This teamwork is likely important to guarantee that multiple exons are cut out quickly and accurately .",
+        "teamwork is likely important to guarantee that multiple exons are cut out quickly and accurately ."
+      ]
+    },
+    {
+      "af_id": "exp1v2_elife_001_af_007",
+      "perturbation_type": "F_error",
+      "fact": "Deep neural networks learn to measure animal posture, which is the positions of an animal’s body parts in space, directly from real data such as images or videos without being explicitly programmed with instructions to perform the task.",
+      "source_sentence": "These tools learn to measure animal posture – the positions of an animal’s body parts in space – directly from real data , such as images or videos , without being explicitly programmed with instructions to perform the task .",
+      "c_predicted_letter": "B",
+      "c_correct_letter": "B",
+      "c_picked_true_option": true,
+      "c_option_checks": {
+        "A": "contradicted",
+        "B": "supported",
+        "C": "contradicted",
+        "D": "contradicted"
+      },
+      "c_contrastive_variables": [
+        "source of data: synthetic/computer-generated images (A) vs real images or videos (B, D)",
+        "need for explicit programming instructions: required (C) vs not required (B, D)",
+        "definition of animal posture: positions of body parts in space (A, B) vs relative angles between body parts (D)",
+        "learning method: direct learning from data (B, D) vs explicit programming (C)",
+        "data type: real-world data (B, D) vs synthetic data (A)"
+      ],
+      "c_supporting_evidence": "Quote from [1]: \"to measure animal posture – the positions of an animal’s body parts in space – indirectly from real data, such as images or videos, without being explicitly programmed with instructions to perform the task.\" Quote from [2]: \"deep neural networks to measure animal behavior . These tools learn to measure animal posture – the positions of an animal’s body parts in space – indirectly from real data, such as images or videos, without being explicitly programmed with instructions\"",
+      "c_reasoning": "Option A is contradicted because the context specifies learning from real data such as images or videos, not synthetic or computer-generated images. Option C is contradicted because the context explicitly states that deep neural networks learn without explicit programming instructions. Option D is contradicted because the context defines animal posture as the positions of body parts in space, not relative angles between body parts. Option B is fully supported by multiple verbatim quotes stating that deep neural networks learn to measure animal posture, defined as positions of body parts in space, directly from real data like images or videos without explicit programming. Therefore, only option B passes all checks.",
+      "a_pred_hallucination": 0,
+      "a_supporting_evidence": "Context [1]: \"to measure animal posture – the positions of an animal’s body parts in space – indirectly from real data, such as images or videos, without being explicitly programmed with instructions to perform the task. This allows deep learning algorithms to automatically track the locations of specific animal body parts in videos faster and more accurately than previous techniques.\"",
+      "a_reason": "The context explicitly states that deep learning algorithms (deep neural networks) learn to measure animal posture, defined as the positions of an animal’s body parts in space, directly from real data such as images or videos without explicit programming instructions, fully supporting the claim.",
+      "options": [
+        "Deep neural networks learn to measure animal posture, which is the positions of an animal’s body parts in space, directly from synthetic data such as computer-generated images rather than real images or videos.",
+        "Deep neural networks can automatically determine animal posture—the spatial positions of body parts—by learning directly from real-world data like images or videos without needing explicit programming instructions.",
+        "Deep neural networks require explicit programming instructions to measure animal posture from images or videos, rather than learning directly from the data.",
+        "Deep neural networks learn to measure animal posture, defined as the relative angles between body parts, directly from real data such as images or videos without explicit programming."
+      ],
+      "correct_letter": "B",
+      "top2_chunks": [
+        "to measure animal posture – the positions of an animal’s body parts in space – indirectly from real data, such as images or videos, without being explicitly programmed with instructions to perform the task. This allows deep learning algorithms to automatically track the locations of specific animal body parts in videos faster and more accurately than previous techniques . This ability to learn from images also removes the need to attach physical markers to animals , which may alter their natural behavior . Now , Graving et al . have created a new deep learning toolkit for measuring animal behavior that combines components from previous tools with the latest advances in computer science . For example , adding connections within",
+        "Studying animal behavior can reveal how animals make decisions based on what they sense in their environment , but measuring behavior can be difficult and time-consuming . Computer programs that measure and analyze animal movement have made these studies faster and easier to complete . These tools have also made more advanced behavioral experiments possible , which have yielded new insights about how the brain organizes behavior . Recently , scientists have started using new machine learning tools called deep neural networks to measure animal behavior . These tools learn to measure animal posture – the positions of an animal’s body parts in space – indirectly from real data, such as images or videos, without being explicitly programmed with instructions"
+      ]
+    },
+    {
+      "af_id": "exp1v2_elife_001_af_012",
+      "perturbation_type": "F_error",
+      "fact": "Adding connections between layers, or ‘neurons’, in the deep neural network and training the algorithm to learn the full geometry of the body by drawing lines between body parts both enhance the accuracy of the deep learning toolkit.",
+      "source_sentence": "For example , adding connections between layers , or ‘neurons’ , in the deep neural network and training the algorithm to learn the full geometry of the body – by drawing lines between body parts – both enhance its accuracy .",
+      "c_predicted_letter": "B",
+      "c_correct_letter": "B",
+      "c_picked_true_option": true,
+      "c_option_checks": {
+        "A": "contradicted",
+        "B": "supported",
+        "C": "contradicted",
+        "D": "contradicted"
+      },
+      "c_contrastive_variables": [
+        "connections between layers vs within layers",
+        "learning only individual body part positions vs full geometry by linking body parts",
+        "species tested: mammalian species like mice vs insects (fruit flies, zebras, locusts)",
+        "number of training examples: 100 vs 500"
+      ],
+      "c_supporting_evidence": "adding connections within layers , or ‘neurons’ , in the deep neural network and training the algorithm to learn the full geometry of the body – by drawing lines between body parts – both enhance its accuracy . As a result of adding these changes , the new toolkit can measure an animal's pose from previously unseen images with high speed and accuracy , after being trained on just 100 examples . Graving et al . tested their model on videos of fruit flies , zebras and locusts , and found that , after training , it was able to accurately track the animals’ movements .",
+      "c_reasoning": "Option B matches the context exactly: the context states that adding connections within layers and training the algorithm to learn the full geometry of the body by drawing lines between body parts improves accuracy. The context also specifies training on just 100 examples and testing on fruit flies, zebras, and locusts (not mice). Option A is contradicted because the context emphasizes learning the full geometry, not only individual body part positions. Option C is contradicted because the context mentions insects and zebras, not specifically mammalian species like mice. Option D is contradicted because the context states training on just 100 examples, not 500. Therefore, only option B is fully supported.",
+      "a_pred_hallucination": 0,
+      "a_supporting_evidence": "For example , adding connections within layers , or ‘neurons’ , in the deep neural network and training the algorithm to learn the full geometry of the body – by drawing lines between body parts – both enhance its accuracy .",
+      "a_reason": "The context explicitly states that both adding connections within layers (neurons) and training the algorithm to learn the full geometry of the body by drawing lines between body parts enhance the accuracy of the deep learning toolkit, fully supporting the claim.",
+      "options": [
+        "Adding connections between layers and training the algorithm to learn only individual body part positions without considering their geometric relationships enhances the toolkit's accuracy.",
+        "Incorporating inter-layer connections and training the deep neural network to capture the complete body geometry by linking body parts improves the accuracy of the deep learning toolkit.",
+        "Adding connections between layers and training the algorithm to learn the full geometry of the body by drawing lines between body parts improves accuracy when applied to mammalian species like mice instead of insects.",
+        "Including connections between layers and training the model to learn the full body geometry by connecting body parts improves accuracy but requires at least 500 training examples."
+      ],
+      "correct_letter": "B",
+      "top2_chunks": [
+        "created a new deep learning toolkit for measuring animal behavior that combines components from previous tools with the latest advances in computer science . For example , adding connections within layers , or ‘neurons’ , in the deep neural network and training the algorithm to learn the full geometry of the body – by drawing lines between body parts – both enhance its accuracy . As a result of adding these changes , the new toolkit can measure an animal's pose from previously unseen images with high speed and accuracy , after being trained on just 100 examples . Graving et al . tested their model on videos of fruit flies , zebras and locusts , and found that ,",
+        "to measure animal posture – the positions of an animal’s body parts in space – indirectly from real data, such as images or videos, without being explicitly programmed with instructions to perform the task. This allows deep learning algorithms to automatically track the locations of specific animal body parts in videos faster and more accurately than previous techniques . This ability to learn from images also removes the need to attach physical markers to animals , which may alter their natural behavior . Now , Graving et al . have created a new deep learning toolkit for measuring animal behavior that combines components from previous tools with the latest advances in computer science . For example , adding connections within"
+      ]
+    },
+    {
+      "af_id": "exp1v2_elife_007_af_013",
+      "perturbation_type": "F_del",
+      "fact": "Testing the hypothesis that retinal stretching causes visual deficits in nearsighted people by looking at cone photoreceptors directly in the eye was impossible until recently.",
+      "source_sentence": "Until recently , testing this hypothesis by looking at cone photoreceptors directly in the eye was impossible .",
+      "c_predicted_letter": "C",
+      "c_correct_letter": "C",
+      "c_picked_true_option": true,
+      "c_option_checks": {
+        "A": "contradicted",
+        "B": "contradicted",
+        "C": "supported",
+        "D": "contradicted"
+      },
+      "c_contrastive_variables": [
+        "photoreceptor type (cone vs rod)",
+        "timeframe (over a decade ago vs recently vs not feasible until recent advances)",
+        "imaging target (fovea vs peripheral retina)",
+        "reason for impossibility (imaging limitations vs not stated)"
+      ],
+      "c_supporting_evidence": "These findings rule out increases in the density of cone photoreceptors as the cause or effect of visual deficits associated with near-sightedness, adding to the understanding of this common condition. ... This hurdle can be overcome using adaptive optics, which means adding a deformable mirror to the instrument being used to image the eye that can adjust to correct the distortion. Wang et al. use a new generation Adaptive Optics Scanning Laser Ophthalmoscope to check the density of cones at the fovea in relation to the size of the eye.",
+      "c_reasoning": "Option A is contradicted because the context does not state that testing was possible over a decade ago; it implies recent advances with adaptive optics enabled this. Option B is contradicted because the context discusses cones, not rods. Option C is supported because the context explains that direct examination of cone photoreceptors at the fovea to test hypotheses about nearsightedness was not feasible until recent advances in adaptive optics imaging. Option D is contradicted because the limitation mentioned is optical distortion corrected by adaptive optics, not specifically imaging the peripheral retina. Therefore, only option C passes all checks.",
+      "a_pred_hallucination": 0,
+      "a_supporting_evidence": "This hurdle can be overcome using adaptive optics, which means adding a deformable mirror to the instrument being used to image the eye that can adjust to correct the distortion. Wang et al. use a new generation Adaptive Optics Scanning Laser Ophthalmoscope to check the density of cones at the fovea in relation to the size of the eye.",
+      "a_reason": "The context explains that imaging the cone photoreceptors directly in the eye was previously hindered by optical imperfections, but this hurdle was overcome recently using adaptive optics technology, enabling direct examination of cones in relation to eye size, which supports the claim that testing the hypothesis was impossible until recently.",
+      "options": [
+        "Testing the hypothesis that retinal stretching causes visual deficits in nearsighted people by looking at cone photoreceptors directly in the eye has been possible for over a decade.",
+        "Testing the hypothesis that retinal stretching causes visual deficits in nearsighted people by examining rod photoreceptors directly in the eye was impossible until recently.",
+        "Direct examination of cone photoreceptors in the eye to test whether retinal stretching causes visual deficits in nearsighted individuals was not feasible until recent advances.",
+        "Testing the hypothesis that retinal stretching causes visual deficits in nearsighted people by looking at cone photoreceptors directly in the eye was impossible until recently due to limitations in imaging the peripheral retina."
+      ],
+      "correct_letter": "C",
+      "top2_chunks": [
+        "have more cones sampling the image and should therefore have a higher resolution view . These findings rule out increases in the density of cone photoreceptors as the cause or effect of visual deficits associated with near-sightedness, adding to the understanding of this common condition.",
+        "hurdle can be overcome using adaptive optics , which means adding a deformable mirror to the instrument being used to image the eye that can adjust to correct the distortion . Wang et al . use a new generation Adaptive Optics Scanning Laser Ophthalmoscope to check the density of cones at the fovea in relation to the size of the eye . So , if a near-sighted person wearing contacts and someone who does not need glasses stood side-by-side admiring the full moon , the near-sighted person would most likely have more cones sampling the image and should therefore have a higher resolution view . These findings rule out increases in the density of cone photoreceptors as the cause or"
+      ]
+    },
+    {
+      "af_id": "exp1v2_elife_007_af_019",
+      "perturbation_type": "F_error",
+      "fact": "The findings of Wang et al. rule out reductions in the density of cone photoreceptors as the cause or effect of visual deficits associated with nearsightedness.",
+      "source_sentence": "These findings rule out reductions in the density of cone photoreceptors as the cause or effect of visual deficits associated with near-sightedness , adding to the understanding of this common condition .",
+      "c_predicted_letter": "D",
+      "c_correct_letter": "D",
+      "c_picked_true_option": true,
+      "c_option_checks": {
+        "A": "contradicted",
+        "B": "contradicted",
+        "C": "insufficient",
+        "D": "supported"
+      },
+      "c_contrastive_variables": [
+        "reductions in cone photoreceptor density as cause of visual deficits",
+        "contribution only in elderly patients",
+        "density of rod photoreceptors vs cones",
+        "decreases in cone photoreceptor density do not explain visual impairments"
+      ],
+      "c_supporting_evidence": "These findings rule out increases in the density of cone photoreceptors as the cause or effect of visual deficits associated with near-sightedness",
+      "c_reasoning": "Option A is contradicted because the context explicitly states that increases in cone density are ruled out as cause or effect of visual deficits. Option B is contradicted because there is no mention of elderly patients or age-related effects. Option C is insufficient because the context does not mention rod photoreceptors at all, only cones. Option D is supported because the context states that changes in cone photoreceptor density do not explain the visual deficits linked to nearsightedness.",
+      "a_pred_hallucination": 1,
+      "a_supporting_evidence": "Quote: NONE",
+      "a_reason": "The context explicitly states that the findings rule out increases in the density of cone photoreceptors as the cause or effect of visual deficits associated with nearsightedness, but does not mention reductions in the density of cone photoreceptors. Therefore, the claim about ruling out reductions is not supported by the provided context.",
+      "options": [
+        "Wang et al. found that reductions in cone photoreceptor density are the primary cause of visual deficits in nearsighted individuals.",
+        "Wang et al. concluded that reductions in cone photoreceptor density contribute to visual deficits only in elderly patients with nearsightedness.",
+        "Wang et al. showed that the density of rod photoreceptors, rather than cones, remains unchanged in relation to nearsightedness.",
+        "Wang et al. demonstrated that decreases in cone photoreceptor density do not explain the visual impairments linked to nearsightedness."
+      ],
+      "correct_letter": "D",
+      "top2_chunks": [
+        "have more cones sampling the image and should therefore have a higher resolution view . These findings rule out increases in the density of cone photoreceptors as the cause or effect of visual deficits associated with near-sightedness, adding to the understanding of this common condition.",
+        "hurdle can be overcome using adaptive optics , which means adding a deformable mirror to the instrument being used to image the eye that can adjust to correct the distortion . Wang et al . use a new generation Adaptive Optics Scanning Laser Ophthalmoscope to check the density of cones at the fovea in relation to the size of the eye . So , if a near-sighted person wearing contacts and someone who does not need glasses stood side-by-side admiring the full moon , the near-sighted person would most likely have more cones sampling the image and should therefore have a higher resolution view . These findings rule out increases in the density of cone photoreceptors as the cause or"
+      ]
+    },
+    {
+      "af_id": "exp1v2_elife_015_af_001",
+      "perturbation_type": "F_error",
+      "fact": "Information stored in DNA is used to make proteins in a two-step process.",
+      "source_sentence": "Information stored in DNA is used to make proteins in a two-step process .",
+      "c_predicted_letter": "C",
+      "c_correct_letter": "C",
+      "c_picked_true_option": true,
+      "c_option_checks": {
+        "A": "contradicted",
+        "B": "contradicted",
+        "C": "supported",
+        "D": "contradicted"
+      },
+      "c_contrastive_variables": [
+        "number of steps in protein synthesis (one-step vs two-step)",
+        "intermediate molecule used (messenger RNA vs transfer RNA vs direct DNA reading)",
+        "sequence of events (DNA to mRNA to protein vs DNA to tRNA to protein vs direct DNA to protein)",
+        "timeframe mentioned (seconds vs no timeframe)"
+      ],
+      "c_supporting_evidence": "Information stored in RNA is used to make proteins in a two-step process. Next, machines called ribosomes use the messenger RNAs as templates to assemble chains of amino acids – the building blocks of proteins – in a process called translation.",
+      "c_reasoning": "Option A is contradicted because although the context confirms a two-step process involving transcription and translation, it does not mention the process is typically completed within seconds. Option B is contradicted because ribosomes do not directly read DNA; they use messenger RNA as a template. Option C is supported as the context explicitly states a two-step process involving messenger RNA and translation at the ribosome. Option D is contradicted because transfer RNA carries amino acids to the ribosome but is not the intermediate copied from DNA; messenger RNA is. Therefore, only option C is fully supported by the context.",
+      "a_pred_hallucination": 1,
+      "a_supporting_evidence": "Quote: NONE",
+      "a_reason": "The context states that information stored in RNA is used to make proteins in a two-step process, not DNA. Therefore, the claim that information stored in DNA is used to make proteins in a two-step process is not supported by the provided context.",
+      "options": [
+        "Protein synthesis from DNA occurs via a two-step process where DNA is transcribed into messenger RNA and then translated into proteins, typically completed within seconds in most cells.",
+        "Proteins are synthesized from DNA in a single step where ribosomes directly read the DNA sequence to assemble amino acids.",
+        "Proteins are produced from DNA through a two-step mechanism involving transcription to messenger RNA followed by translation at the ribosome.",
+        "The process of making proteins from DNA involves first copying DNA into transfer RNA, which then guides amino acid assembly at the ribosome."
+      ],
+      "correct_letter": "C",
+      "top2_chunks": [
+        "Information stored in RNA is used to make proteins in a two-step process . Next , machines called ribosomes use the messenger RNAs as templates to assemble chains of amino acids – the building blocks of proteins – in a process called translation . Another type of RNA molecule called transfer RNA carries each amino acid to the ribosomes . If a specific transfer RNA is not available for translation at the right time , the ribosome might stall as it moves along the messenger RNA . At this point, the ribosome needs to be restarted or it will fall off the tRNA without finishing the protein. In 2014 , a group of researchers reported that certain types of brain",
+        "the ribosome needs to be restarted or it will fall off the tRNA without finishing the protein. In 2014 , a group of researchers reported that certain types of brain cells are very sensitive to ribosome stalling , and tend to die if translation does not continue . Here , Ishimura , Nagy et al . – including some of the researchers from the earlier work – investigated the molecular pathways that ribosome stalling triggers in brain cells using mutant mice that lacked the GTPBP2 protein . The experiments show that ribosome stalling activates an enzyme known as GCN2 , which was already known to sense other types of malfunctions in cellular processes . Ishimura , Nagy et al ."
+      ]
+    },
+    {
+      "af_id": "exp1v2_elife_015_af_008",
+      "perturbation_type": "F_del",
+      "fact": "A protein called GTPBP2 plays an important role in restarting stalled ribosomes in certain brain cells.",
+      "source_sentence": "A protein called GTPBP2 was shown to play an important role in restarting stalled ribosomes in these cells .",
+      "c_predicted_letter": "B",
+      "c_correct_letter": "B",
+      "c_picked_true_option": true,
+      "c_option_checks": {
+        "A": "contradicted",
+        "B": "supported",
+        "C": "contradicted",
+        "D": "contradicted"
+      },
+      "c_contrastive_variables": [
+        "GTPBP2 vs GTPBP1",
+        "facilitates restarting vs crucial for resuming vs essential vs inhibits restarting",
+        "specific types of brain cells",
+        "conditions of oxidative stress (mentioned or not)"
+      ],
+      "c_supporting_evidence": "Here, Ishimura, Nagy et al. – including some of the researchers from the earlier work – investigated the molecular pathways that ribosome stalling triggers in brain cells using mutant mice that lacked the GTPBP2 protein.",
+      "c_reasoning": "Option A is contradicted because the context does not mention oxidative stress as a condition for GTPBP2's role. Option B is supported because the context states that researchers studied ribosome stalling in brain cells using mutant mice lacking GTPBP2, implying GTPBP2's crucial role in resuming ribosome activity after stalling. Option C is contradicted because the protein mentioned is GTPBP2, not GTPBP1. Option D is contradicted because there is no mention that GTPBP2 inhibits restarting; rather, its absence is studied, implying it facilitates restarting. Therefore, only option B is fully supported by the context.",
+      "a_pred_hallucination": 1,
+      "a_supporting_evidence": "Quote: NONE",
+      "a_reason": "The context mentions that mutant mice lacking GTPBP2 were used to study ribosome stalling in brain cells and that ribosome stalling activates GCN2, but it does not explicitly state that GTPBP2 plays an important role in restarting stalled ribosomes in certain brain cells. Therefore, the claim is not fully supported by the provided context.",
+      "options": [
+        "GTPBP2 facilitates the restarting of stalled ribosomes in brain cells only under conditions of oxidative stress.",
+        "The protein GTPBP2 is crucial for resuming the activity of ribosomes that have stalled during translation in specific types of brain cells.",
+        "The protein GTPBP1 is essential for restarting stalled ribosomes in certain brain cells during protein synthesis.",
+        "GTPBP2 inhibits the restarting of stalled ribosomes in certain brain cells, leading to increased ribosome stalling."
+      ],
+      "correct_letter": "B",
+      "top2_chunks": [
+        "the ribosome needs to be restarted or it will fall off the tRNA without finishing the protein. In 2014 , a group of researchers reported that certain types of brain cells are very sensitive to ribosome stalling , and tend to die if translation does not continue . Here , Ishimura , Nagy et al . – including some of the researchers from the earlier work – investigated the molecular pathways that ribosome stalling triggers in brain cells using mutant mice that lacked the GTPBP2 protein . The experiments show that ribosome stalling activates an enzyme known as GCN2 , which was already known to sense other types of malfunctions in cellular processes . Ishimura , Nagy et al .",
+        "that ribosome stalling activates an enzyme known as GCN2 , which was already known to sense other types of malfunctions in cellular processes . Ishimura , Nagy et al . also show that GCN2 triggers stress responses in the cells by activating a communication system called the ATF4 pathway . The next challenges are to understand the exact mechanism by which GCN2 senses stalled ribosomes , and to find out how ribosome stalling causes the death of brain cells ."
+      ]
+    },
+    {
+      "af_id": "exp1v2_elife_010_af_003",
+      "perturbation_type": "F_del",
+      "fact": "The layers of stem cells formed during embryogenesis can be activated to turn into a particular type of cell, such as a heart or a lung cell.",
+      "source_sentence": "These cells can be activated to turn into a particular type of cell , such as a heart or a lung cell .",
+      "c_predicted_letter": "D",
+      "c_correct_letter": "D",
+      "c_picked_true_option": true,
+      "c_option_checks": {
+        "A": "contradicted",
+        "B": "contradicted",
+        "C": "contradicted",
+        "D": "supported"
+      },
+      "c_contrastive_variables": [
+        "stem cell layers develop into heart cells only (A)",
+        "activation timing after first trimester (B)",
+        "activation into liver or lung cells (C)",
+        "activation into heart or lung cells (D)"
+      ],
+      "c_supporting_evidence": "The laboratory-grown stem cells were treated with chemical signals, causing them to form different layers that developed into early forms of heart and lung cells.",
+      "c_reasoning": "Option A is contradicted because the context states the layers develop into both heart and lung cells, not only heart cells. Option B is contradicted because there is no mention of timing related to the first trimester; the context discusses embryogenesis generally without specifying timing. Option C is contradicted because liver cells are not mentioned; only heart and lung cells are specified. Option D is supported as the context explicitly states that stem cells treated with chemical signals formed layers that developed into early heart and lung cells, indicating differentiation into specific cell types including heart and lung cells during embryogenesis.",
+      "a_pred_hallucination": 1,
+      "a_supporting_evidence": "Quote: NONE",
+      "a_reason": "The context describes that during embryogenesis, different layers of stem cells form and that chemical signals can cause stem cells to form early heart and lung cells in a lab model. However, it explicitly states it is not true that chemical signals activate processes inside cells located in different layers of the embryo. The claim that layers of stem cells can be activated to turn into particular cell types such as heart or lung cells is not directly supported; the context only supports that stem cells can be induced in vitro to form such cells, not that the layers themselves are activated in vivo during embryogenesis. Therefore, the claim is not fully supported by the provided context.",
+      "options": [
+        "The layers of stem cells formed during embryogenesis can only develop into heart cells, not lung cells.",
+        "The layers of stem cells formed during embryogenesis can be activated to turn into particular cell types, such as heart or lung cells, but only after the first trimester of pregnancy.",
+        "The layers of stem cells formed during embryogenesis can be activated to become specific cell types, such as liver or lung cells.",
+        "During embryogenesis, the stem cell layers formed can be triggered to differentiate into specific cell types, including heart or lung cells."
+      ],
+      "correct_letter": "D",
+      "top2_chunks": [
+        "These early stages of development are known as embryogenesis – a tightly organized process , during which the embryo forms different layers of stem cells . The heart and lungs develop from the same layer within the embryo, which must communicate with each other for the organs to form correctly. It is not true that chemical signals can be released from and travel between layers of the embryo, activating processes inside cells located in the different areas. In mouse models , chemical signals and cells travel between developing heart and lung , which helps both organs to form into the correct structure . But it is unclear how well the observations from mouse models translate to heart and lung development",
+        "lung , which helps both organs to form into the correct structure . But it is unclear how well the observations from mouse models translate to heart and lung development in humans . To find out more , Ng et al . developed a human model of heart and lung co-development during embryogenesis using human pluripotent stem cells . The laboratory-grown stem cells were treated with chemical signals , causing them to form different layers that developed into early forms of heart and lung cells . The cells were then transferred into a specific growing condition , where they arranged into three-dimensional structures termed microtissues . Ng et al . found that lung cells developed faster when grown in microtissues"
+      ]
+    },
+    {
+      "af_id": "exp1v2_elife_011_af_002",
+      "perturbation_type": "F_error",
+      "fact": "Plant cells are like small balloons surrounded by a strong cell wall.",
+      "source_sentence": "Plant cells are like small balloons surrounded by a strong cell wall .",
+      "c_predicted_letter": "D",
+      "c_correct_letter": "D",
+      "c_picked_true_option": true,
+      "c_option_checks": {
+        "A": "contradicted",
+        "B": "contradicted",
+        "C": "contradicted",
+        "D": "supported"
+      },
+      "c_contrastive_variables": [
+        "presence or absence of cell wall",
+        "rigidity or flexibility of cell wall",
+        "whether cell wall is strong or weak",
+        "whether shape depends on internal pressure"
+      ],
+      "c_supporting_evidence": "Quote: \"Plant cells are like small balloons surrounded by a weak cell wall. It is this pressure that gives non-woody plant tissue its shape.\"",
+      "c_reasoning": "Option A is contradicted because the context specifies a 'weak cell wall,' not just a flexible plasma membrane without a rigid wall. Option B is contradicted because the context explicitly states the presence of a cell wall, so cells do not lack any surrounding cell wall. Option C is contradicted because the context describes the cell wall as 'weak,' not 'strong' and flexible enough to expand without pressure. Option D is supported because the context describes plant cells as 'small balloons surrounded by a weak cell wall,' implying the presence of a cell wall that encloses the cell, consistent with the idea of a rigid cell wall enclosing the cell. Although the wall is described as weak, it is still a cell wall enclosing the cell, which aligns best with option D compared to the others.",
+      "a_pred_hallucination": 1,
+      "a_supporting_evidence": "Quote: NONE",
+      "a_reason": "The context explicitly states that plant cells are like small balloons surrounded by a weak cell wall, not a strong cell wall as claimed. This directly contradicts the claim's key detail about the cell wall being strong.",
+      "options": [
+        "Plant cells are like small balloons surrounded by a flexible plasma membrane without a rigid wall.",
+        "Plant cells are like small balloons lacking any surrounding cell wall, relying solely on internal pressure for shape.",
+        "Plant cells are like small balloons enclosed by a strong cell wall that is flexible enough to expand without pressure.",
+        "Plant cells resemble tiny balloons enclosed by a rigid cell wall."
+      ],
+      "correct_letter": "D",
+      "top2_chunks": [
+        "Cells with complex interlocking shapes , similar to pieces of a jigsaw puzzle , cover the surface of many leaves . Why do these curious shapes form , and what benefit do they provide to the plant ? Plant cells are like small balloons surrounded by a weak cell wall. It is this pressure that gives non-woody plant tissue its shape . It is not true that removing the internal pressure inside plant cells causes the plant to wilt. This could mean that the shape of puzzle cells is an adaptation used by plants to reduce the stress on their surface . To investigate this possibility , Sapala , Runions et al . developed a computer simulation that models how",
+        "are sufficient to reduce the stress on the epidermal cell wall . Sapala , Runions et al . tested this idea by analyzing the shape of organs and cells in many plant species and by genetically modifying growth directions in Arabidopsis thaliana plants . This confirmed that puzzle cell shape is related to both organ shape and how isotropically the plant grows . However , the model developed by Sapala , Runions et al . does not require such chemical signaling . Instead , mechanical forces and the shape the puzzle cells themselves may transmit this information . Mechanical forces are known to have important effects on the shape and behavior of cells from other species too . For example"
+      ]
+    },
+    {
+      "af_id": "exp1v2_elife_011_af_006",
+      "perturbation_type": "F_del",
+      "fact": "The pressure inside a plant cell creates a lot of mechanical stress on the epidermal cell walls that make up the surface of the plant.",
+      "source_sentence": "The pressure inside a cell creates a lot of mechanical stress on the epidermal cell walls – those that make up the surface of the plant .",
+      "c_predicted_letter": "B",
+      "c_correct_letter": "B",
+      "c_picked_true_option": true,
+      "c_option_checks": {
+        "A": "insufficient",
+        "B": "supported",
+        "C": "contradicted",
+        "D": "insufficient"
+      },
+      "c_contrastive_variables": [
+        "pressure inside a plant cell",
+        "amount of mechanical stress (moderate, significant, reduces, minimal)",
+        "location of stress (epidermal cell walls, cuticle layer)",
+        "timing (only during rapid growth phases, general)"
+      ],
+      "c_supporting_evidence": "‘paving’ the leaf surface with puzzle shaped cells instead of more regularly shaped cells reduces the stress in the epidermal cell walls . If a plant organ grows mostly in one direction , like in a root or stem , long thin cells are sufficient to reduce the stress on the epidermal cell wall .",
+      "c_reasoning": "The context states that the pressure inside a plant cell (turgor pressure) creates mechanical stress on the epidermal cell walls covering the plant's surface. It specifically mentions that puzzle-shaped cells reduce this stress, implying that the internal pressure generates significant mechanical stress that needs to be mitigated. There is no mention of stress being only during rapid growth phases (A), nor that pressure reduces stress (C). The cuticle layer is not mentioned in relation to mechanical stress (D). Therefore, only option B is supported.",
+      "a_pred_hallucination": 1,
+      "a_supporting_evidence": "Quote: NONE",
+      "a_reason": "The context discusses mechanical stress on epidermal cell walls and how puzzle-shaped cells reduce this stress, but it does not explicitly state that the pressure inside a plant cell creates a lot of mechanical stress on the epidermal cell walls. Therefore, the claim is not fully supported by the provided context.",
+      "options": [
+        "The pressure inside a plant cell creates a moderate amount of mechanical stress on the epidermal cell walls only during rapid growth phases.",
+        "The internal pressure within a plant cell generates significant mechanical stress on the epidermal cell walls covering the plant's surface.",
+        "The pressure inside a plant cell reduces mechanical stress on the epidermal cell walls that make up the surface of the plant.",
+        "The pressure inside a plant cell creates minimal mechanical stress on the cuticle layer that covers the plant surface."
+      ],
+      "correct_letter": "B",
+      "top2_chunks": [
+        "are sufficient to reduce the stress on the epidermal cell wall . Sapala , Runions et al . tested this idea by analyzing the shape of organs and cells in many plant species and by genetically modifying growth directions in Arabidopsis thaliana plants . This confirmed that puzzle cell shape is related to both organ shape and how isotropically the plant grows . However , the model developed by Sapala , Runions et al . does not require such chemical signaling . Instead , mechanical forces and the shape the puzzle cells themselves may transmit this information . Mechanical forces are known to have important effects on the shape and behavior of cells from other species too . For example",
+        "adaptation used by plants to reduce the stress on their surface . To investigate this possibility , Sapala , Runions et al . developed a computer simulation that models how a plant grows and re-creates a variety of realistic puzzle cell shapes . The simulations show that ‘paving’ the leaf surface with puzzle shaped cells instead of more regularly shaped cells reduces the stress in the epidermal cell walls . If a plant organ grows mostly in one direction , like in a root or stem , long thin cells are sufficient to reduce the stress on the epidermal cell wall . Sapala , Runions et al . tested this idea by analyzing the shape of organs and cells in"
+      ]
+    },
+    {
+      "af_id": "exp1v2_elife_011_af_007",
+      "perturbation_type": "F_del",
+      "fact": "The extent of mechanical stress on epidermal cell walls depends on the shape and size of the cells.",
+      "source_sentence": "The extent of the stress depends on the shape and size of the cells; for example , large cells bulge out and experience more stress than small cells .",
+      "c_predicted_letter": "C",
+      "c_correct_letter": "C",
+      "c_picked_true_option": true,
+      "c_option_checks": {
+        "A": "contradicted",
+        "B": "contradicted",
+        "C": "supported",
+        "D": "contradicted"
+      },
+      "c_contrastive_variables": [
+        "mechanical stress depends mainly on thickness vs shape/size",
+        "mechanical stress influenced by chemical signals vs shape/size",
+        "mechanical stress varies according to size and shape",
+        "larger cells experience half the stress compared to smaller cells due to volume-to-surface area ratio"
+      ],
+      "c_supporting_evidence": "The simulations show that ‘paving’ the leaf surface with puzzle shaped cells instead of more regularly shaped cells reduces the stress in the epidermal cell walls . If a plant organ grows mostly in one direction , like in a root or stem , long thin cells are sufficient to reduce the stress on the epidermal cell wall . Sapala , Runions et al . tested this idea by analyzing the shape of organs and cells in many plant species and by genetically modifying growth directions in Arabidopsis thaliana plants . This confirmed that puzzle cell shape is related to both organ shape and how isotropically the plant grows .",
+      "c_reasoning": "Option A is contradicted because the context emphasizes cell shape (puzzle-shaped cells, long thin cells) as important in reducing stress, not thickness. Option B is contradicted because the model does not require chemical signaling; mechanical forces and cell shape transmit information. Option C is supported because the context explicitly states that the shape of cells (puzzle-shaped vs regular, long thin cells) affects mechanical stress on epidermal cell walls. Option D is contradicted because there is no mention of larger cells experiencing half the stress due to volume-to-surface area ratio. Therefore, only option C is fully supported by the context.",
+      "a_pred_hallucination": 1,
+      "a_supporting_evidence": "Quote: NONE",
+      "a_reason": "The context discusses how certain cell shapes (e.g., puzzle-shaped or long thin cells) can reduce stress on epidermal cell walls and how mechanical forces affect cell shape and behavior, but it does not explicitly state that the extent of mechanical stress depends on the shape and size of the cells. Therefore, the claim is not fully supported by the provided context.",
+      "options": [
+        "The degree of mechanical stress on epidermal cell walls depends mainly on the thickness of the cell walls rather than the shape or size of the cells.",
+        "Mechanical stress on epidermal cell walls is primarily influenced by the chemical signals exchanged between neighboring cells rather than their shape or size.",
+        "The amount of mechanical stress experienced by the epidermal cell walls varies according to the size and shape of the plant cells.",
+        "Larger plant cells experience approximately half the mechanical stress on their epidermal walls compared to smaller cells due to their volume-to-surface area ratio."
+      ],
+      "correct_letter": "C",
+      "top2_chunks": [
+        "are sufficient to reduce the stress on the epidermal cell wall . Sapala , Runions et al . tested this idea by analyzing the shape of organs and cells in many plant species and by genetically modifying growth directions in Arabidopsis thaliana plants . This confirmed that puzzle cell shape is related to both organ shape and how isotropically the plant grows . However , the model developed by Sapala , Runions et al . does not require such chemical signaling . Instead , mechanical forces and the shape the puzzle cells themselves may transmit this information . Mechanical forces are known to have important effects on the shape and behavior of cells from other species too . For example",
+        "puzzle cells themselves may transmit this information . Mechanical forces are known to have important effects on the shape and behavior of cells from other species too . For example , animal cells can develop into different cell types depending on the stiffness of the surface they are placed on . Now that Sapala , Runions et al . have highlighted that plant cell shapes also adapt to mechanical forces , further research is needed to uncover how these forces are sensed ."
+      ]
+    },
+    {
+      "af_id": "exp1v2_elife_011_af_012",
+      "perturbation_type": "F_del",
+      "fact": "The simulations show that complex puzzle shapes develop in parts of the plant that grow isotropically, such as leaves.",
+      "source_sentence": "Counterintuitively , the simulations also show that complex puzzle shapes develop in parts of the plant that grow isotropically ( uniformly in all directions ) , such as leaves .",
+      "c_predicted_letter": "D",
+      "c_correct_letter": "D",
+      "c_picked_true_option": true,
+      "c_option_checks": {
+        "A": "insufficient",
+        "B": "insufficient",
+        "C": "contradicted",
+        "D": "supported"
+      },
+      "c_contrastive_variables": [
+        "growth pattern: isotropic vs predominantly one direction",
+        "plant parts: flower petals vs roots vs leaves",
+        "timing: only early developmental stages vs general",
+        "cell shape: complex puzzle-shaped cells"
+      ],
+      "c_supporting_evidence": "The simulations show that ‘paving’ the leaf surface with puzzle shaped cells instead of more regularly shaped cells reduces the stress in the epidermal cell walls . If a plant organ grows mostly in one direction , like in a root or stem , long thin cells are sufficient to reduce the stress on the epidermal cell wall . Sapala , Runions et al . tested this idea by analyzing the shape of organs and cells in many plant species and by genetically modifying growth directions in Arabidopsis thaliana plants . This confirmed that puzzle cell shape is related to both organ shape and how isotropically the plant grows .",
+      "c_reasoning": "Option A is not supported because the context does not mention flower petals specifically. Option B is not supported because there is no mention of timing or early developmental stages. Option C is contradicted because the context states that organs growing mostly in one direction have long thin cells, not puzzle-shaped cells. Option D is supported because the context explicitly states that puzzle-shaped cells reduce stress on the leaf surface, which grows isotropically (uniformly in all directions). Therefore, D is the only option fully supported by the context.",
+      "a_pred_hallucination": 0,
+      "a_supporting_evidence": "The simulations show that ‘paving’ the leaf surface with puzzle shaped cells instead of more regularly shaped cells reduces the stress in the epidermal cell walls . If a plant organ grows mostly in one direction , like in a root or stem , long thin cells are sufficient to reduce the stress on the epidermal cell wall . Sapala , Runions et al . tested this idea by analyzing the shape of organs and cells in many plant species and by genetically modifying growth directions in Arabidopsis thaliana plants . This confirmed that puzzle cell shape is related to both organ shape and how isotropically the plant grows .",
+      "a_reason": "The context explicitly states that the simulations show puzzle cell shapes develop in relation to isotropic growth, such as in leaves, supporting the claim fully.",
+      "options": [
+        "Computer simulations indicate that complex puzzle-shaped cells develop in plant parts that grow isotropically, such as flower petals.",
+        "Computer simulations indicate that complex puzzle-shaped cells develop in parts of the plant that grow isotropically, but only during early developmental stages.",
+        "Computer simulations indicate that complex puzzle-shaped cells develop primarily in plant parts that grow predominantly in one direction, such as roots.",
+        "Computer simulations indicate that intricate puzzle-shaped cells form in plant regions that expand uniformly in all directions, like leaves."
+      ],
+      "correct_letter": "D",
+      "top2_chunks": [
+        "Cells with complex interlocking shapes , similar to pieces of a jigsaw puzzle , cover the surface of many leaves . Why do these curious shapes form , and what benefit do they provide to the plant ? Plant cells are like small balloons surrounded by a weak cell wall. It is this pressure that gives non-woody plant tissue its shape . It is not true that removing the internal pressure inside plant cells causes the plant to wilt. This could mean that the shape of puzzle cells is an adaptation used by plants to reduce the stress on their surface . To investigate this possibility , Sapala , Runions et al . developed a computer simulation that models how",
+        "adaptation used by plants to reduce the stress on their surface . To investigate this possibility , Sapala , Runions et al . developed a computer simulation that models how a plant grows and re-creates a variety of realistic puzzle cell shapes . The simulations show that ‘paving’ the leaf surface with puzzle shaped cells instead of more regularly shaped cells reduces the stress in the epidermal cell walls . If a plant organ grows mostly in one direction , like in a root or stem , long thin cells are sufficient to reduce the stress on the epidermal cell wall . Sapala , Runions et al . tested this idea by analyzing the shape of organs and cells in"
+      ]
+    },
+    {
+      "af_id": "exp1v2_elife_012_af_002",
+      "perturbation_type": "F_del",
+      "fact": "The lack of a social network may itself be a source of stress.",
+      "source_sentence": "In fact , the lack of a social network may itself be a source of stress .",
+      "c_predicted_letter": "D",
+      "c_correct_letter": "D",
+      "c_picked_true_option": true,
+      "c_option_checks": {
+        "A": "insufficient",
+        "B": "insufficient",
+        "C": "insufficient",
+        "D": "supported"
+      },
+      "c_contrastive_variables": [
+        "lack of social network as source of anxiety vs stress",
+        "population specificity (elderly)",
+        "effect on stress levels (reduces vs causes)",
+        "absence of social connections as stressor"
+      ],
+      "c_supporting_evidence": "Recent research suggests that young girls are more sensitive to social stress than boys. This could mean that social networks are more important for females in general, and that young females from different species, such as mice, may be more sensitive to social isolation than males. ... the changes in the brain cells that control the release of stress hormones required a signalling chemical called corticosterone, which is produced in response to stressful situations.",
+      "c_reasoning": "The context discusses social isolation as a stressor that affects brain cells controlling stress hormone release, indicating that absence of social connections can act as a stressor by itself. There is no mention of anxiety specifically (A), no focus on elderly populations (B), and no indication that limited social networks reduce stress (C). Therefore, only option D is supported.",
+      "a_pred_hallucination": 1,
+      "a_supporting_evidence": "Quote: NONE",
+      "a_reason": "The context discusses the effects of social isolation on brain activity and stress hormone release in mice, but does not explicitly state or support that the lack of a social network itself may be a source of stress. There is no direct evidence linking the absence of a social network as a stress source in the provided chunks.",
+      "options": [
+        "The lack of a social network may itself be a source of anxiety rather than stress.",
+        "The lack of a social network may cause stress in elderly populations specifically.",
+        "Having a limited social network reduces stress levels in individuals.",
+        "The absence of social connections can act as a stressor by itself."
+      ],
+      "correct_letter": "D",
+      "top2_chunks": [
+        "Following on from this work , one future challenge will be to investigate if reuniting a social group erases the effects of social isolation on the brain . Further experiments could also examine the behavioural and physiological effects of social isolation , including how females respond to later stressful events .",
+        "Recent research suggests that young girls are more sensitive to social stress than boys . This could mean that social networks are more important for females in general , and that young females from different species , such as mice , may be more sensitive to social isolation than males . However, few studies have examined how social isolation affects the brain cells that control the release of growth hormones. Senst , Baimoukhametova et al . now show that the brains of young male and female mice react differently to social isolation . Less than a day after separation from their littermates, the activity in the brain cells of male mice became markedly different from that of isolated females. In"
+      ]
+    },
+    {
+      "af_id": "exp1v2_elife_012_af_005",
+      "perturbation_type": "F_error",
+      "fact": "Few studies have examined how social isolation affects the brain cells that control the release of stress hormones.",
+      "source_sentence": "However , few studies have examined how social isolation affects the brain cells that control the release of stress hormones .",
+      "c_predicted_letter": "A",
+      "c_correct_letter": "A",
+      "c_picked_true_option": true,
+      "c_option_checks": {
+        "A": "supported",
+        "B": "contradicted",
+        "C": "contradicted",
+        "D": "contradicted"
+      },
+      "c_contrastive_variables": [
+        "number of studies (limited, few, numerous)",
+        "brain cells controlling release of (stress hormone, dopamine)",
+        "population focus (general, elderly)"
+      ],
+      "c_supporting_evidence": "Context [2]: 'However, few studies have examined how social isolation affects the brain cells that control the release of growth hormones.' and 'Senst, Baimoukhametova et al. now show that the brains of young male and female mice react differently to social isolation.' Context [1] and [2] also mention stress hormones and corticosterone but do not contradict the limited/few studies statement.",
+      "c_reasoning": "Option A states that only a limited number of studies have investigated the impact of social isolation on brain cells responsible for regulating stress hormone release. The context explicitly says 'few studies have examined how social isolation affects the brain cells that control the release of growth hormones' and discusses stress hormones (corticosterone) in relation to social isolation. This supports the idea that only a limited/few studies have been done. Option B is contradicted because the context does not mention dopamine or reward processing. Option C is contradicted because the context says 'few studies' rather than 'numerous studies' have explored this. Option D is contradicted because the context does not specify elderly populations but rather young mice. Therefore, only option A is supported.",
+      "a_pred_hallucination": 0,
+      "a_supporting_evidence": "However, few studies have examined how social isolation affects the brain cells that control the release of growth hormones.",
+      "a_reason": "The claim states that few studies have examined how social isolation affects the brain cells that control the release of stress hormones. Context chunk [2] explicitly states that few studies have examined how social isolation affects the brain cells controlling hormone release, though it mentions growth hormones specifically. Despite the slight difference in hormone type, the context supports the claim's core idea about limited research on social isolation's effect on brain cells controlling hormone release.",
+      "options": [
+        "Only a limited number of studies have investigated the impact of social isolation on the brain cells responsible for regulating stress hormone release.",
+        "Few studies have examined how social isolation affects the brain cells that control the release of dopamine, a neurotransmitter involved in reward processing.",
+        "Numerous studies have extensively explored how social isolation influences the brain cells that regulate the secretion of stress hormones.",
+        "Few studies have examined how social isolation affects the brain cells that control the release of stress hormones specifically in elderly populations."
+      ],
+      "correct_letter": "A",
+      "top2_chunks": [
+        "social isolation . Less than a day after separation from their littermates, the activity in the brain cells of male mice became markedly different from that of isolated females. In contrast to social isolation , the physical stress of being made to swim produced similar changes in the brains of both male and female mice . Further experiments then showed that the changes in the brain cells that control the release of stress hormones required a signalling chemical called corticosterone , which is produced in response to stressful situations . Following on from this work , one future challenge will be to investigate if reuniting a social group erases the effects of social isolation on the brain . Further experiments",
+        "Recent research suggests that young girls are more sensitive to social stress than boys . This could mean that social networks are more important for females in general , and that young females from different species , such as mice , may be more sensitive to social isolation than males . However, few studies have examined how social isolation affects the brain cells that control the release of growth hormones. Senst , Baimoukhametova et al . now show that the brains of young male and female mice react differently to social isolation . Less than a day after separation from their littermates, the activity in the brain cells of male mice became markedly different from that of isolated females. In"
+      ]
+    },
+    {
+      "af_id": "exp1v2_elife_012_af_011",
+      "perturbation_type": "F_del",
+      "fact": "In response to social isolation, female mice are experiencing more stress than male mice.",
+      "source_sentence": "This suggests that , in repsonse to soical isolation , the females are experiencing more stress than the males .",
+      "c_predicted_letter": "B",
+      "c_correct_letter": "B",
+      "c_picked_true_option": true,
+      "c_option_checks": {
+        "A": "contradicted",
+        "B": "supported",
+        "C": "contradicted",
+        "D": "contradicted"
+      },
+      "c_contrastive_variables": [
+        "male vs female mice",
+        "stress levels or stress responses",
+        "species: mice vs rats",
+        "quantitative comparison (approximately twice)",
+        "direction of stress response difference"
+      ],
+      "c_supporting_evidence": "Recent research suggests that young girls are more sensitive to social stress than boys. This could mean that social networks are more important for females in general, and that young females from different species, such as mice, may be more sensitive to social isolation than males.",
+      "c_reasoning": "Option A is contradicted because the context states females may be more sensitive to social isolation than males, not males showing higher stress. Option B is supported by the explicit statement that young females (including mice) may be more sensitive to social isolation than males, indicating greater stress responses in females. Option C is contradicted because no quantitative comparison such as 'approximately twice' is mentioned in the context. Option D is contradicted because the context discusses mice, not rats. Therefore, only option B passes all checks.",
+      "a_pred_hallucination": 1,
+      "a_supporting_evidence": "Quote: NONE",
+      "a_reason": "The context indicates that male and female mice brains react differently to social isolation, but it does not explicitly state that female mice experience more stress than male mice. The evidence is about differences in brain cell activity, not a direct measure of stress levels or a comparison showing females experience more stress. Therefore, the claim is not fully supported.",
+      "options": [
+        "Male mice show higher stress levels than female mice following social isolation.",
+        "Female mice exhibit greater stress responses than male mice when subjected to social isolation.",
+        "In response to social isolation, female mice experience approximately twice the stress compared to male mice.",
+        "In response to social isolation, female rats experience more stress than male rats."
+      ],
+      "correct_letter": "B",
+      "top2_chunks": [
+        "social isolation . Less than a day after separation from their littermates, the activity in the brain cells of male mice became markedly different from that of isolated females. In contrast to social isolation , the physical stress of being made to swim produced similar changes in the brains of both male and female mice . Further experiments then showed that the changes in the brain cells that control the release of stress hormones required a signalling chemical called corticosterone , which is produced in response to stressful situations . Following on from this work , one future challenge will be to investigate if reuniting a social group erases the effects of social isolation on the brain . Further experiments",
+        "Recent research suggests that young girls are more sensitive to social stress than boys . This could mean that social networks are more important for females in general , and that young females from different species , such as mice , may be more sensitive to social isolation than males . However, few studies have examined how social isolation affects the brain cells that control the release of growth hormones. Senst , Baimoukhametova et al . now show that the brains of young male and female mice react differently to social isolation . Less than a day after separation from their littermates, the activity in the brain cells of male mice became markedly different from that of isolated females. In"
+      ]
+    }
+  ]
+}

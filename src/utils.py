@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 import logging
+import threading
 from datetime import datetime
 from pathlib import Path
 from typing import Any, Iterable
@@ -76,6 +77,7 @@ class OpenAIClient:
         "completion_tokens": 0,
         "total_tokens": 0,
     }
+    _usage_lock = threading.Lock()
 
     def __init__(self, api_key: str | None = None, logger: logging.Logger | None = None) -> None:
         key = api_key or config.OPENAI_API_KEY
@@ -116,7 +118,10 @@ class OpenAIClient:
         }
 
         for key, value in usage.items():
-            OpenAIClient._total_usage[key] = OpenAIClient._total_usage.get(key, 0) + int(value)
+            # Class-level counters are shared across threads; protect updates.
+            # (Metrics correctness only; individual API calls are still independent.)
+            with OpenAIClient._usage_lock:
+                OpenAIClient._total_usage[key] = OpenAIClient._total_usage.get(key, 0) + int(value)
 
         self.logger.info(
             "OpenAI usage | prompt=%s completion=%s total=%s | accumulated_total=%s",

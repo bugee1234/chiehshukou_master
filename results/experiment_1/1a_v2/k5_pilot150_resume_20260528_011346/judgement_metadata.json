@@ -1,0 +1,14 @@
+{
+  "time": "2026-05-28T09:10:30",
+  "model": "gpt-4.1-mini",
+  "top_k": 5,
+  "total_rows": 1701,
+  "questions_1t3f": 1701,
+  "question_source": "reused_partial",
+  "reuse_questions_requested": true,
+  "reused_questions_count": 202,
+  "pilot_first_n": 150,
+  "setup_a_parse_error": 0,
+  "setup_b_parse_error": 0,
+  "setup_c_parse_error": 0
+}

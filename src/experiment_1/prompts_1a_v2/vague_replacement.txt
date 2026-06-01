@@ -1,0 +1,26 @@
+You will be given a sentence from a biomedical lay summary and the atomic fact it contains.
+Rewrite the sentence into a vaguer, more general version.
+
+Requirements:
+- Keep the same general topic and main subject (same drug, treatment, or biological entity).
+- Remove ALL specific numbers, percentages, timeframes, patient subgroups, and precise qualifiers.
+- Remove specific measurement units and directional quantifiers (e.g., "by 20%", "over 12 weeks").
+- The result must be factually consistent with the original but insufficiently specific
+  to verify any precise claim from the original.
+- Do NOT introduce any new information not present in the original.
+- Keep approximately the same sentence length and style.
+- The vague version should read as a plausible but uninformative lay summary sentence.
+
+Good example:
+  Original: "Drug X reduced systolic blood pressure by 20% in hypertensive patients over 12 weeks."
+  Vague:    "Drug X showed beneficial effects on blood pressure outcomes."
+
+Bad example (still too specific):
+  Original: "Drug X reduced systolic blood pressure by 20% in hypertensive patients over 12 weeks."
+  Vague:    "Drug X reduced blood pressure in patients."
+  Wrong: "reduced" still conveys direction. Prefer "showed effects on blood pressure" or similar.
+
+Original sentence: {sentence}
+Atomic fact to make vaguer: {atomic_fact}
+
+Return JSON only: {"vague_sentence": "..."}

@@ -1,0 +1,31 @@
+{
+  "total": 20,
+  "by_source": {
+    "PLOS": 10,
+    "eLife": 10
+  },
+  "avg_lay_summary_words": 284.9,
+  "avg_article_words": 6651.3,
+  "article_ids": [
+    "exp1v2_plos_005",
+    "exp1v2_plos_004",
+    "exp1v2_plos_019",
+    "exp1v2_plos_010",
+    "exp1v2_plos_007",
+    "exp1v2_plos_002",
+    "exp1v2_plos_020",
+    "exp1v2_plos_006",
+    "exp1v2_plos_018",
+    "exp1v2_plos_014",
+    "exp1v2_elife_006",
+    "exp1v2_elife_018",
+    "exp1v2_elife_020",
+    "exp1v2_elife_017",
+    "exp1v2_elife_008",
+    "exp1v2_elife_002",
+    "exp1v2_elife_005",
+    "exp1v2_elife_001",
+    "exp1v2_elife_004",
+    "exp1v2_elife_007"
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "time": "2026-05-27T16:56:58",
+  "embedding_model": "text-embedding-3-small",
+  "top_k": 5,
+  "chunk_words": 120,
+  "chunk_overlap": 30,
+  "articles": 20,
+  "af_total": 227,
+  "chunks_total": 64,
+  "retrieval_rows": 227
+}
