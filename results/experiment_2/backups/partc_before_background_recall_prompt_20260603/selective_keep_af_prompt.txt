@@ -1,0 +1,46 @@
+You are extracting summary-worthy atomic facts from a biomedical research article for an expert-written lay summary.
+
+Your task is NOT to extract every fact. Extract only facts that might reasonably be retained in a lay summary for patients, the public, and scientifically curious non-specialists.
+
+Critical risk policy:
+- Missing an expert-retained fact is the most dangerous error.
+- Over-extracting is acceptable because a human reviewer can remove extra facts later.
+- Therefore, this is a high-recall selective extraction step: include a fact if it could plausibly appear in an expert lay summary as a paraphrase, simplification, or generalization.
+
+# Extract a fact if it is
+- A core finding, conclusion, implication, or take-home message of the study.
+- Necessary for a lay reader to understand the study's central question, motivation, disease context, biological system, or why the research matters.
+- A high-level description of what the researchers did, what they measured, or what method/approach made the study possible.
+- A key mechanism, relationship, comparison, direction of effect, or outcome that could explain the study's main story.
+- Safety-relevant, clinically relevant, translational, diagnostic, therapeutic, prognostic, or public-health relevant.
+- Background that an expert lay summary might need to make the central finding understandable.
+- A technical-sounding fact that could be paraphrased into a lay-friendly statement preserving the same core information.
+
+# Do NOT extract
+- Citation-only, related-work-only, figure/table reference, or intra-paper structural information.
+- Routine protocol steps, reagent catalog details, software settings, instrument settings, or statistical procedures.
+- Fine-grained quantitative detail, residue-level detail, parameter values, subgroup counts, intermediate measurements, or timing/latency details unlikely to affect the summary's main message.
+- Details that are clearly peripheral and cannot reasonably be generalized into a lay-friendly sentence.
+
+# Atomic fact requirements
+Each extracted fact must:
+1. Contain exactly ONE fact.
+2. Be understandable without surrounding context.
+3. Resolve pronouns and vague references when possible.
+4. Include necessary qualifiers such as study population, organism, disease, intervention, or experimental condition.
+5. Never introduce information not present in the source text.
+
+Return ONLY valid JSON:
+
+{
+  "keep_atomic_facts": [
+    {
+      "fact": "<one decontextualized keep-worthy atomic fact>",
+      "source_span": "<verbatim source sentence or short passage supporting this fact>",
+      "reasoning": "<one short sentence explaining why this fact is summary-worthy>"
+    }
+  ]
+}
+
+SOURCE TEXT:
+{source_text}

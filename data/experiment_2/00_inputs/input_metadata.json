@@ -1,0 +1,81 @@
+{
+  "time": "2026-06-02T18:31:35",
+  "seed": 20260620,
+  "n_per_source": 25,
+  "exclude_exp0": true,
+  "excluded_indices_by_source": {
+    "PLOS": 20,
+    "eLife": 20
+  },
+  "datasets": {
+    "PLOS": {
+      "dataset_name": "BioLaySumm/BioLaySumm2025-PLOS",
+      "validation_size": 1376,
+      "candidate_size_after_exclusion": 1356,
+      "picked_indices": [
+        1274,
+        883,
+        334,
+        779,
+        810,
+        1324,
+        1339,
+        1291,
+        1157,
+        619,
+        28,
+        629,
+        1314,
+        680,
+        559,
+        317,
+        338,
+        442,
+        1083,
+        445,
+        252,
+        293,
+        881,
+        80,
+        1219
+      ]
+    },
+    "eLife": {
+      "dataset_name": "BioLaySumm/BioLaySumm2025-eLife",
+      "validation_size": 241,
+      "candidate_size_after_exclusion": 221,
+      "picked_indices": [
+        201,
+        204,
+        51,
+        118,
+        236,
+        8,
+        82,
+        230,
+        191,
+        187,
+        10,
+        91,
+        9,
+        57,
+        119,
+        170,
+        175,
+        113,
+        148,
+        53,
+        59,
+        203,
+        188,
+        229,
+        5
+      ]
+    }
+  },
+  "total_articles": 50,
+  "by_source": {
+    "PLOS": 25,
+    "eLife": 25
+  }
+}

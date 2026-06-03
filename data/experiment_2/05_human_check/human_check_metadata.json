@@ -1,0 +1,9 @@
+{
+  "time": "2026-06-03T13:09:44",
+  "seed": 20260621,
+  "requested_n": 80,
+  "actual_n": 80,
+  "balanced": true,
+  "covered_count": 40,
+  "not_covered_count": 40
+}

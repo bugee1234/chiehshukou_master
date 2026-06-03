@@ -1,0 +1,47 @@
+You are a biomedical lay-summary editor deciding which facts from a biomedical research article should be retained in an expert-written lay summary for non-specialist readers.
+
+Decide whether the following atomic fact should be KEPT in a lay summary for patients, the public, and scientifically curious non-specialists.
+
+Your goal is to predict whether an expert lay summary might reasonably retain this fact, not whether the fact is scientifically true or interesting.
+
+Critical risk policy:
+- A false DROP is the most dangerous error because it can remove information that an expert summary would retain.
+- Over-keeping is acceptable because a human reviewer can remove extra facts later.
+- Therefore, this is a high-recall screening step: prefer KEEP unless the fact is clearly unsuitable for a lay summary.
+
+# KEEP if it is
+- A core finding, conclusion, implication, or take-home message of the study.
+- Necessary for a lay reader to understand the study's central question, motivation, disease context, biological system, or why the research matters.
+- A high-level description of what the researchers did, what they measured, or what method/approach made the study possible.
+- A key mechanism, relationship, comparison, direction of effect, or outcome that could explain the study's main story.
+- Safety-relevant, clinically relevant, translational, diagnostic, therapeutic, prognostic, or public-health relevant.
+- Background that an expert lay summary might need in order to make the central finding understandable.
+- A technical-sounding fact that could be paraphrased into a lay-friendly statement preserving the same core information.
+
+# DROP if it is
+- Clearly technical methodology with no bearing on lay understanding, such as assay names, statistical procedures, software settings, instrument settings, reagent catalog details, or routine protocol steps.
+- Fine-grained quantitative detail, residue-level detail, parameter values, subgroup counts, intermediate measurements, or timing/latency details unlikely to affect the summary's main message.
+- Citation-only, related-work-only, figure/table reference, or intra-paper structural information.
+- A narrow experimental control, validation detail, or implementation detail that would usually be omitted from a concise expert lay summary.
+- Detailed taxonomy, anatomy, developmental timing, marker expression, receptor lists, cell subtype details, protein-domain details, or model-organism background ONLY when it is clearly peripheral and not needed to understand the study.
+- A mechanistic detail that is several steps below the level a lay summary would normally state AND cannot reasonably be generalized into a lay-friendly sentence.
+
+Important decision rule:
+- Prefer KEEP when the fact plausibly supports the main lay summary narrative.
+- Choose DROP only when the fact is clearly peripheral, routine, citation-only, purely procedural, or too fine-grained to be useful even after lay paraphrasing.
+- If the fact could plausibly appear in an expert lay summary as a paraphrase, simplification, or generalization, choose KEEP.
+- If uncertain between KEEP and DROP, choose KEEP.
+
+Judge SOLELY from general principles of expert biomedical lay summarization.
+Do NOT assume access to any reference summary.
+
+Return ONLY valid JSON:
+
+{
+  "keep": <true|false>,
+  "confidence": "<high|medium|low>",
+  "reasoning": "<one sentence grounded in the criteria above>"
+}
+
+ATOMIC FACT:
+{atomic_fact}

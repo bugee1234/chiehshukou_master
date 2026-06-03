@@ -1,0 +1,200 @@
+{
+  "time": "2026-06-03T13:09:43",
+  "notes": {
+    "part_a_ground_truth": "Part A uses Setup C-style 1T3F + None-of-the-above coverage judgement to estimate expert-summary coverage of article facts.",
+    "part_b_ground_truth": "Part B uses a direct LLM coverage judgement with supporting span as the keep/skip reference standard, followed by human audit.",
+    "part_a": "Low coverage recall demonstrates that many article facts are safe simplifications and Module 2 filtering is necessary.",
+    "part_b": "Module keep/skip is evaluated against direct coverage-derived keep/skip ground truth.",
+    "dangerous_skip": "Ground truth keep but module predicts skip."
+  },
+  "part_a_setup_c": {
+    "n": 2623,
+    "coverage_recall": 0.098,
+    "covered_count": 257,
+    "not_covered_count": 2366
+  },
+  "part_b_direct_coverage_ground_truth": {
+    "n": 2623,
+    "coverage_recall": 0.1651,
+    "covered_count": 433,
+    "not_covered_count": 2190
+  },
+  "overall": {
+    "n": 2623,
+    "part_a": {
+      "coverage_recall": 0.1651,
+      "covered_count": 433,
+      "not_covered_count": 2190,
+      "safe_simplification_pool_rate": 0.8349
+    },
+    "part_b": {
+      "confusion_matrix": {
+        "module_keep__gt_keep": 335,
+        "module_keep__gt_skip": 722,
+        "module_skip__gt_keep_dangerous": 98,
+        "module_skip__gt_skip": 1468
+      },
+      "tp": 335,
+      "tn": 1468,
+      "fp": 722,
+      "fn": 98,
+      "accuracy": 0.6874,
+      "precision": 0.3169,
+      "recall": 0.7737,
+      "f1": 0.4497,
+      "dangerous_skip_count": 98,
+      "dangerous_skip_rate_among_should_keep": 0.2263,
+      "overkeep_count": 722,
+      "overkeep_rate_among_should_skip": 0.3297
+    }
+  },
+  "by_source": {
+    "PLOS": {
+      "n": 985,
+      "part_a": {
+        "coverage_recall": 0.2162,
+        "covered_count": 213,
+        "not_covered_count": 772,
+        "safe_simplification_pool_rate": 0.7838
+      },
+      "part_b": {
+        "confusion_matrix": {
+          "module_keep__gt_keep": 150,
+          "module_keep__gt_skip": 211,
+          "module_skip__gt_keep_dangerous": 63,
+          "module_skip__gt_skip": 561
+        },
+        "tp": 150,
+        "tn": 561,
+        "fp": 211,
+        "fn": 63,
+        "accuracy": 0.7218,
+        "precision": 0.4155,
+        "recall": 0.7042,
+        "f1": 0.5226,
+        "dangerous_skip_count": 63,
+        "dangerous_skip_rate_among_should_keep": 0.2958,
+        "overkeep_count": 211,
+        "overkeep_rate_among_should_skip": 0.2733
+      }
+    },
+    "eLife": {
+      "n": 1638,
+      "part_a": {
+        "coverage_recall": 0.1343,
+        "covered_count": 220,
+        "not_covered_count": 1418,
+        "safe_simplification_pool_rate": 0.8657
+      },
+      "part_b": {
+        "confusion_matrix": {
+          "module_keep__gt_keep": 185,
+          "module_keep__gt_skip": 511,
+          "module_skip__gt_keep_dangerous": 35,
+          "module_skip__gt_skip": 907
+        },
+        "tp": 185,
+        "tn": 907,
+        "fp": 511,
+        "fn": 35,
+        "accuracy": 0.6667,
+        "precision": 0.2658,
+        "recall": 0.8409,
+        "f1": 0.4039,
+        "dangerous_skip_count": 35,
+        "dangerous_skip_rate_among_should_keep": 0.1591,
+        "overkeep_count": 511,
+        "overkeep_rate_among_should_skip": 0.3604
+      }
+    }
+  },
+  "by_confidence": {
+    "high": {
+      "n": 2550,
+      "part_a": {
+        "coverage_recall": 0.1647,
+        "covered_count": 420,
+        "not_covered_count": 2130,
+        "safe_simplification_pool_rate": 0.8353
+      },
+      "part_b": {
+        "confusion_matrix": {
+          "module_keep__gt_keep": 322,
+          "module_keep__gt_skip": 662,
+          "module_skip__gt_keep_dangerous": 98,
+          "module_skip__gt_skip": 1468
+        },
+        "tp": 322,
+        "tn": 1468,
+        "fp": 662,
+        "fn": 98,
+        "accuracy": 0.702,
+        "precision": 0.3272,
+        "recall": 0.7667,
+        "f1": 0.4587,
+        "dangerous_skip_count": 98,
+        "dangerous_skip_rate_among_should_keep": 0.2333,
+        "overkeep_count": 662,
+        "overkeep_rate_among_should_skip": 0.3108
+      }
+    },
+    "medium": {
+      "n": 73,
+      "part_a": {
+        "coverage_recall": 0.1781,
+        "covered_count": 13,
+        "not_covered_count": 60,
+        "safe_simplification_pool_rate": 0.8219
+      },
+      "part_b": {
+        "confusion_matrix": {
+          "module_keep__gt_keep": 13,
+          "module_keep__gt_skip": 60,
+          "module_skip__gt_keep_dangerous": 0,
+          "module_skip__gt_skip": 0
+        },
+        "tp": 13,
+        "tn": 0,
+        "fp": 60,
+        "fn": 0,
+        "accuracy": 0.1781,
+        "precision": 0.1781,
+        "recall": 1.0,
+        "f1": 0.3023,
+        "dangerous_skip_count": 0,
+        "dangerous_skip_rate_among_should_keep": 0.0,
+        "overkeep_count": 60,
+        "overkeep_rate_among_should_skip": 1.0
+      }
+    },
+    "low": {
+      "n": 0,
+      "part_a": {
+        "coverage_recall": 0.0,
+        "covered_count": 0,
+        "not_covered_count": 0,
+        "safe_simplification_pool_rate": 0.0
+      },
+      "part_b": {
+        "confusion_matrix": {
+          "module_keep__gt_keep": 0,
+          "module_keep__gt_skip": 0,
+          "module_skip__gt_keep_dangerous": 0,
+          "module_skip__gt_skip": 0
+        },
+        "tp": 0,
+        "tn": 0,
+        "fp": 0,
+        "fn": 0,
+        "accuracy": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "dangerous_skip_count": 0,
+        "dangerous_skip_rate_among_should_keep": 0.0,
+        "overkeep_count": 0,
+        "overkeep_rate_among_should_skip": 0.0
+      }
+    }
+  }
+}

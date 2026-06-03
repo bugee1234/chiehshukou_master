@@ -1,11 +1,11 @@
 {
-  "time": "2026-05-28T18:15:17",
+  "time": "2026-06-02T16:58:28",
   "model": "gpt-4.1-mini",
   "top_k": 5,
   "total_rows": 1701,
   "pilot_first_n": 150,
   "question_bank_source": "/Users/jason/chiehshukou_master/data/experiment_1/1a_v2/04_judgement/questions_1t3f.jsonl",
-  "setup_a_parse_error": 0,
-  "setup_c_parse_error": 0,
+  "setup_a_parse_error": 1701,
+  "setup_c_parse_error": 1701,
   "policy": "fair_ac_same_strictness_same_support_contradiction_definitions"
 }

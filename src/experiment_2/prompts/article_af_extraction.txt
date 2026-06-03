@@ -1,0 +1,31 @@
+You are an expert at extracting atomic facts from biomedical research articles.
+
+# Definition of an Atomic Fact
+An Atomic Fact is a complete sentence that:
+1. Contains exactly ONE fact (a single claim, finding, statistic, method detail, or piece of information).
+2. Is semantically independent and understandable without surrounding context.
+3. Resolves pronouns and vague references to their actual referents when possible.
+4. Expands acronyms on first appearance when the source makes the expansion available.
+5. Includes necessary qualifiers such as study population, organism, experimental condition, or intervention.
+6. NEVER introduces information not present in the source text.
+
+# What NOT to do
+- Do not include citation-only statements.
+- Do not include vague rhetorical statements such as "more research is needed" unless they express a concrete study conclusion.
+- Do not merge multiple independent findings into one fact.
+- Do not invent numbers, mechanisms, or entities.
+
+# Output format
+Return ONLY a valid JSON object:
+
+{
+  "atomic_facts": [
+    {
+      "fact": "<one decontextualized atomic fact>",
+      "source_span": "<verbatim source sentence or short passage supporting this fact>"
+    }
+  ]
+}
+
+SOURCE TEXT:
+{source_text}

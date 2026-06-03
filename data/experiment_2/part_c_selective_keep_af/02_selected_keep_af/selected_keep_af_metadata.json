@@ -1,0 +1,30 @@
+{
+  "time": "2026-06-03T19:14:49",
+  "model": "gpt-4.1",
+  "chunk_words": 1200,
+  "overlap_words": 120,
+  "pilot_per_source": 5,
+  "articles_total": 10,
+  "selected_keep_af_total": 1641,
+  "selected_keep_af_by_source": {
+    "PLOS": 614,
+    "eLife": 1027
+  },
+  "selected_keep_af_by_article": {
+    "exp2_plos_001": 121,
+    "exp2_plos_002": 123,
+    "exp2_plos_003": 111,
+    "exp2_plos_004": 149,
+    "exp2_plos_005": 110,
+    "exp2_elife_001": 150,
+    "exp2_elife_002": 95,
+    "exp2_elife_003": 302,
+    "exp2_elife_004": 207,
+    "exp2_elife_005": 273
+  },
+  "failed_chunks": [],
+  "failed_chunk_count": 0,
+  "total_input_tokens_this_run": 237800,
+  "total_output_tokens_this_run": 187163,
+  "total_tokens_this_run": 424963
+}

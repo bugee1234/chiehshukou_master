@@ -1,0 +1,71 @@
+You are extracting KEEP atomic facts from a biomedical research article for an expert-written lay summary.
+
+Your task is NOT to extract every article fact. Extract facts that an expert-written lay summary might retain, paraphrase, simplify, or use as explanatory scaffolding for patients, the public, and scientifically curious non-specialists.
+
+Critical risk policy:
+- Missing an expert-retained fact is the most dangerous error.
+- Over-extracting is acceptable when the fact is plausibly useful for a lay summary.
+- Therefore, this is a high-recall KEEP extraction step: include a fact if it could plausibly appear in an expert lay summary as a paraphrase, simplification, generalization, definition, analogy, or background bridge.
+- Expert lay summaries, especially eLife-style summaries, often include general educational background before describing the study itself. Do not drop a fact merely because it is not novel.
+
+# KEEP a fact if it is
+- A core finding, conclusion, implication, or take-home message of the study.
+- Necessary for a lay reader to understand the study's central question, motivation, disease context, biological system, or why the research matters.
+- A high-level description of what the researchers did, what they measured, or why a method, model organism, imaging approach, dataset, or experimental system made the study possible.
+- A key mechanism, relationship, comparison, direction of effect, or outcome that could explain the study's main story.
+- Safety-relevant, clinically relevant, translational, diagnostic, therapeutic, prognostic, or public-health relevant.
+- Background that an expert lay summary might need to make the central finding understandable.
+- A technical-sounding fact that could be paraphrased into a lay-friendly statement preserving the same core information.
+- Introductory background that explains a disease, biological process, organ, cell type, organism, imaging method, measurement approach, or general scientific problem.
+- Motivation or problem-setting facts, including what is currently unknown, why existing methods are limited, or why the research question matters.
+- Lay-friendly analogies or general-domain background used to explain the study, even if the fact is not itself a new research finding.
+- Normal biological processes or baseline mechanisms that an expert summary might mention before explaining what the study discovered.
+- Definitions of key concepts that a lay reader would need, such as what a technique measures, what a cell type does, what a molecular process means, or what a kind of damage/disorder is.
+- General bridge facts that connect a specialized study to everyday or broader scientific understanding.
+
+# eLife-style background rescue policy
+KEEP these facts when they are present in the source text, even if they are introductory rather than novel:
+- What a normal biological process does before explaining what goes wrong.
+- What a named molecule, cell type, tissue, organ, organism, disease, imaging technique, or repair pathway does.
+- Why a common method is limited, risky, invasive, low-resolution, technically difficult, or insufficient.
+- Why the authors chose a model organism, system, dataset, or method, if that reason helps a lay reader understand the study.
+- Simple analogies or comparisons used to explain a scientific concept.
+- General consequences such as mutations causing disease, DNA damage harming cells, or disrupted blood flow causing harm, when these frame the article's main story.
+
+# Do NOT extract
+- Citation-only, related-work-only, figure/table reference, or intra-paper structural information.
+- Routine protocol steps, reagent catalog details, software settings, instrument settings, or statistical procedures.
+- Fine-grained quantitative detail, residue-level detail, parameter values, subgroup counts, intermediate measurements, or timing/latency details unlikely to affect the summary's main message.
+- Details that are clearly peripheral and cannot reasonably be generalized into a lay-friendly sentence.
+- Operational methods details such as cloning constructs, injection volumes, incubation conditions, buffer composition, electrophoresis settings, package names, implementation details, or routine data-processing steps, unless the detail itself is central to the lay explanation.
+- Facts whose only likely lay-summary paraphrase would be "the researchers performed a standard technical step."
+- Long lists of genes, proteins, variants, parameters, populations, or assay conditions unless the list is itself the main conclusion.
+
+# Precision guidance
+- Prefer broad, explanatory facts over procedural minutiae.
+- Prefer facts from the title, abstract, introduction, author summary, discussion, and conclusion over late methods details.
+- If a methods-section sentence explains WHY a method/model was needed, KEEP the reason.
+- If a methods-section sentence only says HOW a routine procedure was done, SKIP it.
+
+# Atomic fact requirements
+Each extracted fact must:
+1. Contain exactly ONE fact.
+2. Be understandable without surrounding context.
+3. Resolve pronouns and vague references when possible.
+4. Include necessary qualifiers such as study population, organism, disease, intervention, or experimental condition.
+5. Never introduce information not present in the source text.
+
+Return ONLY valid JSON:
+
+{
+  "keep_atomic_facts": [
+    {
+      "fact": "<one decontextualized keep-worthy atomic fact>",
+      "source_span": "<verbatim source sentence or short passage supporting this fact>",
+      "reasoning": "<one short sentence explaining why this fact is summary-worthy>"
+    }
+  ]
+}
+
+SOURCE TEXT:
+{source_text}

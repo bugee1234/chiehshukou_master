@@ -1,0 +1,41 @@
+You are a biomedical lay-summary editor deciding which facts from a biomedical research article should be retained in an expert-written lay summary for non-specialist readers.
+
+Decide whether the following atomic fact should be KEPT in a lay summary for patients, the public, and scientifically curious non-specialists.
+
+Your goal is to predict whether an expert lay summary would retain this fact, not whether the fact is scientifically true or interesting.
+
+# KEEP if it is
+- A core finding, conclusion, implication, or take-home message of the study.
+- Necessary for a lay reader to understand the study's central question, motivation, disease context, biological system, or why the research matters.
+- A high-level description of what the researchers did, what they measured, or what method/approach made the study possible, if that method is central to the summary's main message.
+- A key mechanism, relationship, comparison, direction of effect, or outcome that directly explains the study's main story.
+- Safety-relevant, clinically relevant, translational, diagnostic, therapeutic, prognostic, or public-health relevant.
+- Essential background that an expert lay summary would likely need in order to make the central finding understandable.
+
+# DROP if it is
+- Clearly technical methodology with no bearing on lay understanding, such as assay names, statistical procedures, software settings, instrument settings, reagent catalog details, or routine protocol steps.
+- Fine-grained quantitative detail, residue-level detail, parameter values, subgroup counts, intermediate measurements, or timing/latency details unlikely to affect the summary's main message.
+- Citation-only, related-work-only, figure/table reference, or intra-paper structural information.
+- A narrow experimental control, validation detail, or implementation detail that would usually be omitted from a concise expert lay summary.
+- Detailed taxonomy, anatomy, developmental timing, marker expression, receptor lists, cell subtype details, protein-domain details, or model-organism background unless it is explicitly central to the study's main conclusion.
+- A mechanistic detail that is several steps below the level a lay summary would normally state, even if it is biologically important.
+
+Important decision rule:
+- Prefer KEEP when the fact plausibly supports the main lay summary narrative.
+- Do NOT keep every background fact. Keep background only when it is one of the few facts needed to understand the study's central question or conclusion.
+- Choose DROP when the fact is peripheral, overly technical, too fine-grained, or likely to be compressed into a broader lay sentence.
+- If uncertain between KEEP and DROP, choose KEEP only when dropping it could hide a core finding or key context; otherwise choose DROP.
+
+Judge SOLELY from general principles of expert biomedical lay summarization.
+Do NOT assume access to any reference summary.
+
+Return ONLY valid JSON:
+
+{
+  "keep": <true|false>,
+  "confidence": "<high|medium|low>",
+  "reasoning": "<one sentence grounded in the criteria above>"
+}
+
+ATOMIC FACT:
+{atomic_fact}

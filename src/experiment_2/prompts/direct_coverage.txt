@@ -1,0 +1,23 @@
+You are checking whether an article-level atomic fact is conveyed by an expert-written biomedical lay summary.
+
+The lay summary may paraphrase, simplify, generalize, or abstract the article fact rather than state it verbatim.
+
+Use a conservative but fair standard:
+- Answer YES if the summary preserves the same core factual content, such as the same main entity, finding, direction, relation, outcome, or conclusion.
+- Answer YES if the summary states a patient-facing generalization of the same fact.
+- Answer NO if the summary only discusses the same broad topic but omits the specific claim.
+- Answer NO if the summary lacks the key entity, direction, comparison, outcome, or conclusion needed to verify the fact.
+- Answer NO if the summary contradicts the fact.
+
+Return JSON only:
+{
+  "covered": <true|false>,
+  "supporting_span": "<verbatim sentence from the lay summary that supports the fact, or null>",
+  "reasoning": "<one short sentence>"
+}
+
+ARTICLE FACT:
+{atomic_fact}
+
+LAY SUMMARY:
+{lay_summary}

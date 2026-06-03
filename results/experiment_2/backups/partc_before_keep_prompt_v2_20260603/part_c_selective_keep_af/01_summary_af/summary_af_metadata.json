@@ -1,0 +1,27 @@
+{
+  "time": "2026-06-03T17:31:11",
+  "model": "gpt-4.1",
+  "pilot_per_source": 5,
+  "articles_total": 10,
+  "summary_af_total": 127,
+  "summary_af_by_source": {
+    "PLOS": 45,
+    "eLife": 82
+  },
+  "summary_af_by_article": {
+    "exp2_plos_001": 10,
+    "exp2_plos_002": 9,
+    "exp2_plos_003": 8,
+    "exp2_plos_004": 9,
+    "exp2_plos_005": 9,
+    "exp2_elife_001": 17,
+    "exp2_elife_002": 16,
+    "exp2_elife_003": 23,
+    "exp2_elife_004": 19,
+    "exp2_elife_005": 7
+  },
+  "failed_items": [],
+  "total_input_tokens_this_run": 5356,
+  "total_output_tokens_this_run": 8272,
+  "total_tokens_this_run": 13628
+}
