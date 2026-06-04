@@ -1389,7 +1389,11 @@ def partc_extract_keep_af(
     print(f"[partc_keep_af] selected_keep_AF={len(rows)} failed_chunks={len(failed)} -> {out_dir}")
 
 
-def partc_eval_selected_keep_af(model: str, pilot_per_source: int | None = None, resume: bool = True) -> None:
+def partc_eval_selected_keep_af(
+    model: str,
+    pilot_per_source: int | None = None,
+    resume: bool = True,
+) -> None:
     _ensure_dirs()
     pilot_ids = _pilot_article_ids(pilot_per_source)
     summary_af = _filter_rows_by_articles(_load(_partc_dir("01_summary_af") / "summary_af.jsonl"), pilot_ids)
@@ -1424,6 +1428,8 @@ def partc_eval_selected_keep_af(model: str, pilot_per_source: int | None = None,
         covered = False
         support_id: str | None = None
         support_fact: str | None = None
+        support_ids: list[str] = []
+        support_facts: list[str] = []
         reasoning = ""
         parse_error = False
         try:
@@ -1442,14 +1448,24 @@ def partc_eval_selected_keep_af(model: str, pilot_per_source: int | None = None,
             )
             obj = json.loads(str(resp.get("content", "")))
             covered = _coerce_bool(obj.get("covered", False))
-            raw_id = obj.get("supporting_keep_af_id", None)
-            raw_fact = obj.get("supporting_keep_fact", None)
-            support_id = None if raw_id is None else str(raw_id).strip()
-            support_fact = None if raw_fact is None else str(raw_fact).strip()
-            if support_id in {"", "null", "None"}:
-                support_id = None
-            if support_fact in {"", "null", "None"}:
-                support_fact = None
+            raw_ids = obj.get("supporting_keep_af_ids", obj.get("supporting_keep_af_id", []))
+            raw_facts = obj.get("supporting_keep_facts", obj.get("supporting_keep_fact", []))
+            if not isinstance(raw_ids, list):
+                raw_ids = [raw_ids]
+            if not isinstance(raw_facts, list):
+                raw_facts = [raw_facts]
+            support_ids = [
+                str(x).strip()
+                for x in raw_ids
+                if x is not None and str(x).strip() not in {"", "null", "None"}
+            ]
+            support_facts = [
+                str(x).strip()
+                for x in raw_facts
+                if x is not None and str(x).strip() not in {"", "null", "None"}
+            ]
+            support_id = support_ids[0] if support_ids else None
+            support_fact = support_facts[0] if support_facts else None
             reasoning = str(obj.get("reasoning", "")).strip()
         except Exception as exc:
             parse_error = True
@@ -1465,6 +1481,8 @@ def partc_eval_selected_keep_af(model: str, pilot_per_source: int | None = None,
                 "covered_by_selected_keep_af": covered,
                 "supporting_keep_af_id": support_id,
                 "supporting_keep_fact": support_fact,
+                "supporting_keep_af_ids": support_ids,
+                "supporting_keep_facts": support_facts,
                 "selected_keep_af_count_for_article": len(cands),
                 "reasoning": reasoning,
                 "parse_error": parse_error,

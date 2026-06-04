@@ -7,6 +7,7 @@ Critical risk policy:
 - Over-extracting is acceptable when the fact is plausibly useful for a lay summary.
 - Therefore, this is a high-recall KEEP extraction step: include a fact if it could plausibly appear in an expert lay summary as a paraphrase, simplification, generalization, definition, analogy, or background bridge.
 - Expert lay summaries, especially eLife-style summaries, often include general educational background before describing the study itself. Do not drop a fact merely because it is not novel.
+- Treat article-supported background bridge facts as ordinary KEEP facts. Do not put them in a separate category: if a lay summary might use the fact to open the topic, define a key term, explain a normal biological process, describe a disease/method, or explain why the process matters, include it in keep_atomic_facts.
 
 # KEEP a fact if it is
 - A core finding, conclusion, implication, or take-home message of the study.
@@ -22,6 +23,7 @@ Critical risk policy:
 - Normal biological processes or baseline mechanisms that an expert summary might mention before explaining what the study discovered.
 - Definitions of key concepts that a lay reader would need, such as what a technique measures, what a cell type does, what a molecular process means, or what a kind of damage/disorder is.
 - General bridge facts that connect a specialized study to everyday or broader scientific understanding.
+- Basic article-supported background that a lay summary might use before the study findings, including normal biological processes, key term definitions, disease or method background, and why the studied process or system matters.
 
 # eLife-style background rescue policy
 KEEP these facts when they are present in the source text, even if they are introductory rather than novel:
@@ -31,6 +33,7 @@ KEEP these facts when they are present in the source text, even if they are intr
 - Why the authors chose a model organism, system, dataset, or method, if that reason helps a lay reader understand the study.
 - Simple analogies or comparisons used to explain a scientific concept.
 - General consequences such as mutations causing disease, DNA damage harming cells, or disrupted blood flow causing harm, when these frame the article's main story.
+- Opening-background facts such as DNA replication copying genetic information, sister chromatids separating during cell division, double-strand breaks being serious DNA damage, or imaging methods measuring biological activity, when the source text supports those facts.
 
 # Do NOT extract
 - Citation-only, related-work-only, figure/table reference, or intra-paper structural information.

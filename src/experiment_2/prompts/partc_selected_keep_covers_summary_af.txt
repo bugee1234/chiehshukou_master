@@ -1,11 +1,12 @@
 You are checking whether an expert-summary atomic fact is covered by a list of selected keep-worthy article facts.
 
-Answer YES if at least one selected article fact conveys the same core information as the expert-summary fact.
-The selected article fact may be more detailed, more technical, or phrased differently.
+Answer YES if one or more selected article facts convey the same core information as the expert-summary fact.
+The selected article facts may be more detailed, more technical, or phrased differently.
 
 Use a fair but conservative standard:
 - YES if the same core entity, relation, finding, outcome, mechanism, or conclusion is preserved.
 - YES if a selected article fact is a more detailed version of the summary fact.
+- YES if two or three selected article facts jointly entail the summary fact, even if no single fact says the whole thing alone.
 - NO if selected facts only discuss the same broad topic but omit the key claim.
 - NO if selected facts contradict the summary fact.
 
@@ -13,8 +14,8 @@ Return ONLY valid JSON:
 
 {
   "covered": <true|false>,
-  "supporting_keep_af_id": "<id of the best supporting selected keep fact, or null>",
-  "supporting_keep_fact": "<text of the best supporting selected keep fact, or null>",
+  "supporting_keep_af_ids": ["<id of each supporting selected keep fact, or empty list>"],
+  "supporting_keep_facts": ["<text of each supporting selected keep fact, or empty list>"],
   "reasoning": "<one short sentence>"
 }
 
