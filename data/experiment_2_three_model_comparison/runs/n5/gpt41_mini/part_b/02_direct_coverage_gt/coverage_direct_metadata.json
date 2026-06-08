@@ -1,0 +1,10 @@
+{
+  "time": "2026-06-07T14:35:17",
+  "model_key": "gpt41_mini",
+  "provider": "openai",
+  "model": "gpt-4.1-mini",
+  "total_afs": 854,
+  "coverage_rows": 854,
+  "parse_error_count": 0,
+  "parse_errors_this_run": 0
+}

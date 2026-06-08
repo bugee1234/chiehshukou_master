@@ -1,0 +1,11 @@
+{
+  "time": "2026-06-07T15:00:49",
+  "model_key": "gpt41_mini",
+  "provider": "openai",
+  "model": "gpt-4.1-mini",
+  "prompt_path": "/Users/jason/chiehshukou_master/src/experiment_2/prompts/keep_skip_ultra_recall.txt",
+  "total_afs": 854,
+  "prediction_rows": 854,
+  "parse_error_count": 0,
+  "parse_errors_this_run": 0
+}

@@ -1,0 +1,66 @@
+{
+  "time": "2026-06-07T15:18:40",
+  "model_key": "gpt41_mini",
+  "provider": "openai",
+  "model": "gpt-4.1-mini",
+  "summary_af_total": 56,
+  "selected_keep_af_total": 472,
+  "valid_eval_rows": 55,
+  "parse_error_count": 1,
+  "parse_errors_this_run": 1,
+  "summary_fact_recall": 0.8727,
+  "covered_summary_af_count": 48,
+  "missed_summary_af_count": 7,
+  "selected_keep_af_by_source": {
+    "PLOS": 267,
+    "eLife": 205
+  },
+  "summary_af_by_source": {
+    "PLOS": 26,
+    "eLife": 30
+  },
+  "by_source": {
+    "PLOS": {
+      "summary_af_total": 25,
+      "covered": 24,
+      "summary_fact_recall": 0.96
+    },
+    "eLife": {
+      "summary_af_total": 30,
+      "covered": 24,
+      "summary_fact_recall": 0.8
+    }
+  },
+  "by_article": {
+    "exp2_elife_001": {
+      "summary_af_total": 16,
+      "selected_keep_af_total": 121,
+      "covered": 13,
+      "summary_fact_recall": 0.8125
+    },
+    "exp2_elife_002": {
+      "summary_af_total": 14,
+      "selected_keep_af_total": 84,
+      "covered": 11,
+      "summary_fact_recall": 0.7857
+    },
+    "exp2_plos_001": {
+      "summary_af_total": 8,
+      "selected_keep_af_total": 80,
+      "covered": 7,
+      "summary_fact_recall": 0.875
+    },
+    "exp2_plos_002": {
+      "summary_af_total": 9,
+      "selected_keep_af_total": 98,
+      "covered": 9,
+      "summary_fact_recall": 1.0
+    },
+    "exp2_plos_003": {
+      "summary_af_total": 8,
+      "selected_keep_af_total": 89,
+      "covered": 8,
+      "summary_fact_recall": 1.0
+    }
+  }
+}

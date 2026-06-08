@@ -1,0 +1,25 @@
+{
+  "time": "2026-06-07T15:18:40",
+  "model_key": "gpt41_mini",
+  "provider": "openai",
+  "model": "gpt-4.1-mini",
+  "n_articles": 5,
+  "stages": [
+    "part_b",
+    "part_c"
+  ],
+  "wall_clock_seconds": 4737.9582,
+  "pricing_note": "USD per 1M tokens, fixed in run_three_model_exp2.py for reproducible cost estimates.",
+  "pricing": {
+    "input_usd_per_1m": 0.4,
+    "output_usd_per_1m": 1.6
+  },
+  "prompts": {
+    "article_af_extraction": "/Users/jason/chiehshukou_master/src/experiment_2/prompts/article_af_extraction.txt",
+    "direct_coverage": "/Users/jason/chiehshukou_master/src/experiment_2/prompts/direct_coverage.txt",
+    "keep_skip": "/Users/jason/chiehshukou_master/src/experiment_2/prompts/keep_skip_ultra_recall.txt",
+    "partc_summary_af": "/Users/jason/chiehshukou_master/src/experiment_2/prompts/partc_summary_af_extraction.txt",
+    "partc_selected_keep": "/Users/jason/chiehshukou_master/src/experiment_2/prompts/selective_keep_af_ultra_recall.txt",
+    "partc_eval": "/Users/jason/chiehshukou_master/src/experiment_2/prompts/partc_selected_keep_covers_summary_af.txt"
+  }
+}

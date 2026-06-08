@@ -1,0 +1,33 @@
+{
+  "part": "part_c_selective_keep_af",
+  "time": "2026-06-06T23:48:42",
+  "model": "gpt-4.1",
+  "input_path": "/Users/jason/chiehshukou_master/data/experiment_2/part_c_selective_keep_af/03_eval/summary_af_coverage_by_selected_keep.jsonl",
+  "selected_keep_path": "/Users/jason/chiehshukou_master/data/experiment_2/part_c_selective_keep_af/02_selected_keep_af/selected_keep_af.jsonl",
+  "n": 80,
+  "seed": 20260621,
+  "balanced": true,
+  "part_c_max_candidates": "all",
+  "label_distribution": {
+    "True": 62,
+    "False": 18
+  },
+  "original_coverage_vs_llm_judge": {
+    "n_evaluated": 80,
+    "agreement_count": 74,
+    "agreement_rate": 0.925,
+    "cohen_kappa": 0.7561,
+    "confusion_matrix": {
+      "reference_true__judge_true": 62,
+      "reference_true__judge_false": 6,
+      "reference_false__judge_true": 0,
+      "reference_false__judge_false": 12
+    }
+  },
+  "parse_error_count": 0,
+  "usage": {
+    "prompt_tokens": 753685,
+    "completion_tokens": 23630,
+    "total_tokens": 777315
+  }
+}

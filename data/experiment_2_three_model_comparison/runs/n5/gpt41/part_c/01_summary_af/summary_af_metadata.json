@@ -1,0 +1,20 @@
+{
+  "time": "2026-06-07T16:48:49",
+  "model_key": "gpt41",
+  "provider": "openai",
+  "model": "gpt-4.1",
+  "articles_total": 5,
+  "summary_af_total": 59,
+  "summary_af_by_source": {
+    "PLOS": 27,
+    "eLife": 32
+  },
+  "summary_af_by_article": {
+    "exp2_plos_001": 10,
+    "exp2_elife_001": 16,
+    "exp2_plos_002": 9,
+    "exp2_elife_002": 16,
+    "exp2_plos_003": 8
+  },
+  "failed_items": []
+}

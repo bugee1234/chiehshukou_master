@@ -1,0 +1,34 @@
+{
+  "api_calls": 98,
+  "prompt_tokens": 404696,
+  "completion_tokens": 80580,
+  "total_tokens": 485276,
+  "api_elapsed_seconds": 545.0534,
+  "estimated_cost_usd": 1.454032,
+  "by_stage": {
+    "part_c.selected_keep_af_extraction": {
+      "api_calls": 34,
+      "prompt_tokens": 90376,
+      "completion_tokens": 64673,
+      "total_tokens": 155049,
+      "api_elapsed_seconds": 413.0476,
+      "estimated_cost_usd": 0.698136
+    },
+    "part_c.selected_keep_covers_summary_af": {
+      "api_calls": 59,
+      "prompt_tokens": 311765,
+      "completion_tokens": 12030,
+      "total_tokens": 323795,
+      "api_elapsed_seconds": 111.6804,
+      "estimated_cost_usd": 0.71977
+    },
+    "part_c.summary_af_extraction": {
+      "api_calls": 5,
+      "prompt_tokens": 2555,
+      "completion_tokens": 3877,
+      "total_tokens": 6432,
+      "api_elapsed_seconds": 20.3254,
+      "estimated_cost_usd": 0.036126
+    }
+  }
+}

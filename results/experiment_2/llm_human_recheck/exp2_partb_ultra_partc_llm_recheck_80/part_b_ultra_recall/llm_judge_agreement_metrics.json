@@ -1,0 +1,41 @@
+{
+  "part": "part_b_ultra_recall",
+  "time": "2026-06-06T23:45:16",
+  "model": "gpt-4.1",
+  "input_path": "/Users/jason/chiehshukou_master/data/experiment_2/05_human_check/ultra_recall/human_check_sample.csv",
+  "n": 80,
+  "label_distribution": {
+    "False": 46,
+    "True": 34
+  },
+  "original_llm_covered_vs_llm_judge": {
+    "n_evaluated": 80,
+    "agreement_count": 74,
+    "agreement_rate": 0.925,
+    "cohen_kappa": 0.85,
+    "confusion_matrix": {
+      "reference_true__judge_true": 34,
+      "reference_true__judge_false": 6,
+      "reference_false__judge_true": 0,
+      "reference_false__judge_false": 40
+    }
+  },
+  "module_keep_vs_llm_judge": {
+    "n_evaluated": 80,
+    "agreement_count": 47,
+    "agreement_rate": 0.5875,
+    "cohen_kappa": 0.2509,
+    "confusion_matrix": {
+      "reference_true__judge_true": 34,
+      "reference_true__judge_false": 33,
+      "reference_false__judge_true": 0,
+      "reference_false__judge_false": 13
+    }
+  },
+  "parse_error_count": 0,
+  "usage": {
+    "prompt_tokens": 49247,
+    "completion_tokens": 8971,
+    "total_tokens": 58218
+  }
+}

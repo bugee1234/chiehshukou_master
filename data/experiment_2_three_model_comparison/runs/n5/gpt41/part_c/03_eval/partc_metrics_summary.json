@@ -1,0 +1,66 @@
+{
+  "time": "2026-06-07T16:57:34",
+  "model_key": "gpt41",
+  "provider": "openai",
+  "model": "gpt-4.1",
+  "summary_af_total": 59,
+  "selected_keep_af_total": 601,
+  "valid_eval_rows": 59,
+  "parse_error_count": 0,
+  "parse_errors_this_run": 0,
+  "summary_fact_recall": 0.9153,
+  "covered_summary_af_count": 54,
+  "missed_summary_af_count": 5,
+  "selected_keep_af_by_source": {
+    "PLOS": 349,
+    "eLife": 252
+  },
+  "summary_af_by_source": {
+    "PLOS": 27,
+    "eLife": 32
+  },
+  "by_source": {
+    "PLOS": {
+      "summary_af_total": 27,
+      "covered": 27,
+      "summary_fact_recall": 1.0
+    },
+    "eLife": {
+      "summary_af_total": 32,
+      "covered": 27,
+      "summary_fact_recall": 0.8438
+    }
+  },
+  "by_article": {
+    "exp2_elife_001": {
+      "summary_af_total": 16,
+      "selected_keep_af_total": 158,
+      "covered": 15,
+      "summary_fact_recall": 0.9375
+    },
+    "exp2_elife_002": {
+      "summary_af_total": 16,
+      "selected_keep_af_total": 94,
+      "covered": 12,
+      "summary_fact_recall": 0.75
+    },
+    "exp2_plos_001": {
+      "summary_af_total": 10,
+      "selected_keep_af_total": 106,
+      "covered": 10,
+      "summary_fact_recall": 1.0
+    },
+    "exp2_plos_002": {
+      "summary_af_total": 9,
+      "selected_keep_af_total": 120,
+      "covered": 9,
+      "summary_fact_recall": 1.0
+    },
+    "exp2_plos_003": {
+      "summary_af_total": 8,
+      "selected_keep_af_total": 123,
+      "covered": 8,
+      "summary_fact_recall": 1.0
+    }
+  }
+}

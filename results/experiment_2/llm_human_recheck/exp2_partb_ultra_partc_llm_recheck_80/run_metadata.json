@@ -1,0 +1,13 @@
+{
+  "time": "2026-06-06T23:48:42",
+  "part": "all",
+  "model": "gpt-4.1",
+  "n": 80,
+  "seed": 20260621,
+  "output_root": "/Users/jason/chiehshukou_master/results/experiment_2/llm_human_recheck/exp2_partb_ultra_partc_llm_recheck_80",
+  "usage": {
+    "prompt_tokens": 753685,
+    "completion_tokens": 23630,
+    "total_tokens": 777315
+  }
+}

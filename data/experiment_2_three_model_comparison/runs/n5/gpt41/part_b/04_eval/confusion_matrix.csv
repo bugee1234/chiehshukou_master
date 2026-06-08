@@ -1,0 +1,4 @@
+source,tp,tn,fp,fn,accuracy,precision,recall,f1,dangerous_skip_rate_among_should_keep
+overall,208,262,468,5,0.4984,0.3077,0.9765,0.4679,0.0235
+PLOS,141,141,251,4,0.5251,0.3597,0.9724,0.5251,0.0276
+eLife,67,121,217,1,0.4631,0.2359,0.9853,0.3807,0.0147
