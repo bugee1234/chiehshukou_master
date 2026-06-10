@@ -1,0 +1,385 @@
+{
+  "time": "2026-06-09T12:02:04",
+  "model_key": "gpt41_mini",
+  "provider": "openai",
+  "model": "gpt-4.1-mini",
+  "evaluation_mode": "fixed_judge",
+  "judge_model_key": "gpt41",
+  "judge_provider": "openai",
+  "judge_model": "gpt-4.1",
+  "reuse_legacy_summary_af": true,
+  "n_articles": 10,
+  "part_b": {
+    "time": "2026-06-09T11:21:53",
+    "overall": {
+      "n": 2342,
+      "direct_coverage_ground_truth": {
+        "coverage_recall": 0.155,
+        "covered_count": 363,
+        "not_covered_count": 1979
+      },
+      "keep_skip": {
+        "confusion_matrix": {
+          "module_keep__gt_keep": 186,
+          "module_keep__gt_skip": 283,
+          "module_skip__gt_keep_dangerous": 177,
+          "module_skip__gt_skip": 1696
+        },
+        "tp": 186,
+        "tn": 1696,
+        "fp": 283,
+        "fn": 177,
+        "accuracy": 0.8036,
+        "precision": 0.3966,
+        "recall": 0.5124,
+        "f1": 0.4471,
+        "dangerous_skip_count": 177,
+        "dangerous_skip_rate_among_should_keep": 0.4876,
+        "overkeep_count": 283,
+        "overkeep_rate_among_should_skip": 0.143
+      }
+    },
+    "by_source": {
+      "PLOS": {
+        "n": 861,
+        "direct_coverage_ground_truth": {
+          "coverage_recall": 0.2079,
+          "covered_count": 179,
+          "not_covered_count": 682
+        },
+        "keep_skip": {
+          "confusion_matrix": {
+            "module_keep__gt_keep": 71,
+            "module_keep__gt_skip": 76,
+            "module_skip__gt_keep_dangerous": 108,
+            "module_skip__gt_skip": 606
+          },
+          "tp": 71,
+          "tn": 606,
+          "fp": 76,
+          "fn": 108,
+          "accuracy": 0.7863,
+          "precision": 0.483,
+          "recall": 0.3966,
+          "f1": 0.4356,
+          "dangerous_skip_count": 108,
+          "dangerous_skip_rate_among_should_keep": 0.6034,
+          "overkeep_count": 76,
+          "overkeep_rate_among_should_skip": 0.1114
+        }
+      },
+      "eLife": {
+        "n": 1481,
+        "direct_coverage_ground_truth": {
+          "coverage_recall": 0.1242,
+          "covered_count": 184,
+          "not_covered_count": 1297
+        },
+        "keep_skip": {
+          "confusion_matrix": {
+            "module_keep__gt_keep": 115,
+            "module_keep__gt_skip": 207,
+            "module_skip__gt_keep_dangerous": 69,
+            "module_skip__gt_skip": 1090
+          },
+          "tp": 115,
+          "tn": 1090,
+          "fp": 207,
+          "fn": 69,
+          "accuracy": 0.8136,
+          "precision": 0.3571,
+          "recall": 0.625,
+          "f1": 0.4545,
+          "dangerous_skip_count": 69,
+          "dangerous_skip_rate_among_should_keep": 0.375,
+          "overkeep_count": 207,
+          "overkeep_rate_among_should_skip": 0.1596
+        }
+      }
+    }
+  },
+  "part_c": {
+    "time": "2026-06-09T12:02:04",
+    "model_key": "gpt41",
+    "provider": "openai",
+    "model": "gpt-4.1",
+    "summary_af_total": 127,
+    "selected_keep_af_total": 1269,
+    "valid_eval_rows": 127,
+    "parse_error_count": 0,
+    "parse_errors_this_run": 0,
+    "summary_fact_recall": 0.9055,
+    "covered_summary_af_count": 115,
+    "missed_summary_af_count": 12,
+    "selected_keep_af_by_source": {
+      "PLOS": 482,
+      "eLife": 787
+    },
+    "summary_af_by_source": {
+      "PLOS": 45,
+      "eLife": 82
+    },
+    "by_source": {
+      "PLOS": {
+        "summary_af_total": 45,
+        "covered": 44,
+        "summary_fact_recall": 0.9778
+      },
+      "eLife": {
+        "summary_af_total": 82,
+        "covered": 71,
+        "summary_fact_recall": 0.8659
+      }
+    },
+    "by_article": {
+      "exp2_elife_001": {
+        "summary_af_total": 17,
+        "selected_keep_af_total": 110,
+        "covered": 16,
+        "summary_fact_recall": 0.9412
+      },
+      "exp2_elife_002": {
+        "summary_af_total": 16,
+        "selected_keep_af_total": 85,
+        "covered": 12,
+        "summary_fact_recall": 0.75
+      },
+      "exp2_elife_003": {
+        "summary_af_total": 23,
+        "selected_keep_af_total": 247,
+        "covered": 19,
+        "summary_fact_recall": 0.8261
+      },
+      "exp2_elife_004": {
+        "summary_af_total": 19,
+        "selected_keep_af_total": 163,
+        "covered": 17,
+        "summary_fact_recall": 0.8947
+      },
+      "exp2_elife_005": {
+        "summary_af_total": 7,
+        "selected_keep_af_total": 182,
+        "covered": 7,
+        "summary_fact_recall": 1.0
+      },
+      "exp2_plos_001": {
+        "summary_af_total": 10,
+        "selected_keep_af_total": 71,
+        "covered": 9,
+        "summary_fact_recall": 0.9
+      },
+      "exp2_plos_002": {
+        "summary_af_total": 9,
+        "selected_keep_af_total": 102,
+        "covered": 9,
+        "summary_fact_recall": 1.0
+      },
+      "exp2_plos_003": {
+        "summary_af_total": 8,
+        "selected_keep_af_total": 86,
+        "covered": 8,
+        "summary_fact_recall": 1.0
+      },
+      "exp2_plos_004": {
+        "summary_af_total": 9,
+        "selected_keep_af_total": 108,
+        "covered": 9,
+        "summary_fact_recall": 1.0
+      },
+      "exp2_plos_005": {
+        "summary_af_total": 9,
+        "selected_keep_af_total": 115,
+        "covered": 9,
+        "summary_fact_recall": 1.0
+      }
+    }
+  },
+  "part_b_usage": {
+    "api_calls": 4777,
+    "prompt_tokens": 3220150,
+    "cached_prompt_tokens": 0,
+    "billable_prompt_tokens": 3220150,
+    "completion_tokens": 481774,
+    "billable_output_tokens": 481774,
+    "total_tokens": 3701924,
+    "api_elapsed_seconds": 8162.336,
+    "cost_currencies": [
+      "USD"
+    ],
+    "estimated_cost": 5.232575,
+    "by_stage": {
+      "part_b.article_af_extraction": {
+        "api_calls": 93,
+        "prompt_tokens": 160610,
+        "cached_prompt_tokens": 0,
+        "billable_prompt_tokens": 160610,
+        "completion_tokens": 211119,
+        "billable_output_tokens": 211119,
+        "total_tokens": 371729,
+        "api_elapsed_seconds": 2778.1928,
+        "cost_currencies": [
+          "USD"
+        ],
+        "estimated_cost": 0.402034
+      },
+      "part_b.direct_coverage_gt": {
+        "api_calls": 2342,
+        "prompt_tokens": 1411444,
+        "cached_prompt_tokens": 0,
+        "billable_prompt_tokens": 1411444,
+        "completion_tokens": 143026,
+        "billable_output_tokens": 143026,
+        "total_tokens": 1554470,
+        "api_elapsed_seconds": 2447.662,
+        "cost_currencies": [
+          "USD"
+        ],
+        "estimated_cost": 3.967096
+      },
+      "part_b.keep_skip_ultra_recall": {
+        "api_calls": 2342,
+        "prompt_tokens": 1648096,
+        "cached_prompt_tokens": 0,
+        "billable_prompt_tokens": 1648096,
+        "completion_tokens": 127629,
+        "billable_output_tokens": 127629,
+        "total_tokens": 1775725,
+        "api_elapsed_seconds": 2936.4812,
+        "cost_currencies": [
+          "USD"
+        ],
+        "estimated_cost": 0.863445
+      }
+    }
+  },
+  "part_c_usage": {
+    "api_calls": 220,
+    "prompt_tokens": 1083819,
+    "cached_prompt_tokens": 92544,
+    "billable_prompt_tokens": 991275,
+    "completion_tokens": 184025,
+    "billable_output_tokens": 184025,
+    "total_tokens": 1267844,
+    "api_elapsed_seconds": 2410.4906,
+    "cost_currencies": [
+      "USD"
+    ],
+    "estimated_cost": 2.227081,
+    "by_stage": {
+      "part_c.selected_keep_af_extraction": {
+        "api_calls": 93,
+        "prompt_tokens": 251657,
+        "cached_prompt_tokens": 92544,
+        "billable_prompt_tokens": 159113,
+        "completion_tokens": 153491,
+        "billable_output_tokens": 153491,
+        "total_tokens": 405148,
+        "api_elapsed_seconds": 2089.0042,
+        "cost_currencies": [
+          "USD"
+        ],
+        "estimated_cost": 0.318485
+      },
+      "part_c.selected_keep_covers_summary_af": {
+        "api_calls": 127,
+        "prompt_tokens": 832162,
+        "cached_prompt_tokens": 0,
+        "billable_prompt_tokens": 832162,
+        "completion_tokens": 30534,
+        "billable_output_tokens": 30534,
+        "total_tokens": 862696,
+        "api_elapsed_seconds": 321.4864,
+        "cost_currencies": [
+          "USD"
+        ],
+        "estimated_cost": 1.908596
+      }
+    }
+  },
+  "usage": {
+    "api_calls": 4997,
+    "prompt_tokens": 4303969,
+    "cached_prompt_tokens": 92544,
+    "billable_prompt_tokens": 4211425,
+    "completion_tokens": 665799,
+    "billable_output_tokens": 665799,
+    "total_tokens": 4969768,
+    "api_elapsed_seconds": 10572.8266,
+    "cost_currencies": [
+      "USD"
+    ],
+    "estimated_cost": 7.459656,
+    "by_stage": {
+      "part_b.article_af_extraction": {
+        "api_calls": 93,
+        "prompt_tokens": 160610,
+        "cached_prompt_tokens": 0,
+        "billable_prompt_tokens": 160610,
+        "completion_tokens": 211119,
+        "billable_output_tokens": 211119,
+        "total_tokens": 371729,
+        "api_elapsed_seconds": 2778.1928,
+        "cost_currencies": [
+          "USD"
+        ],
+        "estimated_cost": 0.402034
+      },
+      "part_b.direct_coverage_gt": {
+        "api_calls": 2342,
+        "prompt_tokens": 1411444,
+        "cached_prompt_tokens": 0,
+        "billable_prompt_tokens": 1411444,
+        "completion_tokens": 143026,
+        "billable_output_tokens": 143026,
+        "total_tokens": 1554470,
+        "api_elapsed_seconds": 2447.662,
+        "cost_currencies": [
+          "USD"
+        ],
+        "estimated_cost": 3.967096
+      },
+      "part_b.keep_skip_ultra_recall": {
+        "api_calls": 2342,
+        "prompt_tokens": 1648096,
+        "cached_prompt_tokens": 0,
+        "billable_prompt_tokens": 1648096,
+        "completion_tokens": 127629,
+        "billable_output_tokens": 127629,
+        "total_tokens": 1775725,
+        "api_elapsed_seconds": 2936.4812,
+        "cost_currencies": [
+          "USD"
+        ],
+        "estimated_cost": 0.863445
+      },
+      "part_c.selected_keep_af_extraction": {
+        "api_calls": 93,
+        "prompt_tokens": 251657,
+        "cached_prompt_tokens": 92544,
+        "billable_prompt_tokens": 159113,
+        "completion_tokens": 153491,
+        "billable_output_tokens": 153491,
+        "total_tokens": 405148,
+        "api_elapsed_seconds": 2089.0042,
+        "cost_currencies": [
+          "USD"
+        ],
+        "estimated_cost": 0.318485
+      },
+      "part_c.selected_keep_covers_summary_af": {
+        "api_calls": 127,
+        "prompt_tokens": 832162,
+        "cached_prompt_tokens": 0,
+        "billable_prompt_tokens": 832162,
+        "completion_tokens": 30534,
+        "billable_output_tokens": 30534,
+        "total_tokens": 862696,
+        "api_elapsed_seconds": 321.4864,
+        "cost_currencies": [
+          "USD"
+        ],
+        "estimated_cost": 1.908596
+      }
+    }
+  }
+}

@@ -1,0 +1,86 @@
+{
+  "api_calls": 2883,
+  "prompt_tokens": 2475057,
+  "cached_prompt_tokens": 98176,
+  "billable_prompt_tokens": 2376881,
+  "completion_tokens": 340133,
+  "billable_output_tokens": 340133,
+  "total_tokens": 2815190,
+  "api_elapsed_seconds": 6658.5169,
+  "cost_currencies": [
+    "USD"
+  ],
+  "estimated_cost": 3.453298,
+  "by_stage": {
+    "part_b.article_af_extraction": {
+      "api_calls": 93,
+      "prompt_tokens": 160610,
+      "cached_prompt_tokens": 0,
+      "billable_prompt_tokens": 160610,
+      "completion_tokens": 101794,
+      "billable_output_tokens": 101794,
+      "total_tokens": 262404,
+      "api_elapsed_seconds": 1281.9561,
+      "cost_currencies": [
+        "USD"
+      ],
+      "estimated_cost": 0.085168
+    },
+    "part_b.direct_coverage_gt": {
+      "api_calls": 1285,
+      "prompt_tokens": 769678,
+      "cached_prompt_tokens": 0,
+      "billable_prompt_tokens": 769678,
+      "completion_tokens": 75113,
+      "billable_output_tokens": 75113,
+      "total_tokens": 844791,
+      "api_elapsed_seconds": 1723.4392,
+      "cost_currencies": [
+        "USD"
+      ],
+      "estimated_cost": 2.14026
+    },
+    "part_b.keep_skip_ultra_recall": {
+      "api_calls": 1285,
+      "prompt_tokens": 894916,
+      "cached_prompt_tokens": 0,
+      "billable_prompt_tokens": 894916,
+      "completion_tokens": 69204,
+      "billable_output_tokens": 69204,
+      "total_tokens": 964120,
+      "api_elapsed_seconds": 2598.8684,
+      "cost_currencies": [
+        "USD"
+      ],
+      "estimated_cost": 0.17576
+    },
+    "part_c.selected_keep_af_extraction": {
+      "api_calls": 93,
+      "prompt_tokens": 251657,
+      "cached_prompt_tokens": 98176,
+      "billable_prompt_tokens": 153481,
+      "completion_tokens": 71195,
+      "billable_output_tokens": 71195,
+      "total_tokens": 322852,
+      "api_elapsed_seconds": 740.8525,
+      "cost_currencies": [
+        "USD"
+      ],
+      "estimated_cost": 0.073102
+    },
+    "part_c.selected_keep_covers_summary_af": {
+      "api_calls": 127,
+      "prompt_tokens": 398196,
+      "cached_prompt_tokens": 0,
+      "billable_prompt_tokens": 398196,
+      "completion_tokens": 22827,
+      "billable_output_tokens": 22827,
+      "total_tokens": 421023,
+      "api_elapsed_seconds": 313.4007,
+      "cost_currencies": [
+        "USD"
+      ],
+      "estimated_cost": 0.979008
+    }
+  }
+}

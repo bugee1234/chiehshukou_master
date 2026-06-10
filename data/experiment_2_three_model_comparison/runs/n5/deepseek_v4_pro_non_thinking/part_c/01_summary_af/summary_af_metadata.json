@@ -1,0 +1,20 @@
+{
+  "time": "2026-06-09T04:48:14",
+  "model_key": "deepseek_v4_pro_non_thinking",
+  "provider": "deepseek",
+  "model": "deepseek-v4-pro",
+  "articles_total": 5,
+  "summary_af_total": 98,
+  "summary_af_by_source": {
+    "PLOS": 50,
+    "eLife": 48
+  },
+  "summary_af_by_article": {
+    "exp2_plos_001": 18,
+    "exp2_elife_001": 25,
+    "exp2_plos_002": 12,
+    "exp2_elife_002": 23,
+    "exp2_plos_003": 20
+  },
+  "failed_items": []
+}

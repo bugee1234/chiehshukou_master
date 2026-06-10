@@ -1,0 +1,41 @@
+{
+  "time": "2026-06-09T21:55:57",
+  "model_key": "gemini3_flash_preview_minimal",
+  "provider": "gemini",
+  "model": "gemini-3-flash-preview",
+  "chunk_words": 1200,
+  "overlap_words": 120,
+  "articles_total": 10,
+  "selected_keep_af_total": 842,
+  "selected_keep_af_by_source": {
+    "PLOS": 286,
+    "eLife": 556
+  },
+  "selected_keep_af_by_article": {
+    "exp2_plos_001": 60,
+    "exp2_elife_001": 87,
+    "exp2_plos_002": 39,
+    "exp2_elife_002": 62,
+    "exp2_plos_003": 56,
+    "exp2_elife_003": 143,
+    "exp2_plos_004": 71,
+    "exp2_elife_004": 121,
+    "exp2_plos_005": 60,
+    "exp2_elife_005": 143
+  },
+  "failed_chunks": [
+    {
+      "article_id": "exp2_plos_002",
+      "chunk_idx": 1,
+      "error": "'list' object has no attribute 'get'",
+      "raw_preview": "[\n  {\n    \"fact\": \"Researchers evaluated the ability of several algorithms to predict gene expression levels in human immune precursor cells using genetic data (SNPs).\",\n    \"source_span\": \"We evaluated the ability of several algorithms to predict gene expression data from immune precursor cells of "
+    },
+    {
+      "article_id": "exp2_plos_002",
+      "chunk_idx": 4,
+      "error": "'list' object has no attribute 'get'",
+      "raw_preview": "[\n  {\n    \"fact\": \"High GC content in DNA is associated with higher nucleosome occupancy and regulatory function in humans.\",\n    \"source_span\": \"High GC content was shown to correlate with higher nucleosome occupancy and regulatory function in humans [29]\",\n    \"reasoning\": \"This provides important"
+    }
+  ],
+  "failed_chunk_count": 2
+}

@@ -1,0 +1,23 @@
+{
+  "time": "2026-06-09T05:41:18",
+  "model_key": "gemini3_flash_preview_minimal",
+  "provider": "gemini",
+  "model": "gemini-3-flash-preview",
+  "chunk_words": 1200,
+  "overlap_words": 120,
+  "articles_total": 5,
+  "selected_keep_af_total": 328,
+  "selected_keep_af_by_source": {
+    "PLOS": 179,
+    "eLife": 149
+  },
+  "selected_keep_af_by_article": {
+    "exp2_plos_001": 57,
+    "exp2_elife_001": 88,
+    "exp2_plos_002": 64,
+    "exp2_elife_002": 61,
+    "exp2_plos_003": 58
+  },
+  "failed_chunks": [],
+  "failed_chunk_count": 0
+}

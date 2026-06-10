@@ -1,5 +1,5 @@
 {
-  "time": "2026-06-07T15:18:40",
+  "time": "2026-06-08T15:24:58",
   "model_key": "gpt41_mini",
   "provider": "openai",
   "model": "gpt-4.1-mini",
@@ -7,7 +7,7 @@
   "selected_keep_af_total": 472,
   "valid_eval_rows": 55,
   "parse_error_count": 1,
-  "parse_errors_this_run": 1,
+  "parse_errors_this_run": 0,
   "summary_fact_recall": 0.8727,
   "covered_summary_af_count": 48,
   "missed_summary_af_count": 7,

@@ -4,7 +4,10 @@
   "completion_tokens": 274198,
   "total_tokens": 1749373,
   "api_elapsed_seconds": 4728.3537,
-  "estimated_cost_usd": 1.028787,
+  "cost_currencies": [
+    "USD"
+  ],
+  "estimated_cost": 1.028787,
   "by_stage": {
     "part_b.article_af_extraction": {
       "api_calls": 34,
@@ -12,7 +15,10 @@
       "completion_tokens": 72847,
       "total_tokens": 129937,
       "api_elapsed_seconds": 728.3976,
-      "estimated_cost_usd": 0.139391
+      "cost_currencies": [
+        "USD"
+      ],
+      "estimated_cost": 0.139391
     },
     "part_b.direct_coverage_gt": {
       "api_calls": 854,
@@ -20,7 +26,10 @@
       "completion_tokens": 49822,
       "total_tokens": 522656,
       "api_elapsed_seconds": 1401.968,
-      "estimated_cost_usd": 0.268849
+      "cost_currencies": [
+        "USD"
+      ],
+      "estimated_cost": 0.268849
     },
     "part_b.keep_skip_ultra_recall": {
       "api_calls": 854,
@@ -28,7 +37,10 @@
       "completion_tokens": 46740,
       "total_tokens": 645878,
       "api_elapsed_seconds": 1527.8041,
-      "estimated_cost_usd": 0.314439
+      "cost_currencies": [
+        "USD"
+      ],
+      "estimated_cost": 0.314439
     },
     "part_c.selected_keep_af_extraction": {
       "api_calls": 34,
@@ -36,7 +48,10 @@
       "completion_tokens": 53692,
       "total_tokens": 144068,
       "api_elapsed_seconds": 606.5442,
-      "estimated_cost_usd": 0.122058
+      "cost_currencies": [
+        "USD"
+      ],
+      "estimated_cost": 0.122058
     },
     "part_c.selected_keep_covers_summary_af": {
       "api_calls": 56,
@@ -44,7 +59,10 @@
       "completion_tokens": 47379,
       "total_tokens": 300561,
       "api_elapsed_seconds": 424.0613,
-      "estimated_cost_usd": 0.177079
+      "cost_currencies": [
+        "USD"
+      ],
+      "estimated_cost": 0.177079
     },
     "part_c.summary_af_extraction": {
       "api_calls": 5,
@@ -52,7 +70,10 @@
       "completion_tokens": 3718,
       "total_tokens": 6273,
       "api_elapsed_seconds": 39.5785,
-      "estimated_cost_usd": 0.006971
+      "cost_currencies": [
+        "USD"
+      ],
+      "estimated_cost": 0.006971
     }
   }
 }

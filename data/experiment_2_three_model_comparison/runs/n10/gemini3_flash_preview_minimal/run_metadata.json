@@ -1,0 +1,32 @@
+{
+  "time": "2026-06-09T22:02:17",
+  "model_key": "gemini3_flash_preview_minimal",
+  "provider": "gemini",
+  "model": "gemini-3-flash-preview",
+  "evaluation_mode": "fixed_judge",
+  "judge_model_key": "gpt41",
+  "judge_provider": "openai",
+  "judge_model": "gpt-4.1",
+  "reuse_legacy_summary_af": true,
+  "n_articles": 10,
+  "stages": [
+    "part_b",
+    "part_c"
+  ],
+  "wall_clock_seconds": 6282.6225,
+  "pricing_note": "Prices are per 1M tokens, fixed in run_three_model_exp2.py for reproducible cost estimates.",
+  "pricing": {
+    "input_price_per_1m": 0.5,
+    "output_price_per_1m": 3.0,
+    "currency": "USD",
+    "note": "Gemini output price includes thought tokens."
+  },
+  "prompts": {
+    "article_af_extraction": "C:\\Users\\bugee\\OneDrive\\桌面\\chiehshukou_master\\src\\experiment_2\\prompts\\article_af_extraction.txt",
+    "direct_coverage": "C:\\Users\\bugee\\OneDrive\\桌面\\chiehshukou_master\\src\\experiment_2\\prompts\\direct_coverage.txt",
+    "keep_skip": "C:\\Users\\bugee\\OneDrive\\桌面\\chiehshukou_master\\src\\experiment_2\\prompts\\keep_skip_ultra_recall.txt",
+    "partc_summary_af": "C:\\Users\\bugee\\OneDrive\\桌面\\chiehshukou_master\\src\\experiment_2\\prompts\\partc_summary_af_extraction.txt",
+    "partc_selected_keep": "C:\\Users\\bugee\\OneDrive\\桌面\\chiehshukou_master\\src\\experiment_2\\prompts\\selective_keep_af_ultra_recall.txt",
+    "partc_eval": "C:\\Users\\bugee\\OneDrive\\桌面\\chiehshukou_master\\src\\experiment_2\\prompts\\partc_selected_keep_covers_summary_af.txt"
+  }
+}

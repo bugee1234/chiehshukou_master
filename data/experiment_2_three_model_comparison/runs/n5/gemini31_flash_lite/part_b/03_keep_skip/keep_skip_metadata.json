@@ -1,0 +1,11 @@
+{
+  "time": "2026-06-08T15:37:07",
+  "model_key": "gemini31_flash_lite",
+  "provider": "gemini",
+  "model": "gemini-3.1-flash-lite",
+  "prompt_path": "C:\\Users\\bugee\\OneDrive\\桌面\\chiehshukou_master\\src\\experiment_2\\prompts\\keep_skip_ultra_recall.txt",
+  "total_afs": 332,
+  "prediction_rows": 332,
+  "parse_error_count": 0,
+  "parse_errors_this_run": 0
+}

@@ -1,0 +1,89 @@
+{
+  "time": "2026-06-09T02:49:50",
+  "overall": {
+    "n": 1062,
+    "direct_coverage_ground_truth": {
+      "coverage_recall": 0.1186,
+      "covered_count": 126,
+      "not_covered_count": 936
+    },
+    "keep_skip": {
+      "confusion_matrix": {
+        "module_keep__gt_keep": 102,
+        "module_keep__gt_skip": 315,
+        "module_skip__gt_keep_dangerous": 24,
+        "module_skip__gt_skip": 621
+      },
+      "tp": 102,
+      "tn": 621,
+      "fp": 315,
+      "fn": 24,
+      "accuracy": 0.6808,
+      "precision": 0.2446,
+      "recall": 0.8095,
+      "f1": 0.3757,
+      "dangerous_skip_count": 24,
+      "dangerous_skip_rate_among_should_keep": 0.1905,
+      "overkeep_count": 315,
+      "overkeep_rate_among_should_skip": 0.3365
+    }
+  },
+  "by_source": {
+    "PLOS": {
+      "n": 644,
+      "direct_coverage_ground_truth": {
+        "coverage_recall": 0.1506,
+        "covered_count": 97,
+        "not_covered_count": 547
+      },
+      "keep_skip": {
+        "confusion_matrix": {
+          "module_keep__gt_keep": 76,
+          "module_keep__gt_skip": 165,
+          "module_skip__gt_keep_dangerous": 21,
+          "module_skip__gt_skip": 382
+        },
+        "tp": 76,
+        "tn": 382,
+        "fp": 165,
+        "fn": 21,
+        "accuracy": 0.7112,
+        "precision": 0.3154,
+        "recall": 0.7835,
+        "f1": 0.4497,
+        "dangerous_skip_count": 21,
+        "dangerous_skip_rate_among_should_keep": 0.2165,
+        "overkeep_count": 165,
+        "overkeep_rate_among_should_skip": 0.3016
+      }
+    },
+    "eLife": {
+      "n": 418,
+      "direct_coverage_ground_truth": {
+        "coverage_recall": 0.0694,
+        "covered_count": 29,
+        "not_covered_count": 389
+      },
+      "keep_skip": {
+        "confusion_matrix": {
+          "module_keep__gt_keep": 26,
+          "module_keep__gt_skip": 150,
+          "module_skip__gt_keep_dangerous": 3,
+          "module_skip__gt_skip": 239
+        },
+        "tp": 26,
+        "tn": 239,
+        "fp": 150,
+        "fn": 3,
+        "accuracy": 0.634,
+        "precision": 0.1477,
+        "recall": 0.8966,
+        "f1": 0.2537,
+        "dangerous_skip_count": 3,
+        "dangerous_skip_rate_among_should_keep": 0.1034,
+        "overkeep_count": 150,
+        "overkeep_rate_among_should_skip": 0.3856
+      }
+    }
+  }
+}

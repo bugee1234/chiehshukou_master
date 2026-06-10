@@ -1,0 +1,27 @@
+{
+  "time": "2026-06-09T02:58:44",
+  "model_key": "deepseek_v4_flash_non_thinking",
+  "provider": "deepseek",
+  "model": "deepseek-v4-flash",
+  "n_articles": 5,
+  "stages": [
+    "part_b",
+    "part_c"
+  ],
+  "wall_clock_seconds": 4773.939,
+  "pricing_note": "Prices are per 1M tokens, fixed in run_three_model_exp2.py for reproducible cost estimates.",
+  "pricing": {
+    "input_price_per_1m": 0.14,
+    "output_price_per_1m": 0.28,
+    "currency": "USD",
+    "note": "Uses DeepSeek cache-miss input price; cache-hit discounts are not estimated."
+  },
+  "prompts": {
+    "article_af_extraction": "C:\\Users\\bugee\\OneDrive\\桌面\\chiehshukou_master\\src\\experiment_2\\prompts\\article_af_extraction.txt",
+    "direct_coverage": "C:\\Users\\bugee\\OneDrive\\桌面\\chiehshukou_master\\src\\experiment_2\\prompts\\direct_coverage.txt",
+    "keep_skip": "C:\\Users\\bugee\\OneDrive\\桌面\\chiehshukou_master\\src\\experiment_2\\prompts\\keep_skip_ultra_recall.txt",
+    "partc_summary_af": "C:\\Users\\bugee\\OneDrive\\桌面\\chiehshukou_master\\src\\experiment_2\\prompts\\partc_summary_af_extraction.txt",
+    "partc_selected_keep": "C:\\Users\\bugee\\OneDrive\\桌面\\chiehshukou_master\\src\\experiment_2\\prompts\\selective_keep_af_ultra_recall.txt",
+    "partc_eval": "C:\\Users\\bugee\\OneDrive\\桌面\\chiehshukou_master\\src\\experiment_2\\prompts\\partc_selected_keep_covers_summary_af.txt"
+  }
+}

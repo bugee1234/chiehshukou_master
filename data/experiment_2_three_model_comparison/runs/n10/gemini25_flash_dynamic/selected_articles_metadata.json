@@ -1,0 +1,19 @@
+{
+  "n_articles": 10,
+  "by_source": {
+    "PLOS": 5,
+    "eLife": 5
+  },
+  "article_ids": [
+    "exp2_plos_001",
+    "exp2_elife_001",
+    "exp2_plos_002",
+    "exp2_elife_002",
+    "exp2_plos_003",
+    "exp2_elife_003",
+    "exp2_plos_004",
+    "exp2_elife_004",
+    "exp2_plos_005",
+    "exp2_elife_005"
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "time": "2026-06-09T20:09:19",
+  "model_key": "gpt5_mini",
+  "provider": "openai",
+  "model": "gpt-5-mini",
+  "chunk_words": 1200,
+  "overlap_words": 120,
+  "articles_total": 10,
+  "selected_keep_af_total": 2072,
+  "selected_keep_af_by_source": {
+    "PLOS": 759,
+    "eLife": 1313
+  },
+  "selected_keep_af_by_article": {
+    "exp2_plos_001": 133,
+    "exp2_elife_001": 185,
+    "exp2_plos_002": 142,
+    "exp2_elife_002": 144,
+    "exp2_plos_003": 130,
+    "exp2_elife_003": 392,
+    "exp2_plos_004": 191,
+    "exp2_elife_004": 259,
+    "exp2_plos_005": 163,
+    "exp2_elife_005": 333
+  },
+  "failed_chunks": [],
+  "failed_chunk_count": 0
+}

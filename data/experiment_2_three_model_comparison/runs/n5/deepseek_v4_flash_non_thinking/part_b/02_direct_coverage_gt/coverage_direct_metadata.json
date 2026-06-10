@@ -1,0 +1,10 @@
+{
+  "time": "2026-06-09T02:21:19",
+  "model_key": "deepseek_v4_flash_non_thinking",
+  "provider": "deepseek",
+  "model": "deepseek-v4-flash",
+  "total_afs": 1062,
+  "coverage_rows": 1062,
+  "parse_error_count": 0,
+  "parse_errors_this_run": 0
+}

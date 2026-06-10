@@ -1,0 +1,66 @@
+{
+  "time": "2026-06-09T05:04:43",
+  "model_key": "deepseek_v4_pro_non_thinking",
+  "provider": "deepseek",
+  "model": "deepseek-v4-pro",
+  "summary_af_total": 98,
+  "selected_keep_af_total": 694,
+  "valid_eval_rows": 98,
+  "parse_error_count": 0,
+  "parse_errors_this_run": 0,
+  "summary_fact_recall": 0.7755,
+  "covered_summary_af_count": 76,
+  "missed_summary_af_count": 22,
+  "selected_keep_af_by_source": {
+    "PLOS": 407,
+    "eLife": 287
+  },
+  "summary_af_by_source": {
+    "PLOS": 50,
+    "eLife": 48
+  },
+  "by_source": {
+    "PLOS": {
+      "summary_af_total": 50,
+      "covered": 47,
+      "summary_fact_recall": 0.94
+    },
+    "eLife": {
+      "summary_af_total": 48,
+      "covered": 29,
+      "summary_fact_recall": 0.6042
+    }
+  },
+  "by_article": {
+    "exp2_elife_001": {
+      "summary_af_total": 25,
+      "selected_keep_af_total": 170,
+      "covered": 14,
+      "summary_fact_recall": 0.56
+    },
+    "exp2_elife_002": {
+      "summary_af_total": 23,
+      "selected_keep_af_total": 117,
+      "covered": 15,
+      "summary_fact_recall": 0.6522
+    },
+    "exp2_plos_001": {
+      "summary_af_total": 18,
+      "selected_keep_af_total": 141,
+      "covered": 15,
+      "summary_fact_recall": 0.8333
+    },
+    "exp2_plos_002": {
+      "summary_af_total": 12,
+      "selected_keep_af_total": 152,
+      "covered": 12,
+      "summary_fact_recall": 1.0
+    },
+    "exp2_plos_003": {
+      "summary_af_total": 20,
+      "selected_keep_af_total": 114,
+      "covered": 20,
+      "summary_fact_recall": 1.0
+    }
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "time": "2026-06-09T05:49:31",
+  "model_key": "gemini31_flash_lite_high",
+  "provider": "gemini",
+  "model": "gemini-3.1-flash-lite",
+  "chunk_words": 1200,
+  "overlap_words": 120,
+  "articles_total": 5,
+  "articles_completed": 5,
+  "total_afs": 612,
+  "afs_by_source": {
+    "PLOS": 301,
+    "eLife": 311
+  },
+  "afs_by_article": {
+    "exp2_plos_001": 105,
+    "exp2_elife_001": 162,
+    "exp2_plos_002": 93,
+    "exp2_elife_002": 149,
+    "exp2_plos_003": 103
+  },
+  "failed_chunks": [],
+  "failed_chunk_count": 0
+}

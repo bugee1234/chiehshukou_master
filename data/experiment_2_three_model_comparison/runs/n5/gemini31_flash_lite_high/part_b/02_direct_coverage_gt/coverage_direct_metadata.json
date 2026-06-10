@@ -1,0 +1,10 @@
+{
+  "time": "2026-06-09T06:22:55",
+  "model_key": "gemini31_flash_lite_high",
+  "provider": "gemini",
+  "model": "gemini-3.1-flash-lite",
+  "total_afs": 612,
+  "coverage_rows": 612,
+  "parse_error_count": 0,
+  "parse_errors_this_run": 0
+}

@@ -1,0 +1,79 @@
+{
+  "api_calls": 795,
+  "prompt_tokens": 726388,
+  "completion_tokens": 101530,
+  "total_tokens": 827918,
+  "api_elapsed_seconds": 839.6457,
+  "cost_currencies": [
+    "USD"
+  ],
+  "estimated_cost": 0.166946,
+  "by_stage": {
+    "part_b.article_af_extraction": {
+      "api_calls": 34,
+      "prompt_tokens": 58599,
+      "completion_tokens": 26977,
+      "total_tokens": 85576,
+      "api_elapsed_seconds": 100.9322,
+      "cost_currencies": [
+        "USD"
+      ],
+      "estimated_cost": 0.027558
+    },
+    "part_b.direct_coverage_gt": {
+      "api_calls": 332,
+      "prompt_tokens": 184187,
+      "completion_tokens": 20922,
+      "total_tokens": 205109,
+      "api_elapsed_seconds": 284.5605,
+      "cost_currencies": [
+        "USD"
+      ],
+      "estimated_cost": 0.038715
+    },
+    "part_b.keep_skip_ultra_recall": {
+      "api_calls": 332,
+      "prompt_tokens": 244396,
+      "completion_tokens": 18044,
+      "total_tokens": 262440,
+      "api_elapsed_seconds": 276.3888,
+      "cost_currencies": [
+        "USD"
+      ],
+      "estimated_cost": 0.044083
+    },
+    "part_c.selected_keep_af_extraction": {
+      "api_calls": 34,
+      "prompt_tokens": 93755,
+      "completion_tokens": 23618,
+      "total_tokens": 117373,
+      "api_elapsed_seconds": 103.2373,
+      "cost_currencies": [
+        "USD"
+      ],
+      "estimated_cost": 0.029433
+    },
+    "part_c.selected_keep_covers_summary_af": {
+      "api_calls": 58,
+      "prompt_tokens": 142844,
+      "completion_tokens": 8102,
+      "total_tokens": 150946,
+      "api_elapsed_seconds": 61.052,
+      "cost_currencies": [
+        "USD"
+      ],
+      "estimated_cost": 0.023932
+    },
+    "part_c.summary_af_extraction": {
+      "api_calls": 5,
+      "prompt_tokens": 2607,
+      "completion_tokens": 3867,
+      "total_tokens": 6474,
+      "api_elapsed_seconds": 13.4749,
+      "cost_currencies": [
+        "USD"
+      ],
+      "estimated_cost": 0.003226
+    }
+  }
+}

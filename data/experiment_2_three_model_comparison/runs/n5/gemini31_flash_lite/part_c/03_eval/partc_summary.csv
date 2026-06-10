@@ -1,0 +1,6 @@
+metric,value
+summary_af_total,58
+selected_keep_af_total,219
+summary_fact_recall,0.7414
+covered_summary_af_count,43
+missed_summary_af_count,15

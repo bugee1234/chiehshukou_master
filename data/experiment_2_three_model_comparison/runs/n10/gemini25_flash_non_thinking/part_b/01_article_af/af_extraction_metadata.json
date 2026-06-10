@@ -1,0 +1,29 @@
+{
+  "time": "2026-06-10T01:38:26",
+  "model_key": "gemini25_flash_non_thinking",
+  "provider": "gemini",
+  "model": "gemini-2.5-flash",
+  "chunk_words": 1200,
+  "overlap_words": 120,
+  "articles_total": 10,
+  "articles_completed": 10,
+  "total_afs": 4019,
+  "afs_by_source": {
+    "PLOS": 1429,
+    "eLife": 2590
+  },
+  "afs_by_article": {
+    "exp2_plos_001": 273,
+    "exp2_elife_001": 360,
+    "exp2_plos_002": 198,
+    "exp2_elife_002": 306,
+    "exp2_plos_003": 256,
+    "exp2_elife_003": 638,
+    "exp2_plos_004": 363,
+    "exp2_elife_004": 664,
+    "exp2_plos_005": 339,
+    "exp2_elife_005": 622
+  },
+  "failed_chunks": [],
+  "failed_chunk_count": 0
+}

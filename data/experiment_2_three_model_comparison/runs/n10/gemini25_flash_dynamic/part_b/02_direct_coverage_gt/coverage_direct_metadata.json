@@ -1,0 +1,10 @@
+{
+  "time": "2026-06-10T07:52:29",
+  "model_key": "gpt41",
+  "provider": "openai",
+  "model": "gpt-4.1",
+  "total_afs": 5487,
+  "coverage_rows": 5487,
+  "parse_error_count": 0,
+  "parse_errors_this_run": 0
+}

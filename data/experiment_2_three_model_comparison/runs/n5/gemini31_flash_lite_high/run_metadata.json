@@ -1,0 +1,27 @@
+{
+  "time": "2026-06-09T07:20:17",
+  "model_key": "gemini31_flash_lite_high",
+  "provider": "gemini",
+  "model": "gemini-3.1-flash-lite",
+  "n_articles": 5,
+  "stages": [
+    "part_b",
+    "part_c"
+  ],
+  "wall_clock_seconds": 5802.8144,
+  "pricing_note": "Prices are per 1M tokens, fixed in run_three_model_exp2.py for reproducible cost estimates.",
+  "pricing": {
+    "input_price_per_1m": 0.125,
+    "output_price_per_1m": 0.75,
+    "currency": "USD",
+    "note": "Gemini thinking tokens are billed as output tokens."
+  },
+  "prompts": {
+    "article_af_extraction": "C:\\Users\\bugee\\OneDrive\\桌面\\chiehshukou_master\\src\\experiment_2\\prompts\\article_af_extraction.txt",
+    "direct_coverage": "C:\\Users\\bugee\\OneDrive\\桌面\\chiehshukou_master\\src\\experiment_2\\prompts\\direct_coverage.txt",
+    "keep_skip": "C:\\Users\\bugee\\OneDrive\\桌面\\chiehshukou_master\\src\\experiment_2\\prompts\\keep_skip_ultra_recall.txt",
+    "partc_summary_af": "C:\\Users\\bugee\\OneDrive\\桌面\\chiehshukou_master\\src\\experiment_2\\prompts\\partc_summary_af_extraction.txt",
+    "partc_selected_keep": "C:\\Users\\bugee\\OneDrive\\桌面\\chiehshukou_master\\src\\experiment_2\\prompts\\selective_keep_af_ultra_recall.txt",
+    "partc_eval": "C:\\Users\\bugee\\OneDrive\\桌面\\chiehshukou_master\\src\\experiment_2\\prompts\\partc_selected_keep_covers_summary_af.txt"
+  }
+}

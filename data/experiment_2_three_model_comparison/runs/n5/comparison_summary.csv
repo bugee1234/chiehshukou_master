@@ -1,0 +1,8 @@
+model_key,provider,model,n_articles,part_b_article_af_total,part_b_gt_keep,part_b_gt_skip,part_b_recall,part_b_dangerous_skip_rate,part_b_precision,part_c_summary_af_total,part_c_selected_keep_af_total,part_c_summary_fact_recall,api_calls,total_tokens,prompt_tokens,completion_tokens,api_elapsed_seconds,cost_currencies,estimated_cost
+gpt41_mini,openai,gpt-4.1-mini,5,854,173,681,0.4162,0.5838,0.5035,56,472,0.8727,1837,1749373,1475175,274198,4728.3537,USD,1.028787
+gemini31_flash_lite,gemini,gemini-3.1-flash-lite,5,332,66,266,0.8636,0.1364,0.3239,58,219,0.7414,795,827918,726388,101530,839.6457,USD,0.166946
+gemini31_flash_lite_high,gemini,gemini-3.1-flash-lite,5,612,108,504,0.9815,0.0185,0.2524,80,277,0.8375,1377,3101374,1188752,172015,5796.8306,USD,0.277605
+gemini3_flash_preview_minimal,gemini,gemini-3-flash-preview,5,591,156,435,0.9103,0.0897,0.3912,72,328,0.9028,1327,1342497,1169833,172664,2323.5084,USD,0.275727
+deepseek_v4_flash,deepseek,deepseek-v4-flash,5,690,146,544,0.863,0.137,0.3621,60,357,0.7966,1775,2028351,1411729,616622,7674.639,USD,0.370296
+deepseek_v4_flash_non_thinking,deepseek,deepseek-v4-flash,5,1062,126,936,0.8095,0.1905,0.2446,58,455,0.7586,2255,2019485,1762058,257427,4761.6589,USD,0.318768
+deepseek_v4_pro_non_thinking,deepseek,deepseek-v4-pro,5,1396,276,1120,0.8116,0.1884,0.3784,98,694,0.7755,2963,2883863,2534014,349849,7537.6482,USD,1.406664

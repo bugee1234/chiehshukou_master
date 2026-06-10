@@ -1,0 +1,11 @@
+{
+  "time": "2026-06-08T17:32:20",
+  "model_key": "deepseek_v4_flash",
+  "provider": "deepseek",
+  "model": "deepseek-v4-flash",
+  "prompt_path": "C:\\Users\\bugee\\OneDrive\\桌面\\chiehshukou_master\\src\\experiment_2\\prompts\\keep_skip_ultra_recall.txt",
+  "total_afs": 821,
+  "prediction_rows": 821,
+  "parse_error_count": 17,
+  "parse_errors_this_run": 17
+}

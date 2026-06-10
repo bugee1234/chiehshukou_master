@@ -1,0 +1,20 @@
+{
+  "time": "2026-06-09T06:57:49",
+  "model_key": "gemini31_flash_lite_high",
+  "provider": "gemini",
+  "model": "gemini-3.1-flash-lite",
+  "articles_total": 5,
+  "summary_af_total": 80,
+  "summary_af_by_source": {
+    "PLOS": 39,
+    "eLife": 41
+  },
+  "summary_af_by_article": {
+    "exp2_plos_001": 15,
+    "exp2_elife_001": 17,
+    "exp2_plos_002": 12,
+    "exp2_elife_002": 24,
+    "exp2_plos_003": 12
+  },
+  "failed_items": []
+}

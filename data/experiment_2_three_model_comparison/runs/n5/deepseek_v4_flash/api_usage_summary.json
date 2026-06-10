@@ -1,0 +1,79 @@
+{
+  "api_calls": 1775,
+  "prompt_tokens": 1411729,
+  "completion_tokens": 616622,
+  "total_tokens": 2028351,
+  "api_elapsed_seconds": 7674.639,
+  "cost_currencies": [
+    "USD"
+  ],
+  "estimated_cost": 0.370296,
+  "by_stage": {
+    "part_b.article_af_extraction": {
+      "api_calls": 34,
+      "prompt_tokens": 56710,
+      "completion_tokens": 141316,
+      "total_tokens": 198026,
+      "api_elapsed_seconds": 916.7244,
+      "cost_currencies": [
+        "USD"
+      ],
+      "estimated_cost": 0.047508
+    },
+    "part_b.direct_coverage_gt": {
+      "api_calls": 821,
+      "prompt_tokens": 464685,
+      "completion_tokens": 188317,
+      "total_tokens": 653002,
+      "api_elapsed_seconds": 2778.6143,
+      "cost_currencies": [
+        "USD"
+      ],
+      "estimated_cost": 0.117785
+    },
+    "part_b.keep_skip_ultra_recall": {
+      "api_calls": 821,
+      "prompt_tokens": 592524,
+      "completion_tokens": 184630,
+      "total_tokens": 777154,
+      "api_elapsed_seconds": 3032.3309,
+      "cost_currencies": [
+        "USD"
+      ],
+      "estimated_cost": 0.13465
+    },
+    "part_c.selected_keep_af_extraction": {
+      "api_calls": 34,
+      "prompt_tokens": 90132,
+      "completion_tokens": 61942,
+      "total_tokens": 152074,
+      "api_elapsed_seconds": 559.3653,
+      "cost_currencies": [
+        "USD"
+      ],
+      "estimated_cost": 0.029962
+    },
+    "part_c.selected_keep_covers_summary_af": {
+      "api_calls": 60,
+      "prompt_tokens": 205039,
+      "completion_tokens": 30504,
+      "total_tokens": 235543,
+      "api_elapsed_seconds": 314.8734,
+      "cost_currencies": [
+        "USD"
+      ],
+      "estimated_cost": 0.037247
+    },
+    "part_c.summary_af_extraction": {
+      "api_calls": 5,
+      "prompt_tokens": 2639,
+      "completion_tokens": 9913,
+      "total_tokens": 12552,
+      "api_elapsed_seconds": 72.7307,
+      "cost_currencies": [
+        "USD"
+      ],
+      "estimated_cost": 0.003145
+    }
+  }
+}

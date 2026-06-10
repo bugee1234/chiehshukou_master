@@ -1,0 +1,96 @@
+{
+  "time": "2026-06-09T12:02:04",
+  "model_key": "gpt41",
+  "provider": "openai",
+  "model": "gpt-4.1",
+  "summary_af_total": 127,
+  "selected_keep_af_total": 1269,
+  "valid_eval_rows": 127,
+  "parse_error_count": 0,
+  "parse_errors_this_run": 0,
+  "summary_fact_recall": 0.9055,
+  "covered_summary_af_count": 115,
+  "missed_summary_af_count": 12,
+  "selected_keep_af_by_source": {
+    "PLOS": 482,
+    "eLife": 787
+  },
+  "summary_af_by_source": {
+    "PLOS": 45,
+    "eLife": 82
+  },
+  "by_source": {
+    "PLOS": {
+      "summary_af_total": 45,
+      "covered": 44,
+      "summary_fact_recall": 0.9778
+    },
+    "eLife": {
+      "summary_af_total": 82,
+      "covered": 71,
+      "summary_fact_recall": 0.8659
+    }
+  },
+  "by_article": {
+    "exp2_elife_001": {
+      "summary_af_total": 17,
+      "selected_keep_af_total": 110,
+      "covered": 16,
+      "summary_fact_recall": 0.9412
+    },
+    "exp2_elife_002": {
+      "summary_af_total": 16,
+      "selected_keep_af_total": 85,
+      "covered": 12,
+      "summary_fact_recall": 0.75
+    },
+    "exp2_elife_003": {
+      "summary_af_total": 23,
+      "selected_keep_af_total": 247,
+      "covered": 19,
+      "summary_fact_recall": 0.8261
+    },
+    "exp2_elife_004": {
+      "summary_af_total": 19,
+      "selected_keep_af_total": 163,
+      "covered": 17,
+      "summary_fact_recall": 0.8947
+    },
+    "exp2_elife_005": {
+      "summary_af_total": 7,
+      "selected_keep_af_total": 182,
+      "covered": 7,
+      "summary_fact_recall": 1.0
+    },
+    "exp2_plos_001": {
+      "summary_af_total": 10,
+      "selected_keep_af_total": 71,
+      "covered": 9,
+      "summary_fact_recall": 0.9
+    },
+    "exp2_plos_002": {
+      "summary_af_total": 9,
+      "selected_keep_af_total": 102,
+      "covered": 9,
+      "summary_fact_recall": 1.0
+    },
+    "exp2_plos_003": {
+      "summary_af_total": 8,
+      "selected_keep_af_total": 86,
+      "covered": 8,
+      "summary_fact_recall": 1.0
+    },
+    "exp2_plos_004": {
+      "summary_af_total": 9,
+      "selected_keep_af_total": 108,
+      "covered": 9,
+      "summary_fact_recall": 1.0
+    },
+    "exp2_plos_005": {
+      "summary_af_total": 9,
+      "selected_keep_af_total": 115,
+      "covered": 9,
+      "summary_fact_recall": 1.0
+    }
+  }
+}

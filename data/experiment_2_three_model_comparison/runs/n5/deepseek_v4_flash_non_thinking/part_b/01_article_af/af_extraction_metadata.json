@@ -1,0 +1,24 @@
+{
+  "time": "2026-06-09T01:49:35",
+  "model_key": "deepseek_v4_flash_non_thinking",
+  "provider": "deepseek",
+  "model": "deepseek-v4-flash",
+  "chunk_words": 1200,
+  "overlap_words": 120,
+  "articles_total": 5,
+  "articles_completed": 5,
+  "total_afs": 1062,
+  "afs_by_source": {
+    "PLOS": 644,
+    "eLife": 418
+  },
+  "afs_by_article": {
+    "exp2_plos_001": 241,
+    "exp2_elife_001": 220,
+    "exp2_plos_002": 182,
+    "exp2_elife_002": 198,
+    "exp2_plos_003": 221
+  },
+  "failed_chunks": [],
+  "failed_chunk_count": 0
+}

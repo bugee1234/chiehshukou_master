@@ -32,6 +32,14 @@ DATA_THREE_MODEL_DIR = ROOT_DIR / "data" / "experiment_2_three_model_comparison"
 RUNS_DIR = DATA_THREE_MODEL_DIR / "runs"
 PROMPTS_EXP2_DIR = ROOT_DIR / "src" / "experiment_2" / "prompts"
 INPUT_ARTICLES_PATH = ROOT_DIR / "data" / "experiment_2" / "00_inputs" / "articles_50.jsonl"
+LEGACY_PARTC_SUMMARY_AF_PATH = (
+    ROOT_DIR
+    / "data"
+    / "experiment_2"
+    / "part_c_selective_keep_af"
+    / "01_summary_af"
+    / "summary_af.jsonl"
+)
 
 ARTICLE_AF_PROMPT = PROMPTS_EXP2_DIR / "article_af_extraction.txt"
 DIRECT_COVERAGE_PROMPT = PROMPTS_EXP2_DIR / "direct_coverage.txt"
@@ -44,12 +52,38 @@ PARTC_EVAL_PROMPT = PROMPTS_EXP2_DIR / "partc_selected_keep_covers_summary_af.tx
 # Prices are per 1M tokens. Keep these fixed in the metadata so each run is
 # reproducible even if provider pricing changes later.
 MODEL_CONFIGS: dict[str, dict[str, Any]] = {
+    "gpt41": {
+        "provider": "openai",
+        "model": "gpt-4.1",
+        "input_price_per_1m": 2.00,
+        "cached_input_price_per_1m": 0.50,
+        "output_price_per_1m": 8.00,
+        "currency": "USD",
+    },
     "gpt41_mini": {
         "provider": "openai",
         "model": "gpt-4.1-mini",
         "input_price_per_1m": 0.40,
+        "cached_input_price_per_1m": 0.10,
         "output_price_per_1m": 1.60,
         "currency": "USD",
+    },
+    "gpt4o_mini": {
+        "provider": "openai",
+        "model": "gpt-4o-mini",
+        "input_price_per_1m": 0.15,
+        "cached_input_price_per_1m": 0.075,
+        "output_price_per_1m": 0.60,
+        "currency": "USD",
+    },
+    "gpt5_mini": {
+        "provider": "openai",
+        "model": "gpt-5-mini",
+        "input_price_per_1m": 0.25,
+        "cached_input_price_per_1m": 0.025,
+        "output_price_per_1m": 2.00,
+        "currency": "USD",
+        "pricing_note": "Reasoning tokens are billed as output tokens when used.",
     },
     "gemini31_flash_lite": {
         "provider": "gemini",
@@ -57,6 +91,64 @@ MODEL_CONFIGS: dict[str, dict[str, Any]] = {
         "input_price_per_1m": 0.125,
         "output_price_per_1m": 0.75,
         "currency": "USD",
+    },
+    "gemini31_flash_lite_minimal": {
+        "provider": "gemini",
+        "model": "gemini-3.1-flash-lite",
+        "thinking_level": "minimal",
+        "input_price_per_1m": 0.125,
+        "output_price_per_1m": 0.75,
+        "currency": "USD",
+        "pricing_note": "Gemini thinking tokens are billed as output tokens; minimal does not guarantee thinking is fully off.",
+    },
+    "gemini31_flash_lite_high": {
+        "provider": "gemini",
+        "model": "gemini-3.1-flash-lite",
+        "thinking_level": "high",
+        "input_price_per_1m": 0.125,
+        "output_price_per_1m": 0.75,
+        "currency": "USD",
+        "pricing_note": "Gemini thinking tokens are billed as output tokens.",
+    },
+    "gemini3_flash_preview_minimal": {
+        "provider": "gemini",
+        "model": "gemini-3-flash-preview",
+        "thinking_level": "minimal",
+        "input_price_per_1m": 0.50,
+        "cached_input_price_per_1m": 0.05,
+        "output_price_per_1m": 3.00,
+        "currency": "USD",
+        "pricing_note": "Gemini output price includes thought tokens.",
+    },
+    "gemini3_flash_preview_high": {
+        "provider": "gemini",
+        "model": "gemini-3-flash-preview",
+        "thinking_level": "high",
+        "input_price_per_1m": 0.50,
+        "cached_input_price_per_1m": 0.05,
+        "output_price_per_1m": 3.00,
+        "currency": "USD",
+        "pricing_note": "Gemini output price includes thought tokens.",
+    },
+    "gemini25_flash_non_thinking": {
+        "provider": "gemini",
+        "model": "gemini-2.5-flash",
+        "thinking_budget": 0,
+        "input_price_per_1m": 0.30,
+        "cached_input_price_per_1m": 0.03,
+        "output_price_per_1m": 2.50,
+        "currency": "USD",
+        "pricing_note": "Gemini output price includes thought tokens; thinking_budget=0 disables thinking.",
+    },
+    "gemini25_flash_dynamic": {
+        "provider": "gemini",
+        "model": "gemini-2.5-flash",
+        "thinking_budget": -1,
+        "input_price_per_1m": 0.30,
+        "cached_input_price_per_1m": 0.03,
+        "output_price_per_1m": 2.50,
+        "currency": "USD",
+        "pricing_note": "Gemini dynamic thinking; output price includes thought tokens.",
     },
     "deepseek_v4_flash": {
         "provider": "deepseek",
@@ -66,7 +158,47 @@ MODEL_CONFIGS: dict[str, dict[str, Any]] = {
         "currency": "USD",
         "pricing_note": "Uses DeepSeek cache-miss input price; cache-hit discounts are not estimated.",
     },
+    "deepseek_v4_flash_non_thinking": {
+        "provider": "deepseek",
+        "model": "deepseek-v4-flash",
+        "thinking_type": "disabled",
+        "input_price_per_1m": 0.14,
+        "output_price_per_1m": 0.28,
+        "currency": "USD",
+        "pricing_note": "Uses DeepSeek cache-miss input price; cache-hit discounts are not estimated.",
+    },
+    "deepseek_v4_flash_thinking": {
+        "provider": "deepseek",
+        "model": "deepseek-v4-flash",
+        "thinking_type": "enabled",
+        "reasoning_effort": "high",
+        "input_price_per_1m": 0.14,
+        "output_price_per_1m": 0.28,
+        "currency": "USD",
+        "pricing_note": "Uses DeepSeek cache-miss input price; thinking tokens may increase billable output tokens.",
+    },
+    "deepseek_v4_pro_non_thinking": {
+        "provider": "deepseek",
+        "model": "deepseek-v4-pro",
+        "thinking_type": "disabled",
+        "input_price_per_1m": 0.435,
+        "output_price_per_1m": 0.87,
+        "currency": "USD",
+        "pricing_note": "Uses DeepSeek cache-miss input price; cache-hit discounts are not estimated.",
+    },
+    "deepseek_v4_pro_thinking": {
+        "provider": "deepseek",
+        "model": "deepseek-v4-pro",
+        "thinking_type": "enabled",
+        "reasoning_effort": "high",
+        "input_price_per_1m": 0.435,
+        "output_price_per_1m": 0.87,
+        "currency": "USD",
+        "pricing_note": "Uses DeepSeek cache-miss input price; thinking tokens may increase billable output tokens.",
+    },
 }
+
+DEFAULT_MODEL_KEYS = ["gpt41_mini", "gemini31_flash_lite", "deepseek_v4_flash"]
 
 
 @dataclass
@@ -88,6 +220,14 @@ class UsageTracker:
                 row["input_price_per_1m"] = row.get("input_usd_per_1m", "0")
             if "output_price_per_1m" not in row and "output_usd_per_1m" in row:
                 row["output_price_per_1m"] = row.get("output_usd_per_1m", "0")
+            row.setdefault("cached_prompt_tokens", "0")
+            row.setdefault("billable_prompt_tokens", str(row.get("prompt_tokens", "0")))
+            if "billable_output_tokens" not in row:
+                prompt_tokens = int(row.get("prompt_tokens", 0) or 0)
+                completion_tokens = int(row.get("completion_tokens", 0) or 0)
+                total_tokens = int(row.get("total_tokens", 0) or 0)
+                row["billable_output_tokens"] = str(max(completion_tokens, total_tokens - prompt_tokens, 0))
+            row.setdefault("cached_input_price_per_1m", row.get("input_price_per_1m", "0"))
             normalized.append(row)
         return cls(rows=normalized)
 
@@ -102,12 +242,18 @@ class UsageTracker:
         total_tokens: int,
         elapsed_seconds: float,
         input_price_per_1m: float,
+        cached_input_price_per_1m: float,
         output_price_per_1m: float,
         currency: str,
         item_id: str,
+        cached_prompt_tokens: int = 0,
     ) -> None:
-        cost = (prompt_tokens / 1_000_000 * input_price_per_1m) + (
-            completion_tokens / 1_000_000 * output_price_per_1m
+        billable_prompt_tokens = max(prompt_tokens - cached_prompt_tokens, 0)
+        billable_output_tokens = max(completion_tokens, total_tokens - prompt_tokens, 0)
+        cost = (
+            billable_prompt_tokens / 1_000_000 * input_price_per_1m
+            + cached_prompt_tokens / 1_000_000 * cached_input_price_per_1m
+            + billable_output_tokens / 1_000_000 * output_price_per_1m
         )
         self.rows.append(
             {
@@ -117,10 +263,14 @@ class UsageTracker:
                 "model": model,
                 "item_id": item_id,
                 "prompt_tokens": prompt_tokens,
+                "cached_prompt_tokens": cached_prompt_tokens,
+                "billable_prompt_tokens": billable_prompt_tokens,
                 "completion_tokens": completion_tokens,
+                "billable_output_tokens": billable_output_tokens,
                 "total_tokens": total_tokens,
                 "elapsed_seconds": round(elapsed_seconds, 4),
                 "input_price_per_1m": input_price_per_1m,
+                "cached_input_price_per_1m": cached_input_price_per_1m,
                 "output_price_per_1m": output_price_per_1m,
                 "cost_currency": currency,
                 "estimated_cost": round(cost, 8),
@@ -129,7 +279,12 @@ class UsageTracker:
 
     def summarize(self) -> dict[str, Any]:
         total_prompt = sum(int(r["prompt_tokens"]) for r in self.rows)
+        total_cached_prompt = sum(int(r.get("cached_prompt_tokens", 0) or 0) for r in self.rows)
+        total_billable_prompt = sum(int(r.get("billable_prompt_tokens", r["prompt_tokens"]) or 0) for r in self.rows)
         total_completion = sum(int(r["completion_tokens"]) for r in self.rows)
+        total_billable_output = sum(
+            int(r.get("billable_output_tokens", r["completion_tokens"]) or 0) for r in self.rows
+        )
         total_tokens = sum(int(r["total_tokens"]) for r in self.rows)
         total_elapsed = sum(float(r["elapsed_seconds"]) for r in self.rows)
         currencies = sorted({str(r.get("cost_currency", "")) for r in self.rows if r.get("cost_currency")})
@@ -140,7 +295,14 @@ class UsageTracker:
             by_stage[stage] = {
                 "api_calls": len(sub),
                 "prompt_tokens": sum(int(r["prompt_tokens"]) for r in sub),
+                "cached_prompt_tokens": sum(int(r.get("cached_prompt_tokens", 0) or 0) for r in sub),
+                "billable_prompt_tokens": sum(
+                    int(r.get("billable_prompt_tokens", r["prompt_tokens"]) or 0) for r in sub
+                ),
                 "completion_tokens": sum(int(r["completion_tokens"]) for r in sub),
+                "billable_output_tokens": sum(
+                    int(r.get("billable_output_tokens", r["completion_tokens"]) or 0) for r in sub
+                ),
                 "total_tokens": sum(int(r["total_tokens"]) for r in sub),
                 "api_elapsed_seconds": round(sum(float(r["elapsed_seconds"]) for r in sub), 4),
                 "cost_currencies": sorted(
@@ -151,7 +313,10 @@ class UsageTracker:
         return {
             "api_calls": len(self.rows),
             "prompt_tokens": total_prompt,
+            "cached_prompt_tokens": total_cached_prompt,
+            "billable_prompt_tokens": total_billable_prompt,
             "completion_tokens": total_completion,
+            "billable_output_tokens": total_billable_output,
             "total_tokens": total_tokens,
             "api_elapsed_seconds": round(total_elapsed, 4),
             "cost_currencies": currencies,
@@ -179,8 +344,13 @@ class ProviderClient:
         self.provider = str(cfg["provider"])
         self.model = str(cfg["model"])
         self.input_price_per_1m = float(cfg["input_price_per_1m"])
+        self.cached_input_price_per_1m = float(cfg.get("cached_input_price_per_1m", cfg["input_price_per_1m"]))
         self.output_price_per_1m = float(cfg["output_price_per_1m"])
         self.currency = str(cfg.get("currency", "USD"))
+        self.thinking_type = cfg.get("thinking_type")
+        self.reasoning_effort = cfg.get("reasoning_effort")
+        self.gemini_thinking_level = cfg.get("thinking_level")
+        self.gemini_thinking_budget = cfg.get("thinking_budget")
         self.usage = usage
 
         if self.provider == "openai":
@@ -218,6 +388,7 @@ class ProviderClient:
         temperature: float = 0.0,
     ) -> str:
         started = time.perf_counter()
+        cached_prompt_tokens = 0
         if self.provider == "gemini":
             content, prompt_tokens, completion_tokens, total_tokens = self._gemini_chat(
                 messages=messages,
@@ -228,16 +399,23 @@ class ProviderClient:
             params: dict[str, Any] = {
                 "model": self.model,
                 "messages": messages,
-                "temperature": temperature,
             }
+            if not self.model.startswith("gpt-5"):
+                params["temperature"] = temperature
             if response_format is not None:
                 params["response_format"] = response_format
+            if self.provider == "deepseek" and self.thinking_type:
+                params["extra_body"] = {"thinking": {"type": str(self.thinking_type)}}
+                if self.thinking_type == "enabled" and self.reasoning_effort:
+                    params["reasoning_effort"] = str(self.reasoning_effort)
             response = self.client.chat.completions.create(**params)
             content = response.choices[0].message.content or ""
             usage_obj = response.usage
             prompt_tokens = int(getattr(usage_obj, "prompt_tokens", 0) or 0)
             completion_tokens = int(getattr(usage_obj, "completion_tokens", 0) or 0)
             total_tokens = int(getattr(usage_obj, "total_tokens", 0) or 0)
+            prompt_details = getattr(usage_obj, "prompt_tokens_details", None)
+            cached_prompt_tokens = int(getattr(prompt_details, "cached_tokens", 0) or 0)
         elapsed = time.perf_counter() - started
         self.usage.add(
             stage=stage,
@@ -248,9 +426,11 @@ class ProviderClient:
             total_tokens=total_tokens,
             elapsed_seconds=elapsed,
             input_price_per_1m=self.input_price_per_1m,
+            cached_input_price_per_1m=self.cached_input_price_per_1m,
             output_price_per_1m=self.output_price_per_1m,
             currency=self.currency,
             item_id=item_id,
+            cached_prompt_tokens=cached_prompt_tokens if self.provider != "gemini" else 0,
         )
         return content
 
@@ -275,6 +455,14 @@ class ProviderClient:
         config_kwargs: dict[str, Any] = {"temperature": temperature}
         if response_format is not None:
             config_kwargs["response_mime_type"] = "application/json"
+        if self.gemini_thinking_level:
+            config_kwargs["thinking_config"] = self.genai_types.ThinkingConfig(
+                thinking_level=str(self.gemini_thinking_level)
+            )
+        elif self.gemini_thinking_budget is not None:
+            config_kwargs["thinking_config"] = self.genai_types.ThinkingConfig(
+                thinking_budget=int(self.gemini_thinking_budget)
+            )
         config = self.genai_types.GenerateContentConfig(**config_kwargs)
         response = self.client.models.generate_content(
             model=self.model,
@@ -344,6 +532,25 @@ def _select_articles(n_articles: int) -> list[dict[str, Any]]:
     return selected
 
 
+def _selected_article_ids(n_articles: int) -> set[str]:
+    return {str(r["id"]) for r in _select_articles(n_articles)}
+
+
+def _load_legacy_summary_af_for_articles(n_articles: int) -> list[dict[str, Any]] | None:
+    if not LEGACY_PARTC_SUMMARY_AF_PATH.exists():
+        return None
+    article_ids = _selected_article_ids(n_articles)
+    rows = [
+        r
+        for r in load_jsonl(LEGACY_PARTC_SUMMARY_AF_PATH)
+        if str(r.get("article_id", "")) in article_ids
+    ]
+    found_ids = {str(r.get("article_id", "")) for r in rows}
+    if found_ids != article_ids:
+        return None
+    return rows
+
+
 def _binary_metrics(tp: int, tn: int, fp: int, fn: int) -> dict[str, Any]:
     total = tp + tn + fp + fn
     precision = tp / (tp + fp) if tp + fp else 0.0
@@ -373,6 +580,8 @@ def _save_usage_and_meta(
     model_key: str,
     n_articles: int,
     stages: list[str],
+    judge_model_key: str | None = None,
+    reuse_legacy_summary_af: bool = False,
 ) -> None:
     usage.save(out_dir)
     cfg = MODEL_CONFIGS[model_key]
@@ -382,6 +591,11 @@ def _save_usage_and_meta(
             "model_key": model_key,
             "provider": cfg["provider"],
             "model": cfg["model"],
+            "evaluation_mode": "fixed_judge" if judge_model_key else "end_to_end",
+            "judge_model_key": judge_model_key,
+            "judge_provider": MODEL_CONFIGS[judge_model_key]["provider"] if judge_model_key else None,
+            "judge_model": MODEL_CONFIGS[judge_model_key]["model"] if judge_model_key else None,
+            "reuse_legacy_summary_af": reuse_legacy_summary_af,
             "n_articles": n_articles,
             "stages": stages,
             "wall_clock_seconds": round(time.perf_counter() - run_started, 4),
@@ -1074,15 +1288,20 @@ def run_model(
     chunk_words: int,
     overlap_words: int,
     resume: bool,
+    judge_model_key: str | None = None,
+    reuse_legacy_summary_af: bool = False,
 ) -> dict[str, Any]:
     if model_key not in MODEL_CONFIGS:
         raise ValueError(f"Unknown model key: {model_key}. Valid: {sorted(MODEL_CONFIGS)}")
+    if judge_model_key is not None and judge_model_key not in MODEL_CONFIGS:
+        raise ValueError(f"Unknown judge model key: {judge_model_key}. Valid: {sorted(MODEL_CONFIGS)}")
 
     run_started = time.perf_counter()
     articles = _select_articles(n_articles)
     run_dir = RUNS_DIR / f"n{n_articles}" / model_key
     usage = UsageTracker.from_csv(run_dir / "api_usage_calls.csv") if resume else UsageTracker(rows=[])
     client = ProviderClient(model_key, usage)
+    judge_client = ProviderClient(judge_model_key, usage) if judge_model_key else client
 
     part_b_dir = run_dir / "part_b"
     part_c_dir = run_dir / "part_c"
@@ -1105,7 +1324,7 @@ def run_model(
         resume=resume,
     )
     direct_rows = part_b_direct_coverage(
-        client=client,
+        client=judge_client,
         af_rows=af_rows,
         out_dir=part_b_dir / "02_direct_coverage_gt",
         resume=resume,
@@ -1122,12 +1341,36 @@ def run_model(
         out_dir=part_b_dir / "04_eval",
     )
 
-    summary_af = partc_summary_af(
-        client=client,
-        articles=articles,
-        out_dir=part_c_dir / "01_summary_af",
-        resume=resume,
-    )
+    summary_af = None
+    if judge_model_key and reuse_legacy_summary_af:
+        summary_af = _load_legacy_summary_af_for_articles(n_articles)
+        if summary_af is not None:
+            out_dir = part_c_dir / "01_summary_af"
+            out_dir.mkdir(parents=True, exist_ok=True)
+            save_jsonl(summary_af, out_dir / "summary_af.jsonl")
+            save_json(
+                {
+                    "time": datetime.now().isoformat(timespec="seconds"),
+                    "model_key": judge_model_key,
+                    "provider": judge_client.provider,
+                    "model": judge_client.model,
+                    "source": str(LEGACY_PARTC_SUMMARY_AF_PATH),
+                    "articles_total": len(articles),
+                    "summary_af_total": len(summary_af),
+                    "summary_af_by_source": dict(Counter(str(r["source_dataset"]) for r in summary_af)),
+                    "summary_af_by_article": dict(Counter(str(r["article_id"]) for r in summary_af)),
+                    "failed_items": [],
+                    "reused_legacy_summary_af": True,
+                },
+                out_dir / "summary_af_metadata.json",
+            )
+    if summary_af is None:
+        summary_af = partc_summary_af(
+            client=judge_client,
+            articles=articles,
+            out_dir=part_c_dir / "01_summary_af",
+            resume=resume,
+        )
     selected_keep = partc_selected_keep_af(
         client=client,
         articles=articles,
@@ -1137,7 +1380,7 @@ def run_model(
         resume=resume,
     )
     part_c_summary = partc_eval(
-        client=client,
+        client=judge_client,
         summary_af=summary_af,
         selected_keep=selected_keep,
         out_dir=part_c_dir / "03_eval",
@@ -1155,6 +1398,8 @@ def run_model(
         model_key=model_key,
         n_articles=n_articles,
         stages=["part_b", "part_c"],
+        judge_model_key=judge_model_key,
+        reuse_legacy_summary_af=bool(judge_model_key and reuse_legacy_summary_af and summary_af is not None),
     )
     method_usage = usage.summarize()
     summary = {
@@ -1162,6 +1407,11 @@ def run_model(
         "model_key": model_key,
         "provider": client.provider,
         "model": client.model,
+        "evaluation_mode": "fixed_judge" if judge_model_key else "end_to_end",
+        "judge_model_key": judge_model_key,
+        "judge_provider": judge_client.provider if judge_model_key else None,
+        "judge_model": judge_client.model if judge_model_key else None,
+        "reuse_legacy_summary_af": bool(judge_model_key and reuse_legacy_summary_af),
         "n_articles": n_articles,
         "part_b": part_b_summary,
         "part_c": part_c_summary,
@@ -1183,6 +1433,8 @@ def write_comparison(n_articles: int) -> None:
             continue
         summary = json.loads(summary_path.read_text(encoding="utf-8"))
         usage = json.loads(usage_path.read_text(encoding="utf-8"))
+        part_b_usage = summary.get("part_b_usage", {})
+        part_c_usage = summary.get("part_c_usage", {})
         part_b_overall = summary["part_b"]["overall"]
         part_b_keep = part_b_overall["keep_skip"]
         part_c = summary["part_c"]
@@ -1191,6 +1443,9 @@ def write_comparison(n_articles: int) -> None:
                 "model_key": model_key,
                 "provider": summary["provider"],
                 "model": summary["model"],
+                "evaluation_mode": summary.get("evaluation_mode", "end_to_end"),
+                "judge_model_key": summary.get("judge_model_key", ""),
+                "judge_model": summary.get("judge_model", ""),
                 "n_articles": n_articles,
                 "part_b_article_af_total": part_b_overall["n"],
                 "part_b_gt_keep": part_b_overall["direct_coverage_ground_truth"]["covered_count"],
@@ -1201,10 +1456,25 @@ def write_comparison(n_articles: int) -> None:
                 "part_c_summary_af_total": part_c["summary_af_total"],
                 "part_c_selected_keep_af_total": part_c["selected_keep_af_total"],
                 "part_c_summary_fact_recall": part_c["summary_fact_recall"],
+                "part_b_api_calls": part_b_usage.get("api_calls", ""),
+                "part_b_total_tokens": part_b_usage.get("total_tokens", ""),
+                "part_b_billable_prompt_tokens": part_b_usage.get("billable_prompt_tokens", ""),
+                "part_b_billable_output_tokens": part_b_usage.get("billable_output_tokens", ""),
+                "part_b_api_elapsed_seconds": part_b_usage.get("api_elapsed_seconds", ""),
+                "part_b_estimated_cost": part_b_usage.get("estimated_cost", ""),
+                "part_c_api_calls": part_c_usage.get("api_calls", ""),
+                "part_c_total_tokens": part_c_usage.get("total_tokens", ""),
+                "part_c_billable_prompt_tokens": part_c_usage.get("billable_prompt_tokens", ""),
+                "part_c_billable_output_tokens": part_c_usage.get("billable_output_tokens", ""),
+                "part_c_api_elapsed_seconds": part_c_usage.get("api_elapsed_seconds", ""),
+                "part_c_estimated_cost": part_c_usage.get("estimated_cost", ""),
                 "api_calls": usage["api_calls"],
                 "total_tokens": usage["total_tokens"],
                 "prompt_tokens": usage["prompt_tokens"],
+                "cached_prompt_tokens": usage.get("cached_prompt_tokens", 0),
+                "billable_prompt_tokens": usage.get("billable_prompt_tokens", usage["prompt_tokens"]),
                 "completion_tokens": usage["completion_tokens"],
+                "billable_output_tokens": usage.get("billable_output_tokens", usage["completion_tokens"]),
                 "api_elapsed_seconds": usage["api_elapsed_seconds"],
                 "cost_currencies": ";".join(usage.get("cost_currencies", [])),
                 "estimated_cost": usage["estimated_cost"],
@@ -1227,7 +1497,7 @@ def main() -> None:
     parser.add_argument(
         "--models",
         nargs="+",
-        default=list(MODEL_CONFIGS.keys()),
+        default=DEFAULT_MODEL_KEYS,
         help=f"Model keys to run. Valid: {', '.join(MODEL_CONFIGS)}",
     )
     parser.add_argument("--n-articles", type=int, default=5)
@@ -1235,6 +1505,17 @@ def main() -> None:
     parser.add_argument("--overlap-words", type=int, default=120)
     parser.add_argument("--no-resume", action="store_true")
     parser.add_argument("--comparison-only", action="store_true")
+    parser.add_argument(
+        "--judge-model",
+        type=str,
+        default=None,
+        help="Optional fixed judge model key for coverage/reference/eval stages, e.g. gpt41.",
+    )
+    parser.add_argument(
+        "--reuse-legacy-summary-af",
+        action="store_true",
+        help="Reuse existing GPT-4.1 Part C summary AFs when they exactly cover the selected articles.",
+    )
     args = parser.parse_args()
 
     if args.comparison_only:
@@ -1249,6 +1530,8 @@ def main() -> None:
             chunk_words=args.chunk_words,
             overlap_words=args.overlap_words,
             resume=not args.no_resume,
+            judge_model_key=args.judge_model,
+            reuse_legacy_summary_af=args.reuse_legacy_summary_af,
         )
     write_comparison(args.n_articles)
 

@@ -1,0 +1,20 @@
+{
+  "time": "2026-06-09T05:38:02",
+  "model_key": "gemini3_flash_preview_minimal",
+  "provider": "gemini",
+  "model": "gemini-3-flash-preview",
+  "articles_total": 5,
+  "summary_af_total": 72,
+  "summary_af_by_source": {
+    "PLOS": 33,
+    "eLife": 39
+  },
+  "summary_af_by_article": {
+    "exp2_plos_001": 12,
+    "exp2_elife_001": 20,
+    "exp2_plos_002": 10,
+    "exp2_elife_002": 19,
+    "exp2_plos_003": 11
+  },
+  "failed_items": []
+}

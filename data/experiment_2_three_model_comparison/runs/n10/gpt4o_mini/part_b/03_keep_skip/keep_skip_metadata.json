@@ -1,0 +1,11 @@
+{
+  "time": "2026-06-10T00:54:28",
+  "model_key": "gpt4o_mini",
+  "provider": "openai",
+  "model": "gpt-4o-mini",
+  "prompt_path": "C:\\Users\\bugee\\OneDrive\\桌面\\chiehshukou_master\\src\\experiment_2\\prompts\\keep_skip_ultra_recall.txt",
+  "total_afs": 1285,
+  "prediction_rows": 1285,
+  "parse_error_count": 0,
+  "parse_errors_this_run": 0
+}
