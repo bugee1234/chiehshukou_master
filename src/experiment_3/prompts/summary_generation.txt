@@ -1,0 +1,18 @@
+You are writing a plain-language summary of a biomedical research article for non-expert readers.
+
+Use ONLY the provided article content. Do not use outside knowledge.
+
+Requirements:
+- Preserve the study's central question, main methods, key findings, and implications.
+- Explain necessary background in accessible language.
+- Avoid unsupported claims, exaggerated clinical advice, and invented details.
+- Prefer clear patient/public-facing wording over technical phrasing.
+- Keep the summary concise but complete enough to cover the important facts.
+
+Return ONLY valid JSON:
+{
+  "summary": "<plain-language lay summary>"
+}
+
+ARTICLE:
+{article}

@@ -1,0 +1,65 @@
+{
+  "time": "2026-06-11T12:21:06",
+  "split": "validation",
+  "seed": 20260611,
+  "n_per_source": 10,
+  "datasets": {
+    "PLOS": {
+      "dataset_name": "BioLaySumm/BioLaySumm2025-PLOS",
+      "split_size": 1376,
+      "selected_count": 10,
+      "selected_indices": [
+        256,
+        463,
+        572,
+        900,
+        1038,
+        1097,
+        1102,
+        1173,
+        1212,
+        1251
+      ],
+      "columns": [
+        "article",
+        "summary",
+        "section_headings",
+        "keywords",
+        "year",
+        "title"
+      ]
+    },
+    "eLife": {
+      "dataset_name": "BioLaySumm/BioLaySumm2025-eLife",
+      "split_size": 241,
+      "selected_count": 10,
+      "selected_indices": [
+        2,
+        5,
+        9,
+        13,
+        38,
+        55,
+        116,
+        191,
+        203,
+        237
+      ],
+      "columns": [
+        "article",
+        "summary",
+        "section_headings",
+        "keywords",
+        "year",
+        "title"
+      ]
+    }
+  },
+  "paper_alignment": "BioLaySumm 2025 Task 1.1 test split: PLOS 142 and eLife 142 when n_per_source is omitted.",
+  "total_articles": 20,
+  "by_source": {
+    "PLOS": 10,
+    "eLife": 10
+  },
+  "empty_reference_count": 0
+}

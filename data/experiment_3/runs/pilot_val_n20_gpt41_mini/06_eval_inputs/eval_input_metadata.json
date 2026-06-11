@@ -1,0 +1,19 @@
+{
+  "time": "2026-06-12T01:14:01",
+  "final_iteration": 2,
+  "files": {
+    "initial": [
+      "plos_initial.txt",
+      "elife_initial.txt"
+    ],
+    "rewritten": [
+      "plos_rewritten.txt",
+      "elife_rewritten.txt"
+    ],
+    "ground_truth": [
+      "../00_inputs/PLOS_test.jsonl",
+      "../00_inputs/eLife_test.jsonl"
+    ]
+  },
+  "evaluation_note": "For evaluation_final.evaluate_all, pass list[str] predictions and JSONL truth dicts with document/reference."
+}

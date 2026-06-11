@@ -1,0 +1,26 @@
+[
+  {
+    "iteration": 0,
+    "af_total": 2177,
+    "covered": 640,
+    "errors": 1537,
+    "coverage_rate": 0.294,
+    "parse_error_count": 0
+  },
+  {
+    "iteration": 1,
+    "af_total": 2177,
+    "covered": 655,
+    "errors": 1522,
+    "coverage_rate": 0.3009,
+    "parse_error_count": 0
+  },
+  {
+    "iteration": 2,
+    "af_total": 2177,
+    "covered": 663,
+    "errors": 1514,
+    "coverage_rate": 0.3045,
+    "parse_error_count": 0
+  }
+]

@@ -1,0 +1,28 @@
+You are revising a plain-language biomedical lay summary.
+
+Use ONLY the provided article and the feedback list. Do not add unsupported claims.
+
+The feedback list contains article-supported facts that the current summary failed to cover correctly.
+Revise the summary so those facts are correctly and naturally covered while preserving readability.
+
+Rules:
+- Keep the writing accessible to non-expert readers.
+- Correct omissions or mistakes listed in the feedback.
+- Do not copy the feedback list mechanically.
+- Do not introduce new unsupported details.
+- Preserve useful content from the current summary when it is correct.
+
+Return ONLY valid JSON:
+{
+  "summary": "<rewritten plain-language lay summary>",
+  "revision_notes": ["<short note>"]
+}
+
+ARTICLE:
+{article}
+
+CURRENT SUMMARY:
+{summary}
+
+FACT FEEDBACK:
+{feedback}
