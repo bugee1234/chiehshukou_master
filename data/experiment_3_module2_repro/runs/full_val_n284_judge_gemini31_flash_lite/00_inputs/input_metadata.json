@@ -1,0 +1,55 @@
+{
+  "time": "2026-06-12T03:27:08",
+  "split": "validation",
+  "seed": 20260612,
+  "n_per_source": 5,
+  "selection_mode": "first",
+  "datasets": {
+    "PLOS": {
+      "dataset_name": "BioLaySumm/BioLaySumm2025-PLOS",
+      "split_size": 1376,
+      "selected_count": 5,
+      "selected_indices": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "columns": [
+        "article",
+        "summary",
+        "section_headings",
+        "keywords",
+        "year",
+        "title"
+      ]
+    },
+    "eLife": {
+      "dataset_name": "BioLaySumm/BioLaySumm2025-eLife",
+      "split_size": 241,
+      "selected_count": 5,
+      "selected_indices": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "columns": [
+        "article",
+        "summary",
+        "section_headings",
+        "keywords",
+        "year",
+        "title"
+      ]
+    }
+  },
+  "note": "Validation split is used because simulated Module 2 requires non-empty expert summaries.",
+  "total_articles": 10,
+  "by_source": {
+    "PLOS": 5,
+    "eLife": 5
+  }
+}

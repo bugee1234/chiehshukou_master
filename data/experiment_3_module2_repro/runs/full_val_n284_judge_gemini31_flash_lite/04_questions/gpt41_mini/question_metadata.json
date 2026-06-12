@@ -1,0 +1,27 @@
+{
+  "time": "2026-06-12T03:34:42",
+  "model_key": "gpt41_mini",
+  "provider": "openai",
+  "model": "gpt-4.1-mini",
+  "max_workers": 8,
+  "prompt_sha256": "d7c45f6ae8314198dedc7c362c820048d6f5b672d7320173ecaac76760ef4dcb",
+  "final_keep_af_total": 259,
+  "questions_total": 259,
+  "questions_by_source": {
+    "eLife": 116,
+    "PLOS": 143
+  },
+  "questions_by_article": {
+    "m2_elife_0000": 3,
+    "m2_elife_0001": 31,
+    "m2_elife_0002": 35,
+    "m2_elife_0003": 23,
+    "m2_elife_0004": 24,
+    "m2_plos_0000": 35,
+    "m2_plos_0001": 29,
+    "m2_plos_0002": 38,
+    "m2_plos_0003": 15,
+    "m2_plos_0004": 26
+  },
+  "parse_error_count": 0
+}

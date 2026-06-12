@@ -1,0 +1,27 @@
+{
+  "time": "2026-06-12T03:38:15",
+  "model_key": "gemini3_flash_preview_minimal",
+  "provider": "gemini",
+  "model": "gemini-3-flash-preview",
+  "max_workers": 8,
+  "prompt_sha256": "d7c45f6ae8314198dedc7c362c820048d6f5b672d7320173ecaac76760ef4dcb",
+  "final_keep_af_total": 216,
+  "questions_total": 216,
+  "questions_by_source": {
+    "eLife": 106,
+    "PLOS": 110
+  },
+  "questions_by_article": {
+    "m2_elife_0000": 3,
+    "m2_elife_0001": 27,
+    "m2_elife_0002": 28,
+    "m2_elife_0003": 20,
+    "m2_elife_0004": 28,
+    "m2_plos_0000": 25,
+    "m2_plos_0001": 23,
+    "m2_plos_0002": 29,
+    "m2_plos_0003": 16,
+    "m2_plos_0004": 17
+  },
+  "parse_error_count": 0
+}

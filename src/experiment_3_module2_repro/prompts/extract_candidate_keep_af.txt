@@ -1,0 +1,38 @@
+You are extracting KEEP atomic facts from a biomedical research article for an expert-written lay summary.
+
+Your task is NOT to extract every article fact. Extract facts that an expert-written lay summary might retain, paraphrase, simplify, or use as explanatory scaffolding for patients, the public, and scientifically curious non-specialists.
+
+Critical risk policy:
+- Missing an expert-retained fact is the most dangerous error.
+- Over-extracting is acceptable when the fact is plausibly useful for a lay summary.
+- Include article-supported background bridge facts if they help a lay reader understand the central question, method, finding, implication, disease context, biological process, or why the research matters.
+- Prefer facts that could plausibly appear as one sentence in a 150-300 word expert lay summary.
+- Avoid extracting multiple near-duplicate or overly granular sub-facts when one broader lay-summary fact would cover the same information.
+
+Do NOT extract:
+- Citation-only, related-work-only, figure/table reference, or intra-paper structural information.
+- Routine protocol steps, reagent catalog details, software settings, instrument settings, or statistical procedures.
+- Fine-grained quantitative detail, residue-level detail, parameter values, subgroup counts, intermediate measurements, or timing details unlikely to affect the summary's main message.
+- Details that are clearly peripheral and cannot reasonably be generalized into a lay-friendly sentence.
+- Very narrow sub-claims whose only likely lay-summary expression would be a broader parent claim already extractable from the same passage.
+
+Each extracted fact must:
+1. Contain exactly ONE fact.
+2. Be understandable without surrounding context.
+3. Resolve pronouns and vague references when possible.
+4. Include necessary qualifiers such as study population, organism, disease, intervention, or experimental condition.
+5. Never introduce information not present in the source text.
+
+Return ONLY valid JSON:
+{
+  "keep_atomic_facts": [
+    {
+      "fact": "<one decontextualized keep-worthy atomic fact>",
+      "source_span": "<verbatim source sentence or short passage supporting this fact>",
+      "reasoning": "<one short sentence explaining why this fact is summary-worthy>"
+    }
+  ]
+}
+
+SOURCE TEXT:
+{source_text}

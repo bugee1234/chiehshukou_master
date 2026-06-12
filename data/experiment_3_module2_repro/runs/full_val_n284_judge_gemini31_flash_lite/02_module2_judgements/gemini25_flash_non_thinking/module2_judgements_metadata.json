@@ -1,0 +1,23 @@
+{
+  "time": "2026-06-12T03:42:38",
+  "model_key": "gemini25_flash_non_thinking",
+  "judge_model_key": "gemini31_flash_lite",
+  "judge_model": "gemini-3.1-flash-lite",
+  "max_workers": 8,
+  "prompt_sha256": "c3f49e2dc3df210e2b11d91c55e6432df8ced4e790c2ed54aad8834783e7a113",
+  "candidate_keep_af_total": 994,
+  "judgements_total": 994,
+  "final_keep_total": 336,
+  "coverage_type_counts": {
+    "paraphrase": 212,
+    "lay_generalization": 51,
+    "topic_only": 57,
+    "absent": 593,
+    "exact": 73,
+    "contradicted": 8
+  },
+  "confidence_counts": {
+    "high": 994
+  },
+  "parse_error_count": 0
+}

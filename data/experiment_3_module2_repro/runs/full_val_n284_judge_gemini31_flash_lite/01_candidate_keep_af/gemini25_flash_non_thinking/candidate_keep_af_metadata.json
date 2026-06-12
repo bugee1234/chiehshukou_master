@@ -1,0 +1,37 @@
+{
+  "time": "2026-06-12T03:41:04",
+  "model_key": "gemini25_flash_non_thinking",
+  "provider": "gemini",
+  "model": "gemini-2.5-flash",
+  "chunk_words": 1200,
+  "overlap_words": 120,
+  "max_workers": 8,
+  "prompt_sha256": "d26ca6234918ab3beb41316566cd6d9f265da72fa7b91388859224ba6edaad00",
+  "articles_total": 10,
+  "articles_done_before_resume": 0,
+  "candidate_keep_af_total": 994,
+  "candidate_keep_af_by_source": {
+    "eLife": 523,
+    "PLOS": 471
+  },
+  "candidate_keep_af_by_article": {
+    "m2_elife_0000": 109,
+    "m2_elife_0001": 109,
+    "m2_elife_0002": 76,
+    "m2_elife_0003": 91,
+    "m2_elife_0004": 138,
+    "m2_plos_0000": 117,
+    "m2_plos_0001": 99,
+    "m2_plos_0002": 122,
+    "m2_plos_0003": 39,
+    "m2_plos_0004": 94
+  },
+  "failed_chunks": [
+    {
+      "article_id": "m2_elife_0004",
+      "chunk_idx": 1,
+      "error": "Expecting value: line 9 column 15 (char 646)",
+      "raw_preview": "{\n  \"keep_atomic_facts\": [\n    {\n      \"fact\": \"The polycomb transcriptional repressor Bmi-1 is believed to be necessary for neural stem cell (NSC) self-renewal.\",\n      \"source_span\": \"For example , the polycomb transcriptional repressor Bmi-1 is thought to be required for NSC self-renewal ( Molofs"
+    }
+  ]
+}

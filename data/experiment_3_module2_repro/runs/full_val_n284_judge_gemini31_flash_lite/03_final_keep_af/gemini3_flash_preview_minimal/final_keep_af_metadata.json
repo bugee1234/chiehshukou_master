@@ -1,0 +1,35 @@
+{
+  "time": "2026-06-12T03:37:15",
+  "model_key": "gemini3_flash_preview_minimal",
+  "final_keep_total": 216,
+  "final_keep_by_source": {
+    "eLife": 106,
+    "PLOS": 110
+  },
+  "final_keep_by_article": {
+    "m2_elife_0000": 3,
+    "m2_elife_0001": 27,
+    "m2_elife_0002": 28,
+    "m2_elife_0003": 20,
+    "m2_elife_0004": 28,
+    "m2_plos_0000": 25,
+    "m2_plos_0001": 23,
+    "m2_plos_0002": 29,
+    "m2_plos_0003": 16,
+    "m2_plos_0004": 17
+  },
+  "rule": {
+    "covered_by_expert_summary": true,
+    "coverage_type": [
+      "exact",
+      "paraphrase",
+      "lay_generalization"
+    ],
+    "confidence": [
+      "high",
+      "medium"
+    ],
+    "supporting_span": "non-empty",
+    "parse_error": false
+  }
+}

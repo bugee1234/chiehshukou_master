@@ -1,0 +1,35 @@
+{
+  "time": "2026-06-12T03:33:02",
+  "model_key": "gpt41_mini",
+  "final_keep_total": 259,
+  "final_keep_by_source": {
+    "eLife": 116,
+    "PLOS": 143
+  },
+  "final_keep_by_article": {
+    "m2_elife_0000": 3,
+    "m2_elife_0001": 31,
+    "m2_elife_0002": 35,
+    "m2_elife_0003": 23,
+    "m2_elife_0004": 24,
+    "m2_plos_0000": 35,
+    "m2_plos_0001": 29,
+    "m2_plos_0002": 38,
+    "m2_plos_0003": 15,
+    "m2_plos_0004": 26
+  },
+  "rule": {
+    "covered_by_expert_summary": true,
+    "coverage_type": [
+      "exact",
+      "paraphrase",
+      "lay_generalization"
+    ],
+    "confidence": [
+      "high",
+      "medium"
+    ],
+    "supporting_span": "non-empty",
+    "parse_error": false
+  }
+}

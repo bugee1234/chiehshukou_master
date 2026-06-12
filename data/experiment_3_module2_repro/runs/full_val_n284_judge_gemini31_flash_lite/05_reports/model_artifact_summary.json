@@ -1,0 +1,71 @@
+[
+  {
+    "model_key": "gpt41_mini",
+    "provider": "openai",
+    "model": "gpt-4.1-mini",
+    "judge_model_key": "gemini31_flash_lite",
+    "candidate_keep_af": 673,
+    "module2_judgements": 673,
+    "final_keep_af": 259,
+    "module2_keep_rate": 0.3848,
+    "questions": 259,
+    "candidate_by_source": {
+      "eLife": 378,
+      "PLOS": 295
+    },
+    "final_by_source": {
+      "eLife": 116,
+      "PLOS": 143
+    },
+    "questions_by_source": {
+      "eLife": 116,
+      "PLOS": 143
+    }
+  },
+  {
+    "model_key": "gemini3_flash_preview_minimal",
+    "provider": "gemini",
+    "model": "gemini-3-flash-preview",
+    "judge_model_key": "gemini31_flash_lite",
+    "candidate_keep_af": 561,
+    "module2_judgements": 561,
+    "final_keep_af": 216,
+    "module2_keep_rate": 0.385,
+    "questions": 216,
+    "candidate_by_source": {
+      "eLife": 323,
+      "PLOS": 238
+    },
+    "final_by_source": {
+      "eLife": 106,
+      "PLOS": 110
+    },
+    "questions_by_source": {
+      "eLife": 106,
+      "PLOS": 110
+    }
+  },
+  {
+    "model_key": "gemini25_flash_non_thinking",
+    "provider": "gemini",
+    "model": "gemini-2.5-flash",
+    "judge_model_key": "gemini31_flash_lite",
+    "candidate_keep_af": 994,
+    "module2_judgements": 994,
+    "final_keep_af": 336,
+    "module2_keep_rate": 0.338,
+    "questions": 336,
+    "candidate_by_source": {
+      "eLife": 523,
+      "PLOS": 471
+    },
+    "final_by_source": {
+      "eLife": 130,
+      "PLOS": 206
+    },
+    "questions_by_source": {
+      "eLife": 130,
+      "PLOS": 206
+    }
+  }
+]
