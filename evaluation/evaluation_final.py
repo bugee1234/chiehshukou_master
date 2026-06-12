@@ -1,6 +1,9 @@
 import os, sys, json
-sys.path.append("./AlignScore/src")
-sys.path.append("./summac")
+from pathlib import Path
+
+ROOT_DIR = Path(__file__).resolve().parents[1]
+sys.path.append(str(ROOT_DIR / "AlignScore" / "src"))
+sys.path.append(str(ROOT_DIR / "summac"))
 import torch
 import nltk 
 import textstat
@@ -11,14 +14,8 @@ from alignscore import AlignScore
 from lens import download_model, LENS
 from summac.model_summac import SummaCConv
 import argparse
-from f1chexbert import F1CheXbert
-from radgraph import RadGraph, F1RadGraph
 from huggingface_hub import hf_hub_download
-from sentence_transformers import SentenceTransformer
 import evaluate
-
-
-nltk.download('punkt')
 
 def calc_rouge(preds, refs):
   # Get ROUGE F1 scores
@@ -70,15 +67,18 @@ def calc_alignscore(preds, docs):
   return np.mean(alignscorer.score(contexts=docs, claims=preds))
 
 def cal_summac(preds, docs):
-  model_conv = SummaCConv(models=["vitc"], bins='percentile', granularity="sentence", nli_labels="e", device="cuda", start_file="/summac/summac_conv_vitc_sent_perc_e.bin", agg="mean")
+  start_file = ROOT_DIR / "summac" / "summac_conv_vitc_sent_perc_e.bin"
+  model_conv = SummaCConv(models=["vitc"], bins='percentile', granularity="sentence", nli_labels="e", device="cuda", start_file=str(start_file), agg="mean")
   return np.mean(model_conv.score(docs, preds)['scores'])
 
 def cal_f1bert(preds, refs):
+  from f1chexbert import F1CheXbert
   f1chexbert = F1CheXbert()
   f1chexbert_score, _, _, _ = f1chexbert(hyps=preds, refs=refs) 
   return f1chexbert_score
 
 def cal_radgraph(preds, refs):
+  from radgraph import F1RadGraph
   f1radgraph = F1RadGraph(reward_level="all")
   f1radgraph_score,  _, _, _ = f1radgraph(hyps=preds, refs=refs)
   return f1radgraph_score[-1]
@@ -93,6 +93,7 @@ def read_file_lines(path):
   return lines
 
 def cal_similarity(preds, refs):
+  from sentence_transformers import SentenceTransformer
   model = SentenceTransformer("all-MiniLM-L6-v2")
   scores = [np.array(model.similarity(model.encode(p), model.encode(r))) for p,r in zip(preds,refs)]
   return np.mean(scores)
