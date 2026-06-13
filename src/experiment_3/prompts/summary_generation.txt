@@ -7,7 +7,9 @@ Requirements:
 - Explain necessary background in accessible language.
 - Avoid unsupported claims, exaggerated clinical advice, and invented details.
 - Prefer clear patient/public-facing wording over technical phrasing.
-- Keep the summary concise but complete enough to cover the important facts.
+- Write approximately {target_word_count} words, matching the length of the expert lay summary for this dataset item.
+- Stay within about 10% of that target when possible while keeping the summary natural.
+- Keep the summary complete enough to cover the important facts.
 
 Return ONLY valid JSON:
 {

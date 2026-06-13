@@ -11,6 +11,9 @@ Rules:
 - Do not copy the feedback list mechanically.
 - Do not introduce new unsupported details.
 - Preserve useful content from the current summary when it is correct.
+- Use {target_word_count} words as a soft reference length from the expert lay summary.
+- It is acceptable for the rewritten summary to be longer than the expert summary when extra length is needed to cover the feedback facts accurately and naturally.
+- Do not make the summary shorter by omitting important corrected facts.
 
 Return ONLY valid JSON:
 {

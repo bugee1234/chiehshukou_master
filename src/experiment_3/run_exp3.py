@@ -8,10 +8,12 @@ import math
 import random
 import re
 import sys
+import time
 from collections import Counter, defaultdict
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import datetime
 from pathlib import Path
-from typing import Any
+from typing import Any, Callable, Iterable
 
 from datasets import load_dataset
 from openai import OpenAI
@@ -22,11 +24,13 @@ if str(ROOT_DIR) not in sys.path:
     sys.path.insert(0, str(ROOT_DIR))
 
 from src import config
+from src.experiment_2.run_three_model_exp2 import MODEL_CONFIGS, ProviderClient, UsageTracker
 from src.utils import OpenAIClient, load_jsonl, save_json, save_jsonl
 
 
 EXP3_DATA_DIR = ROOT_DIR / "data" / "experiment_3"
 EXP3_RESULTS_DIR = ROOT_DIR / "results" / "experiment_3"
+MODULE2_REPRO_DATA_DIR = ROOT_DIR / "data" / "experiment_3_module2_repro"
 PROMPTS_EXP2_DIR = ROOT_DIR / "src" / "experiment_2" / "prompts"
 PROMPTS_EXP3_DIR = ROOT_DIR / "src" / "experiment_3" / "prompts"
 SETUP_C_PROMPT = ROOT_DIR / "src" / "experiment_1" / "prompts_1a_v2_fair_ac" / "setup_c_system.txt"
@@ -37,12 +41,14 @@ DATASETS = {
 }
 
 DEFAULT_MODEL = "gpt-4.1-mini"
+DEFAULT_MODEL_KEY = "gpt41_mini"
 DEFAULT_TOP_K = 5
 DEFAULT_SUMMARY_CHUNK_WORDS = 120
 DEFAULT_SUMMARY_OVERLAP_WORDS = 30
 DEFAULT_AF_CHUNK_WORDS = 1200
 DEFAULT_AF_OVERLAP_WORDS = 120
 DEFAULT_EMBED_MODEL = "text-embedding-3-small"
+DEFAULT_CONTEXT_MODE = "full_summary"
 
 
 def _run_dir(run_name: str) -> Path:
@@ -69,6 +75,92 @@ def _coerce_bool(v: Any) -> bool:
     if isinstance(v, (int, float)):
         return bool(v)
     return str(v or "").strip().lower() in {"1", "true", "yes", "y"}
+
+
+def _run_parallel(
+    items: Iterable[Any],
+    worker: Callable[[Any], Any],
+    *,
+    max_workers: int,
+    desc: str,
+) -> list[Any]:
+    item_list = list(items)
+    if max_workers <= 1:
+        return [worker(item) for item in tqdm(item_list, desc=desc, total=len(item_list))]
+    out: list[Any] = []
+    with ThreadPoolExecutor(max_workers=max_workers) as ex:
+        futures = [ex.submit(worker, item) for item in item_list]
+        for fut in tqdm(as_completed(futures), desc=desc, total=len(futures)):
+            out.append(fut.result())
+    return out
+
+
+def _usage(run_name: str, resume: bool) -> UsageTracker:
+    path = _run_dir(run_name) / "api_usage_calls.csv"
+    return UsageTracker.from_csv(path) if resume else UsageTracker(rows=[])
+
+
+def _save_usage(run_name: str, usage: UsageTracker) -> None:
+    usage.save(_run_dir(run_name))
+
+
+class ChatRunner:
+    def __init__(self, *, model: str, model_key: str | None, run_name: str, usage: UsageTracker | None) -> None:
+        self.model = model
+        self.model_key = model_key
+        self.usage = usage
+        if model_key and usage is None:
+            raise ValueError("usage tracker is required when model_key is used")
+        self.provider_client = ProviderClient(model_key, usage) if model_key else None
+        self.openai_client = None if model_key else OpenAIClient()
+
+    def chat(
+        self,
+        *,
+        stage: str,
+        item_id: str,
+        messages: list[dict[str, str]],
+        temperature: float = 0.0,
+        response_format: dict[str, Any] | None = None,
+    ) -> str:
+        if self.provider_client is not None:
+            return self.provider_client.chat(
+                stage=stage,
+                item_id=item_id,
+                messages=messages,
+                temperature=temperature,
+                response_format=response_format,
+            )
+        assert self.openai_client is not None
+        resp = self.openai_client.chat(
+            messages=messages,
+            model=self.model,
+            temperature=temperature,
+            response_format=response_format,
+        )
+        return str(resp.get("content", ""))
+
+
+def _model_label(model: str, model_key: str | None) -> str:
+    if model_key:
+        cfg = MODEL_CONFIGS[model_key]
+        return f"{model_key}:{cfg['model']}"
+    return model
+
+
+def _normalize_options(q: dict[str, Any]) -> dict[str, str]:
+    raw = q.get("options", {})
+    if isinstance(raw, dict):
+        out = {letter: str(raw.get(letter, "")).strip() for letter in ["A", "B", "C", "D", "E"]}
+    elif isinstance(raw, list):
+        out = {letter: str(raw[i]).strip() if i < len(raw) else "" for i, letter in enumerate(["A", "B", "C", "D"])}
+        out["E"] = str(raw[4]).strip() if len(raw) > 4 else "None of the above"
+    else:
+        out = {letter: "" for letter in ["A", "B", "C", "D"]}
+        out["E"] = "None of the above"
+    if not out.get("E"):
+        out["E"] = "None of the above"
+    return out
 
 
 def _chunk_words(text: str, chunk_words: int, overlap_words: int = 0) -> list[dict[str, Any]]:
@@ -162,11 +254,27 @@ def _decide_setup_c_answer(option_eval: dict[str, dict[str, Any]], obj: dict[str
     return max(supported, key=lambda x: len(str(option_eval.get(x, {}).get("evidence", ""))))
 
 
-def _embed_texts(client: OpenAI, texts: list[str], model: str, batch_size: int = 64) -> list[list[float]]:
+def _embed_texts(
+    client: OpenAI,
+    texts: list[str],
+    model: str,
+    batch_size: int = 64,
+    max_retries: int = 5,
+) -> list[list[float]]:
     embs: list[list[float]] = []
     for i in range(0, len(texts), batch_size):
         batch = texts[i : i + batch_size]
-        resp = client.embeddings.create(model=model, input=batch)
+        resp = None
+        for attempt in range(max_retries):
+            try:
+                resp = client.embeddings.create(model=model, input=batch)
+                break
+            except Exception:
+                if attempt == max_retries - 1:
+                    raise
+                time.sleep(min(30.0, 2.0**attempt + random.random()))
+        if resp is None:
+            raise RuntimeError("embedding request failed without response")
         embs.extend([d.embedding for d in resp.data])
     return embs
 
@@ -276,26 +384,118 @@ def stage00_prepare_inputs(
         print("[stage00] WARNING: empty references detected; final evaluation needs official reference JSONL files.")
 
 
+def stage00_import_module2_artifacts(
+    run_name: str,
+    module2_run_name: str,
+    module2_model_key: str,
+    n_per_source: int | None,
+) -> None:
+    module2_run_dir = MODULE2_REPRO_DATA_DIR / "runs" / module2_run_name
+    articles_path = module2_run_dir / "00_inputs" / "articles.jsonl"
+    final_af_path = module2_run_dir / "03_final_keep_af" / module2_model_key / "final_keep_af.jsonl"
+    questions_path = module2_run_dir / "04_questions" / module2_model_key / "questions_1t3f_nota.jsonl"
+    missing = [str(p) for p in [articles_path, final_af_path, questions_path] if not p.exists()]
+    if missing:
+        raise FileNotFoundError("Missing Module 2 artifact(s): " + ", ".join(missing))
+
+    all_articles = load_jsonl(articles_path)
+    selected: list[dict[str, Any]] = []
+    by_source_count: Counter[str] = Counter()
+    for art in all_articles:
+        source = str(art["source_dataset"])
+        if n_per_source is not None and by_source_count[source] >= n_per_source:
+            continue
+        row = dict(art)
+        row["reference"] = str(row.get("expert_summary", row.get("reference", "")))
+        row["module2_source_run_name"] = module2_run_name
+        row["module2_model_key"] = module2_model_key
+        selected.append(row)
+        by_source_count[source] += 1
+
+    selected_ids = {str(r["id"]) for r in selected}
+    final_af = [dict(r, keep=True) for r in load_jsonl(final_af_path) if str(r.get("article_id")) in selected_ids]
+    questions = [r for r in load_jsonl(questions_path) if str(r.get("article_id")) in selected_ids]
+    question_af_ids = {str(r.get("af_id")) for r in questions}
+    final_af = [r for r in final_af if str(r.get("af_id")) in question_af_ids]
+
+    in_dir = _stage_dir(run_name, "00_inputs")
+    save_jsonl(selected, in_dir / "articles.jsonl")
+    save_jsonl(
+        [{"document": r["document"], "reference": r["reference"]} for r in selected if str(r["source_dataset"]) == "eLife"],
+        in_dir / "eLife_test.jsonl",
+    )
+    save_jsonl(
+        [{"document": r["document"], "reference": r["reference"]} for r in selected if str(r["source_dataset"]) == "PLOS"],
+        in_dir / "PLOS_test.jsonl",
+    )
+    save_json(
+        {
+            "time": datetime.now().isoformat(timespec="seconds"),
+            "source": "experiment_3_module2_repro",
+            "module2_run_name": module2_run_name,
+            "module2_model_key": module2_model_key,
+            "n_per_source": n_per_source,
+            "total_articles": len(selected),
+            "by_source": dict(Counter(str(r["source_dataset"]) for r in selected)),
+            "selected_article_ids": sorted(selected_ids),
+            "note": "Imported expert_summary as reference for local BioLaySumm evaluation.",
+        },
+        in_dir / "input_metadata.json",
+    )
+
+    af_dir = _stage_dir(run_name, "01_selected_keep_af")
+    save_jsonl(final_af, af_dir / "selected_keep_af.jsonl")
+    save_json(
+        {
+            "time": datetime.now().isoformat(timespec="seconds"),
+            "source": str(final_af_path),
+            "method": "Imported simulated Module 2 final_keep_af; AF extraction and human review skipped in exp3.",
+            "selected_keep_af_total": len(final_af),
+            "selected_keep_af_by_source": dict(Counter(str(r["source_dataset"]) for r in final_af)),
+            "selected_keep_af_by_article": dict(Counter(str(r["article_id"]) for r in final_af)),
+        },
+        af_dir / "selected_keep_af_metadata.json",
+    )
+
+    q_dir = _stage_dir(run_name, "02_questions")
+    save_jsonl(questions, q_dir / "questions_1t3f_keep_af.jsonl")
+    save_json(
+        {
+            "time": datetime.now().isoformat(timespec="seconds"),
+            "source": str(questions_path),
+            "question_format": "1T3F + E(None of the above)",
+            "questions": len(questions),
+            "questions_by_source": dict(Counter(str(r["source_dataset"]) for r in questions)),
+            "questions_by_article": dict(Counter(str(r["article_id"]) for r in questions)),
+        },
+        q_dir / "question_metadata.json",
+    )
+    print(
+        f"[stage00] imported module2 articles={len(selected)} final_keep_AF={len(final_af)} "
+        f"questions={len(questions)} -> {_run_dir(run_name)}"
+    )
+
+
 def stage01_extract_keep_af(
     run_name: str,
     model: str,
     chunk_words: int,
     overlap_words: int,
     resume: bool,
+    max_workers: int = 1,
 ) -> None:
     articles = _load_articles(run_name)
     out_dir = _stage_dir(run_name, "01_selected_keep_af")
     out_path = out_dir / "selected_keep_af.jsonl"
     prompt = (PROMPTS_EXP2_DIR / "selective_keep_af_ultra_recall.txt").read_text(encoding="utf-8")
-    client = OpenAIClient()
 
     rows = load_jsonl(out_path) if resume and out_path.exists() else []
     done = {str(r.get("article_id")) for r in rows}
-    failed: list[dict[str, Any]] = []
-    for art in tqdm(articles, desc="stage01 | Part C selected keep AF", total=len(articles)):
+    def worker(art: dict[str, Any]) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
+        client = OpenAIClient()
         article_id = str(art["id"])
-        if resume and article_id in done:
-            continue
+        local_rows: list[dict[str, Any]] = []
+        local_failed: list[dict[str, Any]] = []
         seen: set[str] = set()
         cnt = 0
         for ch in _chunk_words(str(art["article"]), chunk_words, overlap_words):
@@ -323,7 +523,7 @@ def stage01_extract_keep_af(
                         continue
                     seen.add(n)
                     cnt += 1
-                    rows.append(
+                    local_rows.append(
                         {
                             "af_id": f"{article_id}_keep_af_{cnt:04d}",
                             "article_id": article_id,
@@ -339,9 +539,17 @@ def stage01_extract_keep_af(
                         }
                     )
             except Exception as exc:
-                failed.append({"article_id": article_id, "chunk_idx": ch["chunk_idx"], "error": str(exc), "raw_preview": raw[:300]})
-        done.add(article_id)
-        save_jsonl(rows, out_path)
+                local_failed.append({"article_id": article_id, "chunk_idx": ch["chunk_idx"], "error": str(exc), "raw_preview": raw[:300]})
+        return local_rows, local_failed
+
+    todo = [art for art in articles if not (resume and str(art["id"]) in done)]
+    results = _run_parallel(todo, worker, max_workers=max_workers, desc="stage01 | Part C selected keep AF")
+    failed: list[dict[str, Any]] = []
+    for new_rows, new_failed in results:
+        rows.extend(new_rows)
+        failed.extend(new_failed)
+    rows.sort(key=lambda r: (str(r["article_id"]), str(r["af_id"])))
+    save_jsonl(rows, out_path)
 
     save_json(
         {
@@ -350,6 +558,7 @@ def stage01_extract_keep_af(
             "method": "Experiment 2 Part C selected keep AF; Module 2 human review skipped.",
             "chunk_words": chunk_words,
             "overlap_words": overlap_words,
+            "max_workers": max_workers,
             "selected_keep_af_total": len(rows),
             "selected_keep_af_by_source": dict(Counter(str(r["source_dataset"]) for r in rows)),
             "selected_keep_af_by_article": dict(Counter(str(r["article_id"]) for r in rows)),
@@ -401,26 +610,30 @@ def _generate_question(client: OpenAIClient, af: dict[str, Any], model: str, pro
     }
 
 
-def stage02_generate_questions(run_name: str, model: str, resume: bool) -> None:
+def stage02_generate_questions(run_name: str, model: str, resume: bool, max_workers: int = 1) -> None:
     out_dir = _stage_dir(run_name, "02_questions")
     out_path = out_dir / "questions_1t3f_keep_af.jsonl"
     af_rows = load_jsonl(_stage_dir(run_name, "01_selected_keep_af") / "selected_keep_af.jsonl")
     existing = load_jsonl(out_path) if resume and out_path.exists() else []
     questions = {str(q["af_id"]): q for q in existing if str(q.get("af_id", ""))}
-    client = OpenAIClient()
     prompt = (PROMPTS_EXP2_DIR / "coverage_question_generation.txt").read_text(encoding="utf-8")
 
-    for af in tqdm(af_rows, desc="stage02 | build 1T3F questions", total=len(af_rows)):
-        af_id = str(af["af_id"])
-        if resume and af_id in questions:
-            continue
-        questions[af_id] = _generate_question(client, af, model, prompt)
-        save_jsonl(list(questions.values()), out_path)
+    def worker(af: dict[str, Any]) -> dict[str, Any]:
+        client = OpenAIClient()
+        return _generate_question(client, af, model, prompt)
+
+    todo = [af for af in af_rows if not (resume and str(af["af_id"]) in questions)]
+    for q in _run_parallel(todo, worker, max_workers=max_workers, desc="stage02 | build 1T3F questions"):
+        questions[str(q["af_id"])] = q
+    out_rows = list(questions.values())
+    out_rows.sort(key=lambda r: (str(r["article_id"]), str(r["af_id"])))
+    save_jsonl(out_rows, out_path)
 
     save_json(
         {
             "time": datetime.now().isoformat(timespec="seconds"),
             "model": model,
+            "max_workers": max_workers,
             "prompt_source": str(PROMPTS_EXP2_DIR / "coverage_question_generation.txt"),
             "af_total": len(af_rows),
             "questions": len(questions),
@@ -430,56 +643,79 @@ def stage02_generate_questions(run_name: str, model: str, resume: bool) -> None:
     print(f"[stage02] questions={len(questions)} -> {out_dir}")
 
 
-def stage03_generate_initial_summaries(run_name: str, model: str, resume: bool) -> None:
+def stage03_generate_initial_summaries(
+    run_name: str,
+    model: str,
+    resume: bool,
+    *,
+    model_key: str | None = None,
+    max_workers: int = 1,
+    usage: UsageTracker | None = None,
+) -> None:
     articles = _load_articles(run_name)
     out_dir = _stage_dir(run_name, "03_summaries")
     out_path = out_dir / "summaries_iter0.jsonl"
     prompt = (PROMPTS_EXP3_DIR / "summary_generation.txt").read_text(encoding="utf-8")
-    client = OpenAIClient()
     rows = load_jsonl(out_path) if resume and out_path.exists() else []
     done = {str(r.get("article_id")) for r in rows}
-    failed: list[dict[str, Any]] = []
 
-    for art in tqdm(articles, desc="stage03 | initial summaries", total=len(articles)):
+    def worker(art: dict[str, Any]) -> tuple[dict[str, Any], dict[str, Any] | None]:
         article_id = str(art["id"])
-        if resume and article_id in done:
-            continue
+        client = ChatRunner(model=model, model_key=model_key, run_name=run_name, usage=usage)
         raw = ""
         summary = ""
         parse_error = False
+        failed: dict[str, Any] | None = None
         try:
-            resp = client.chat(
-                messages=[{"role": "user", "content": prompt.replace("{article}", str(art["document"]))}],
-                model=model,
+            target_word_count = _target_summary_word_count(art)
+            raw = client.chat(
+                stage=f"stage03_initial_summary:{_model_label(model, model_key)}",
+                item_id=article_id,
+                messages=[
+                    {
+                        "role": "user",
+                        "content": prompt.replace("{article}", str(art["document"])).replace(
+                            "{target_word_count}", str(target_word_count)
+                        ),
+                    }
+                ],
                 temperature=0.0,
                 response_format={"type": "json_object"},
             )
-            raw = str(resp.get("content", ""))
             obj = json.loads(raw)
             summary = str(obj.get("summary", "")).strip()
             if not summary:
                 raise ValueError("empty summary")
         except Exception as exc:
             parse_error = True
-            failed.append({"article_id": article_id, "error": str(exc), "raw_preview": raw[:300]})
+            failed = {"article_id": article_id, "error": str(exc), "raw_preview": raw[:300]}
             summary = raw.strip()
-        rows.append(
+        return (
             {
                 "article_id": article_id,
                 "source_dataset": art["source_dataset"],
                 "original_index": art["original_index"],
                 "iteration": 0,
                 "summary": summary,
+                "summary_word_count": _word_count(summary),
+                "target_word_count": _target_summary_word_count(art),
                 "parse_error": parse_error,
-            }
+            },
+            failed,
         )
-        done.add(article_id)
-        save_jsonl(rows, out_path)
+
+    todo = [art for art in articles if not (resume and str(art["id"]) in done)]
+    results = _run_parallel(todo, worker, max_workers=max_workers, desc="stage03 | initial summaries")
+    failed = [f for _, f in results if f is not None]
+    rows.extend([r for r, _ in results])
+    rows.sort(key=lambda r: (str(r["source_dataset"]), int(r["original_index"]), str(r["article_id"])))
+    save_jsonl(rows, out_path)
 
     save_json(
         {
             "time": datetime.now().isoformat(timespec="seconds"),
-            "model": model,
+            "model": _model_label(model, model_key),
+            "max_workers": max_workers,
             "summaries": len(rows),
             "failed": failed,
         },
@@ -530,11 +766,53 @@ def _retrieve_summary_chunks(
     return chunks, retrieval_rows
 
 
+def _full_summary_context(
+    *,
+    article_id: str,
+    summary: str,
+    facts: list[dict[str, Any]],
+) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
+    chunk = {
+        "article_id": article_id,
+        "chunk_id": f"{article_id}_summary_full",
+        "chunk_idx": 0,
+        "start_word": 0,
+        "end_word": _word_count(summary),
+        "chunk_text": str(summary or "").strip(),
+    }
+    chunks = [chunk] if chunk["chunk_text"] else []
+    retrieval_rows = [
+        {
+            "af_id": af["af_id"],
+            "article_id": article_id,
+            "top_k": 1,
+            "context_mode": "full_summary",
+            "retrieved_chunks": [
+                {
+                    "rank": 1,
+                    "chunk_id": chunk["chunk_id"],
+                    "score": 1.0,
+                    "chunk_text": chunk["chunk_text"],
+                }
+            ]
+            if chunks
+            else [],
+        }
+        for af in facts
+    ]
+    return chunks, retrieval_rows
+
+
 def _summaries_for_iteration(run_name: str, iteration: int) -> dict[str, dict[str, Any]]:
     path = _stage_dir(run_name, "03_summaries") / f"summaries_iter{iteration}.jsonl"
     if not path.exists():
         return {}
     return {str(r["article_id"]): r for r in load_jsonl(path)}
+
+
+def _target_summary_word_count(article: dict[str, Any]) -> int:
+    target_text = str(article.get("reference") or article.get("expert_summary") or "")
+    return _word_count(target_text) or 200
 
 
 def stage04_check_iteration(
@@ -546,15 +824,28 @@ def stage04_check_iteration(
     overlap_words: int,
     embed_model: str,
     resume: bool,
+    *,
+    model_key: str | None = None,
+    max_workers: int = 1,
+    only_previous_errors: bool = False,
+    context_mode: str = DEFAULT_CONTEXT_MODE,
+    usage: UsageTracker | None = None,
 ) -> None:
-    if not config.OPENAI_API_KEY:
-        raise RuntimeError("OPENAI_API_KEY missing. Required for summary chunk retrieval and LLM checking.")
+    if context_mode not in {"full_summary", "embedding"}:
+        raise ValueError("context_mode must be 'full_summary' or 'embedding'")
+    if context_mode == "embedding" and not config.OPENAI_API_KEY:
+        raise RuntimeError("OPENAI_API_KEY missing. Required for summary chunk retrieval embeddings.")
     out_dir = _stage_dir(run_name, f"04_checks_iter{iteration}")
     out_path = out_dir / "coverage_predictions.jsonl"
     out_retrieval = out_dir / "retrieval_topk.jsonl"
     out_chunks = out_dir / "summary_chunks.jsonl"
     af_rows = load_jsonl(_stage_dir(run_name, "01_selected_keep_af") / "selected_keep_af.jsonl")
     questions = {str(q["af_id"]): q for q in load_jsonl(_stage_dir(run_name, "02_questions") / "questions_1t3f_keep_af.jsonl")}
+    if only_previous_errors and iteration > 0:
+        prev_path = _stage_dir(run_name, f"04_checks_iter{iteration - 1}") / "coverage_predictions.jsonl"
+        prev_rows = load_jsonl(prev_path) if prev_path.exists() else []
+        active_af_ids = {str(r["af_id"]) for r in prev_rows if not r.get("covered")}
+        af_rows = [r for r in af_rows if str(r.get("af_id")) in active_af_ids]
     summaries = _summaries_for_iteration(run_name, iteration)
     by_article: dict[str, list[dict[str, Any]]] = defaultdict(list)
     for af in af_rows:
@@ -565,55 +856,63 @@ def stage04_check_iteration(
     all_chunks: list[dict[str, Any]] = []
     all_retrieval: list[dict[str, Any]] = []
     setup_c_system = SETUP_C_PROMPT.read_text(encoding="utf-8")
-    client = OpenAIClient()
-    parse_errors = 0
 
-    for article_id, summ in tqdm(summaries.items(), desc=f"stage04 | check iter {iteration}", total=len(summaries)):
+    def worker(item: tuple[str, dict[str, Any]]) -> tuple[list[dict[str, Any]], list[dict[str, Any]], list[dict[str, Any]], int]:
+        article_id, summ = item
         facts = by_article.get(article_id, [])
-        chunks, retrieval = _retrieve_summary_chunks(
-            article_id=article_id,
-            summary=str(summ["summary"]),
-            facts=facts,
-            top_k=top_k,
-            chunk_words=chunk_words,
-            overlap_words=overlap_words,
-            embed_model=embed_model,
-        )
-        all_chunks.extend(chunks)
-        all_retrieval.extend(retrieval)
+        if context_mode == "full_summary":
+            chunks, retrieval = _full_summary_context(
+                article_id=article_id,
+                summary=str(summ["summary"]),
+                facts=facts,
+            )
+        else:
+            chunks, retrieval = _retrieve_summary_chunks(
+                article_id=article_id,
+                summary=str(summ["summary"]),
+                facts=facts,
+                top_k=top_k,
+                chunk_words=chunk_words,
+                overlap_words=overlap_words,
+                embed_model=embed_model,
+            )
         retr_map = {str(r["af_id"]): r for r in retrieval}
+        client = ChatRunner(model=model, model_key=model_key, run_name=run_name, usage=usage)
+        out_rows: list[dict[str, Any]] = []
+        parse_errors = 0
         for af in facts:
             af_id = str(af["af_id"])
             if resume and af_id in done:
                 continue
             q = questions[af_id]
-            opts = q["options"]
+            opts = _normalize_options(q)
             chunks_txt = "\n\n".join([f"[{c['rank']}] {c['chunk_text']}" for c in retr_map.get(af_id, {}).get("retrieved_chunks", [])])
             user_msg = (
                 "Context Chunks:\n"
                 f"{chunks_txt}\n\n"
                 "Question: Which option is supported by the context under the SAME strict policy as direct claim checking?\n"
-                f"A. {opts[0]}\n"
-                f"B. {opts[1]}\n"
-                f"C. {opts[2]}\n"
-                f"D. {opts[3]}\n"
-                "E. None of the above\n"
+                f"A. {opts['A']}\n"
+                f"B. {opts['B']}\n"
+                f"C. {opts['C']}\n"
+                f"D. {opts['D']}\n"
+                f"E. {opts['E']}\n"
             )
             option_eval: dict[str, dict[str, Any]] = {}
             pred_letter = "E"
             reason = ""
             parse_error = False
             try:
-                resp = client.chat(
+                raw = client.chat(
+                    stage=f"stage04_check_iter{iteration}:{_model_label(model, model_key)}",
+                    item_id=af_id,
                     messages=[
                         {"role": "system", "content": setup_c_system},
                         {"role": "user", "content": user_msg},
                     ],
-                    model=model,
                     temperature=0.0,
                     response_format={"type": "json_object"},
                 )
-                obj = json.loads(str(resp.get("content", "")))
+                obj = json.loads(raw)
                 option_eval = _parse_option_eval(obj)
                 pred_letter = _decide_setup_c_answer(option_eval, obj)
                 reason = str(obj.get("reasoning", "")).strip()
@@ -624,7 +923,7 @@ def stage04_check_iteration(
                 parse_errors += 1
             covered = (not parse_error) and pred_letter == q["correct_letter"]
             true_eval = option_eval.get(q["correct_letter"], {})
-            rows.append(
+            out_rows.append(
                 {
                     "af_id": af_id,
                     "article_id": article_id,
@@ -632,9 +931,11 @@ def stage04_check_iteration(
                     "iteration": iteration,
                     "fact": af["fact"],
                     "question_id": q["question_id"],
-                    "options": q["options"] + ["None of the above"],
+                    "options": opts,
                     "correct_letter": q["correct_letter"],
+                    "correct_answer": opts.get(str(q["correct_letter"]), ""),
                     "predicted_letter": pred_letter,
+                    "predicted_answer": opts.get(pred_letter, ""),
                     "covered": covered,
                     "error_type": "none" if covered else ("parse_error" if parse_error else "missing_or_incorrect"),
                     "supporting_span": true_eval.get("evidence", "Quote: NONE") if covered else "Quote: NONE",
@@ -645,8 +946,18 @@ def stage04_check_iteration(
                     "parse_error": parse_error,
                 }
             )
-            done.add(af_id)
-            save_jsonl(rows, out_path)
+        return chunks, retrieval, out_rows, parse_errors
+
+    summary_items = [(article_id, summ) for article_id, summ in summaries.items() if by_article.get(article_id)]
+    results = _run_parallel(summary_items, worker, max_workers=max_workers, desc=f"stage04 | check iter {iteration}")
+    parse_errors_this_run = 0
+    for chunks, retrieval, new_rows, parse_errors in results:
+        all_chunks.extend(chunks)
+        all_retrieval.extend(retrieval)
+        rows.extend(new_rows)
+        parse_errors_this_run += parse_errors
+    rows.sort(key=lambda r: (str(r["article_id"]), str(r["af_id"]), int(r["iteration"])))
+    save_jsonl(rows, out_path)
 
     save_jsonl(all_chunks, out_chunks)
     save_jsonl(all_retrieval, out_retrieval)
@@ -665,9 +976,12 @@ def stage04_check_iteration(
     save_json(
         {
             "time": datetime.now().isoformat(timespec="seconds"),
-            "model": model,
+            "model": _model_label(model, model_key),
             "iteration": iteration,
             "setup": "Experiment 1 Setup C 1T3F + E(None), fair strict policy",
+            "context_mode": context_mode,
+            "only_previous_errors": only_previous_errors,
+            "max_workers": max_workers,
             "top_k": top_k,
             "summary_chunk_words": chunk_words,
             "summary_overlap_words": overlap_words,
@@ -677,7 +991,7 @@ def stage04_check_iteration(
             "errors": total - covered_count,
             "coverage_rate": round(covered_count / total, 4) if total else 0.0,
             "parse_error_count": sum(1 for r in rows if r.get("parse_error")),
-            "parse_errors_this_run": parse_errors,
+            "parse_errors_this_run": parse_errors_this_run,
             "by_article": by_article_metrics,
         },
         out_dir / "coverage_summary.json",
@@ -685,7 +999,16 @@ def stage04_check_iteration(
     print(f"[stage04] iter={iteration} covered={covered_count}/{total} -> {out_dir}")
 
 
-def stage05_rewrite_iteration(run_name: str, model: str, from_iteration: int, resume: bool) -> None:
+def stage05_rewrite_iteration(
+    run_name: str,
+    model: str,
+    from_iteration: int,
+    resume: bool,
+    *,
+    model_key: str | None = None,
+    max_workers: int = 1,
+    usage: UsageTracker | None = None,
+) -> None:
     articles = {str(r["id"]): r for r in _load_articles(run_name)}
     current = _summaries_for_iteration(run_name, from_iteration)
     check_path = _stage_dir(run_name, f"04_checks_iter{from_iteration}") / "coverage_predictions.jsonl"
@@ -700,40 +1023,52 @@ def stage05_rewrite_iteration(run_name: str, model: str, from_iteration: int, re
     rows = load_jsonl(out_path) if resume and out_path.exists() else []
     done = {str(r.get("article_id")) for r in rows}
     prompt = (PROMPTS_EXP3_DIR / "rewrite_summary.txt").read_text(encoding="utf-8")
-    client = OpenAIClient()
 
-    for article_id, summ in tqdm(current.items(), desc=f"stage05 | rewrite iter {from_iteration + 1}", total=len(current)):
+    def worker(item: tuple[str, dict[str, Any]]) -> dict[str, Any]:
+        article_id, summ = item
         if resume and article_id in done:
-            continue
+            return {}
         errors = by_article_errors.get(article_id, [])
         if not errors:
-            rows.append({**summ, "iteration": from_iteration + 1, "summary": summ["summary"], "rewrite_skipped_no_errors": True})
-            done.add(article_id)
-            save_jsonl(rows, out_path)
-            continue
+            return {
+                **summ,
+                "iteration": from_iteration + 1,
+                "summary": summ["summary"],
+                "summary_word_count": _word_count(str(summ["summary"])),
+                "target_word_count": _target_summary_word_count(articles[article_id]),
+                "rewrite_skipped_no_errors": True,
+            }
         feedback = "\n".join(
-            f"- AF {i + 1}: {e['fact']}\n  Problem: predicted {e.get('predicted_letter')} instead of {e.get('correct_letter')}. Reason: {e.get('reason', '')}"
+            (
+                f"- Missing/incorrect fact {i + 1}: {e['fact']}\n"
+                f"  Correct answer should be {e.get('correct_letter')}: {e.get('correct_answer', '')}\n"
+                f"  The checker selected {e.get('predicted_letter')}: {e.get('predicted_answer', '')}\n"
+                f"  Checker reason: {e.get('reason', '')}"
+            )
             for i, e in enumerate(errors)
         )
+        client = ChatRunner(model=model, model_key=model_key, run_name=run_name, usage=usage)
         raw = ""
         new_summary = ""
         revision_notes: list[str] = []
         parse_error = False
         try:
-            resp = client.chat(
+            target_word_count = _target_summary_word_count(articles[article_id])
+            raw = client.chat(
+                stage=f"stage05_rewrite_iter{from_iteration + 1}:{_model_label(model, model_key)}",
+                item_id=article_id,
                 messages=[
                     {
                         "role": "user",
                         "content": prompt.replace("{article}", str(articles[article_id]["document"]))
                         .replace("{summary}", str(summ["summary"]))
-                        .replace("{feedback}", feedback),
+                        .replace("{feedback}", feedback)
+                        .replace("{target_word_count}", str(target_word_count)),
                     }
                 ],
-                model=model,
                 temperature=0.0,
                 response_format={"type": "json_object"},
             )
-            raw = str(resp.get("content", ""))
             obj = json.loads(raw)
             new_summary = str(obj.get("summary", "")).strip()
             raw_notes = obj.get("revision_notes", [])
@@ -744,20 +1079,28 @@ def stage05_rewrite_iteration(run_name: str, model: str, from_iteration: int, re
             parse_error = True
             revision_notes = [f"parse_or_runtime_error: {exc}"]
             new_summary = raw.strip() or str(summ["summary"])
-        rows.append(
-            {
-                "article_id": article_id,
-                "source_dataset": summ["source_dataset"],
-                "original_index": summ["original_index"],
-                "iteration": from_iteration + 1,
-                "summary": new_summary,
-                "feedback_error_count": len(errors),
-                "revision_notes": revision_notes,
-                "parse_error": parse_error,
-            }
-        )
-        done.add(article_id)
-        save_jsonl(rows, out_path)
+        return {
+            "article_id": article_id,
+            "source_dataset": summ["source_dataset"],
+            "original_index": summ["original_index"],
+            "iteration": from_iteration + 1,
+            "summary": new_summary,
+            "summary_word_count": _word_count(new_summary),
+            "target_word_count": _target_summary_word_count(articles[article_id]),
+            "feedback_error_count": len(errors),
+            "feedback_mode": "only_current_error_af_with_correct_answer",
+            "revision_notes": revision_notes,
+            "parse_error": parse_error,
+        }
+
+    new_rows = [
+        r
+        for r in _run_parallel(list(current.items()), worker, max_workers=max_workers, desc=f"stage05 | rewrite iter {from_iteration + 1}")
+        if r
+    ]
+    rows.extend(new_rows)
+    rows.sort(key=lambda r: (str(r["source_dataset"]), int(r["original_index"]), str(r["article_id"])))
+    save_jsonl(rows, out_path)
     print(f"[stage05] wrote summaries_iter{from_iteration + 1}.jsonl")
 
 
@@ -837,10 +1180,36 @@ def stage07_summarize_run(run_name: str, max_iteration: int) -> None:
 
 
 def run_all(args: argparse.Namespace) -> None:
-    stage00_prepare_inputs(args.run_name, args.split, args.n_per_source, args.seed)
-    stage01_extract_keep_af(args.run_name, args.model, args.af_chunk_words, args.af_overlap_words, resume=not args.no_resume)
-    stage02_generate_questions(args.run_name, args.model, resume=not args.no_resume)
-    stage03_generate_initial_summaries(args.run_name, args.model, resume=not args.no_resume)
+    model_key = args.model_key
+    usage = _usage(args.run_name, resume=not args.no_resume) if model_key else None
+    if model_key and model_key not in MODEL_CONFIGS:
+        raise ValueError(f"Unknown model key: {model_key}. Valid keys include: {sorted(MODEL_CONFIGS)}")
+    if args.module2_run_name:
+        module2_model_key = args.module2_model_key or model_key
+        if not module2_model_key:
+            raise ValueError("--module2-model-key is required when --module2-run-name is used without --model-key")
+        stage00_import_module2_artifacts(args.run_name, args.module2_run_name, module2_model_key, args.n_per_source)
+    else:
+        stage00_prepare_inputs(args.run_name, args.split, args.n_per_source, args.seed)
+        stage01_extract_keep_af(
+            args.run_name,
+            args.model,
+            args.af_chunk_words,
+            args.af_overlap_words,
+            resume=not args.no_resume,
+            max_workers=args.max_workers,
+        )
+        stage02_generate_questions(args.run_name, args.model, resume=not args.no_resume, max_workers=args.max_workers)
+    stage03_generate_initial_summaries(
+        args.run_name,
+        args.model,
+        resume=not args.no_resume,
+        model_key=model_key,
+        max_workers=args.max_workers,
+        usage=usage,
+    )
+    if usage is not None:
+        _save_usage(args.run_name, usage)
 
     final_iteration = 0
     for iteration in range(args.max_rewrites + 1):
@@ -853,14 +1222,31 @@ def run_all(args: argparse.Namespace) -> None:
             args.summary_overlap_words,
             args.embed_model,
             resume=not args.no_resume,
+            model_key=model_key,
+            max_workers=args.max_workers,
+            only_previous_errors=iteration > 0,
+            context_mode=args.context_mode,
+            usage=usage,
         )
+        if usage is not None:
+            _save_usage(args.run_name, usage)
         summary_path = _stage_dir(args.run_name, f"04_checks_iter{iteration}") / "coverage_summary.json"
         summary = json.loads(summary_path.read_text(encoding="utf-8"))
         final_iteration = iteration
         if int(summary.get("errors", 0)) == 0:
             break
         if iteration < args.max_rewrites:
-            stage05_rewrite_iteration(args.run_name, args.model, iteration, resume=not args.no_resume)
+            stage05_rewrite_iteration(
+                args.run_name,
+                args.model,
+                iteration,
+                resume=not args.no_resume,
+                model_key=model_key,
+                max_workers=args.max_workers,
+                usage=usage,
+            )
+            if usage is not None:
+                _save_usage(args.run_name, usage)
 
     stage06_build_submission_files(args.run_name, final_iteration)
     stage07_summarize_run(args.run_name, final_iteration)
@@ -873,6 +1259,8 @@ def main() -> None:
     def add_common(p: argparse.ArgumentParser) -> None:
         p.add_argument("--run-name", type=str, default="pilot_n20_gpt41_mini")
         p.add_argument("--model", type=str, default=DEFAULT_MODEL)
+        p.add_argument("--model-key", type=str, default=None, help="Optional MODEL_CONFIGS key for non-OpenAI providers, e.g. gemini3_flash_preview_minimal.")
+        p.add_argument("--max-workers", type=int, default=1)
         p.add_argument("--no-resume", action="store_true")
 
     p_all = sub.add_parser("run_all")
@@ -887,6 +1275,9 @@ def main() -> None:
     p_all.add_argument("--af-chunk-words", type=int, default=DEFAULT_AF_CHUNK_WORDS)
     p_all.add_argument("--af-overlap-words", type=int, default=DEFAULT_AF_OVERLAP_WORDS)
     p_all.add_argument("--embed-model", type=str, default=DEFAULT_EMBED_MODEL)
+    p_all.add_argument("--context-mode", choices=["full_summary", "embedding"], default=DEFAULT_CONTEXT_MODE)
+    p_all.add_argument("--module2-run-name", type=str, default=None, help="Import simulated Module 2 final keep AFs/questions from this run.")
+    p_all.add_argument("--module2-model-key", type=str, default=None, help="Module 2 artifact branch to import. Defaults to --model-key.")
 
     p0 = sub.add_parser("stage00_prepare_inputs")
     p0.add_argument("--run-name", type=str, default="pilot_n20_gpt41_mini")
@@ -894,6 +1285,12 @@ def main() -> None:
     p0.add_argument("--n-per-source", type=int, default=10)
     p0.add_argument("--full-test", action="store_true")
     p0.add_argument("--seed", type=int, default=20260611)
+
+    p0m = sub.add_parser("stage00_import_module2_artifacts")
+    p0m.add_argument("--run-name", type=str, default="pilot_module2_gemini3_flash_preview")
+    p0m.add_argument("--module2-run-name", type=str, required=True)
+    p0m.add_argument("--module2-model-key", type=str, required=True)
+    p0m.add_argument("--n-per-source", type=int, default=5)
 
     p1 = sub.add_parser("stage01_extract_keep_af")
     add_common(p1)
@@ -913,6 +1310,8 @@ def main() -> None:
     p4.add_argument("--summary-chunk-words", type=int, default=DEFAULT_SUMMARY_CHUNK_WORDS)
     p4.add_argument("--summary-overlap-words", type=int, default=DEFAULT_SUMMARY_OVERLAP_WORDS)
     p4.add_argument("--embed-model", type=str, default=DEFAULT_EMBED_MODEL)
+    p4.add_argument("--context-mode", choices=["full_summary", "embedding"], default=DEFAULT_CONTEXT_MODE)
+    p4.add_argument("--only-previous-errors", action="store_true")
 
     p5 = sub.add_parser("stage05_rewrite_iteration")
     add_common(p5)
@@ -931,13 +1330,33 @@ def main() -> None:
         run_all(args)
     elif args.cmd == "stage00_prepare_inputs":
         stage00_prepare_inputs(args.run_name, args.split, None if args.full_test else args.n_per_source, args.seed)
+    elif args.cmd == "stage00_import_module2_artifacts":
+        stage00_import_module2_artifacts(args.run_name, args.module2_run_name, args.module2_model_key, args.n_per_source)
     elif args.cmd == "stage01_extract_keep_af":
-        stage01_extract_keep_af(args.run_name, args.model, args.af_chunk_words, args.af_overlap_words, resume=not args.no_resume)
+        stage01_extract_keep_af(
+            args.run_name,
+            args.model,
+            args.af_chunk_words,
+            args.af_overlap_words,
+            resume=not args.no_resume,
+            max_workers=args.max_workers,
+        )
     elif args.cmd == "stage02_generate_questions":
-        stage02_generate_questions(args.run_name, args.model, resume=not args.no_resume)
+        stage02_generate_questions(args.run_name, args.model, resume=not args.no_resume, max_workers=args.max_workers)
     elif args.cmd == "stage03_generate_initial_summaries":
-        stage03_generate_initial_summaries(args.run_name, args.model, resume=not args.no_resume)
+        usage = _usage(args.run_name, resume=not args.no_resume) if args.model_key else None
+        stage03_generate_initial_summaries(
+            args.run_name,
+            args.model,
+            resume=not args.no_resume,
+            model_key=args.model_key,
+            max_workers=args.max_workers,
+            usage=usage,
+        )
+        if usage is not None:
+            _save_usage(args.run_name, usage)
     elif args.cmd == "stage04_check_iteration":
+        usage = _usage(args.run_name, resume=not args.no_resume) if args.model_key else None
         stage04_check_iteration(
             args.run_name,
             args.model,
@@ -947,9 +1366,27 @@ def main() -> None:
             args.summary_overlap_words,
             args.embed_model,
             resume=not args.no_resume,
+            model_key=args.model_key,
+            max_workers=args.max_workers,
+            only_previous_errors=args.only_previous_errors,
+            context_mode=args.context_mode,
+            usage=usage,
         )
+        if usage is not None:
+            _save_usage(args.run_name, usage)
     elif args.cmd == "stage05_rewrite_iteration":
-        stage05_rewrite_iteration(args.run_name, args.model, args.from_iteration, resume=not args.no_resume)
+        usage = _usage(args.run_name, resume=not args.no_resume) if args.model_key else None
+        stage05_rewrite_iteration(
+            args.run_name,
+            args.model,
+            args.from_iteration,
+            resume=not args.no_resume,
+            model_key=args.model_key,
+            max_workers=args.max_workers,
+            usage=usage,
+        )
+        if usage is not None:
+            _save_usage(args.run_name, usage)
     elif args.cmd == "stage06_build_submission_files":
         stage06_build_submission_files(args.run_name, args.final_iteration)
     elif args.cmd == "stage07_summarize_run":
