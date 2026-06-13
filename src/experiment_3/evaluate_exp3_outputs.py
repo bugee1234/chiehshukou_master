@@ -9,6 +9,7 @@ from typing import Any
 import numpy as np
 
 ROOT_DIR = Path(__file__).resolve().parents[2]
+REFERENCE_SELF_CHECK = "reference-self-check"
 if str(ROOT_DIR) not in sys.path:
     sys.path.insert(0, str(ROOT_DIR))
 
@@ -92,8 +93,12 @@ def evaluate_variant(run_dir: Path, variant: str, truth_dir: Path | None = None)
     _assert_refs_available(elife_refs, truth_dir / "eLife_test.jsonl")
     _assert_refs_available(plos_refs, truth_dir / "PLOS_test.jsonl")
 
-    elife_preds = read_predictions(eval_dir, variant, "eLife", elife_refs)
-    plos_preds = read_predictions(eval_dir, variant, "PLOS", plos_refs)
+    if variant == REFERENCE_SELF_CHECK:
+        elife_preds = [str(ref["reference"]) for ref in elife_refs]
+        plos_preds = [str(ref["reference"]) for ref in plos_refs]
+    else:
+        elife_preds = read_predictions(eval_dir, variant, "eLife", elife_refs)
+        plos_preds = read_predictions(eval_dir, variant, "PLOS", plos_refs)
     _assert_matching_counts(elife_preds, elife_refs, "eLife", variant)
     _assert_matching_counts(plos_preds, plos_refs, "PLOS", variant)
 
@@ -112,9 +117,14 @@ def evaluate_variant(run_dir: Path, variant: str, truth_dir: Path | None = None)
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="Evaluate Experiment 3 initial/rewritten outputs with BioLaySumm metrics.")
+    parser = argparse.ArgumentParser(description="Evaluate Experiment 3 outputs with BioLaySumm metrics.")
     parser.add_argument("--run-name", type=str, required=True)
-    parser.add_argument("--variant", choices=["initial", "rewritten", "both"], default="both")
+    parser.add_argument(
+        "--variant",
+        choices=["initial", "rewritten", "both", REFERENCE_SELF_CHECK],
+        default="both",
+        help="Use reference-self-check to score each expert summary as its own prediction.",
+    )
     parser.add_argument("--data-root", type=Path, default=ROOT_DIR / "data" / "experiment_3" / "runs")
     parser.add_argument("--output-root", type=Path, default=ROOT_DIR / "results" / "experiment_3")
     parser.add_argument(
@@ -129,11 +139,15 @@ def main() -> None:
     variants = ["initial", "rewritten"] if args.variant == "both" else [args.variant]
     results = {variant: evaluate_variant(run_dir, variant, truth_dir=args.truth_dir) for variant in variants}
 
-    out_dir = args.output_root / args.run_name / "official_metrics"
+    if args.variant == REFERENCE_SELF_CHECK:
+        out_dir = args.output_root / args.run_name / "diagnostics" / "reference_self_check"
+    else:
+        out_dir = args.output_root / args.run_name / "official_metrics"
     out_dir.mkdir(parents=True, exist_ok=True)
     for variant, result in results.items():
-        write_scores(result["overall"], out_dir / f"{variant}_scores.txt")
-        (out_dir / f"{variant}_scores.json").write_text(json.dumps(result, indent=2), encoding="utf-8")
+        prefix = "scores" if variant == REFERENCE_SELF_CHECK else f"{variant}_scores"
+        write_scores(result["overall"], out_dir / f"{prefix}.txt")
+        (out_dir / f"{prefix}.json").write_text(json.dumps(result, indent=2), encoding="utf-8")
 
     if "initial" in results and "rewritten" in results:
         delta = {
