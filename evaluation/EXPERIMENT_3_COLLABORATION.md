@@ -2,6 +2,8 @@
 
 This document defines the ownership and Git workflow for running Experiment 3 generation on one computer and official evaluation on another. Codex sessions on both computers should read this file before changing Experiment 3 artifacts.
 
+On the evaluation computer, also read `evaluation/EXPERIMENT_3_EVALUATION_SETUP.md` before running diagnostics or metrics. It records the existing local environment, required environment variables, and the canonical PowerShell commands.
+
 ## Branch Roles
 
 - `main` is the integration branch and the source of truth for completed generation inputs, summaries, evaluation code, and accepted evaluation results.

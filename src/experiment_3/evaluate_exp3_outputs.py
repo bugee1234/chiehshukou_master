@@ -13,10 +13,6 @@ if str(ROOT_DIR) not in sys.path:
     sys.path.insert(0, str(ROOT_DIR))
 
 
-def read_txt_lines(path: Path) -> list[str]:
-    return [line.rstrip("\n") for line in path.read_text(encoding="utf-8").splitlines()]
-
-
 def read_jsonl(path: Path) -> list[dict[str, Any]]:
     with path.open("r", encoding="utf-8") as f:
         return [json.loads(line) for line in f if line.strip()]
@@ -40,6 +36,52 @@ def _assert_refs_available(refs: list[dict[str, Any]], path: Path) -> None:
         )
 
 
+def read_predictions(
+    eval_dir: Path,
+    variant: str,
+    source: str,
+    refs: list[dict[str, Any]],
+) -> list[str]:
+    paired_path = eval_dir / "paired_summaries.jsonl"
+    rows = [row for row in read_jsonl(paired_path) if row.get("source_dataset") == source]
+    try:
+        rows.sort(key=lambda row: int(row["original_index"]))
+    except (KeyError, TypeError, ValueError) as exc:
+        raise ValueError(f"{paired_path} contains an invalid original_index for {source}") from exc
+
+    indices = [int(row["original_index"]) for row in rows]
+    expected_indices = list(range(len(refs)))
+    if indices != expected_indices:
+        raise ValueError(
+            f"{paired_path} has invalid {source} original_index values: "
+            f"expected {expected_indices}, found {indices}"
+        )
+
+    mismatched_refs = [
+        index
+        for index, (row, ref) in enumerate(zip(rows, refs))
+        if str(row.get("reference", "")) != str(ref.get("reference", ""))
+    ]
+    if mismatched_refs:
+        raise ValueError(
+            f"{paired_path} {source} references do not match the truth JSONL "
+            f"at original_index values {mismatched_refs}"
+        )
+
+    summary_key = f"{variant}_summary"
+    predictions = [str(row.get(summary_key, "")) for row in rows]
+    if not predictions or any(not prediction.strip() for prediction in predictions):
+        raise ValueError(f"{paired_path} contains missing {summary_key} values for {source}")
+    return predictions
+
+
+def _assert_matching_counts(preds: list[str], refs: list[dict[str, Any]], source: str, variant: str) -> None:
+    if len(preds) != len(refs):
+        raise ValueError(
+            f"{source} {variant} prediction/reference count mismatch: {len(preds)} != {len(refs)}"
+        )
+
+
 def evaluate_variant(run_dir: Path, variant: str, truth_dir: Path | None = None) -> dict[str, Any]:
     from evaluation.evaluation_final import evaluate_all
 
@@ -50,13 +92,18 @@ def evaluate_variant(run_dir: Path, variant: str, truth_dir: Path | None = None)
     _assert_refs_available(elife_refs, truth_dir / "eLife_test.jsonl")
     _assert_refs_available(plos_refs, truth_dir / "PLOS_test.jsonl")
 
+    elife_preds = read_predictions(eval_dir, variant, "eLife", elife_refs)
+    plos_preds = read_predictions(eval_dir, variant, "PLOS", plos_refs)
+    _assert_matching_counts(elife_preds, elife_refs, "eLife", variant)
+    _assert_matching_counts(plos_preds, plos_refs, "PLOS", variant)
+
     elife_scores = evaluate_all(
-        read_txt_lines(eval_dir / f"elife_{variant}.txt"),
+        elife_preds,
         elife_refs,
         "lay_summ",
     )
     plos_scores = evaluate_all(
-        read_txt_lines(eval_dir / f"plos_{variant}.txt"),
+        plos_preds,
         plos_refs,
         "lay_summ",
     )
