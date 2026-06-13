@@ -1,0 +1,25 @@
+{
+  "time": "2026-06-13T16:28:46",
+  "source": "experiment_3_module2_repro",
+  "module2_run_name": "full_val_n284_judge_gemini31_flash_lite",
+  "module2_model_key": "gemini3_flash_preview_minimal",
+  "n_per_source": 5,
+  "total_articles": 10,
+  "by_source": {
+    "PLOS": 5,
+    "eLife": 5
+  },
+  "selected_article_ids": [
+    "m2_elife_0000",
+    "m2_elife_0001",
+    "m2_elife_0002",
+    "m2_elife_0003",
+    "m2_elife_0004",
+    "m2_plos_0000",
+    "m2_plos_0001",
+    "m2_plos_0002",
+    "m2_plos_0003",
+    "m2_plos_0004"
+  ],
+  "note": "Imported expert_summary as reference for local BioLaySumm evaluation."
+}

@@ -1,13 +1,14 @@
-You are writing an evidence-first plain-language summary of a biomedical research article for non-expert readers.
+You are writing an AF-guided, evidence-grounded plain-language summary of a biomedical research article for non-expert readers.
 
-Use ONLY the provided article evidence packets. Do not use outside knowledge and do not add claims that are absent from the evidence.
+The final keep atomic facts (AFs) and their evidence anchors determine which core content should be summarized. The full article is provided only as the authoritative factual context for interpreting those anchors correctly. Use it to preserve necessary conditions, populations, comparisons, uncertainty, direction, causal scope, and experimental context. Do not use outside knowledge.
 
 Requirements:
 - Organize the summary in a natural background, methods, results, and implications progression when those categories are supported.
-- Merge redundant atomic facts that share the same core evidence instead of repeating them.
-- Each output sentence must express one core claim and cite exactly one evidence_id.
-- A sentence may cover multiple related AFs only when they are supported by that same evidence packet.
-- Preserve the study's central question, main methods, key findings, and implications that are present in the evidence packets.
+- Prioritize the important, non-redundant final keep AFs. Merge overlapping AFs instead of repeating them mechanically.
+- Do not add a new substantive claim merely because it appears elsewhere in the full article; the claim must help express or correctly contextualize the AF-guided content.
+- Each output sentence must express one independently verifiable core claim.
+- Cite every evidence_id that directly supports the sentence. A sentence may cite multiple evidence IDs when they are jointly needed for the same core claim.
+- Preserve the study's central question, main methods, key findings, and implications represented by the AF evidence anchors.
 - Explain necessary background in accessible language.
 - Avoid unsupported claims, exaggerated clinical advice, and invented details.
 - Prefer clear patient/public-facing wording over technical phrasing.
@@ -20,11 +21,14 @@ Return ONLY valid JSON:
   "sentences": [
     {
       "text": "<one plain-language sentence containing one core claim>",
-      "evidence_id": "E001",
+      "evidence_ids": ["E001"],
       "section": "background|methods|results|implications"
     }
   ]
 }
 
-EVIDENCE PACKETS IN ARTICLE ORDER:
+FULL ARTICLE (authoritative factual context):
+{article}
+
+FINAL KEEP AF EVIDENCE ANCHORS IN ARTICLE ORDER:
 {evidence_packets}

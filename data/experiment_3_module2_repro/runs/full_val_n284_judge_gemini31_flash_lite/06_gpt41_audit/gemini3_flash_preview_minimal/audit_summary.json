@@ -1,0 +1,59 @@
+{
+  "time": "2026-06-13T16:35:46",
+  "audited": 60,
+  "retained": 40,
+  "rejected": 20,
+  "parse_error_count": 0,
+  "counts": {
+    "atomicity": {
+      "compound": 1,
+      "atomic": 59
+    },
+    "article_support": {
+      "partial": 13,
+      "full": 47
+    },
+    "source_span_support": {
+      "partial": 19,
+      "full": 41
+    },
+    "expert_coverage": {
+      "broad_only": 31,
+      "none": 11,
+      "full": 18
+    },
+    "redundancy": {
+      "none": 40,
+      "parent_child_overlap": 18,
+      "near_duplicate": 2
+    },
+    "summary_priority": {
+      "exclude": 17,
+      "required": 16,
+      "optional": 27
+    },
+    "question_validity": {
+      "not_applicable": 20,
+      "valid": 38,
+      "invalid_true_option": 2
+    },
+    "recommended_action": {
+      "reject": 21,
+      "keep_required": 14,
+      "rewrite_af": 4,
+      "keep_optional": 21
+    },
+    "confidence": {
+      "high": 59,
+      "medium": 1
+    }
+  },
+  "retained_problem_rates": {
+    "article_not_fully_supported": 0.1,
+    "source_span_not_fully_supported": 0.25,
+    "expert_not_full_coverage": 0.55,
+    "compound_or_unclear": 0.0,
+    "semantic_overlap": 0.425,
+    "invalid_question": 0.05
+  }
+}

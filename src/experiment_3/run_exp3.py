@@ -765,9 +765,9 @@ def stage03_generate_initial_summaries(
                 messages=[
                     {
                         "role": "user",
-                        "content": prompt.replace("{evidence_packets}", _format_evidence_packets(packets)).replace(
-                            "{target_word_count}", str(target_word_count)
-                        ),
+                        "content": prompt.replace("{article}", str(art["document"]))
+                        .replace("{evidence_packets}", _format_evidence_packets(packets))
+                        .replace("{target_word_count}", str(target_word_count)),
                     }
                 ],
                 temperature=0.0,
@@ -777,18 +777,24 @@ def stage03_generate_initial_summaries(
             raw_sentences = obj.get("sentences", [])
             if not isinstance(raw_sentences, list) or not raw_sentences:
                 raise ValueError("sentences must be a non-empty list")
-            sentence_rows: list[dict[str, str]] = []
+            sentence_rows: list[dict[str, Any]] = []
             for entry in raw_sentences:
                 if not isinstance(entry, dict):
                     raise ValueError("each sentence must be an object")
                 text = str(entry.get("text", "")).strip()
-                evidence_id = str(entry.get("evidence_id", "")).strip()
+                raw_evidence_ids = entry.get("evidence_ids", entry.get("evidence_id", []))
+                if isinstance(raw_evidence_ids, str):
+                    evidence_ids = [raw_evidence_ids.strip()] if raw_evidence_ids.strip() else []
+                elif isinstance(raw_evidence_ids, list):
+                    evidence_ids = list(dict.fromkeys(str(x).strip() for x in raw_evidence_ids if str(x).strip()))
+                else:
+                    evidence_ids = []
                 section = str(entry.get("section", "")).strip().lower()
-                if not text or evidence_id not in valid_evidence_ids:
-                    raise ValueError(f"invalid sentence evidence mapping: {evidence_id}")
+                if not text or not evidence_ids or any(eid not in valid_evidence_ids for eid in evidence_ids):
+                    raise ValueError(f"invalid sentence evidence mapping: {evidence_ids}")
                 if section not in {"background", "methods", "results", "implications"}:
                     raise ValueError(f"invalid section: {section}")
-                sentence_rows.append({"text": text, "evidence_id": evidence_id, "section": section})
+                sentence_rows.append({"text": text, "evidence_ids": evidence_ids, "section": section})
             summary = " ".join(r["text"] for r in sentence_rows)
         except Exception as exc:
             parse_error = True
@@ -804,7 +810,7 @@ def stage03_generate_initial_summaries(
                 "summary": summary,
                 "summary_word_count": _word_count(summary),
                 "target_word_count": _target_summary_word_count(art),
-                "generation_mode": "evidence_first",
+                "generation_mode": "af_guided_full_article_context",
                 "evidence_packet_count": len(evidence_by_article[article_id]),
                 "sentence_evidence": sentence_rows,
                 "parse_error": parse_error,
@@ -1618,6 +1624,11 @@ def run_all(args: argparse.Namespace) -> None:
     if usage is not None:
         _save_usage(args.run_name, usage)
 
+    if args.initial_only:
+        stage06_build_submission_files(args.run_name, 0)
+        stage07_summarize_run(args.run_name, 0)
+        return
+
     final_iteration = 0
     for iteration in range(args.max_rewrites + 1):
         stage04_check_iteration(
@@ -1699,6 +1710,11 @@ def main() -> None:
     p_all.add_argument("--n-per-source", type=int, default=10, help="Use 10 for a 20-article pilot; omit via stage00 for full 142+142.")
     p_all.add_argument("--seed", type=int, default=20260611)
     p_all.add_argument("--max-rewrites", type=int, default=2)
+    p_all.add_argument(
+        "--initial-only",
+        action="store_true",
+        help="Stop after initial sentence factuality checking and minimal repair; skip AF coverage checks and rewrites.",
+    )
     p_all.add_argument("--top-k", type=int, default=DEFAULT_TOP_K)
     p_all.add_argument("--summary-chunk-words", type=int, default=DEFAULT_SUMMARY_CHUNK_WORDS)
     p_all.add_argument("--summary-overlap-words", type=int, default=DEFAULT_SUMMARY_OVERLAP_WORDS)

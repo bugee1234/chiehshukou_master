@@ -1,0 +1,30 @@
+{
+  "api_calls": 60,
+  "prompt_tokens": 867396,
+  "cached_prompt_tokens": 0,
+  "billable_prompt_tokens": 867396,
+  "completion_tokens": 17627,
+  "billable_output_tokens": 17627,
+  "total_tokens": 885023,
+  "api_elapsed_seconds": 227.7477,
+  "cost_currencies": [
+    "USD"
+  ],
+  "estimated_cost": 1.875808,
+  "by_stage": {
+    "module2_audit:gpt41": {
+      "api_calls": 60,
+      "prompt_tokens": 867396,
+      "cached_prompt_tokens": 0,
+      "billable_prompt_tokens": 867396,
+      "completion_tokens": 17627,
+      "billable_output_tokens": 17627,
+      "total_tokens": 885023,
+      "api_elapsed_seconds": 227.7477,
+      "cost_currencies": [
+        "USD"
+      ],
+      "estimated_cost": 1.875808
+    }
+  }
+}

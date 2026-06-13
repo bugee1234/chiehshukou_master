@@ -20,6 +20,23 @@ This pipeline implements the Experiment 3 flow:
 python src/experiment_3/run_exp3.py run_all --run-name pilot_val_n20_gpt41_mini --split validation --model gpt-4.1-mini --n-per-source 10 --max-rewrites 2
 ```
 
+## AF-Guided Full-Article Context Pilot
+
+This variant keeps the imported final keep AFs as the content plan, gives the
+generator the full article to recover qualifiers and scope, and stops after
+sentence-level minimal repair without running the coverage rewrite loop:
+
+```bash
+python src/experiment_3/run_exp3.py run_all \
+  --run-name exp3_module2_val_n10_gemini3_flash_preview_fullarticle_af \
+  --model-key gemini3_flash_preview_minimal \
+  --module2-run-name full_val_n284_judge_gemini31_flash_lite \
+  --module2-model-key gemini3_flash_preview_minimal \
+  --n-per-source 5 \
+  --max-workers 8 \
+  --initial-only
+```
+
 This runs 20 validation articles total: 10 PLOS and 10 eLife. Validation is used because the public HuggingFace test split has blank references.
 
 ## Full Test Run
