@@ -5,11 +5,14 @@ This pipeline implements the Experiment 3 flow:
 1. Load BioLaySumm 2025 Task 1.1 PLOS/eLife test articles.
 2. Extract candidate selected keep AFs using Experiment 2 Part C.
 3. Generate 1T3F questions for every keep AF.
-4. Generate an initial lay summary from the article.
-5. Check whether the summary covers each keep AF using Experiment 1 Setup C: 1T3F + E(None) with retrieved summary context.
-6. Rewrite the summary using the error/missing list.
-7. Repeat until no errors or the rewrite limit is reached.
-8. Export initial and rewritten summaries for BioLaySumm official evaluation.
+4. Merge overlapping article source spans into evidence packets, order them by article position, and generate an evidence-first lay summary whose sentences each cite one evidence packet.
+5. Run sentence-level factuality checking and minimal repair on the initial summary while preserving the pre-repair initial version for evaluation.
+6. Check whether the summary covers every keep AF using Experiment 1 Setup C: 1T3F + E(None) with the full summary as context by default.
+7. Rewrite the summary using the error/missing list and each AF's article source span.
+8. Check every rewritten-summary sentence against the article as supported, partial, unsupported, or contradicted.
+9. Apply code-enforced minimal edits only to problematic sentences.
+10. Recheck all keep AF questions, not only the previous error subset, and repeat until no errors or the rewrite limit is reached.
+11. Export the pre-repair evidence-first initial summary and final repaired summary for BioLaySumm official evaluation.
 
 ## Recommended First Pilot
 

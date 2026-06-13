@@ -1,0 +1,22 @@
+{
+  "time": "2026-06-13T14:56:47",
+  "source": "/Users/jason/chiehshukou_master/data/experiment_3_module2_repro/runs/full_val_n284_judge_gemini31_flash_lite/03_final_keep_af/gemini3_flash_preview_minimal/final_keep_af.jsonl",
+  "method": "Imported simulated Module 2 final_keep_af; AF extraction and human review skipped in exp3.",
+  "selected_keep_af_total": 216,
+  "selected_keep_af_by_source": {
+    "eLife": 106,
+    "PLOS": 110
+  },
+  "selected_keep_af_by_article": {
+    "m2_elife_0000": 3,
+    "m2_elife_0001": 27,
+    "m2_elife_0002": 28,
+    "m2_elife_0003": 20,
+    "m2_elife_0004": 28,
+    "m2_plos_0000": 25,
+    "m2_plos_0001": 23,
+    "m2_plos_0002": 29,
+    "m2_plos_0003": 16,
+    "m2_plos_0004": 17
+  }
+}

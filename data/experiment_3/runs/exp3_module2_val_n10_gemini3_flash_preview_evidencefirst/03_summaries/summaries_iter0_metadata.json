@@ -1,0 +1,9 @@
+{
+  "time": "2026-06-13T14:56:58",
+  "model": "gemini3_flash_preview_minimal:gemini-3-flash-preview",
+  "max_workers": 8,
+  "generation_mode": "evidence_first",
+  "evidence_packets": 214,
+  "summaries": 10,
+  "failed": []
+}

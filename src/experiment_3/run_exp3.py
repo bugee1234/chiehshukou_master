@@ -643,6 +643,74 @@ def stage02_generate_questions(run_name: str, model: str, resume: bool, max_work
     print(f"[stage02] questions={len(questions)} -> {out_dir}")
 
 
+def _span_tokens(text: str) -> set[str]:
+    return set(re.findall(r"[a-z0-9]+", str(text or "").lower()))
+
+
+def _build_evidence_packets(article: dict[str, Any], facts: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    article_text = str(article.get("document", ""))
+    article_norm = _norm(article_text)
+    candidates: list[dict[str, Any]] = []
+    for af in facts:
+        span = str(af.get("source_span", "")).strip() or str(af.get("fact", "")).strip()
+        tokens = _span_tokens(span)
+        norm_span = _norm(span)
+        candidates.append(
+            {
+                "span": span,
+                "tokens": tokens,
+                "article_position": article_norm.find(norm_span),
+                "af_ids": [str(af["af_id"])],
+                "facts": [str(af["fact"])],
+            }
+        )
+
+    packets: list[dict[str, Any]] = []
+    for cand in candidates:
+        best_idx = -1
+        best_overlap = 0.0
+        for i, packet in enumerate(packets):
+            union = cand["tokens"] | packet["tokens"]
+            overlap = len(cand["tokens"] & packet["tokens"]) / len(union) if union else 0.0
+            if overlap > best_overlap:
+                best_overlap = overlap
+                best_idx = i
+        if best_idx >= 0 and best_overlap >= 0.72:
+            packet = packets[best_idx]
+            packet["af_ids"].extend(cand["af_ids"])
+            packet["facts"].extend(cand["facts"])
+            if len(cand["span"].split()) > len(packet["span"].split()):
+                packet["span"] = cand["span"]
+                packet["tokens"] = cand["tokens"]
+            positions = [p for p in [packet["article_position"], cand["article_position"]] if p >= 0]
+            packet["article_position"] = min(positions) if positions else -1
+        else:
+            packets.append(dict(cand))
+
+    packets.sort(key=lambda p: (p["article_position"] < 0, p["article_position"], p["af_ids"][0]))
+    out: list[dict[str, Any]] = []
+    for i, packet in enumerate(packets, start=1):
+        out.append(
+            {
+                "evidence_id": f"E{i:03d}",
+                "source_span": packet["span"],
+                "af_ids": sorted(set(packet["af_ids"])),
+                "atomic_facts": list(dict.fromkeys(packet["facts"])),
+                "article_position": packet["article_position"],
+            }
+        )
+    return out
+
+
+def _format_evidence_packets(packets: list[dict[str, Any]]) -> str:
+    return "\n\n".join(
+        f"{p['evidence_id']}\n"
+        f"ARTICLE EVIDENCE: {p['source_span']}\n"
+        f"RELATED FINAL KEEP AFS: " + " | ".join(p["atomic_facts"])
+        for p in packets
+    )
+
+
 def stage03_generate_initial_summaries(
     run_name: str,
     model: str,
@@ -653,11 +721,32 @@ def stage03_generate_initial_summaries(
     usage: UsageTracker | None = None,
 ) -> None:
     articles = _load_articles(run_name)
+    af_rows = load_jsonl(_stage_dir(run_name, "01_selected_keep_af") / "selected_keep_af.jsonl")
+    facts_by_article: dict[str, list[dict[str, Any]]] = defaultdict(list)
+    for af in af_rows:
+        facts_by_article[str(af["article_id"])].append(af)
     out_dir = _stage_dir(run_name, "03_summaries")
     out_path = out_dir / "summaries_iter0.jsonl"
+    evidence_path = out_dir / "evidence_packets_iter0.jsonl"
     prompt = (PROMPTS_EXP3_DIR / "summary_generation.txt").read_text(encoding="utf-8")
     rows = load_jsonl(out_path) if resume and out_path.exists() else []
     done = {str(r.get("article_id")) for r in rows}
+    evidence_by_article = {
+        str(art["id"]): _build_evidence_packets(art, facts_by_article.get(str(art["id"]), []))
+        for art in articles
+    }
+    save_jsonl(
+        [
+            {
+                "article_id": art["id"],
+                "source_dataset": art["source_dataset"],
+                "original_index": art["original_index"],
+                "evidence_packets": evidence_by_article[str(art["id"])],
+            }
+            for art in articles
+        ],
+        evidence_path,
+    )
 
     def worker(art: dict[str, Any]) -> tuple[dict[str, Any], dict[str, Any] | None]:
         article_id = str(art["id"])
@@ -668,13 +757,15 @@ def stage03_generate_initial_summaries(
         failed: dict[str, Any] | None = None
         try:
             target_word_count = _target_summary_word_count(art)
+            packets = evidence_by_article[article_id]
+            valid_evidence_ids = {str(p["evidence_id"]) for p in packets}
             raw = client.chat(
                 stage=f"stage03_initial_summary:{_model_label(model, model_key)}",
                 item_id=article_id,
                 messages=[
                     {
                         "role": "user",
-                        "content": prompt.replace("{article}", str(art["document"])).replace(
+                        "content": prompt.replace("{evidence_packets}", _format_evidence_packets(packets)).replace(
                             "{target_word_count}", str(target_word_count)
                         ),
                     }
@@ -683,13 +774,27 @@ def stage03_generate_initial_summaries(
                 response_format={"type": "json_object"},
             )
             obj = json.loads(raw)
-            summary = str(obj.get("summary", "")).strip()
-            if not summary:
-                raise ValueError("empty summary")
+            raw_sentences = obj.get("sentences", [])
+            if not isinstance(raw_sentences, list) or not raw_sentences:
+                raise ValueError("sentences must be a non-empty list")
+            sentence_rows: list[dict[str, str]] = []
+            for entry in raw_sentences:
+                if not isinstance(entry, dict):
+                    raise ValueError("each sentence must be an object")
+                text = str(entry.get("text", "")).strip()
+                evidence_id = str(entry.get("evidence_id", "")).strip()
+                section = str(entry.get("section", "")).strip().lower()
+                if not text or evidence_id not in valid_evidence_ids:
+                    raise ValueError(f"invalid sentence evidence mapping: {evidence_id}")
+                if section not in {"background", "methods", "results", "implications"}:
+                    raise ValueError(f"invalid section: {section}")
+                sentence_rows.append({"text": text, "evidence_id": evidence_id, "section": section})
+            summary = " ".join(r["text"] for r in sentence_rows)
         except Exception as exc:
             parse_error = True
             failed = {"article_id": article_id, "error": str(exc), "raw_preview": raw[:300]}
             summary = raw.strip()
+            sentence_rows = []
         return (
             {
                 "article_id": article_id,
@@ -699,6 +804,9 @@ def stage03_generate_initial_summaries(
                 "summary": summary,
                 "summary_word_count": _word_count(summary),
                 "target_word_count": _target_summary_word_count(art),
+                "generation_mode": "evidence_first",
+                "evidence_packet_count": len(evidence_by_article[article_id]),
+                "sentence_evidence": sentence_rows,
                 "parse_error": parse_error,
             },
             failed,
@@ -716,11 +824,15 @@ def stage03_generate_initial_summaries(
             "time": datetime.now().isoformat(timespec="seconds"),
             "model": _model_label(model, model_key),
             "max_workers": max_workers,
+            "generation_mode": "evidence_first",
+            "evidence_packets": sum(len(v) for v in evidence_by_article.values()),
             "summaries": len(rows),
             "failed": failed,
         },
         out_dir / "summaries_iter0_metadata.json",
     )
+    if failed:
+        raise RuntimeError(f"initial summary generation failed for {len(failed)} articles; rerun with resume")
     print(f"[stage03] summaries={len(rows)} failed={len(failed)} -> {out_dir}")
 
 
@@ -813,6 +925,18 @@ def _summaries_for_iteration(run_name: str, iteration: int) -> dict[str, dict[st
 def _target_summary_word_count(article: dict[str, Any]) -> int:
     target_text = str(article.get("reference") or article.get("expert_summary") or "")
     return _word_count(target_text) or 200
+
+
+def _split_summary_sentences(summary: str) -> list[str]:
+    text = re.sub(r"\s+", " ", str(summary or "").strip())
+    if not text:
+        return []
+    sentences = re.split(r"(?<=[.!?])\s+(?=[\"'A-Z0-9])", text)
+    return [s.strip() for s in sentences if s.strip()]
+
+
+def _numbered_sentences(sentences: list[str]) -> str:
+    return "\n".join(f"[{i}] {sentence}" for i, sentence in enumerate(sentences))
 
 
 def stage04_check_iteration(
@@ -930,6 +1054,7 @@ def stage04_check_iteration(
                     "source_dataset": af["source_dataset"],
                     "iteration": iteration,
                     "fact": af["fact"],
+                    "source_span": af.get("source_span", ""),
                     "question_id": q["question_id"],
                     "options": opts,
                     "correct_letter": q["correct_letter"],
@@ -1041,6 +1166,7 @@ def stage05_rewrite_iteration(
         feedback = "\n".join(
             (
                 f"- Missing/incorrect fact {i + 1}: {e['fact']}\n"
+                f"  Article evidence: {e.get('source_span', '')}\n"
                 f"  Correct answer should be {e.get('correct_letter')}: {e.get('correct_answer', '')}\n"
                 f"  The checker selected {e.get('predicted_letter')}: {e.get('predicted_answer', '')}\n"
                 f"  Checker reason: {e.get('reason', '')}"
@@ -1104,9 +1230,267 @@ def stage05_rewrite_iteration(
     print(f"[stage05] wrote summaries_iter{from_iteration + 1}.jsonl")
 
 
+def stage05_sentence_factuality_check(
+    run_name: str,
+    model: str,
+    iteration: int,
+    resume: bool,
+    *,
+    model_key: str | None = None,
+    max_workers: int = 1,
+    usage: UsageTracker | None = None,
+) -> None:
+    articles = {str(r["id"]): r for r in _load_articles(run_name)}
+    summaries = _summaries_for_iteration(run_name, iteration)
+    out_dir = _stage_dir(run_name, f"05_sentence_checks_iter{iteration}")
+    out_path = out_dir / "sentence_factuality.jsonl"
+    rows = load_jsonl(out_path) if resume and out_path.exists() else []
+    done = {str(r["article_id"]) for r in rows if not r.get("parse_error")}
+    prompt = (PROMPTS_EXP3_DIR / "sentence_factuality_check.txt").read_text(encoding="utf-8")
+
+    def worker(item: tuple[str, dict[str, Any]]) -> dict[str, Any]:
+        article_id, summ = item
+        sentences = _split_summary_sentences(str(summ["summary"]))
+        client = ChatRunner(model=model, model_key=model_key, run_name=run_name, usage=usage)
+        raw = ""
+        parse_error = False
+        error = ""
+        evaluations: list[dict[str, Any]] = []
+        try:
+            raw = client.chat(
+                stage=f"stage05_sentence_check_iter{iteration}:{_model_label(model, model_key)}",
+                item_id=article_id,
+                messages=[
+                    {
+                        "role": "user",
+                        "content": prompt.replace("{article}", str(articles[article_id]["document"])).replace(
+                            "{numbered_sentences}", _numbered_sentences(sentences)
+                        ),
+                    }
+                ],
+                temperature=0.0,
+                response_format={"type": "json_object"},
+            )
+            obj = json.loads(raw)
+            raw_evals = obj.get("sentence_evaluations", [])
+            if not isinstance(raw_evals, list):
+                raise ValueError("sentence_evaluations must be a list")
+            by_index: dict[int, dict[str, Any]] = {}
+            for entry in raw_evals:
+                if not isinstance(entry, dict):
+                    continue
+                idx = int(entry.get("sentence_index", -1))
+                verdict = str(entry.get("verdict", "")).strip().lower()
+                if 0 <= idx < len(sentences) and verdict in {"supported", "partial", "unsupported", "contradicted"}:
+                    by_index[idx] = {
+                        "sentence_index": idx,
+                        "sentence": sentences[idx],
+                        "verdict": verdict,
+                        "evidence": str(entry.get("evidence", "")).strip(),
+                        "reason": str(entry.get("reason", "")).strip(),
+                    }
+            if len(by_index) != len(sentences):
+                missing = sorted(set(range(len(sentences))) - set(by_index))
+                raise ValueError(f"missing sentence evaluations: {missing}")
+            evaluations = [by_index[i] for i in range(len(sentences))]
+        except Exception as exc:
+            parse_error = True
+            error = str(exc)
+        return {
+            "article_id": article_id,
+            "source_dataset": summ["source_dataset"],
+            "original_index": summ["original_index"],
+            "iteration": iteration,
+            "sentence_count": len(sentences),
+            "sentence_evaluations": evaluations,
+            "problematic_count": sum(1 for e in evaluations if e["verdict"] != "supported"),
+            "parse_error": parse_error,
+            "error": error,
+            "raw_preview": raw[:500] if parse_error else "",
+        }
+
+    todo = [(article_id, summ) for article_id, summ in summaries.items() if article_id not in done]
+    new_rows = _run_parallel(todo, worker, max_workers=max_workers, desc=f"stage05 | sentence check iter {iteration}")
+    new_ids = {str(r["article_id"]) for r in new_rows}
+    rows = [r for r in rows if str(r["article_id"]) not in new_ids] + new_rows
+    rows.sort(key=lambda r: (str(r["source_dataset"]), int(r["original_index"]), str(r["article_id"])))
+    save_jsonl(rows, out_path)
+    save_json(
+        {
+            "time": datetime.now().isoformat(timespec="seconds"),
+            "model": _model_label(model, model_key),
+            "iteration": iteration,
+            "max_workers": max_workers,
+            "articles": len(rows),
+            "sentences": sum(int(r.get("sentence_count", 0)) for r in rows),
+            "problematic_sentences": sum(int(r.get("problematic_count", 0)) for r in rows),
+            "parse_error_count": sum(1 for r in rows if r.get("parse_error")),
+        },
+        out_dir / "sentence_factuality_summary.json",
+    )
+    parse_errors = [r for r in rows if r.get("parse_error")]
+    if parse_errors:
+        raise RuntimeError(f"sentence factuality check has {len(parse_errors)} parse/runtime errors; rerun with resume")
+    print(
+        f"[stage05] sentence check iter={iteration} problematic="
+        f"{sum(int(r.get('problematic_count', 0)) for r in rows)}"
+    )
+
+
+def stage05_minimal_sentence_repair(
+    run_name: str,
+    model: str,
+    iteration: int,
+    resume: bool,
+    *,
+    model_key: str | None = None,
+    max_workers: int = 1,
+    usage: UsageTracker | None = None,
+) -> None:
+    articles = {str(r["id"]): r for r in _load_articles(run_name)}
+    summaries_path = _stage_dir(run_name, "03_summaries") / f"summaries_iter{iteration}.jsonl"
+    backup_path = _stage_dir(run_name, "03_summaries") / f"summaries_iter{iteration}_pre_factuality.jsonl"
+    if backup_path.exists():
+        source_rows = load_jsonl(backup_path)
+    else:
+        source_rows = load_jsonl(summaries_path)
+        save_jsonl(source_rows, backup_path)
+    summaries = {str(r["article_id"]): r for r in source_rows}
+    check_path = _stage_dir(run_name, f"05_sentence_checks_iter{iteration}") / "sentence_factuality.jsonl"
+    checks = {str(r["article_id"]): r for r in load_jsonl(check_path)}
+    out_dir = _stage_dir(run_name, f"05_sentence_repairs_iter{iteration}")
+    out_path = out_dir / "sentence_repairs.jsonl"
+    rows = load_jsonl(out_path) if resume and out_path.exists() else []
+    done = {str(r["article_id"]) for r in rows if not r.get("parse_error")}
+    prompt = (PROMPTS_EXP3_DIR / "minimal_sentence_repair.txt").read_text(encoding="utf-8")
+
+    def worker(item: tuple[str, dict[str, Any]]) -> dict[str, Any]:
+        article_id, summ = item
+        sentences = _split_summary_sentences(str(summ["summary"]))
+        evaluations = checks[article_id].get("sentence_evaluations", [])
+        problematic = [e for e in evaluations if str(e.get("verdict")) != "supported"]
+        if not problematic:
+            return {
+                **summ,
+                "sentence_repair_iteration": iteration,
+                "problematic_sentence_count": 0,
+                "replacements": [],
+                "parse_error": False,
+            }
+        feedback = "\n".join(
+            f"[{e['sentence_index']}] verdict={e['verdict']}\n"
+            f"Sentence: {e['sentence']}\nEvidence: {e.get('evidence', '')}\nReason: {e.get('reason', '')}"
+            for e in problematic
+        )
+        client = ChatRunner(model=model, model_key=model_key, run_name=run_name, usage=usage)
+        raw = ""
+        parse_error = False
+        error = ""
+        replacements: list[dict[str, Any]] = []
+        repaired_sentences = list(sentences)
+        try:
+            raw = client.chat(
+                stage=f"stage05_sentence_repair_iter{iteration}:{_model_label(model, model_key)}",
+                item_id=article_id,
+                messages=[
+                    {
+                        "role": "user",
+                        "content": prompt.replace("{article}", str(articles[article_id]["document"]))
+                        .replace("{numbered_sentences}", _numbered_sentences(sentences))
+                        .replace("{factuality_feedback}", feedback),
+                    }
+                ],
+                temperature=0.0,
+                response_format={"type": "json_object"},
+            )
+            obj = json.loads(raw)
+            raw_replacements = obj.get("replacements", [])
+            if not isinstance(raw_replacements, list):
+                raise ValueError("replacements must be a list")
+            allowed_indices = {int(e["sentence_index"]) for e in problematic}
+            seen_indices: set[int] = set()
+            for entry in raw_replacements:
+                if not isinstance(entry, dict):
+                    continue
+                idx = int(entry.get("sentence_index", -1))
+                action = str(entry.get("action", "")).strip().lower()
+                replacement = str(entry.get("replacement", "")).strip()
+                if idx not in allowed_indices or idx in seen_indices or action not in {"replace", "delete"}:
+                    continue
+                if action == "replace" and not replacement:
+                    raise ValueError(f"empty replacement for sentence {idx}")
+                repaired_sentences[idx] = replacement if action == "replace" else ""
+                seen_indices.add(idx)
+                replacements.append(
+                    {
+                        "sentence_index": idx,
+                        "action": action,
+                        "original": sentences[idx],
+                        "replacement": replacement,
+                        "reason": str(entry.get("reason", "")).strip(),
+                    }
+                )
+            if seen_indices != allowed_indices:
+                missing = sorted(allowed_indices - seen_indices)
+                raise ValueError(f"missing repairs for problematic sentences: {missing}")
+        except Exception as exc:
+            parse_error = True
+            error = str(exc)
+            repaired_sentences = sentences
+        repaired_summary = " ".join(s for s in repaired_sentences if s).strip()
+        return {
+            "article_id": article_id,
+            "source_dataset": summ["source_dataset"],
+            "original_index": summ["original_index"],
+            "iteration": iteration,
+            "summary": repaired_summary,
+            "summary_word_count": _word_count(repaired_summary),
+            "target_word_count": _target_summary_word_count(articles[article_id]),
+            "sentence_repair_iteration": iteration,
+            "problematic_sentence_count": len(problematic),
+            "replacements": replacements,
+            "parse_error": parse_error,
+            "error": error,
+            "raw_preview": raw[:500] if parse_error else "",
+        }
+
+    todo = [(article_id, summ) for article_id, summ in summaries.items() if article_id not in done]
+    new_rows = _run_parallel(todo, worker, max_workers=max_workers, desc=f"stage05 | sentence repair iter {iteration}")
+    new_ids = {str(r["article_id"]) for r in new_rows}
+    rows = [r for r in rows if str(r["article_id"]) not in new_ids] + new_rows
+    rows.sort(key=lambda r: (str(r["source_dataset"]), int(r["original_index"]), str(r["article_id"])))
+    save_jsonl(rows, out_path)
+    save_jsonl(rows, summaries_path)
+    save_json(
+        {
+            "time": datetime.now().isoformat(timespec="seconds"),
+            "model": _model_label(model, model_key),
+            "iteration": iteration,
+            "max_workers": max_workers,
+            "articles": len(rows),
+            "problematic_sentences": sum(int(r.get("problematic_sentence_count", 0)) for r in rows),
+            "repaired_or_deleted_sentences": sum(len(r.get("replacements", [])) for r in rows),
+            "parse_error_count": sum(1 for r in rows if r.get("parse_error")),
+        },
+        out_dir / "sentence_repair_summary.json",
+    )
+    parse_errors = [r for r in rows if r.get("parse_error")]
+    if parse_errors:
+        raise RuntimeError(f"sentence repair has {len(parse_errors)} parse/runtime errors; rerun with resume")
+    print(
+        f"[stage05] sentence repair iter={iteration} repaired="
+        f"{sum(len(r.get('replacements', [])) for r in rows)}"
+    )
+
+
 def stage06_build_submission_files(run_name: str, final_iteration: int) -> None:
     articles = _load_articles(run_name)
-    initial = _summaries_for_iteration(run_name, 0)
+    initial_raw_path = _stage_dir(run_name, "03_summaries") / "summaries_iter0_pre_factuality.jsonl"
+    initial = (
+        {str(r["article_id"]): r for r in load_jsonl(initial_raw_path)}
+        if initial_raw_path.exists()
+        else _summaries_for_iteration(run_name, 0)
+    )
     final = _summaries_for_iteration(run_name, final_iteration)
     out_dir = _stage_dir(run_name, "06_eval_inputs")
     rows_summary: list[dict[str, Any]] = []
@@ -1138,6 +1522,7 @@ def stage06_build_submission_files(run_name: str, final_iteration: int) -> None:
         {
             "time": datetime.now().isoformat(timespec="seconds"),
             "final_iteration": final_iteration,
+            "initial_variant": "evidence_first_pre_factuality_repair" if initial_raw_path.exists() else "iteration_0",
             "files": {
                 "initial": ["plos_initial.txt", "elife_initial.txt"],
                 "rewritten": ["plos_rewritten.txt", "elife_rewritten.txt"],
@@ -1210,6 +1595,28 @@ def run_all(args: argparse.Namespace) -> None:
     )
     if usage is not None:
         _save_usage(args.run_name, usage)
+    stage05_sentence_factuality_check(
+        args.run_name,
+        args.model,
+        0,
+        resume=not args.no_resume,
+        model_key=model_key,
+        max_workers=args.max_workers,
+        usage=usage,
+    )
+    if usage is not None:
+        _save_usage(args.run_name, usage)
+    stage05_minimal_sentence_repair(
+        args.run_name,
+        args.model,
+        0,
+        resume=not args.no_resume,
+        model_key=model_key,
+        max_workers=args.max_workers,
+        usage=usage,
+    )
+    if usage is not None:
+        _save_usage(args.run_name, usage)
 
     final_iteration = 0
     for iteration in range(args.max_rewrites + 1):
@@ -1224,7 +1631,7 @@ def run_all(args: argparse.Namespace) -> None:
             resume=not args.no_resume,
             model_key=model_key,
             max_workers=args.max_workers,
-            only_previous_errors=iteration > 0,
+            only_previous_errors=False,
             context_mode=args.context_mode,
             usage=usage,
         )
@@ -1240,6 +1647,29 @@ def run_all(args: argparse.Namespace) -> None:
                 args.run_name,
                 args.model,
                 iteration,
+                resume=not args.no_resume,
+                model_key=model_key,
+                max_workers=args.max_workers,
+                usage=usage,
+            )
+            if usage is not None:
+                _save_usage(args.run_name, usage)
+            next_iteration = iteration + 1
+            stage05_sentence_factuality_check(
+                args.run_name,
+                args.model,
+                next_iteration,
+                resume=not args.no_resume,
+                model_key=model_key,
+                max_workers=args.max_workers,
+                usage=usage,
+            )
+            if usage is not None:
+                _save_usage(args.run_name, usage)
+            stage05_minimal_sentence_repair(
+                args.run_name,
+                args.model,
+                next_iteration,
                 resume=not args.no_resume,
                 model_key=model_key,
                 max_workers=args.max_workers,
@@ -1317,6 +1747,14 @@ def main() -> None:
     add_common(p5)
     p5.add_argument("--from-iteration", type=int, required=True)
 
+    p5s = sub.add_parser("stage05_sentence_factuality_check")
+    add_common(p5s)
+    p5s.add_argument("--iteration", type=int, required=True)
+
+    p5r = sub.add_parser("stage05_minimal_sentence_repair")
+    add_common(p5r)
+    p5r.add_argument("--iteration", type=int, required=True)
+
     p6 = sub.add_parser("stage06_build_submission_files")
     p6.add_argument("--run-name", type=str, default="pilot_n10_gpt41_mini")
     p6.add_argument("--final-iteration", type=int, required=True)
@@ -1380,6 +1818,32 @@ def main() -> None:
             args.run_name,
             args.model,
             args.from_iteration,
+            resume=not args.no_resume,
+            model_key=args.model_key,
+            max_workers=args.max_workers,
+            usage=usage,
+        )
+        if usage is not None:
+            _save_usage(args.run_name, usage)
+    elif args.cmd == "stage05_sentence_factuality_check":
+        usage = _usage(args.run_name, resume=not args.no_resume) if args.model_key else None
+        stage05_sentence_factuality_check(
+            args.run_name,
+            args.model,
+            args.iteration,
+            resume=not args.no_resume,
+            model_key=args.model_key,
+            max_workers=args.max_workers,
+            usage=usage,
+        )
+        if usage is not None:
+            _save_usage(args.run_name, usage)
+    elif args.cmd == "stage05_minimal_sentence_repair":
+        usage = _usage(args.run_name, resume=not args.no_resume) if args.model_key else None
+        stage05_minimal_sentence_repair(
+            args.run_name,
+            args.model,
+            args.iteration,
             resume=not args.no_resume,
             model_key=args.model_key,
             max_workers=args.max_workers,
