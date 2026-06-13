@@ -3,6 +3,12 @@
 Read this file together with `EXPERIMENT_3_COLLABORATION.md` before running
 Experiment 3 evaluation on this computer.
 
+If you are on the local test machine at
+`C:\Users\bugee\OneDrive\桌面\chiehshukou_master` rather than the lab evaluation
+computer, read `evaluation/LOCAL_TEST_MACHINE_SETUP.md` first. That file records
+the local `.venv-eval` workflow, ASCII-only Hugging Face cache path, and
+small-run testing commands used on this machine.
+
 ## Local Environment
 
 - Repository: `C:\Users\user\Desktop\chiehshukou_master`

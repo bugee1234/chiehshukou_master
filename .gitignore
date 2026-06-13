@@ -13,3 +13,9 @@ logs/*.log
 .ipynb_checkpoints/
 results/experiment_0/*.json
 results/experiment_0/*.csv
+
+.venv-eval/
+.cache/
+.nltk_data/
+AlignScore/
+summac/
