@@ -62,6 +62,26 @@ After the command reports that it wrote official metrics, run:
 Warnings about deprecated `pkg_resources` or LENS not using an available GPU
 do not by themselves indicate evaluation failure.
 
+## Reference Self-Check
+
+To validate the metric pipeline on a run, use each expert reference summary as
+the prediction for the same article:
+
+```powershell
+$env:NLTK_DATA="$PWD\.nltk_data"; $env:HF_HOME="$PWD\.cache\huggingface"; .\.venv\Scripts\python.exe src/experiment_3/evaluate_exp3_outputs.py --run-name <run-name> --variant reference-self-check
+```
+
+Results are written separately from official metrics under:
+
+```text
+results/experiment_3/<run-name>/diagnostics/reference_self_check/
+```
+
+ROUGE, BLEU, METEOR, and BERTScore should reach or approach their self-match
+maximums. Readability metrics still describe the expert summaries themselves.
+LENS, AlignScore, and SummaC also use the source article, so they are not
+expected to equal one.
+
 ## Input Format
 
 `evaluate_exp3_outputs.py` reads predictions from
