@@ -1,0 +1,33 @@
+{
+  "created_at": "2026-06-14T22:53:56",
+  "run_name": "pilot_val_n10_judge_gemini31_flash_lite",
+  "article_count": 10,
+  "method": {
+    "document_source": "extractive selection from original article sentences",
+    "query": "every expert-summary sentence",
+    "embedding_retrieval": "top 20 by normalized cosine similarity",
+    "nli_reranking": "top 5 by vitc entailment probability",
+    "deduplication": "union by original article sentence index",
+    "document_cap": "top 100 unique sentences by best NLI entailment, restored to original article order",
+    "final_metric": "official SummaCConv configuration"
+  },
+  "configuration": {
+    "embedding_model": "all-MiniLM-L6-v2",
+    "embedding_top_k": 20,
+    "nli_model": "vitc",
+    "nli_top_k": 5,
+    "max_document_sentences": 100,
+    "summacconv_max_summary_chunks": 10,
+    "device": "cuda"
+  },
+  "summacconv_mean": 0.3741342216730118,
+  "timing_seconds": {
+    "embedding_model_load": 12.637975399999998,
+    "summacconv_model_load": 0.003273199999998866,
+    "embedding_total": 2.1446166999999967,
+    "nli_rerank_total": 69.66569789999998,
+    "summacconv_total": 152.03731850000003,
+    "ten_article_processing_total": 223.90764949999996,
+    "overall_wall_including_model_load": 236.55191870000002
+  }
+}

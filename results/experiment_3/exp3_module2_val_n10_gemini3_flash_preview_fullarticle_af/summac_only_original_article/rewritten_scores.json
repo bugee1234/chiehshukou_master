@@ -1,0 +1,19 @@
+{
+  "variant": "rewritten",
+  "metric": "SummaCConv",
+  "summac_document": "original full article; native SummaCConv keeps the first 100 document sentences",
+  "eLife": {
+    "article_count": 5,
+    "SummaC": 0.413493287563324,
+    "seconds": 100.2839118
+  },
+  "PLOS": {
+    "article_count": 5,
+    "SummaC": 0.41559746861457825,
+    "seconds": 134.75823499999998
+  },
+  "overall": {
+    "SummaC": 0.4145453780889511
+  },
+  "total_seconds": 235.04742009999998
+}

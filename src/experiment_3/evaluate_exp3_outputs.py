@@ -3,6 +3,7 @@ from __future__ import annotations
 import argparse
 import json
 import sys
+import time
 from pathlib import Path
 from typing import Any
 
@@ -83,7 +84,12 @@ def _assert_matching_counts(preds: list[str], refs: list[dict[str, Any]], source
         )
 
 
-def evaluate_variant(run_dir: Path, variant: str, truth_dir: Path | None = None) -> dict[str, Any]:
+def evaluate_variant(
+    run_dir: Path,
+    variant: str,
+    truth_dir: Path | None = None,
+    summac_document: str = "original",
+) -> dict[str, Any]:
     from evaluation.evaluation_final import evaluate_all
 
     eval_dir = run_dir / "06_eval_inputs"
@@ -102,18 +108,70 @@ def evaluate_variant(run_dir: Path, variant: str, truth_dir: Path | None = None)
     _assert_matching_counts(elife_preds, elife_refs, "eLife", variant)
     _assert_matching_counts(plos_preds, plos_refs, "PLOS", variant)
 
+    elife_summac_docs = None
+    plos_summac_docs = None
+    if summac_document == "expert-summary":
+        elife_summac_docs = [str(ref["reference"]) for ref in elife_refs]
+        plos_summac_docs = [str(ref["reference"]) for ref in plos_refs]
+
     elife_scores = evaluate_all(
         elife_preds,
         elife_refs,
         "lay_summ",
+        summac_docs=elife_summac_docs,
     )
     plos_scores = evaluate_all(
         plos_preds,
         plos_refs,
         "lay_summ",
+        summac_docs=plos_summac_docs,
     )
     overall = {key: float(np.mean([elife_scores[key], plos_scores[key]])) for key in elife_scores}
-    return {"variant": variant, "eLife": elife_scores, "PLOS": plos_scores, "overall": overall}
+    return {
+        "variant": variant,
+        "summac_document": summac_document,
+        "eLife": elife_scores,
+        "PLOS": plos_scores,
+        "overall": overall,
+    }
+
+
+def evaluate_summac_only(
+    run_dir: Path,
+    variant: str,
+    truth_dir: Path | None = None,
+) -> dict[str, Any]:
+    from evaluation.evaluation_final import cal_summac
+
+    eval_dir = run_dir / "06_eval_inputs"
+    truth_dir = truth_dir or (run_dir / "00_inputs")
+    source_results: dict[str, dict[str, float]] = {}
+    total_started = time.perf_counter()
+
+    for source, filename in (("eLife", "eLife_test.jsonl"), ("PLOS", "PLOS_test.jsonl")):
+        refs = read_jsonl(truth_dir / filename)
+        _assert_refs_available(refs, truth_dir / filename)
+        preds = read_predictions(eval_dir, variant, source, refs)
+        _assert_matching_counts(preds, refs, source, variant)
+        documents = [str(ref["document"]) for ref in refs]
+        started = time.perf_counter()
+        score = float(cal_summac(preds, documents))
+        source_results[source] = {
+            "article_count": len(preds),
+            "SummaC": score,
+            "seconds": time.perf_counter() - started,
+        }
+
+    overall = float(np.mean([source_results["eLife"]["SummaC"], source_results["PLOS"]["SummaC"]]))
+    return {
+        "variant": variant,
+        "metric": "SummaCConv",
+        "summac_document": "original full article; native SummaCConv keeps the first 100 document sentences",
+        "eLife": source_results["eLife"],
+        "PLOS": source_results["PLOS"],
+        "overall": {"SummaC": overall},
+        "total_seconds": time.perf_counter() - total_started,
+    }
 
 
 def main() -> None:
@@ -133,14 +191,51 @@ def main() -> None:
         default=None,
         help="Directory containing official eLife_test.jsonl and PLOS_test.jsonl references.",
     )
+    parser.add_argument(
+        "--summac-document",
+        choices=["original", "expert-summary"],
+        default="original",
+        help=(
+            "Document used only by SummaC. The default preserves official evaluation; "
+            "expert-summary uses each reference summary as the SummaC document."
+        ),
+    )
+    parser.add_argument(
+        "--metric",
+        choices=["all", "summac-only"],
+        default="all",
+        help="Run all ten metrics or SummaC alone.",
+    )
     args = parser.parse_args()
 
     run_dir = args.data_root / args.run_name
     variants = ["initial", "rewritten"] if args.variant == "both" else [args.variant]
-    results = {variant: evaluate_variant(run_dir, variant, truth_dir=args.truth_dir) for variant in variants}
+    if args.metric == "summac-only":
+        if args.variant == REFERENCE_SELF_CHECK:
+            parser.error("--metric summac-only does not support reference-self-check")
+        if args.summac_document != "original":
+            parser.error("--metric summac-only currently requires --summac-document original")
+        results = {
+            variant: evaluate_summac_only(run_dir, variant, truth_dir=args.truth_dir)
+            for variant in variants
+        }
+    else:
+        results = {
+            variant: evaluate_variant(
+                run_dir,
+                variant,
+                truth_dir=args.truth_dir,
+                summac_document=args.summac_document,
+            )
+            for variant in variants
+        }
 
-    if args.variant == REFERENCE_SELF_CHECK:
+    if args.metric == "summac-only":
+        out_dir = args.output_root / args.run_name / "summac_only_original_article"
+    elif args.variant == REFERENCE_SELF_CHECK:
         out_dir = args.output_root / args.run_name / "diagnostics" / "reference_self_check"
+    elif args.summac_document == "expert-summary":
+        out_dir = args.output_root / args.run_name / "official_metrics_summac_expert_document"
     else:
         out_dir = args.output_root / args.run_name / "official_metrics"
     out_dir.mkdir(parents=True, exist_ok=True)

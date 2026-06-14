@@ -1,0 +1,30 @@
+{
+  "api_calls": 10,
+  "prompt_tokens": 116035,
+  "cached_prompt_tokens": 0,
+  "billable_prompt_tokens": 116035,
+  "completion_tokens": 3649,
+  "billable_output_tokens": 3649,
+  "total_tokens": 119684,
+  "api_elapsed_seconds": 32.4303,
+  "cost_currencies": [
+    "USD"
+  ],
+  "estimated_cost": 0.068964,
+  "by_stage": {
+    "summaczs_expert_extract": {
+      "api_calls": 10,
+      "prompt_tokens": 116035,
+      "cached_prompt_tokens": 0,
+      "billable_prompt_tokens": 116035,
+      "completion_tokens": 3649,
+      "billable_output_tokens": 3649,
+      "total_tokens": 119684,
+      "api_elapsed_seconds": 32.4303,
+      "cost_currencies": [
+        "USD"
+      ],
+      "estimated_cost": 0.068964
+    }
+  }
+}

@@ -127,6 +127,33 @@ $env:HF_HOME="C:\hf_cache"
 python src/experiment_3/evaluate_exp3_outputs.py --run-name <run-name> --variant reference-self-check
 ```
 
+### Experiment 3 Ten Metrics With Expert Summary As SummaC Document
+
+This diagnostic preserves the normal inputs for ROUGE, BLEU, METEOR,
+BERTScore, FKGL, DCRS, CLI, LENS, and AlignScore. Only SummaC uses the expert
+summary instead of the original article as its document:
+
+```powershell
+$env:NLTK_DATA="$PWD\.nltk_data"
+$env:HF_HOME="C:\hf_cache"
+.\.venv-eval\Scripts\python.exe src\experiment_3\evaluate_exp3_outputs.py --run-name exp3_module2_val_n10_gemini3_flash_preview_fullarticle_af --variant both --summac-document expert-summary
+```
+
+Results are written separately under
+`results/experiment_3/<run-name>/official_metrics_summac_expert_document/`.
+
+To evaluate only official SummaCConv with the original full article as its
+document (native SummaCConv still keeps only the first 100 document sentences):
+
+```powershell
+$env:NLTK_DATA="$PWD\.nltk_data"
+$env:HF_HOME="C:\hf_cache"
+.\.venv-eval\Scripts\python.exe src\experiment_3\evaluate_exp3_outputs.py --run-name exp3_module2_val_n10_gemini3_flash_preview_fullarticle_af --variant rewritten --metric summac-only
+```
+
+Results and elapsed time are written under
+`results/experiment_3/<run-name>/summac_only_original_article/`.
+
 ### Module 2 Repro Expert-Summary Diagnostics
 
 This machine also has a local helper script for the `experiment_3_module2_repro`
@@ -165,6 +192,90 @@ For self-check style diagnostics on this machine:
   replaced with the expert summary.
 
 This pattern is expected and does not by itself indicate a bug.
+
+## SummaCZS Expert-Summary Variant Pilot
+
+This pilot uses the ten validation articles in
+`pilot_val_n10_judge_gemini31_flash_lite` and evaluates only AlignScore and
+SummaCZS. Its outputs are separate from the existing diagnostics.
+
+First generate the expert-conditioned documents with Gemini 3 Flash Preview:
+
+```powershell
+$env:NLTK_DATA="$PWD\.nltk_data"
+.\.venv\Scripts\python.exe src\experiment_3_module2_repro\evaluate_summaczs_variants.py prepare-expert-extract --resume
+```
+
+Generation uses `.venv` (Python 3.11) because Gemini 3's `thinking_level`
+configuration requires a newer `google-genai` release that no longer supports
+the Python 3.9 runtime in `.venv-eval`. The generated JSONL is then consumed by
+the evaluation command below, so the model evaluation still runs entirely in
+`.venv-eval`.
+
+Then evaluate all three variants and record per-article and ten-article times:
+
+```powershell
+$env:NLTK_DATA="$PWD\.nltk_data"
+$env:HF_HOME="C:\hf_cache"
+.\.venv-eval\Scripts\python.exe src\experiment_3_module2_repro\evaluate_summaczs_variants.py evaluate
+```
+
+The variants are:
+
+- `full_article`: original article. SummaCZS processes consecutive blocks of at
+  most 100 sentences, concatenates the NLI images, and performs the native ZS
+  aggregation once over the complete article.
+- `expert_extract`: Gemini 3 Flash Preview document containing only article
+  information relevant to the expert summary, capped at 100 sentences.
+- `expert_as_document`: expert summary used as both document and generated
+  summary. This is an identity sanity check, not a formal upper bound.
+
+All variants use the expert summary as the generated summary. AlignScore uses
+its native full-document chunking. SummaCZS uses `vitc`, sentence granularity,
+`op1=max`, `op2=mean`, and entailment minus contradiction.
+
+Results are written under:
+
+```text
+results/experiment_3_module2_repro/pilot_val_n10_judge_gemini31_flash_lite/summaczs_variants/
+```
+
+The main files are `evaluation/summary.json`, `evaluation/method_manifest.json`,
+`evaluation/per_article.csv`, and `evaluation/per_article.jsonl`. Gemini
+generation outputs and times are stored under `expert_extract/`. The summary
+separates inference time, expert-extract preparation time, and end-to-end time
+for all ten articles.
+
+To additionally evaluate the Gemini expert-extract documents with the official
+SummaCConv configuration:
+
+```powershell
+$env:NLTK_DATA="$PWD\.nltk_data"
+$env:HF_HOME="C:\hf_cache"
+.\.venv-eval\Scripts\python.exe src\experiment_3_module2_repro\evaluate_summaczs_variants.py evaluate-summacconv
+```
+
+This uses the expert extract as the document and the expert summary as the
+generated summary. It preserves native SummaCConv limits: at most 100 document
+sentences and the first 10 summary chunks. Results are written under
+`summaczs_variants/summacconv_expert_extract/`.
+
+To run extractive retrieval over the original articles before official
+SummaCConv evaluation:
+
+```powershell
+$env:NLTK_DATA="$PWD\.nltk_data"
+$env:HF_HOME="C:\hf_cache"
+.\.venv-eval\Scripts\python.exe src\experiment_3_module2_repro\evaluate_summaczs_variants.py evaluate-retrieval-summacconv
+```
+
+For every expert-summary sentence, this retrieves the top 20 original article
+sentences with `all-MiniLM-L6-v2`, reranks them with `vitc` NLI entailment,
+keeps the top 5, merges duplicates, and caps the final extractive document at
+100 sentences. Retrieval uses all summary sentences; native SummaCConv still
+scores only its first 10 summary chunks. Outputs, selected documents, evidence
+mappings, per-article timings, and the ten-article total are written under
+`summaczs_variants/retrieval_summacconv/`.
 
 ## Local Compatibility Fixes
 

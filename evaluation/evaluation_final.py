@@ -99,7 +99,7 @@ def cal_similarity(preds, refs):
   return np.mean(scores)
 
 
-def evaluate_all(preds,refs_dicts,task_name):
+def evaluate_all(preds,refs_dicts,task_name,summac_docs=None):
   # Load data from files
   # refs_dicts = read_file_lines(gold_path)
   # preds = read_file_lines(pred_path)
@@ -108,6 +108,9 @@ def evaluate_all(preds,refs_dicts,task_name):
   refs = [d['reference'] for d in refs_dicts]
   if task_name == "lay_summ":
     docs = [d['document'] for d in refs_dicts]
+    if summac_docs is None:
+      summac_docs = docs
+    assert len(summac_docs) == len(preds)
   
   score_dict = {}
 
@@ -128,7 +131,7 @@ def evaluate_all(preds,refs_dicts,task_name):
   if task_name == "lay_summ":
     score_dict['LENS'] = calc_lens(preds, refs, docs)
     score_dict['AlignScore'] = calc_alignscore(preds, docs)   
-    score_dict['SummaC'] = cal_summac(preds, docs)
+    score_dict['SummaC'] = cal_summac(preds, summac_docs)
   else:
     score_dict['similarity'] = cal_similarity(preds, refs)
     score_dict["radgraph"] = cal_radgraph(preds,refs)

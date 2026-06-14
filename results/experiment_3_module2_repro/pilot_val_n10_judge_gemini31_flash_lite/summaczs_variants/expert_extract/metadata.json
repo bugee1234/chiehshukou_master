@@ -1,0 +1,9 @@
+{
+  "created_at": "2026-06-14T22:15:53",
+  "run_name": "pilot_val_n10_judge_gemini31_flash_lite",
+  "model_key": "gemini3_flash_preview_minimal",
+  "prompt": "src\\experiment_3_module2_repro\\prompts\\build_expert_conditioned_article.txt",
+  "article_count": 10,
+  "total_generation_seconds": 32.431407,
+  "max_sentence_count": 14
+}
