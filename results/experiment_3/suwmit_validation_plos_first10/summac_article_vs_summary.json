@@ -1,0 +1,48 @@
+{
+  "sample": "first_10_rows",
+  "document_field": "article",
+  "summary_field": "summary",
+  "overall_summac": 0.551174420118332,
+  "per_article": [
+    {
+      "index": 0,
+      "SummaC": 0.4608140289783478
+    },
+    {
+      "index": 1,
+      "SummaC": 0.3782348036766052
+    },
+    {
+      "index": 2,
+      "SummaC": 0.6437463164329529
+    },
+    {
+      "index": 3,
+      "SummaC": 0.5418484210968018
+    },
+    {
+      "index": 4,
+      "SummaC": 0.4406515955924988
+    },
+    {
+      "index": 5,
+      "SummaC": 0.38525086641311646
+    },
+    {
+      "index": 6,
+      "SummaC": 0.4145450294017792
+    },
+    {
+      "index": 7,
+      "SummaC": 0.9746365547180176
+    },
+    {
+      "index": 8,
+      "SummaC": 0.8541677594184875
+    },
+    {
+      "index": 9,
+      "SummaC": 0.4178488254547119
+    }
+  ]
+}

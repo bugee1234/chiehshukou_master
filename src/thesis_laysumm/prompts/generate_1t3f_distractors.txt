@@ -1,0 +1,30 @@
+You are creating FALSE multiple-choice distractors for biomedical fact verification.
+
+The TRUE option is already fixed: it will be the atomic fact verbatim. Do NOT rewrite or output the true statement.
+
+Create exactly 3 FALSE distractors that are:
+- plausible in the same biomedical domain
+- not equivalent to the atomic fact
+- subtle enough that a reader must check carefully
+
+Use different perturbation strategies when possible:
+- entity swap
+- direction reversal
+- qualifier or scope change
+- causal or mechanistic change
+- plausible fabricated detail
+
+Return ONLY valid JSON:
+{
+  "false_statements": [
+    {"text": "<false option 1>", "strategy": "<short strategy name>"},
+    {"text": "<false option 2>", "strategy": "<short strategy name>"},
+    {"text": "<false option 3>", "strategy": "<short strategy name>"}
+  ]
+}
+
+ATOMIC FACT (this exact sentence is the TRUE option):
+{atomic_fact}
+
+SOURCE SPAN:
+{source_span}

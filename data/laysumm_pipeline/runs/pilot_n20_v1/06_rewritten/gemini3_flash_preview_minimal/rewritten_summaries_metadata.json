@@ -1,0 +1,71 @@
+{
+  "time": "2026-06-15T23:16:05",
+  "run_name": "pilot_n20_v1",
+  "stage": "06_rewritten",
+  "model_key": "gemini3_flash_preview_minimal",
+  "provider": "gemini",
+  "model": "gemini-3-flash-preview",
+  "max_workers": 4,
+  "articles_limit": null,
+  "prompt_version": "rewrite_lay_summary_v1",
+  "prompt_file": "C:\\Users\\bugee\\OneDrive\\桌面\\chiehshukou_master\\src\\thesis_laysumm\\prompts\\rewrite_lay_summary.txt",
+  "prompt_sha256": "636876279cad3056f89244a7df48338f5ce5d3aebf0cfd7103bb70d83251c47c",
+  "rewritten_total": 20,
+  "skipped_no_errors_count": 0,
+  "parse_error_count": 0,
+  "below_min_length_count": 0,
+  "wrong_feedback_stats": {
+    "min": 2,
+    "max": 20,
+    "mean": 9.3
+  },
+  "rewritten_word_count_stats": {
+    "min": 345,
+    "max": 754,
+    "mean": 492.0
+  },
+  "usage_summary": {
+    "api_calls": 821,
+    "prompt_tokens": 940925,
+    "cached_prompt_tokens": 0,
+    "billable_prompt_tokens": 940925,
+    "completion_tokens": 284941,
+    "billable_output_tokens": 284941,
+    "total_tokens": 1225866,
+    "api_elapsed_seconds": 2308.7481,
+    "cost_currencies": [
+      "USD"
+    ],
+    "estimated_cost": 1.325285,
+    "by_stage": {
+      "phase_b.answer_questions:gemini3_flash_preview_minimal": {
+        "api_calls": 801,
+        "prompt_tokens": 895940,
+        "cached_prompt_tokens": 0,
+        "billable_prompt_tokens": 895940,
+        "completion_tokens": 268953,
+        "billable_output_tokens": 268953,
+        "total_tokens": 1164893,
+        "api_elapsed_seconds": 2205.0848,
+        "cost_currencies": [
+          "USD"
+        ],
+        "estimated_cost": 1.254829
+      },
+      "phase_b.rewrite_summary:gemini3_flash_preview_minimal": {
+        "api_calls": 20,
+        "prompt_tokens": 44985,
+        "cached_prompt_tokens": 0,
+        "billable_prompt_tokens": 44985,
+        "completion_tokens": 15988,
+        "billable_output_tokens": 15988,
+        "total_tokens": 60973,
+        "api_elapsed_seconds": 103.6633,
+        "cost_currencies": [
+          "USD"
+        ],
+        "estimated_cost": 0.070457
+      }
+    }
+  }
+}

@@ -1,0 +1,29 @@
+You are revising a plain-language biomedical lay summary after a fact-checking quiz.
+
+Use ONLY the abstract, current summary, and feedback list. Do not use outside knowledge.
+
+The feedback lists atomic facts (AFs) that the current summary failed to support in the quiz.
+Revise the summary so each feedback AF is correctly and naturally covered.
+
+Rules:
+- Stay abstract-aligned: corrected claims must match the abstract-level science in the feedback AFs.
+- Fix omissions and contradictions; preserve correct existing content.
+- Do not copy the feedback list mechanically.
+- Do not add claims beyond the abstract and feedback AF scope.
+- Keep lay-readable language for non-expert readers.
+- Length: at least {min_word_count} words. Do not shorten the summary.
+
+Return ONLY valid JSON:
+{
+  "rewritten_summary": "<full revised plain-language lay summary>",
+  "revision_notes": ["<short note per major change>"]
+}
+
+ABSTRACT:
+{abstract}
+
+CURRENT SUMMARY:
+{generated_summary}
+
+FEEDBACK (missed or incorrectly covered AFs from quiz):
+{feedback}

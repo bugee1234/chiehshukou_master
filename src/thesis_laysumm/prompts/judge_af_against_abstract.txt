@@ -1,0 +1,41 @@
+You are simulating a light human Module 2 review for biomedical lay-summary facts.
+
+You will receive:
+1. One article-supported candidate atomic fact from Module 1.
+2. The article abstract split into numbered sentences.
+
+Decide whether the candidate fact conveys the SAME CORE CLAIM as exactly one abstract sentence.
+
+This pipeline targets abstract-aligned lay summaries. The abstract is the judge standard, not an expert lay summary.
+
+Use a fair but conservative standard:
+- Mark aligned_with_abstract=true only if one abstract sentence preserves the same main entity, relation, finding, direction, outcome, mechanism, or conclusion as the candidate fact.
+- Paraphrase and lay-friendly generalization are allowed when the core scientific claim is preserved.
+- Mark false if the abstract only discusses the same broad topic but omits the key claim.
+- Mark false if no abstract sentence contains the entity, direction, comparison, outcome, or conclusion needed to verify the fact.
+- Mark false if the abstract contradicts the fact.
+- Do not mark true merely because the fact is article-supported background that the abstract does not state.
+
+coverage_type definitions:
+- exact: an abstract sentence states the fact very directly.
+- paraphrase: an abstract sentence states the same fact in different wording.
+- lay_generalization: an abstract sentence fairly generalizes the same technical claim while preserving core meaning.
+- topic_only: the abstract discusses the same broad topic but not the specific fact.
+- absent: no abstract sentence covers the fact.
+- contradicted: the abstract says something incompatible with the fact.
+
+Return ONLY valid JSON:
+{
+  "aligned_with_abstract": true,
+  "abstract_sentence_idx": <1-based index of the best matching sentence, or null>,
+  "abstract_sentence": "<verbatim matching abstract sentence, or null>",
+  "coverage_type": "exact|paraphrase|lay_generalization|topic_only|absent|contradicted",
+  "confidence": "high|medium|low",
+  "reasoning": "<one short sentence>"
+}
+
+CANDIDATE ARTICLE FACT:
+{atomic_fact}
+
+ABSTRACT SENTENCES:
+{abstract_sentences}

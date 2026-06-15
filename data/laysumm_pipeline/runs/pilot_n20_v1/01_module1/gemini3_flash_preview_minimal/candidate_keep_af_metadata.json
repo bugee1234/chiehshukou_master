@@ -1,0 +1,74 @@
+{
+  "time": "2026-06-15T21:44:37",
+  "run_name": "pilot_n20_v1",
+  "stage": "01_module1",
+  "model_key": "gemini3_flash_preview_minimal",
+  "provider": "gemini",
+  "model": "gemini-3-flash-preview",
+  "chunk_words": 1200,
+  "overlap_words": 120,
+  "max_workers": 8,
+  "prompt_file": "C:\\Users\\bugee\\OneDrive\\桌面\\chiehshukou_master\\src\\thesis_laysumm\\prompts\\select_summary_candidate_af.txt",
+  "prompt_sha256": "60afb5c26ff8c528eea6dce64e566438c54703225f96f391edff2b265e59988f",
+  "articles_total": 20,
+  "articles_limit": null,
+  "articles_completed": 20,
+  "candidate_keep_af_total": 1295,
+  "candidate_keep_af_by_source": {
+    "eLife": 774,
+    "PLOS": 521
+  },
+  "candidate_keep_af_by_article": {
+    "laysumm_elife_0006": 109,
+    "laysumm_elife_0026": 72,
+    "laysumm_elife_0028": 60,
+    "laysumm_elife_0035": 79,
+    "laysumm_elife_0057": 55,
+    "laysumm_elife_0062": 98,
+    "laysumm_elife_0070": 67,
+    "laysumm_elife_0163": 86,
+    "laysumm_elife_0188": 55,
+    "laysumm_elife_0189": 93,
+    "laysumm_plos_0051": 57,
+    "laysumm_plos_0178": 18,
+    "laysumm_plos_0209": 58,
+    "laysumm_plos_0228": 80,
+    "laysumm_plos_0285": 43,
+    "laysumm_plos_0457": 60,
+    "laysumm_plos_0501": 69,
+    "laysumm_plos_0563": 41,
+    "laysumm_plos_1116": 46,
+    "laysumm_plos_1309": 49
+  },
+  "failed_chunk_count": 0,
+  "usage_summary": {
+    "api_calls": 168,
+    "prompt_tokens": 362440,
+    "cached_prompt_tokens": 0,
+    "billable_prompt_tokens": 362440,
+    "completion_tokens": 132825,
+    "billable_output_tokens": 132825,
+    "total_tokens": 495265,
+    "api_elapsed_seconds": 878.6108,
+    "cost_currencies": [
+      "USD"
+    ],
+    "estimated_cost": 0.579695,
+    "by_stage": {
+      "module1.candidate_af:gemini3_flash_preview_minimal": {
+        "api_calls": 168,
+        "prompt_tokens": 362440,
+        "cached_prompt_tokens": 0,
+        "billable_prompt_tokens": 362440,
+        "completion_tokens": 132825,
+        "billable_output_tokens": 132825,
+        "total_tokens": 495265,
+        "api_elapsed_seconds": 878.6108,
+        "cost_currencies": [
+          "USD"
+        ],
+        "estimated_cost": 0.579695
+      }
+    }
+  }
+}

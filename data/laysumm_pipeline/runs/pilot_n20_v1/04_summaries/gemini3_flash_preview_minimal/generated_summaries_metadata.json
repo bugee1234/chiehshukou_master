@@ -1,0 +1,79 @@
+{
+  "time": "2026-06-15T22:42:15",
+  "run_name": "pilot_n20_v1",
+  "stage": "04_summaries",
+  "model_key": "gemini3_flash_preview_minimal",
+  "provider": "gemini",
+  "model": "gemini-3-flash-preview",
+  "max_workers": 4,
+  "articles_limit": null,
+  "prompt_version": "generate_lay_summary_v1",
+  "prompt_file": "C:\\Users\\bugee\\OneDrive\\桌面\\chiehshukou_master\\src\\thesis_laysumm\\prompts\\generate_lay_summary.txt",
+  "prompt_sha256": "b5129d68d3fecfefa2db9d45373c92e2d59677e4e75b36796152735bfcb584b7",
+  "few_shot_file": "C:\\Users\\bugee\\OneDrive\\桌面\\chiehshukou_master\\src\\thesis_laysumm\\prompts\\few_shot_summary_examples.json",
+  "length_policy": {
+    "min_word_count": "expert_summary_word_count",
+    "max_word_count": "none (longer allowed)"
+  },
+  "summaries_total": 20,
+  "parse_error_count": 5,
+  "below_min_length_count": 0,
+  "generated_word_count_stats": {
+    "min": 0,
+    "max": 610,
+    "mean": 317.9
+  },
+  "af_cited_stats": {
+    "min": 16,
+    "max": 49,
+    "mean": 33.9
+  },
+  "summaries_by_source": {
+    "eLife": 10,
+    "PLOS": 10
+  },
+  "usage_summary": {
+    "api_calls": 187,
+    "prompt_tokens": 444621,
+    "cached_prompt_tokens": 0,
+    "billable_prompt_tokens": 444621,
+    "completion_tokens": 193535,
+    "billable_output_tokens": 193535,
+    "total_tokens": 638156,
+    "api_elapsed_seconds": 1144.9734,
+    "cost_currencies": [
+      "USD"
+    ],
+    "estimated_cost": 0.802916,
+    "by_stage": {
+      "module1.candidate_af:gemini3_flash_preview_minimal": {
+        "api_calls": 168,
+        "prompt_tokens": 362440,
+        "cached_prompt_tokens": 0,
+        "billable_prompt_tokens": 362440,
+        "completion_tokens": 132825,
+        "billable_output_tokens": 132825,
+        "total_tokens": 495265,
+        "api_elapsed_seconds": 878.6108,
+        "cost_currencies": [
+          "USD"
+        ],
+        "estimated_cost": 0.579695
+      },
+      "phase_b.generate_summary:gemini3_flash_preview_minimal": {
+        "api_calls": 19,
+        "prompt_tokens": 82181,
+        "cached_prompt_tokens": 0,
+        "billable_prompt_tokens": 82181,
+        "completion_tokens": 60710,
+        "billable_output_tokens": 60710,
+        "total_tokens": 142891,
+        "api_elapsed_seconds": 266.3626,
+        "cost_currencies": [
+          "USD"
+        ],
+        "estimated_cost": 0.223221
+      }
+    }
+  }
+}

@@ -110,7 +110,10 @@ def evaluate_variant(
 
     elife_summac_docs = None
     plos_summac_docs = None
-    if summac_document == "expert-summary":
+    if summac_document == "abstract":
+        elife_summac_docs = [str(ref["document"]).split("\n", 1)[0] for ref in elife_refs]
+        plos_summac_docs = [str(ref["document"]).split("\n", 1)[0] for ref in plos_refs]
+    elif summac_document == "expert-summary":
         elife_summac_docs = [str(ref["reference"]) for ref in elife_refs]
         plos_summac_docs = [str(ref["reference"]) for ref in plos_refs]
 
@@ -140,6 +143,7 @@ def evaluate_summac_only(
     run_dir: Path,
     variant: str,
     truth_dir: Path | None = None,
+    summac_document: str = "original",
 ) -> dict[str, Any]:
     from evaluation.evaluation_final import cal_summac
 
@@ -151,9 +155,17 @@ def evaluate_summac_only(
     for source, filename in (("eLife", "eLife_test.jsonl"), ("PLOS", "PLOS_test.jsonl")):
         refs = read_jsonl(truth_dir / filename)
         _assert_refs_available(refs, truth_dir / filename)
-        preds = read_predictions(eval_dir, variant, source, refs)
+        if variant == REFERENCE_SELF_CHECK:
+            preds = [str(ref["reference"]) for ref in refs]
+        else:
+            preds = read_predictions(eval_dir, variant, source, refs)
         _assert_matching_counts(preds, refs, source, variant)
-        documents = [str(ref["document"]) for ref in refs]
+        if summac_document == "abstract":
+            documents = [str(ref["document"]).split("\n", 1)[0] for ref in refs]
+        elif summac_document == "expert-summary":
+            documents = [str(ref["reference"]) for ref in refs]
+        else:
+            documents = [str(ref["document"]) for ref in refs]
         started = time.perf_counter()
         score = float(cal_summac(preds, documents))
         source_results[source] = {
@@ -166,7 +178,7 @@ def evaluate_summac_only(
     return {
         "variant": variant,
         "metric": "SummaCConv",
-        "summac_document": "original full article; native SummaCConv keeps the first 100 document sentences",
+        "summac_document": summac_document,
         "eLife": source_results["eLife"],
         "PLOS": source_results["PLOS"],
         "overall": {"SummaC": overall},
@@ -193,11 +205,12 @@ def main() -> None:
     )
     parser.add_argument(
         "--summac-document",
-        choices=["original", "expert-summary"],
+        choices=["original", "abstract", "expert-summary"],
         default="original",
         help=(
             "Document used only by SummaC. The default preserves official evaluation; "
-            "expert-summary uses each reference summary as the SummaC document."
+            "abstract uses the first newline-delimited article section; expert-summary "
+            "uses each reference summary as the SummaC document."
         ),
     )
     parser.add_argument(
@@ -211,12 +224,13 @@ def main() -> None:
     run_dir = args.data_root / args.run_name
     variants = ["initial", "rewritten"] if args.variant == "both" else [args.variant]
     if args.metric == "summac-only":
-        if args.variant == REFERENCE_SELF_CHECK:
-            parser.error("--metric summac-only does not support reference-self-check")
-        if args.summac_document != "original":
-            parser.error("--metric summac-only currently requires --summac-document original")
         results = {
-            variant: evaluate_summac_only(run_dir, variant, truth_dir=args.truth_dir)
+            variant: evaluate_summac_only(
+                run_dir,
+                variant,
+                truth_dir=args.truth_dir,
+                summac_document=args.summac_document,
+            )
             for variant in variants
         }
     else:
@@ -231,7 +245,12 @@ def main() -> None:
         }
 
     if args.metric == "summac-only":
-        out_dir = args.output_root / args.run_name / "summac_only_original_article"
+        output_suffix = {
+            "original": "original_article",
+            "abstract": "abstract",
+            "expert-summary": "expert_summary",
+        }[args.summac_document]
+        out_dir = args.output_root / args.run_name / f"summac_only_{output_suffix}"
     elif args.variant == REFERENCE_SELF_CHECK:
         out_dir = args.output_root / args.run_name / "diagnostics" / "reference_self_check"
     elif args.summac_document == "expert-summary":

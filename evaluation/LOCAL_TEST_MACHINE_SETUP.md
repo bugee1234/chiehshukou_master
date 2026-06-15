@@ -106,6 +106,18 @@ Expected behavior:
 
 ## Local Test Commands
 
+### Thesis LaySumm Pipeline (Phase C)
+
+Phase A/B LLM steps use `.venv`. Official metrics use `.venv-eval`:
+
+```powershell
+deactivate
+.\.venv-eval\Scripts\Activate.ps1
+$env:NLTK_DATA="$PWD\.nltk_data"
+$env:HF_HOME="C:\hf_cache"
+.\.venv-eval\Scripts\python.exe -m src.thesis_laysumm.run_evaluate --run-name pilot_n20_v1 --model-key gemini3_flash_preview_minimal --variant both --compare-leaderboard
+```
+
 ### Experiment 3 Official-Style Evaluation
 
 Use this only for local testing, not as the final authoritative evaluation:

@@ -1,0 +1,10 @@
+LAY SUMMARY (sole context — use only this):
+{generated_summary}
+
+Question: Which option is supported by the lay summary under the strict policy?
+
+A. {option_a}
+B. {option_b}
+C. {option_c}
+D. {option_d}
+E. {option_e}

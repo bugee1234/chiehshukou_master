@@ -1,0 +1,19 @@
+{
+  "variant": "reference-self-check",
+  "metric": "SummaCConv",
+  "summac_document": "abstract",
+  "eLife": {
+    "article_count": 5,
+    "SummaC": 0.23211895823478698,
+    "seconds": 19.170698700000003
+  },
+  "PLOS": {
+    "article_count": 5,
+    "SummaC": 0.2324220210313797,
+    "seconds": 11.234043200000002
+  },
+  "overall": {
+    "SummaC": 0.23227048963308333
+  },
+  "total_seconds": 30.407310200000005
+}

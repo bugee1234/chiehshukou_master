@@ -1,0 +1,86 @@
+{
+  "time": "2026-06-15T22:12:51",
+  "run_name": "pilot_n20_v1",
+  "stage": "03_questions",
+  "model_key": "gemini3_flash_preview_minimal",
+  "provider": "gemini",
+  "model": "gemini-3-flash-preview",
+  "max_workers": 8,
+  "articles_limit": null,
+  "prompt_file": "C:\\Users\\bugee\\OneDrive\\桌面\\chiehshukou_master\\src\\thesis_laysumm\\prompts\\generate_1t3f_distractors.txt",
+  "prompt_sha256": "2256316ac93bf21f4887a95bc8a63833009c39503eb0dc66b3445991f43dbde9",
+  "true_option_policy": "af_verbatim",
+  "final_keep_af_total": 800,
+  "questions_total": 800,
+  "questions_by_source": {
+    "eLife": 443,
+    "PLOS": 357
+  },
+  "questions_by_article": {
+    "laysumm_elife_0006": 48,
+    "laysumm_elife_0026": 38,
+    "laysumm_elife_0028": 42,
+    "laysumm_elife_0035": 55,
+    "laysumm_elife_0057": 32,
+    "laysumm_elife_0062": 56,
+    "laysumm_elife_0070": 45,
+    "laysumm_elife_0163": 48,
+    "laysumm_elife_0188": 28,
+    "laysumm_elife_0189": 51,
+    "laysumm_plos_0051": 37,
+    "laysumm_plos_0178": 16,
+    "laysumm_plos_0209": 39,
+    "laysumm_plos_0228": 58,
+    "laysumm_plos_0285": 34,
+    "laysumm_plos_0457": 36,
+    "laysumm_plos_0501": 44,
+    "laysumm_plos_0563": 31,
+    "laysumm_plos_1116": 29,
+    "laysumm_plos_1309": 33
+  },
+  "parse_error_count": 0,
+  "usage_summary": {
+    "api_calls": 931,
+    "prompt_tokens": 569171,
+    "cached_prompt_tokens": 0,
+    "billable_prompt_tokens": 569171,
+    "completion_tokens": 252525,
+    "billable_output_tokens": 252525,
+    "total_tokens": 821696,
+    "api_elapsed_seconds": 2788.6615,
+    "cost_currencies": [
+      "USD"
+    ],
+    "estimated_cost": 1.042161,
+    "by_stage": {
+      "module1.candidate_af:gemini3_flash_preview_minimal": {
+        "api_calls": 168,
+        "prompt_tokens": 362440,
+        "cached_prompt_tokens": 0,
+        "billable_prompt_tokens": 362440,
+        "completion_tokens": 132825,
+        "billable_output_tokens": 132825,
+        "total_tokens": 495265,
+        "api_elapsed_seconds": 878.6108,
+        "cost_currencies": [
+          "USD"
+        ],
+        "estimated_cost": 0.579695
+      },
+      "module3.questions:gemini3_flash_preview_minimal": {
+        "api_calls": 763,
+        "prompt_tokens": 206731,
+        "cached_prompt_tokens": 0,
+        "billable_prompt_tokens": 206731,
+        "completion_tokens": 119700,
+        "billable_output_tokens": 119700,
+        "total_tokens": 326431,
+        "api_elapsed_seconds": 1910.0507,
+        "cost_currencies": [
+          "USD"
+        ],
+        "estimated_cost": 0.462465
+      }
+    }
+  }
+}

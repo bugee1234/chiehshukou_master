@@ -1,0 +1,75 @@
+{
+  "dataset": "whopriyam2/SUWMIT-dataset",
+  "revision": "2cb35d15f1f63ec1fbb0062dec235c3661515aac",
+  "file": "abstract_only_summaries(w:articles)/validation_plos_abstracts.csv",
+  "sample": "first_10_rows",
+  "document_field": "article",
+  "generated_summary_field": "extracted_summary",
+  "metric": "SummaCConv",
+  "overall": {
+    "SummaC": 0.9596770524978637
+  },
+  "per_article": [
+    {
+      "index": 0,
+      "SummaC": 0.9444378018379211,
+      "article_chars": 58481,
+      "generated_summary_chars": 2064
+    },
+    {
+      "index": 1,
+      "SummaC": 0.9318848252296448,
+      "article_chars": 45550,
+      "generated_summary_chars": 1423
+    },
+    {
+      "index": 2,
+      "SummaC": 0.9441004395484924,
+      "article_chars": 39554,
+      "generated_summary_chars": 1587
+    },
+    {
+      "index": 3,
+      "SummaC": 0.9538264274597168,
+      "article_chars": 24706,
+      "generated_summary_chars": 2272
+    },
+    {
+      "index": 4,
+      "SummaC": 0.9578879475593567,
+      "article_chars": 37914,
+      "generated_summary_chars": 1369
+    },
+    {
+      "index": 5,
+      "SummaC": 0.9969111084938049,
+      "article_chars": 25144,
+      "generated_summary_chars": 1443
+    },
+    {
+      "index": 6,
+      "SummaC": 0.9804075360298157,
+      "article_chars": 28927,
+      "generated_summary_chars": 1781
+    },
+    {
+      "index": 7,
+      "SummaC": 0.9601916670799255,
+      "article_chars": 71354,
+      "generated_summary_chars": 1843
+    },
+    {
+      "index": 8,
+      "SummaC": 0.9757825136184692,
+      "article_chars": 66601,
+      "generated_summary_chars": 1977
+    },
+    {
+      "index": 9,
+      "SummaC": 0.9513402581214905,
+      "article_chars": 35638,
+      "generated_summary_chars": 1163
+    }
+  ],
+  "total_seconds": 284.82900309999997
+}

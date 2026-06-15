@@ -1,0 +1,31 @@
+{
+  "time": "2026-06-15T21:59:49",
+  "model_key": "gemini3_flash_preview_minimal",
+  "final_keep_total": 800,
+  "final_keep_by_source": {
+    "eLife": 443,
+    "PLOS": 357
+  },
+  "final_keep_by_article": {
+    "laysumm_elife_0006": 48,
+    "laysumm_elife_0026": 38,
+    "laysumm_elife_0028": 42,
+    "laysumm_elife_0035": 55,
+    "laysumm_elife_0057": 32,
+    "laysumm_elife_0062": 56,
+    "laysumm_elife_0070": 45,
+    "laysumm_elife_0163": 48,
+    "laysumm_elife_0188": 28,
+    "laysumm_elife_0189": 51,
+    "laysumm_plos_0051": 37,
+    "laysumm_plos_0178": 16,
+    "laysumm_plos_0209": 39,
+    "laysumm_plos_0228": 58,
+    "laysumm_plos_0285": 34,
+    "laysumm_plos_0457": 36,
+    "laysumm_plos_0501": 44,
+    "laysumm_plos_0563": 31,
+    "laysumm_plos_1116": 29,
+    "laysumm_plos_1309": 33
+  }
+}

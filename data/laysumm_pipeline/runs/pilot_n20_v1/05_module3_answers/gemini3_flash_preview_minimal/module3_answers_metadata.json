@@ -1,0 +1,82 @@
+{
+  "time": "2026-06-15T23:09:25",
+  "run_name": "pilot_n20_v1",
+  "stage": "05_module3_answers",
+  "model_key": "gemini3_flash_preview_minimal",
+  "provider": "gemini",
+  "model": "gemini-3-flash-preview",
+  "max_workers": 1,
+  "articles_limit": null,
+  "context_mode": "full_generated_summary",
+  "prompt_file_system": "C:\\Users\\bugee\\OneDrive\\桌面\\chiehshukou_master\\src\\thesis_laysumm\\prompts\\answer_1t3f_setup_c.txt",
+  "prompt_file_user": "C:\\Users\\bugee\\OneDrive\\桌面\\chiehshukou_master\\src\\thesis_laysumm\\prompts\\answer_1t3f_user.txt",
+  "prompt_sha256_system": "b56c24148834a951174bd30454d2aabcf79e77e34035a83999857b933172d9c9",
+  "prompt_sha256_user": "6d4a7ca2dc261f2cdfc88891109f5a262b8a9341b090da05d6915d615daebed4",
+  "questions_total": 800,
+  "questions_expected": 800,
+  "parse_error_count": 0,
+  "json_repaired_count": 0,
+  "correct_count": 613,
+  "wrong_count": 187,
+  "accuracy_excluding_parse_errors": 0.7662,
+  "accuracy_all_rows": 0.7662,
+  "predicted_letter_counts": {
+    "C": 158,
+    "B": 147,
+    "D": 152,
+    "E": 184,
+    "A": 159
+  },
+  "wrong_by_article": {
+    "laysumm_elife_0006": 7,
+    "laysumm_elife_0026": 6,
+    "laysumm_elife_0028": 5,
+    "laysumm_elife_0035": 18,
+    "laysumm_elife_0057": 2,
+    "laysumm_elife_0062": 18,
+    "laysumm_elife_0070": 14,
+    "laysumm_elife_0163": 14,
+    "laysumm_elife_0188": 3,
+    "laysumm_elife_0189": 11,
+    "laysumm_plos_0051": 8,
+    "laysumm_plos_0178": 2,
+    "laysumm_plos_0209": 13,
+    "laysumm_plos_0228": 20,
+    "laysumm_plos_0285": 10,
+    "laysumm_plos_0457": 3,
+    "laysumm_plos_0501": 10,
+    "laysumm_plos_0563": 10,
+    "laysumm_plos_1116": 4,
+    "laysumm_plos_1309": 9
+  },
+  "usage_summary": {
+    "api_calls": 801,
+    "prompt_tokens": 895940,
+    "cached_prompt_tokens": 0,
+    "billable_prompt_tokens": 895940,
+    "completion_tokens": 268953,
+    "billable_output_tokens": 268953,
+    "total_tokens": 1164893,
+    "api_elapsed_seconds": 2205.0848,
+    "cost_currencies": [
+      "USD"
+    ],
+    "estimated_cost": 1.254829,
+    "by_stage": {
+      "phase_b.answer_questions:gemini3_flash_preview_minimal": {
+        "api_calls": 801,
+        "prompt_tokens": 895940,
+        "cached_prompt_tokens": 0,
+        "billable_prompt_tokens": 895940,
+        "completion_tokens": 268953,
+        "billable_output_tokens": 268953,
+        "total_tokens": 1164893,
+        "api_elapsed_seconds": 2205.0848,
+        "cost_currencies": [
+          "USD"
+        ],
+        "estimated_cost": 1.254829
+      }
+    }
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "api_calls": 821,
+  "prompt_tokens": 940925,
+  "cached_prompt_tokens": 0,
+  "billable_prompt_tokens": 940925,
+  "completion_tokens": 284941,
+  "billable_output_tokens": 284941,
+  "total_tokens": 1225866,
+  "api_elapsed_seconds": 2308.7481,
+  "cost_currencies": [
+    "USD"
+  ],
+  "estimated_cost": 1.325285,
+  "by_stage": {
+    "phase_b.answer_questions:gemini3_flash_preview_minimal": {
+      "api_calls": 801,
+      "prompt_tokens": 895940,
+      "cached_prompt_tokens": 0,
+      "billable_prompt_tokens": 895940,
+      "completion_tokens": 268953,
+      "billable_output_tokens": 268953,
+      "total_tokens": 1164893,
+      "api_elapsed_seconds": 2205.0848,
+      "cost_currencies": [
+        "USD"
+      ],
+      "estimated_cost": 1.254829
+    },
+    "phase_b.rewrite_summary:gemini3_flash_preview_minimal": {
+      "api_calls": 20,
+      "prompt_tokens": 44985,
+      "cached_prompt_tokens": 0,
+      "billable_prompt_tokens": 44985,
+      "completion_tokens": 15988,
+      "billable_output_tokens": 15988,
+      "total_tokens": 60973,
+      "api_elapsed_seconds": 103.6633,
+      "cost_currencies": [
+        "USD"
+      ],
+      "estimated_cost": 0.070457
+    }
+  }
+}

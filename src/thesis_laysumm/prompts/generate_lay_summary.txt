@@ -1,0 +1,58 @@
+You are writing a plain-language lay summary of a biomedical research article.
+
+GOAL
+- Cover the same core scientific claims as the article ABSTRACT. The abstract is the factuality anchor.
+- Write for non-expert readers: clear wording, short sentences, minimal unexplained jargon.
+- Use the FINAL KEEP atomic facts (AFs) as a checklist of claims that must be represented.
+- Do NOT imitate the structure, ordering, or wording of any expert lay summary example.
+- Expert examples show STYLE only (accessible tone and readability), not content to copy.
+
+FACTUALITY RULES
+- Every summary sentence must express a claim supported by at least one listed AF.
+- Prefer claims that map to an abstract sentence; do not add claims outside the abstract+AF scope.
+- Merge overlapping AFs; do not repeat the same point mechanically.
+- Preserve direction, comparisons, populations, organisms, and qualifiers from the AFs.
+- No outside knowledge. No clinical advice beyond what the AFs support.
+
+CHAIN OF THOUGHT (required before writing)
+1) Read the abstract sentences and the grouped AF list.
+2) For each abstract sentence, decide which AFs carry the same core claim.
+3) Plan which claims MUST appear in the lay summary (prioritize findings, high-level methods, and significance).
+4) Then write the lay summary.
+
+LENGTH
+- The expert lay summary for this article is about {expert_summary_word_count} words.
+- Your summary must be AT LEAST that long. Do not write a shorter summary.
+- It is acceptable — and often desirable — to write longer than the expert summary when needed to cover the AF checklist clearly and naturally.
+- There is no hard upper word limit; completeness and readability matter more than brevity.
+
+FEW-SHOT EXAMPLES (style reference only — different articles)
+{few_shot_examples}
+
+TARGET ARTICLE
+TITLE: {title}
+
+ABSTRACT:
+{abstract}
+
+ABSTRACT-ALIGNED FINAL KEEP AFS (grouped):
+{grouped_afs}
+
+Return ONLY valid JSON:
+{
+  "abstract_claim_plan": [
+    {
+      "abstract_sentence_idx": <1-based int or null>,
+      "core_claim": "<short plan note>",
+      "af_ids": ["<af_id>", "..."],
+      "include_in_summary": true
+    }
+  ],
+  "sentences": [
+    {
+      "text": "<one plain-language sentence containing one core claim>",
+      "af_ids": ["<af_id>", "..."],
+      "section": "background|methods|results|implications"
+    }
+  ]
+}

@@ -1,0 +1,308 @@
+from __future__ import annotations
+
+import argparse
+import json
+import sys
+from collections import Counter
+from datetime import datetime
+from pathlib import Path
+from typing import Any
+
+ROOT_DIR = Path(__file__).resolve().parents[2]
+if str(ROOT_DIR) not in sys.path:
+    sys.path.insert(0, str(ROOT_DIR))
+
+from src.experiment_2.run_three_model_exp2 import MODEL_CONFIGS, ProviderClient
+from src.thesis_laysumm.llm_utils import (
+    load_articles,
+    run_parallel,
+    save_usage,
+    sha256_text,
+    usage_tracker,
+)
+from src.thesis_laysumm.paths import run_data_dir
+from src.utils import load_jsonl, save_json, save_jsonl
+
+PROMPTS_DIR = Path(__file__).resolve().parent / "prompts"
+DEFAULT_MODEL_KEY = "gemini3_flash_preview_minimal"
+DEFAULT_JUDGE_MODEL_KEY = "gemini3_flash_preview_minimal"
+
+
+def _coerce_bool(value: Any) -> bool:
+    if isinstance(value, bool):
+        return value
+    if isinstance(value, (int, float)):
+        return bool(value)
+    return str(value or "").strip().lower() in {"1", "true", "yes", "y"}
+
+
+def _module1_dir(run_name: str, model_key: str) -> Path:
+    return run_data_dir(run_name) / "01_module1" / model_key
+
+
+def _module2_dir(run_name: str, model_key: str) -> Path:
+    path = run_data_dir(run_name) / "02_module2" / model_key
+    path.mkdir(parents=True, exist_ok=True)
+    return path
+
+
+def _format_abstract_sentences(sentences: list[str]) -> str:
+    lines = []
+    for i, sentence in enumerate(sentences, start=1):
+        text = str(sentence or "").strip()
+        if text:
+            lines.append(f"[S{i}] {text}")
+    return "\n".join(lines) if lines else "[S1] (no abstract sentences parsed)"
+
+
+def _is_final_keep(judgement: dict[str, Any]) -> bool:
+    idx = judgement.get("abstract_sentence_idx")
+    has_idx = idx is not None and str(idx).strip() not in {"", "null", "None"}
+    return (
+        _coerce_bool(judgement.get("aligned_with_abstract", False))
+        and str(judgement.get("coverage_type", "")).strip() in {"exact", "paraphrase", "lay_generalization"}
+        and str(judgement.get("confidence", "")).strip() in {"high", "medium"}
+        and has_idx
+        and bool(str(judgement.get("abstract_sentence", "") or "").strip())
+        and not _coerce_bool(judgement.get("parse_error", False))
+    )
+
+
+def judge_candidate_af(
+    *,
+    run_name: str,
+    model_key: str,
+    judge_model_key: str,
+    max_workers: int,
+    resume: bool,
+    limit_articles: int | None = None,
+) -> list[dict[str, Any]]:
+    if model_key not in MODEL_CONFIGS:
+        raise ValueError(f"Unknown model_key {model_key!r}")
+    if judge_model_key not in MODEL_CONFIGS:
+        raise ValueError(f"Unknown judge_model_key {judge_model_key!r}")
+
+    articles = {str(r["id"]): r for r in load_articles(run_name)}
+    candidate_path = _module1_dir(run_name, model_key) / "candidate_keep_af.jsonl"
+    if not candidate_path.exists():
+        raise FileNotFoundError(f"Missing Module 1 output: {candidate_path}")
+
+    candidate_rows = load_jsonl(candidate_path)
+    if limit_articles is not None:
+        allowed_ids = {str(r["id"]) for r in load_articles(run_name)[:limit_articles]}
+        candidate_rows = [r for r in candidate_rows if str(r["article_id"]) in allowed_ids]
+
+    out_dir = _module2_dir(run_name, model_key)
+    out_path = out_dir / "module2_judgements.jsonl"
+    prompt = (PROMPTS_DIR / "judge_af_against_abstract.txt").read_text(encoding="utf-8")
+
+    usage = usage_tracker(run_name, resume=resume)
+    client = ProviderClient(judge_model_key, usage)
+    existing = load_jsonl(out_path) if resume and out_path.exists() else []
+    done = {str(r.get("af_id")) for r in existing}
+
+    def worker(af: dict[str, Any]) -> dict[str, Any]:
+        article = articles[str(af["article_id"])]
+        abstract_sentences = article.get("abstract_sentences") or []
+        raw = ""
+        parse_error = False
+        try:
+            raw = client.chat(
+                stage=f"module2.judge_abstract:{judge_model_key}",
+                item_id=str(af["af_id"]),
+                messages=[
+                    {
+                        "role": "user",
+                        "content": prompt.replace("{atomic_fact}", str(af["fact"])).replace(
+                            "{abstract_sentences}",
+                            _format_abstract_sentences(abstract_sentences),
+                        ),
+                    }
+                ],
+                temperature=0.0,
+                response_format={"type": "json_object"},
+            )
+            obj = json.loads(raw)
+        except Exception as exc:
+            parse_error = True
+            obj = {
+                "aligned_with_abstract": False,
+                "abstract_sentence_idx": None,
+                "abstract_sentence": None,
+                "coverage_type": "absent",
+                "confidence": "low",
+                "reasoning": f"parse_or_runtime_error: {exc}",
+            }
+
+        coverage_type = str(obj.get("coverage_type", "absent")).strip()
+        if coverage_type not in {
+            "exact",
+            "paraphrase",
+            "lay_generalization",
+            "topic_only",
+            "absent",
+            "contradicted",
+        }:
+            coverage_type = "absent"
+        confidence = str(obj.get("confidence", "low")).strip()
+        if confidence not in {"high", "medium", "low"}:
+            confidence = "low"
+
+        abstract_sentence = obj.get("abstract_sentence", None)
+        abstract_sentence = None if abstract_sentence is None else str(abstract_sentence).strip()
+        if abstract_sentence in {"", "null", "None"}:
+            abstract_sentence = None
+
+        abstract_sentence_idx = obj.get("abstract_sentence_idx", None)
+        if abstract_sentence_idx in {"", "null", "None"}:
+            abstract_sentence_idx = None
+
+        row = {
+            "af_id": af["af_id"],
+            "model_key": model_key,
+            "article_id": af["article_id"],
+            "source_dataset": af["source_dataset"],
+            "original_index": af["original_index"],
+            "fact": af["fact"],
+            "source_span": af.get("source_span", ""),
+            "judge_model_key": judge_model_key,
+            "judge_provider": MODEL_CONFIGS[judge_model_key]["provider"],
+            "judge_model": MODEL_CONFIGS[judge_model_key]["model"],
+            "aligned_with_abstract": _coerce_bool(obj.get("aligned_with_abstract", False)),
+            "abstract_sentence_idx": abstract_sentence_idx,
+            "abstract_sentence": abstract_sentence,
+            "coverage_type": coverage_type,
+            "confidence": confidence,
+            "reasoning": str(obj.get("reasoning", "")).strip(),
+            "parse_error": parse_error,
+        }
+        row["final_keep"] = _is_final_keep(row)
+        return row
+
+    todo = [r for r in candidate_rows if str(r["af_id"]) not in done]
+    new_rows = run_parallel(
+        todo,
+        worker,
+        max_workers=max_workers,
+        desc=f"module2 | {model_key}",
+    )
+    all_rows = existing + new_rows
+    all_rows.sort(key=lambda r: (str(r["article_id"]), str(r["af_id"])))
+    save_jsonl(all_rows, out_path)
+    save_usage(run_name, usage)
+
+    save_json(
+        {
+            "time": datetime.now().isoformat(timespec="seconds"),
+            "run_name": run_name,
+            "stage": "02_module2",
+            "model_key": model_key,
+            "judge_model_key": judge_model_key,
+            "judge_model": MODEL_CONFIGS[judge_model_key]["model"],
+            "max_workers": max_workers,
+            "articles_limit": limit_articles,
+            "prompt_file": str(PROMPTS_DIR / "judge_af_against_abstract.txt"),
+            "prompt_sha256": sha256_text(prompt),
+            "candidate_af_total": len(candidate_rows),
+            "judgements_total": len(all_rows),
+            "final_keep_total": sum(1 for r in all_rows if r.get("final_keep")),
+            "coverage_type_counts": dict(Counter(str(r.get("coverage_type")) for r in all_rows)),
+            "confidence_counts": dict(Counter(str(r.get("confidence")) for r in all_rows)),
+            "parse_error_count": sum(1 for r in all_rows if r.get("parse_error")),
+            "final_keep_rule": {
+                "aligned_with_abstract": True,
+                "coverage_type": ["exact", "paraphrase", "lay_generalization"],
+                "confidence": ["high", "medium"],
+                "abstract_sentence_idx": "non-null",
+                "abstract_sentence": "non-empty",
+                "parse_error": False,
+            },
+            "usage_summary": usage.summarize(),
+        },
+        out_dir / "module2_judgements_metadata.json",
+    )
+
+    print(
+        f"[module2] {model_key} judgements={len(all_rows)} "
+        f"final_keep={sum(1 for r in all_rows if r.get('final_keep'))}"
+    )
+    print(f"[module2] output -> {out_path}")
+    return all_rows
+
+
+def build_final_keep_af(*, run_name: str, model_key: str) -> list[dict[str, Any]]:
+    out_dir = _module2_dir(run_name, model_key)
+    judgements = load_jsonl(out_dir / "module2_judgements.jsonl")
+    rows = []
+    for row in judgements:
+        if not row.get("final_keep"):
+            continue
+        rows.append(
+            {
+                "af_id": row["af_id"],
+                "model_key": model_key,
+                "article_id": row["article_id"],
+                "source_dataset": row["source_dataset"],
+                "original_index": row["original_index"],
+                "fact": row["fact"],
+                "source_span": row.get("source_span", ""),
+                "abstract_sentence_idx": row.get("abstract_sentence_idx"),
+                "abstract_sentence": row.get("abstract_sentence"),
+                "module2_coverage_type": row.get("coverage_type"),
+                "module2_confidence": row.get("confidence"),
+                "module2_reasoning": row.get("reasoning"),
+                "judge_model_key": row.get("judge_model_key"),
+                "judge_model": row.get("judge_model"),
+            }
+        )
+    rows.sort(key=lambda r: (str(r["article_id"]), str(r["af_id"])))
+    save_jsonl(rows, out_dir / "final_keep_af.jsonl")
+    save_json(
+        {
+            "time": datetime.now().isoformat(timespec="seconds"),
+            "model_key": model_key,
+            "final_keep_total": len(rows),
+            "final_keep_by_source": dict(Counter(str(r["source_dataset"]) for r in rows)),
+            "final_keep_by_article": dict(Counter(str(r["article_id"]) for r in rows)),
+        },
+        out_dir / "final_keep_af_metadata.json",
+    )
+    print(f"[module2] final_keep_af={len(rows)} -> {out_dir / 'final_keep_af.jsonl'}")
+    return rows
+
+
+def build_parser() -> argparse.ArgumentParser:
+    parser = argparse.ArgumentParser(
+        description="Thesis lay-summary pipeline — Module 2: abstract-aligned review of candidate AF."
+    )
+    parser.add_argument("--run-name", type=str, required=True)
+    parser.add_argument("--model-key", type=str, default=DEFAULT_MODEL_KEY)
+    parser.add_argument("--judge-model-key", type=str, default=None)
+    parser.add_argument("--max-workers", type=int, default=8)
+    parser.add_argument("--limit-articles", type=int, default=None)
+    parser.add_argument("--judgements-only", action="store_true")
+    parser.add_argument("--final-keep-only", action="store_true")
+    parser.add_argument("--no-resume", action="store_true")
+    return parser
+
+
+def main() -> None:
+    args = build_parser().parse_args()
+    judge_model_key = args.judge_model_key or args.model_key
+    resume = not args.no_resume
+
+    if not args.final_keep_only:
+        judge_candidate_af(
+            run_name=args.run_name,
+            model_key=args.model_key,
+            judge_model_key=judge_model_key,
+            max_workers=args.max_workers,
+            resume=resume,
+            limit_articles=args.limit_articles,
+        )
+    if not args.judgements_only:
+        build_final_keep_af(run_name=args.run_name, model_key=args.model_key)
+
+
+if __name__ == "__main__":
+    main()
