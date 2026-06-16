@@ -1,0 +1,44 @@
+{
+  "api_calls": 13,
+  "prompt_tokens": 49676,
+  "cached_prompt_tokens": 0,
+  "billable_prompt_tokens": 49676,
+  "completion_tokens": 19320,
+  "billable_output_tokens": 19320,
+  "total_tokens": 68996,
+  "api_elapsed_seconds": 84.5625,
+  "cost_currencies": [
+    "USD"
+  ],
+  "estimated_cost": 0.082798,
+  "by_stage": {
+    "v5.rewrite_summary.factuality_chase:gemini3_flash_preview_minimal": {
+      "api_calls": 12,
+      "prompt_tokens": 46407,
+      "cached_prompt_tokens": 0,
+      "billable_prompt_tokens": 46407,
+      "completion_tokens": 18065,
+      "billable_output_tokens": 18065,
+      "total_tokens": 64472,
+      "api_elapsed_seconds": 79.3997,
+      "cost_currencies": [
+        "USD"
+      ],
+      "estimated_cost": 0.077398
+    },
+    "v5.rewrite_summary.gemini3_flash_preview_minimal.expand_length.factuality_chase": {
+      "api_calls": 1,
+      "prompt_tokens": 3269,
+      "cached_prompt_tokens": 0,
+      "billable_prompt_tokens": 3269,
+      "completion_tokens": 1255,
+      "billable_output_tokens": 1255,
+      "total_tokens": 4524,
+      "api_elapsed_seconds": 5.1628,
+      "cost_currencies": [
+        "USD"
+      ],
+      "estimated_cost": 0.005399
+    }
+  }
+}

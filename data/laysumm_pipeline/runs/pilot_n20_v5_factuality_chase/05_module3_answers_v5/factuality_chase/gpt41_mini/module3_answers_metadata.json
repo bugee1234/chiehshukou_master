@@ -1,0 +1,61 @@
+{
+  "time": "2026-06-17T03:17:08",
+  "run_name": "pilot_n20_v5_factuality_chase",
+  "stage": "v5_05_answers",
+  "mode": "factuality_chase",
+  "model_key": "gpt41_mini",
+  "questions_total": 299,
+  "answers_total": 299,
+  "wrong_total": 33,
+  "accuracy": 0.8896,
+  "wrong_check_type_counts": {
+    "high_risk": 28,
+    "core": 5
+  },
+  "wrong_slot_type_counts": {
+    "mechanism|finding": 1,
+    "measurement|mechanism": 1,
+    "core_claim": 5,
+    "method": 8,
+    "mechanism|number": 1,
+    "mechanism": 5,
+    "organism": 2,
+    "measurement": 3,
+    "comparison": 2,
+    "organism|genetic background": 1,
+    "finding": 1,
+    "entity": 1,
+    "organism|measurement|direction": 1,
+    "measurement|entity|timepoint": 1
+  },
+  "usage_summary": {
+    "api_calls": 299,
+    "prompt_tokens": 274046,
+    "cached_prompt_tokens": 0,
+    "billable_prompt_tokens": 274046,
+    "completion_tokens": 105049,
+    "billable_output_tokens": 105049,
+    "total_tokens": 379095,
+    "api_elapsed_seconds": 1639.5182,
+    "cost_currencies": [
+      "USD"
+    ],
+    "estimated_cost": 0.277697,
+    "by_stage": {
+      "v5.answer_questions.factuality_chase:gpt41_mini": {
+        "api_calls": 299,
+        "prompt_tokens": 274046,
+        "cached_prompt_tokens": 0,
+        "billable_prompt_tokens": 274046,
+        "completion_tokens": 105049,
+        "billable_output_tokens": 105049,
+        "total_tokens": 379095,
+        "api_elapsed_seconds": 1639.5182,
+        "cost_currencies": [
+          "USD"
+        ],
+        "estimated_cost": 0.277697
+      }
+    }
+  }
+}

@@ -1,0 +1,72 @@
+You are writing a biomedical lay summary using an evidence table.
+
+MODE: {mode}
+
+Inputs:
+- ABSTRACT controls the main story and order.
+- EXPERT STYLE HINTS help with lay explanation, but they are not evidence.
+- EVIDENCE TABLE contains the only document-backed details you may use.
+- STYLE PROFILE: selects how much lay explanation is needed.
+
+Writing policy:
+- Write for non-expert readers.
+- Use short, clear sentences.
+- Preserve exact methods, organisms, measurements, directions, numbers, comparisons,
+  and named entities from must_use_terms when they are important.
+- Each sentence must cite one evidence_row_id.
+- Do not add facts that are not supported by the evidence row's allowed_evidence_spans.
+- You may add lay explanation only when it is supported by the same evidence row's
+  abstract_claim, core_keep_af, lay_context, expert_summary_hint, or allowed_evidence_spans.
+- Do not use expert_summary_hint as evidence for a new factual claim. Use it only
+  to decide which supported details deserve a plain-language explanation.
+- Avoid "suggests", "supports", "shows why", "because", or broad implications unless
+  that relationship is explicitly supported by the evidence row.
+- Do not turn a precise method into a vague phrase. For example, do not turn
+  "neuronal recordings from macaque MT/MST" into "brain scans" or "brain activity".
+- Keep the abstract/expert story order: motivation or background, method, finding,
+  and implication or limitation when those roles are supported.
+- Do not merely concatenate evidence rows. Build a coherent lay summary with
+  transitions, while keeping every claim grounded.
+
+Mode-specific style:
+- balanced: use readable lay wording and include enough context to resemble a good
+  expert lay summary.
+- factuality_chase: keep strict document entailment, but do not sacrifice necessary
+  lay explanation. Preserve exact biomedical terms, numbers, methods, organisms,
+  and directions; briefly explain technical terms using supported row context.
+
+Style profile:
+- compact_factual: write concise prose with short lay explanations only where needed.
+- lay_explainer: write a fuller plain-language summary. For technical rows, pair the
+  precise claim with a short supported explanation of what role it plays in the study.
+
+Length:
+- Target about {target_word_count} words.
+- Minimum {min_word_count} words.
+- Maximum {max_word_count} words.
+- Stay within this range. If the summary is below the minimum, add supported lay
+  clarification from evidence rows rather than unsupported background.
+
+Return ONLY valid JSON:
+{
+  "sentences": [
+    {
+      "text": "<one summary sentence>",
+      "evidence_row_id": "row_0001",
+      "section": "background|methods|results|implications"
+    }
+  ],
+  "summary": "<full summary>"
+}
+
+TITLE:
+{title}
+
+ABSTRACT:
+{abstract}
+
+EVIDENCE TABLE:
+{evidence_table}
+
+STYLE PROFILE:
+{style_profile}

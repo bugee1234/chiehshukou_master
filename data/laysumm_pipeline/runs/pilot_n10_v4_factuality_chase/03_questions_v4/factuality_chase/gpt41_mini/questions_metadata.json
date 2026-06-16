@@ -1,0 +1,115 @@
+{
+  "time": "2026-06-16T22:18:35",
+  "run_name": "pilot_n10_v4_factuality_chase",
+  "stage": "v4_03_questions",
+  "mode": "factuality_chase",
+  "model_key": "gpt41_mini",
+  "prompt_file": "C:\\Users\\bugee\\OneDrive\\桌面\\chiehshukou_master\\src\\thesis_laysumm\\prompts\\generate_1t3f_distractors.txt",
+  "prompt_sha256": "2256316ac93bf21f4887a95bc8a63833009c39503eb0dc66b3445991f43dbde9",
+  "check_af_total": 155,
+  "questions_total": 155,
+  "check_type_counts": {
+    "core": 83,
+    "high_risk": 72
+  },
+  "slot_type_counts": {
+    "core_claim": 83,
+    "method": 17,
+    "causality": 5,
+    "finding": 7,
+    "implication": 4,
+    "method|organism|entity": 1,
+    "causality|entity|method": 2,
+    "mechanism|entity|causality": 1,
+    "measurement|causality": 1,
+    "mechanism|entity": 2,
+    "entity": 4,
+    "measurement": 5,
+    "mechanism": 1,
+    "organism|measurement": 3,
+    "gene|causality": 3,
+    "organism|genetics": 1,
+    "organism": 1,
+    "organism|direction|entity": 1,
+    "measurement|direction": 6,
+    "method|entity": 1,
+    "causality|mechanism": 2,
+    "direction|timing": 1,
+    "entity|mechanism": 1,
+    "entity|comparison": 1,
+    "background": 1
+  },
+  "parse_error_count": 0,
+  "usage_summary": {
+    "api_calls": 1089,
+    "prompt_tokens": 923867,
+    "cached_prompt_tokens": 0,
+    "billable_prompt_tokens": 923867,
+    "completion_tokens": 245458,
+    "billable_output_tokens": 245458,
+    "total_tokens": 1169325,
+    "api_elapsed_seconds": 5438.0048,
+    "cost_currencies": [
+      "USD"
+    ],
+    "estimated_cost": 0.76228,
+    "by_stage": {
+      "module1.candidate_af:gpt41_mini": {
+        "api_calls": 85,
+        "prompt_tokens": 177792,
+        "cached_prompt_tokens": 0,
+        "billable_prompt_tokens": 177792,
+        "completion_tokens": 101628,
+        "billable_output_tokens": 101628,
+        "total_tokens": 279420,
+        "api_elapsed_seconds": 2789.6743,
+        "cost_currencies": [
+          "USD"
+        ],
+        "estimated_cost": 0.233722
+      },
+      "module2.judge_abstract:gpt41_mini": {
+        "api_calls": 839,
+        "prompt_tokens": 636638,
+        "cached_prompt_tokens": 0,
+        "billable_prompt_tokens": 636638,
+        "completion_tokens": 83741,
+        "billable_output_tokens": 83741,
+        "total_tokens": 720379,
+        "api_elapsed_seconds": 1690.4865,
+        "cost_currencies": [
+          "USD"
+        ],
+        "estimated_cost": 0.388641
+      },
+      "v4.evidence_table.factuality_chase:gpt41_mini": {
+        "api_calls": 10,
+        "prompt_tokens": 62607,
+        "cached_prompt_tokens": 0,
+        "billable_prompt_tokens": 62607,
+        "completion_tokens": 38677,
+        "billable_output_tokens": 38677,
+        "total_tokens": 101284,
+        "api_elapsed_seconds": 572.555,
+        "cost_currencies": [
+          "USD"
+        ],
+        "estimated_cost": 0.086926
+      },
+      "v4.questions.factuality_chase:gpt41_mini": {
+        "api_calls": 155,
+        "prompt_tokens": 46830,
+        "cached_prompt_tokens": 0,
+        "billable_prompt_tokens": 46830,
+        "completion_tokens": 21412,
+        "billable_output_tokens": 21412,
+        "total_tokens": 68242,
+        "api_elapsed_seconds": 385.289,
+        "cost_currencies": [
+          "USD"
+        ],
+        "estimated_cost": 0.052991
+      }
+    }
+  }
+}

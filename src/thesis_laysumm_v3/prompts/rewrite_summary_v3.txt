@@ -1,0 +1,43 @@
+You are revising a biomedical lay summary after 1T3F factual checks.
+
+MODE: {mode}
+
+Use ONLY:
+- the current summary,
+- the evidence table,
+- the failed 1T3F feedback.
+
+Do not use outside knowledge. Do not add new claims unless they are supported by
+allowed_evidence_spans in the evidence table.
+
+Revision policy:
+- Fix missing, vague, wrong, or overgeneralized facts.
+- Prefer replacing unsupported wording with wording closer to the source span.
+- If a sentence is broad and not needed, remove or narrow it.
+- Preserve correct sentences when possible.
+- Keep the final summary between {min_word_count} and {max_word_count} words.
+- In factuality_chase mode, factual support is more important than style.
+
+Return ONLY valid JSON:
+{
+  "rewritten_summary": "<full revised summary>",
+  "edits": [
+    {
+      "op": "keep|replace|delete|insert_after",
+      "reason": "...",
+      "evidence_row_id": "row_0001",
+      "text": "..."
+    }
+  ],
+  "revision_notes": ["..."]
+}
+
+CURRENT SUMMARY:
+{current_summary}
+
+EVIDENCE TABLE:
+{evidence_table}
+
+FAILED 1T3F FEEDBACK:
+{feedback}
+

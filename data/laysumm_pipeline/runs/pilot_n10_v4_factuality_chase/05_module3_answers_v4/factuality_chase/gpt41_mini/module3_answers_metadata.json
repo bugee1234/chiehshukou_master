@@ -1,0 +1,121 @@
+{
+  "time": "2026-06-16T22:20:47",
+  "run_name": "pilot_n10_v4_factuality_chase",
+  "stage": "v4_05_answers",
+  "mode": "factuality_chase",
+  "model_key": "gpt41_mini",
+  "questions_total": 155,
+  "answers_total": 155,
+  "wrong_total": 6,
+  "accuracy": 0.9613,
+  "wrong_check_type_counts": {
+    "high_risk": 5,
+    "core": 1
+  },
+  "wrong_slot_type_counts": {
+    "method": 3,
+    "mechanism": 1,
+    "core_claim": 1,
+    "measurement": 1
+  },
+  "usage_summary": {
+    "api_calls": 1254,
+    "prompt_tokens": 1098781,
+    "cached_prompt_tokens": 0,
+    "billable_prompt_tokens": 1098781,
+    "completion_tokens": 308834,
+    "billable_output_tokens": 308834,
+    "total_tokens": 1407615,
+    "api_elapsed_seconds": 6387.4172,
+    "cost_currencies": [
+      "USD"
+    ],
+    "estimated_cost": 0.933647,
+    "by_stage": {
+      "module1.candidate_af:gpt41_mini": {
+        "api_calls": 85,
+        "prompt_tokens": 177792,
+        "cached_prompt_tokens": 0,
+        "billable_prompt_tokens": 177792,
+        "completion_tokens": 101628,
+        "billable_output_tokens": 101628,
+        "total_tokens": 279420,
+        "api_elapsed_seconds": 2789.6743,
+        "cost_currencies": [
+          "USD"
+        ],
+        "estimated_cost": 0.233722
+      },
+      "module2.judge_abstract:gpt41_mini": {
+        "api_calls": 839,
+        "prompt_tokens": 636638,
+        "cached_prompt_tokens": 0,
+        "billable_prompt_tokens": 636638,
+        "completion_tokens": 83741,
+        "billable_output_tokens": 83741,
+        "total_tokens": 720379,
+        "api_elapsed_seconds": 1690.4865,
+        "cost_currencies": [
+          "USD"
+        ],
+        "estimated_cost": 0.388641
+      },
+      "v4.answer_questions.factuality_chase:gpt41_mini": {
+        "api_calls": 155,
+        "prompt_tokens": 136736,
+        "cached_prompt_tokens": 0,
+        "billable_prompt_tokens": 136736,
+        "completion_tokens": 54849,
+        "billable_output_tokens": 54849,
+        "total_tokens": 191585,
+        "api_elapsed_seconds": 791.9911,
+        "cost_currencies": [
+          "USD"
+        ],
+        "estimated_cost": 0.142453
+      },
+      "v4.evidence_table.factuality_chase:gpt41_mini": {
+        "api_calls": 10,
+        "prompt_tokens": 62607,
+        "cached_prompt_tokens": 0,
+        "billable_prompt_tokens": 62607,
+        "completion_tokens": 38677,
+        "billable_output_tokens": 38677,
+        "total_tokens": 101284,
+        "api_elapsed_seconds": 572.555,
+        "cost_currencies": [
+          "USD"
+        ],
+        "estimated_cost": 0.086926
+      },
+      "v4.generate_summary.factuality_chase:gpt41_mini": {
+        "api_calls": 10,
+        "prompt_tokens": 38178,
+        "cached_prompt_tokens": 0,
+        "billable_prompt_tokens": 38178,
+        "completion_tokens": 8527,
+        "billable_output_tokens": 8527,
+        "total_tokens": 46705,
+        "api_elapsed_seconds": 157.4213,
+        "cost_currencies": [
+          "USD"
+        ],
+        "estimated_cost": 0.028914
+      },
+      "v4.questions.factuality_chase:gpt41_mini": {
+        "api_calls": 155,
+        "prompt_tokens": 46830,
+        "cached_prompt_tokens": 0,
+        "billable_prompt_tokens": 46830,
+        "completion_tokens": 21412,
+        "billable_output_tokens": 21412,
+        "total_tokens": 68242,
+        "api_elapsed_seconds": 385.289,
+        "cost_currencies": [
+          "USD"
+        ],
+        "estimated_cost": 0.052991
+      }
+    }
+  }
+}

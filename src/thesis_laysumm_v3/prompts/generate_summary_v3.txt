@@ -1,0 +1,53 @@
+You are writing a biomedical lay summary using an evidence table.
+
+MODE: {mode}
+
+Inputs:
+- ABSTRACT controls the main story and order.
+- EXPERT STYLE HINTS help with lay explanation, but they are not evidence.
+- EVIDENCE TABLE contains the only document-backed details you may use.
+
+Writing policy:
+- Write for non-expert readers.
+- Use short, clear sentences.
+- Preserve exact methods, organisms, measurements, directions, numbers, comparisons,
+  and named entities from must_use_terms when they are important.
+- Each sentence must cite one evidence_row_id.
+- Do not add facts that are not supported by the evidence row's allowed_evidence_spans.
+- Avoid "suggests", "supports", "shows why", "because", or broad implications unless
+  that relationship is explicitly supported by the evidence row.
+- Do not turn a precise method into a vague phrase. For example, do not turn
+  "neuronal recordings from macaque MT/MST" into "brain scans" or "brain activity".
+
+Mode-specific style:
+- balanced: use readable lay wording and include enough context to resemble a good
+  expert lay summary.
+- factuality_chase: prefer fewer claims, shorter sentences, and closer wording to the
+  allowed evidence spans. It is acceptable if the prose is drier.
+
+Length:
+- Target about {target_word_count} words.
+- Minimum {min_word_count} words.
+- Maximum {max_word_count} words.
+
+Return ONLY valid JSON:
+{
+  "sentences": [
+    {
+      "text": "<one summary sentence>",
+      "evidence_row_id": "row_0001",
+      "section": "background|methods|results|implications"
+    }
+  ],
+  "summary": "<full summary>"
+}
+
+TITLE:
+{title}
+
+ABSTRACT:
+{abstract}
+
+EVIDENCE TABLE:
+{evidence_table}
+

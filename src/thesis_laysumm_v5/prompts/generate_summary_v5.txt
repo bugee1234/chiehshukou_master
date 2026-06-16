@@ -1,0 +1,74 @@
+You are filling a controlled biomedical lay-summary plan from evidence rows.
+
+MODE: {mode}
+DATASET PROFILE: {dataset_profile}
+STYLE PROFILE: {style_profile}
+
+Inputs:
+- ABSTRACT controls the main story and order.
+- EVIDENCE TABLE contains the only document-backed details you may use.
+- Each evidence row is a final keep-AF group. Its core_keep_af is the source for
+  the claim sentence.
+
+Global rules:
+- Write for non-expert readers, but stay evidence-local.
+- Preserve exact named entities, organisms, methods, directions, comparisons,
+  measurements, and numbers from must_use_terms when important.
+- Do not add outside knowledge.
+- Do not use broad implications unless the same evidence row's abstract_claim or
+  core_keep_af is itself an implication.
+- Avoid these unsupported implication/metaphor phrases: "suggests", "may be able",
+  "could help", "important for", "acted like", "call for help".
+- Use short sentences. Prefer one factual relation per sentence.
+- Do not merely copy evidence spans; make readable lay sentences while preserving
+  the same claim.
+
+Slot rules:
+- Build slots in abstract/story order.
+- Each slot must cite exactly one evidence_row_id.
+- claim_sentence: a lay rewrite of the row's core_keep_af or abstract_claim.
+- clarification_sentence: optional but encouraged; define one term, unpack one
+  method, or explain the row's study role using only that same row's lay_context,
+  expert_summary_hint, or allowed_evidence_spans.
+- Each evidence row may contribute at most one claim_sentence and one
+  clarification_sentence.
+- If a clarification would introduce a new claim, leave it empty.
+
+Dataset profile:
+- plos_concise: prioritize methods, numbers, comparisons, disease names, and
+  concrete findings. Use fewer clarifications. Usually select 5-7 slots; include
+  clarification_sentence only when a term would be unclear without it.
+- elife_mechanism: include enough supported mechanism detail to follow the study:
+  background, method, mechanism or measurement, finding, and cautious conclusion.
+  Clarify technical terms without metaphors.
+
+Length:
+- Target about {target_word_count} words.
+- Minimum {min_word_count} words.
+- Maximum {max_word_count} words.
+- Stay within range. If under the minimum, add row-local clarification sentences
+  from selected slots; do not add unsupported background.
+
+Return ONLY valid JSON:
+{
+  "slots": [
+    {
+      "slot_id": "slot_0001",
+      "role": "background|motivation|method|mechanism|finding|implication|limitation",
+      "evidence_row_id": "row_0001",
+      "claim_sentence": "<one grounded sentence>",
+      "clarification_sentence": "<optional grounded sentence or empty string>",
+      "used_for_summary": true
+    }
+  ],
+  "summary": "<full summary made by joining slot sentences in order>"
+}
+
+TITLE:
+{title}
+
+ABSTRACT:
+{abstract}
+
+EVIDENCE TABLE:
+{evidence_table}

@@ -1,0 +1,80 @@
+You are building an evidence table for a biomedical lay-summary pipeline.
+
+The final summary will be much shorter than the full article. Do NOT keep every fact.
+Your job is to select a small set of core claims and document-backed evidence that
+will help a later writer produce a factual lay summary.
+
+MODE: {mode}
+
+Mode policy:
+- balanced: preserve the article's main story, use expert-summary hints for lay framing,
+  and keep enough concrete document evidence to avoid vague factual claims.
+- factuality_chase: optimize for strict document entailment. Prefer fewer, shorter,
+  source-supported claims. Avoid broad implications unless a source span says them.
+
+Use the inputs this way:
+- ABSTRACT: determines the core claims and their order.
+- EXPERT LAY SUMMARY: helps identify which details are worth explaining to lay readers.
+  It is only a hint, not evidence by itself.
+- CANDIDATE FACTS: article-supported facts with source spans. These are the evidence.
+
+For each selected abstract sentence, create one evidence row.
+
+Each evidence row must include:
+- evidence_row_id: "row_XXXX" in abstract order.
+- abstract_sentence_idx: 1-based index.
+- abstract_claim: a concise claim to cover.
+- core_keep_af: the central fact that the summary must cover.
+- expert_summary_hint: a short lay-framing hint from the expert summary, or "".
+- support_af_ids: 1-4 candidate fact IDs that support writing this claim.
+- allowed_evidence_spans: 1-4 short source spans copied from CANDIDATE FACTS.
+- must_use_terms: exact entities, methods, organisms, numbers, directions, or comparisons
+  that should be preserved if the row is written.
+- forbidden_overgeneralizations: vague or wrong phrasings to avoid.
+- high_risk_check_facts: 0-3 short facts that should later be checked with 1T3F.
+  Prefer method, organism, measurement, direction, number, and comparison details.
+
+Selection limits:
+- balanced: select about 6-10 evidence rows per article.
+- factuality_chase: select about 5-8 evidence rows per article.
+- If an abstract sentence is low-value background, you may skip it.
+- Do not include a support fact unless its source_span is useful for writing.
+- If a fact appears in the expert summary but cannot be supported by candidate facts
+  or abstract, omit it.
+
+Return ONLY valid JSON:
+{
+  "evidence_rows": [
+    {
+      "evidence_row_id": "row_0001",
+      "abstract_sentence_idx": 1,
+      "abstract_claim": "...",
+      "core_keep_af": "...",
+      "expert_summary_hint": "...",
+      "support_af_ids": ["..."],
+      "allowed_evidence_spans": ["..."],
+      "must_use_terms": ["..."],
+      "forbidden_overgeneralizations": ["..."],
+      "high_risk_check_facts": [
+        {
+          "fact": "...",
+          "slot_type": "method|organism|measurement|direction|number|comparison|entity|causality",
+          "source_span": "..."
+        }
+      ]
+    }
+  ]
+}
+
+TITLE:
+{title}
+
+ABSTRACT SENTENCES:
+{abstract_sentences}
+
+EXPERT LAY SUMMARY:
+{expert_summary}
+
+CANDIDATE FACTS GROUPED BY ABSTRACT SENTENCE:
+{candidate_facts}
+

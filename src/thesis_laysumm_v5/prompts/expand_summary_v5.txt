@@ -1,0 +1,47 @@
+You are repairing the length of a controlled biomedical lay summary.
+
+The summary is below the minimum word count. Expand it only by adding supported,
+row-local clarification sentences to existing slots or by adding a small number of
+unused evidence rows as new slots.
+
+Rules:
+- Do not change already correct factual claims unless needed for grammar.
+- Do not add outside knowledge.
+- Do not write broad implications unless a selected evidence row supports them.
+- Use only the evidence row's core_keep_af, abstract_claim, lay_context,
+  expert_summary_hint, must_use_terms, and allowed_evidence_spans.
+- Keep each added sentence short and evidence-local.
+- Avoid: "suggests", "may be able", "could help", "important for", "acted like",
+  "call for help".
+- Final summary must be between {min_word_count} and {max_word_count} words.
+
+Return ONLY valid JSON:
+{
+  "slots": [
+    {
+      "slot_id": "slot_0001",
+      "role": "background|motivation|method|mechanism|finding|implication|limitation",
+      "evidence_row_id": "row_0001",
+      "claim_sentence": "<one grounded sentence>",
+      "clarification_sentence": "<optional grounded sentence or empty string>",
+      "used_for_summary": true
+    }
+  ],
+  "summary": "<expanded full summary>"
+}
+
+MODE: {mode}
+DATASET PROFILE: {dataset_profile}
+STYLE PROFILE: {style_profile}
+TARGET WORDS: {target_word_count}
+MIN WORDS: {min_word_count}
+MAX WORDS: {max_word_count}
+
+CURRENT SLOTS:
+{current_slots}
+
+CURRENT SUMMARY:
+{current_summary}
+
+EVIDENCE TABLE:
+{evidence_table}

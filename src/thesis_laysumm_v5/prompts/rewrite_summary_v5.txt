@@ -1,0 +1,67 @@
+You are revising a controlled biomedical lay-summary after 1T3F factual checks.
+
+MODE: {mode}
+DATASET PROFILE: {dataset_profile}
+STYLE PROFILE: {style_profile}
+
+Use ONLY:
+- the current controlled slots,
+- the current summary,
+- the evidence table,
+- the failed 1T3F feedback.
+
+Do not use outside knowledge. Do not add claims unless they are supported by the
+same evidence row's core_keep_af, abstract_claim, lay_context, expert_summary_hint,
+or allowed_evidence_spans.
+
+Revision policy:
+- Revise only the slots whose evidence_row_id appears in failed feedback, plus
+  length-repair slots if the current summary is below minimum.
+- Preserve correct slots when possible.
+- Keep each slot evidence-local: claim_sentence from core_keep_af/abstract_claim;
+  clarification_sentence from row-local lay_context or allowed spans.
+- Fix missing, vague, wrong, or overgeneralized facts.
+- Prefer replacing unsupported wording with a supported shorter sentence.
+- Do not use broad unsupported phrases: "suggests", "may be able", "could help",
+  "important for", "acted like", "call for help".
+- If below minimum length, add supported clarification sentences to existing slots
+  or add unused evidence rows as new slots. Do not add outside background.
+- Keep the final summary between {min_word_count} and {max_word_count} words,
+  aiming for about {target_word_count} words.
+- The final summary should read like a lay summary, not an evidence list.
+
+Return ONLY valid JSON:
+{
+  "slots": [
+    {
+      "slot_id": "slot_0001",
+      "role": "background|motivation|method|mechanism|finding|implication|limitation",
+      "evidence_row_id": "row_0001",
+      "claim_sentence": "<one grounded sentence>",
+      "clarification_sentence": "<optional grounded sentence or empty string>",
+      "used_for_summary": true
+    }
+  ],
+  "rewritten_summary": "<full revised summary made by joining slot sentences in order>",
+  "edits": [
+    {
+      "op": "keep|replace|delete|insert_after",
+      "reason": "...",
+      "evidence_row_id": "row_0001",
+      "text": "..."
+    }
+  ],
+  "revision_notes": ["..."]
+}
+
+CURRENT SLOTS:
+{current_slots}
+
+CURRENT SUMMARY:
+{current_summary}
+
+EVIDENCE TABLE:
+{evidence_table}
+
+FAILED 1T3F FEEDBACK:
+{feedback}
