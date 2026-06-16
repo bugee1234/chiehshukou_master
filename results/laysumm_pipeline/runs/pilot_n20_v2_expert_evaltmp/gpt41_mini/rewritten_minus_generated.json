@@ -1,0 +1,12 @@
+{
+  "ROUGE": 0.0,
+  "BLEU": 0.0,
+  "METEOR": 0.0,
+  "BERTScore": 0.0,
+  "FKGL": 0.0,
+  "DCRS": 0.0,
+  "CLI": 0.0,
+  "LENS": 0.0,
+  "AlignScore": 0.0,
+  "SummaC": 0.0
+}

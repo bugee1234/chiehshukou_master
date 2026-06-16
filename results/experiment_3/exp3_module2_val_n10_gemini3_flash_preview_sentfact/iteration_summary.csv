@@ -1,4 +1,0 @@
-iteration,af_total,covered,errors,coverage_rate,parse_error_count
-0,216,157,59,0.7269,0
-1,216,206,10,0.9537,0
-2,216,201,15,0.9306,1

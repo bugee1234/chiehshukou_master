@@ -1,0 +1,46 @@
+{
+  "source_run": "pilot_n20_v2",
+  "eval_run": "pilot_n20_v2_expert_evaltmp",
+  "results": [
+    {
+      "model_key": "gemini3_flash_preview_minimal",
+      "prediction_source": "expert_summary",
+      "final_rank_among_pool": 2,
+      "pool_size": 18,
+      "final_score": 0.6422,
+      "relevance": 1.0,
+      "readability": 0.4017,
+      "factuality": 0.5249,
+      "ROUGE": 1.0,
+      "BLEU": 100.0,
+      "METEOR": 1.0,
+      "BERTScore": 1.0,
+      "FKGL": 13.8856,
+      "DCRS": 12.2298,
+      "CLI": 14.5215,
+      "LENS": 61.0057,
+      "AlignScore": 0.8019,
+      "SummaC": 0.5602
+    },
+    {
+      "model_key": "gpt41_mini",
+      "prediction_source": "expert_summary",
+      "final_rank_among_pool": 2,
+      "pool_size": 18,
+      "final_score": 0.6422,
+      "relevance": 1.0,
+      "readability": 0.4017,
+      "factuality": 0.5249,
+      "ROUGE": 1.0,
+      "BLEU": 100.0,
+      "METEOR": 1.0,
+      "BERTScore": 1.0,
+      "FKGL": 13.8856,
+      "DCRS": 12.2298,
+      "CLI": 14.5215,
+      "LENS": 61.0057,
+      "AlignScore": 0.8019,
+      "SummaC": 0.5602
+    }
+  ]
+}

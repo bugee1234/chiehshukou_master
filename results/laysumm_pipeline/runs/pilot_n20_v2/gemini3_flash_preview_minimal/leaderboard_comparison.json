@@ -1,0 +1,209 @@
+{
+  "caution": "Pilot validation sample versus published official-test leaderboard; positions are descriptive only.",
+  "comparisons": {
+    "initial": [
+      {
+        "variant": "initial",
+        "metric": "ROUGE",
+        "value": 0.32872071443392814,
+        "direction": "higher",
+        "metric_rank_among_17": 8,
+        "nearest_team": "MetinOZU",
+        "nearest_team_score": 0.33,
+        "difference_from_nearest": -0.001279285566071875
+      },
+      {
+        "variant": "initial",
+        "metric": "BLEU",
+        "value": 4.964560166154696,
+        "direction": "higher",
+        "metric_rank_among_17": 10,
+        "nearest_team": "RainCityNLP",
+        "nearest_team_score": 4.87,
+        "difference_from_nearest": 0.09456016615469576
+      },
+      {
+        "variant": "initial",
+        "metric": "METEOR",
+        "value": 0.30327741265941927,
+        "direction": "higher",
+        "metric_rank_among_17": 3,
+        "nearest_team": "Baseline-qwen2.5-7B-sft",
+        "nearest_team_score": 0.303,
+        "difference_from_nearest": 0.00027741265941927384
+      },
+      {
+        "variant": "initial",
+        "metric": "BERTScore",
+        "value": 0.8544489115476608,
+        "direction": "higher",
+        "metric_rank_among_17": 9,
+        "nearest_team": "LaySummX",
+        "nearest_team_score": 0.855,
+        "difference_from_nearest": -0.000551088452339199
+      },
+      {
+        "variant": "initial",
+        "metric": "FKGL",
+        "value": 14.643311750441548,
+        "direction": "lower",
+        "metric_rank_among_17": 14,
+        "nearest_team": "Aard",
+        "nearest_team_score": 14.56,
+        "difference_from_nearest": 0.08331175044154726
+      },
+      {
+        "variant": "initial",
+        "metric": "DCRS",
+        "value": 11.595030195014996,
+        "direction": "lower",
+        "metric_rank_among_17": 14,
+        "nearest_team": "RainCityNLP",
+        "nearest_team_score": 11.66,
+        "difference_from_nearest": -0.06496980498500449
+      },
+      {
+        "variant": "initial",
+        "metric": "CLI",
+        "value": 13.766103999506388,
+        "direction": "lower",
+        "metric_rank_among_17": 13,
+        "nearest_team": "Baseline-qwen2.5-7B-sft",
+        "nearest_team_score": 13.7,
+        "difference_from_nearest": 0.06610399950638879
+      },
+      {
+        "variant": "initial",
+        "metric": "LENS",
+        "value": 75.25535003808508,
+        "direction": "higher",
+        "metric_rank_among_17": 5,
+        "nearest_team": "5cNLP",
+        "nearest_team_score": 76.05,
+        "difference_from_nearest": -0.7946499619149137
+      },
+      {
+        "variant": "initial",
+        "metric": "AlignScore",
+        "value": 0.5041786000132561,
+        "direction": "higher",
+        "metric_rank_among_17": 16,
+        "nearest_team": "CUTN_Bio",
+        "nearest_team_score": 0.589,
+        "difference_from_nearest": -0.08482139998674387
+      },
+      {
+        "variant": "initial",
+        "metric": "SummaC",
+        "value": 0.47362616360187526,
+        "direction": "higher",
+        "metric_rank_among_17": 16,
+        "nearest_team": "LTRC",
+        "nearest_team_score": 0.476,
+        "difference_from_nearest": -0.002373836398124718
+      }
+    ],
+    "rewritten": [
+      {
+        "variant": "rewritten",
+        "metric": "ROUGE",
+        "value": 0.32678528811062046,
+        "direction": "higher",
+        "metric_rank_among_17": 8,
+        "nearest_team": "MetinOZU",
+        "nearest_team_score": 0.33,
+        "difference_from_nearest": -0.003214711889379551
+      },
+      {
+        "variant": "rewritten",
+        "metric": "BLEU",
+        "value": 4.877603071474953,
+        "direction": "higher",
+        "metric_rank_among_17": 10,
+        "nearest_team": "RainCityNLP",
+        "nearest_team_score": 4.87,
+        "difference_from_nearest": 0.00760307147495265
+      },
+      {
+        "variant": "rewritten",
+        "metric": "METEOR",
+        "value": 0.30479767031221644,
+        "direction": "higher",
+        "metric_rank_among_17": 3,
+        "nearest_team": "Baseline-qwen2.5-7B-sft",
+        "nearest_team_score": 0.303,
+        "difference_from_nearest": 0.0017976703122164484
+      },
+      {
+        "variant": "rewritten",
+        "metric": "BERTScore",
+        "value": 0.8532484352588654,
+        "direction": "higher",
+        "metric_rank_among_17": 9,
+        "nearest_team": "LaySummX",
+        "nearest_team_score": 0.855,
+        "difference_from_nearest": -0.0017515647411345814
+      },
+      {
+        "variant": "rewritten",
+        "metric": "FKGL",
+        "value": 14.749205918215079,
+        "direction": "lower",
+        "metric_rank_among_17": 14,
+        "nearest_team": "Aard",
+        "nearest_team_score": 14.56,
+        "difference_from_nearest": 0.18920591821507848
+      },
+      {
+        "variant": "rewritten",
+        "metric": "DCRS",
+        "value": 11.687090681811714,
+        "direction": "lower",
+        "metric_rank_among_17": 15,
+        "nearest_team": "RainCityNLP",
+        "nearest_team_score": 11.66,
+        "difference_from_nearest": 0.027090681811714035
+      },
+      {
+        "variant": "rewritten",
+        "metric": "CLI",
+        "value": 13.752395233842307,
+        "direction": "lower",
+        "metric_rank_among_17": 13,
+        "nearest_team": "Baseline-qwen2.5-7B-sft",
+        "nearest_team_score": 13.7,
+        "difference_from_nearest": 0.05239523384230793
+      },
+      {
+        "variant": "rewritten",
+        "metric": "LENS",
+        "value": 74.68594782805516,
+        "direction": "higher",
+        "metric_rank_among_17": 5,
+        "nearest_team": "5cNLP",
+        "nearest_team_score": 76.05,
+        "difference_from_nearest": -1.3640521719448344
+      },
+      {
+        "variant": "rewritten",
+        "metric": "AlignScore",
+        "value": 0.5136886730790138,
+        "direction": "higher",
+        "metric_rank_among_17": 16,
+        "nearest_team": "CUTN_Bio",
+        "nearest_team_score": 0.589,
+        "difference_from_nearest": -0.07531132692098619
+      },
+      {
+        "variant": "rewritten",
+        "metric": "SummaC",
+        "value": 0.473839670419693,
+        "direction": "higher",
+        "metric_rank_among_17": 16,
+        "nearest_team": "LTRC",
+        "nearest_team_score": 0.476,
+        "difference_from_nearest": -0.0021603295803069855
+      }
+    ]
+  }
+}

@@ -231,43 +231,85 @@ def judge_candidate_af(
 
 
 def build_final_keep_af(*, run_name: str, model_key: str) -> list[dict[str, Any]]:
+    from collections import defaultdict
+
+    from src.thesis_laysumm.llm_utils import load_articles
+
     out_dir = _module2_dir(run_name, model_key)
     judgements = load_jsonl(out_dir / "module2_judgements.jsonl")
-    rows = []
+    articles = {str(r["id"]): r for r in load_articles(run_name)}
+
+    grouped: dict[tuple[str, int], list[dict[str, Any]]] = defaultdict(list)
+    pre_dedup_count = 0
     for row in judgements:
         if not row.get("final_keep"):
             continue
+        pre_dedup_count += 1
+        idx_raw = row.get("abstract_sentence_idx")
+        if idx_raw in {None, "", "null", "None"}:
+            continue
+        idx = int(idx_raw)
+        grouped[(str(row["article_id"]), idx)].append(row)
+
+    rows: list[dict[str, Any]] = []
+    skipped_invalid_idx = 0
+    for (article_id, idx), group in sorted(grouped.items(), key=lambda item: (item[0][0], item[0][1])):
+        article = articles.get(article_id)
+        if article is None:
+            continue
+        abstract_sentences = article.get("abstract_sentences") or []
+        if idx < 1 or idx > len(abstract_sentences):
+            skipped_invalid_idx += 1
+            continue
+
+        canonical_fact = str(abstract_sentences[idx - 1]).strip()
+        if not canonical_fact:
+            skipped_invalid_idx += 1
+            continue
+
+        group.sort(key=lambda r: str(r["af_id"]))
+        rep = group[0]
+        merged_ids = sorted({str(r["af_id"]) for r in group})
         rows.append(
             {
-                "af_id": row["af_id"],
+                "af_id": rep["af_id"],
                 "model_key": model_key,
-                "article_id": row["article_id"],
-                "source_dataset": row["source_dataset"],
-                "original_index": row["original_index"],
-                "fact": row["fact"],
-                "source_span": row.get("source_span", ""),
-                "abstract_sentence_idx": row.get("abstract_sentence_idx"),
-                "abstract_sentence": row.get("abstract_sentence"),
-                "module2_coverage_type": row.get("coverage_type"),
-                "module2_confidence": row.get("confidence"),
-                "module2_reasoning": row.get("reasoning"),
-                "judge_model_key": row.get("judge_model_key"),
-                "judge_model": row.get("judge_model"),
+                "article_id": article_id,
+                "source_dataset": rep["source_dataset"],
+                "original_index": rep["original_index"],
+                "fact": canonical_fact,
+                "source_span": rep.get("source_span", ""),
+                "abstract_sentence_idx": idx,
+                "abstract_sentence": canonical_fact,
+                "merged_from_af_ids": merged_ids if len(merged_ids) > 1 else [],
+                "merged_af_count": len(merged_ids),
+                "module2_coverage_type": rep.get("coverage_type"),
+                "module2_confidence": rep.get("confidence"),
+                "module2_reasoning": rep.get("reasoning"),
+                "judge_model_key": rep.get("judge_model_key"),
+                "judge_model": rep.get("judge_model"),
             }
         )
-    rows.sort(key=lambda r: (str(r["article_id"]), str(r["af_id"])))
+
+    rows.sort(key=lambda r: (str(r["article_id"]), int(r["abstract_sentence_idx"])))
     save_jsonl(rows, out_dir / "final_keep_af.jsonl")
     save_json(
         {
             "time": datetime.now().isoformat(timespec="seconds"),
             "model_key": model_key,
-            "final_keep_total": len(rows),
+            "final_keep_rule": "dedupe_by_abstract_sentence_idx; fact=canonical abstract sentence",
+            "final_keep_pre_dedup": pre_dedup_count,
+            "final_keep_post_dedup": len(rows),
+            "skipped_invalid_abstract_idx": skipped_invalid_idx,
             "final_keep_by_source": dict(Counter(str(r["source_dataset"]) for r in rows)),
             "final_keep_by_article": dict(Counter(str(r["article_id"]) for r in rows)),
         },
         out_dir / "final_keep_af_metadata.json",
     )
-    print(f"[module2] final_keep_af={len(rows)} -> {out_dir / 'final_keep_af.jsonl'}")
+    print(
+        f"[module2] final_keep_af={len(rows)} (deduped from {pre_dedup_count}) "
+        f"-> {out_dir / 'final_keep_af.jsonl'}"
+    )
     return rows
 
 

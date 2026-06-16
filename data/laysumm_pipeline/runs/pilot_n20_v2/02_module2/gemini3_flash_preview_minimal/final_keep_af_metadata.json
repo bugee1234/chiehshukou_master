@@ -1,0 +1,34 @@
+{
+  "time": "2026-06-16T01:18:24",
+  "model_key": "gemini3_flash_preview_minimal",
+  "final_keep_rule": "dedupe_by_abstract_sentence_idx; fact=canonical abstract sentence",
+  "final_keep_pre_dedup": 804,
+  "final_keep_post_dedup": 160,
+  "skipped_invalid_abstract_idx": 0,
+  "final_keep_by_source": {
+    "eLife": 69,
+    "PLOS": 91
+  },
+  "final_keep_by_article": {
+    "laysumm_elife_0006": 6,
+    "laysumm_elife_0026": 7,
+    "laysumm_elife_0028": 8,
+    "laysumm_elife_0035": 7,
+    "laysumm_elife_0057": 7,
+    "laysumm_elife_0062": 7,
+    "laysumm_elife_0070": 8,
+    "laysumm_elife_0163": 5,
+    "laysumm_elife_0188": 8,
+    "laysumm_elife_0189": 6,
+    "laysumm_plos_0051": 7,
+    "laysumm_plos_0178": 9,
+    "laysumm_plos_0209": 8,
+    "laysumm_plos_0228": 13,
+    "laysumm_plos_0285": 9,
+    "laysumm_plos_0457": 6,
+    "laysumm_plos_0501": 12,
+    "laysumm_plos_0563": 6,
+    "laysumm_plos_1116": 13,
+    "laysumm_plos_1309": 8
+  }
+}

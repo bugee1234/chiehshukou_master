@@ -3,31 +3,30 @@ You are writing a plain-language lay summary of a biomedical research article.
 GOAL
 - Cover the same core scientific claims as the article ABSTRACT. The abstract is the factuality anchor.
 - Write for non-expert readers: clear wording, short sentences, minimal unexplained jargon.
-- Use the FINAL KEEP atomic facts (AFs) as a checklist of claims that must be represented.
-- Do NOT imitate the structure, ordering, or wording of any expert lay summary example.
-- Expert examples show STYLE only (accessible tone and readability), not content to copy.
+- Use FINAL KEEP items as a checklist: each item is one abstract sentence whose core claim must appear in your summary.
+- Follow the abstract information order ([S1], [S2], ...). Expert lay summary below is a style reference for the same article.
 
-FACTUALITY RULES
-- Every summary sentence must express a claim supported by at least one listed AF.
-- Prefer claims that map to an abstract sentence; do not add claims outside the abstract+AF scope.
-- Merge overlapping AFs; do not repeat the same point mechanically.
-- Preserve direction, comparisons, populations, organisms, and qualifiers from the AFs.
-- No outside knowledge. No clinical advice beyond what the AFs support.
+WRITING RULES (important)
+- Do NOT concatenate or copy AF / abstract sentences into the summary.
+- Express each required claim in fresh plain-language sentences of your own.
+- One abstract sentence may become one or two lay sentences, but keep the abstract order.
+- Skip abstract sentences that are NOT listed in FINAL KEEP (do not invent extra claims for them).
+- Do not add claims outside the abstract + FINAL KEEP scope.
+- Preserve direction, comparisons, populations, organisms, and qualifiers from the required claims.
 
 CHAIN OF THOUGHT (required before writing)
-1) Read the abstract sentences and the grouped AF list.
-2) For each abstract sentence, decide which AFs carry the same core claim.
-3) Plan which claims MUST appear in the lay summary (prioritize findings, high-level methods, and significance).
-4) Then write the lay summary.
+1) Read abstract sentences and the FINAL KEEP checklist (grouped by [S#]).
+2) For each FINAL KEEP [S#], plan how to express that claim in lay language.
+3) Write sentences in ascending abstract sentence order.
+4) Join into a coherent summary.
 
 LENGTH
 - The expert lay summary for this article is about {expert_summary_word_count} words.
-- Your summary must be AT LEAST that long. Do not write a shorter summary.
-- It is acceptable — and often desirable — to write longer than the expert summary when needed to cover the AF checklist clearly and naturally.
-- There is no hard upper word limit; completeness and readability matter more than brevity.
+- Your summary must be AT LEAST that long.
+- No hard upper limit, but prefer clarity over length.
 
-FEW-SHOT EXAMPLES (style reference only — different articles)
-{few_shot_examples}
+STYLE REFERENCE (same article — abstract + expert lay summary)
+{article_style_reference}
 
 TARGET ARTICLE
 TITLE: {title}
@@ -35,14 +34,14 @@ TITLE: {title}
 ABSTRACT:
 {abstract}
 
-ABSTRACT-ALIGNED FINAL KEEP AFS (grouped):
+FINAL KEEP CHECKLIST (abstract sentences to cover; grouped):
 {grouped_afs}
 
 Return ONLY valid JSON:
 {
   "abstract_claim_plan": [
     {
-      "abstract_sentence_idx": <1-based int or null>,
+      "abstract_sentence_idx": <1-based int>,
       "core_claim": "<short plan note>",
       "af_ids": ["<af_id>", "..."],
       "include_in_summary": true
@@ -50,8 +49,9 @@ Return ONLY valid JSON:
   ],
   "sentences": [
     {
-      "text": "<one plain-language sentence containing one core claim>",
+      "text": "<one plain-language sentence expressing a required claim>",
       "af_ids": ["<af_id>", "..."],
+      "abstract_sentence_idx": <1-based int matching the claim>,
       "section": "background|methods|results|implications"
     }
   ]

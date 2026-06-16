@@ -26,9 +26,26 @@ from src.utils import load_json, load_jsonl, save_json, save_jsonl
 
 PROMPTS_DIR = Path(__file__).resolve().parent / "prompts"
 DEFAULT_MODEL_KEY = "gemini3_flash_preview_minimal"
-PROMPT_VERSION = "generate_lay_summary_v1"
-REWRITE_PROMPT_VERSION = "rewrite_lay_summary_v1"
+PROMPT_VERSION = "generate_lay_summary_v2"
+REWRITE_PROMPT_VERSION = "rewrite_lay_summary_v2"
 VALID_SECTIONS = {"background", "methods", "results", "implications"}
+SECTION_ALIASES = {
+    "hypotheses": "results",
+    "hypothesis": "results",
+    "conclusion": "implications",
+    "conclusions": "implications",
+    "introduction": "background",
+    "discussion": "implications",
+    "finding": "results",
+    "findings": "results",
+}
+
+
+def _normalize_section(section: str) -> str:
+    normalized = str(section or "").strip().lower()
+    if normalized in VALID_SECTIONS:
+        return normalized
+    return SECTION_ALIASES.get(normalized, "results")
 
 
 def _module2_dir(run_name: str, model_key: str) -> Path:
@@ -41,66 +58,31 @@ def _summaries_dir(run_name: str, model_key: str) -> Path:
     return path
 
 
-def _load_few_shot_examples() -> list[dict[str, Any]]:
-    path = PROMPTS_DIR / "few_shot_summary_examples.json"
-    if not path.exists():
-        raise FileNotFoundError(
-            f"Missing few-shot examples: {path}. "
-            "Run: python -m src.thesis_laysumm.prepare_few_shot_summary_examples --run-name <run_name>"
-        )
-    examples = load_json(path)
-    if not isinstance(examples, list) or len(examples) < 1:
-        raise ValueError(f"few_shot_summary_examples.json must be a non-empty list: {path}")
-    return examples
-
-
-def _format_few_shot_examples(examples: list[dict[str, Any]]) -> str:
-    blocks: list[str] = []
-    for i, ex in enumerate(examples, start=1):
-        blocks.append(
-            f"### Example {i} ({ex.get('source_dataset', 'unknown')})\n"
-            f"Title: {ex.get('title', '')}\n\n"
-            f"Abstract:\n{ex.get('abstract', '')}\n\n"
-            f"Expert lay summary (STYLE REFERENCE ONLY — do not copy structure or wording):\n"
-            f"{ex.get('expert_summary', '')}"
-        )
-    return "\n\n".join(blocks)
-
-
-def _format_abstract_sentences(sentences: list[str]) -> str:
-    lines = []
-    for i, sentence in enumerate(sentences, start=1):
-        text = str(sentence or "").strip()
-        if text:
-            lines.append(f"[S{i}] {text}")
-    return "\n".join(lines) if lines else ""
+def _format_article_style_reference(article: dict[str, Any]) -> str:
+    return (
+        f"Title: {article.get('title', '')}\n\n"
+        f"Abstract:\n{article.get('abstract', '')}\n\n"
+        f"Expert lay summary:\n{article.get('expert_summary', '')}"
+    )
 
 
 def _group_final_keep_af(afs: list[dict[str, Any]], abstract_sentences: list[str]) -> str:
-    by_idx: dict[int | str, list[dict[str, Any]]] = defaultdict(list)
+    by_idx: dict[int, dict[str, Any]] = {}
     for af in afs:
-        idx = af.get("abstract_sentence_idx")
-        if idx in {None, "", "null", "None"}:
-            by_idx["unmapped"].append(af)
-        else:
-            by_idx[int(idx)].append(af)
+        idx_raw = af.get("abstract_sentence_idx")
+        if idx_raw in {None, "", "null", "None"}:
+            continue
+        by_idx[int(idx_raw)] = af
 
     blocks: list[str] = []
-    for i in range(1, len(abstract_sentences) + 1):
-        sentence = str(abstract_sentences[i - 1]).strip()
-        group = by_idx.get(i, [])
-        if not sentence and not group:
-            continue
-        lines = [f"[S{i}] {sentence}" if sentence else f"[S{i}]"]
-        for af in group:
-            lines.append(f"  - AF {af['af_id']}: {af['fact']}")
-        blocks.append("\n".join(lines))
-
-    unmapped = by_idx.get("unmapped", [])
-    if unmapped:
-        lines = ["[S?] AFs without abstract sentence mapping:"]
-        for af in unmapped:
-            lines.append(f"  - AF {af['af_id']}: {af['fact']}")
+    for idx in sorted(by_idx):
+        af = by_idx[idx]
+        sentence = str(abstract_sentences[idx - 1]).strip() if 1 <= idx <= len(abstract_sentences) else ""
+        lines = [f"[S{idx}] {sentence}" if sentence else f"[S{idx}]"]
+        lines.append(f"  - REQUIRED (AF {af['af_id']}): express this claim in lay language")
+        merged_count = int(af.get("merged_af_count") or 1)
+        if merged_count > 1:
+            lines.append(f"    (merged from {merged_count} candidate AFs)")
         blocks.append("\n".join(lines))
     return "\n\n".join(blocks) if blocks else "(no final keep AFs)"
 
@@ -109,6 +91,7 @@ def _validate_generation(
     obj: dict[str, Any],
     *,
     valid_af_ids: set[str],
+    valid_abstract_indices: set[int],
 ) -> tuple[list[dict[str, Any]], list[dict[str, Any]], list[str], list[dict[str, str]]]:
     errors: list[str] = []
     warnings: list[dict[str, str]] = []
@@ -145,17 +128,31 @@ def _validate_generation(
             continue
         text = str(entry.get("text", "")).strip()
         af_ids = _normalize_af_ids(entry.get("af_ids", entry.get("af_id")), valid_af_ids, errors, label="sentence")
-        section = str(entry.get("section", "")).strip().lower()
+        section = _normalize_section(str(entry.get("section", "")))
+        idx_raw = entry.get("abstract_sentence_idx")
+        if idx_raw in {None, "", "null", "None"}:
+            errors.append("sentence missing abstract_sentence_idx")
+            continue
+        abstract_sentence_idx = int(idx_raw)
+        if abstract_sentence_idx not in valid_abstract_indices:
+            errors.append(f"sentence cites abstract_sentence_idx not in final keep: {abstract_sentence_idx}")
+            continue
         if not text:
             errors.append("sentence text is empty")
             continue
         if not af_ids:
             warnings.append({"text": text, "reason": "missing_af_ids"})
             continue
-        if section not in VALID_SECTIONS:
-            errors.append(f"invalid section: {section!r}")
-            continue
-        sentence_rows.append({"text": text, "af_ids": af_ids, "section": section})
+        sentence_rows.append(
+            {
+                "text": text,
+                "af_ids": af_ids,
+                "abstract_sentence_idx": abstract_sentence_idx,
+                "section": section,
+            }
+        )
+
+    sentence_rows.sort(key=lambda row: (int(row["abstract_sentence_idx"]), row["text"]))
 
     if isinstance(raw_sentences, list) and raw_sentences and not sentence_rows:
         errors.append("no sentences with valid af_ids remained after validation")
@@ -211,7 +208,6 @@ def generate_summaries(
 
     prompt_path = PROMPTS_DIR / "generate_lay_summary.txt"
     prompt_template = prompt_path.read_text(encoding="utf-8")
-    few_shot_block = _format_few_shot_examples(_load_few_shot_examples())
 
     out_dir = _summaries_dir(run_name, model_key)
     out_path = out_dir / "generated_summaries.jsonl"
@@ -225,10 +221,16 @@ def generate_summaries(
         article_id = str(article["id"])
         afs = af_by_article.get(article_id, [])
         valid_af_ids = {str(af["af_id"]) for af in afs}
+        valid_abstract_indices = {
+            int(af["abstract_sentence_idx"])
+            for af in afs
+            if af.get("abstract_sentence_idx") not in {None, "", "null", "None"}
+        }
         expert_wc = int(article.get("expert_summary_word_count") or word_count(article.get("expert_summary", "")))
         min_word_count = expert_wc
         abstract_sentences = article.get("abstract_sentences") or []
         grouped_afs = _group_final_keep_af(afs, abstract_sentences)
+        article_style_reference = _format_article_style_reference(article)
 
         raw = ""
         parse_error = False
@@ -240,7 +242,7 @@ def generate_summaries(
 
         try:
             prompt = (
-                prompt_template.replace("{few_shot_examples}", few_shot_block)
+                prompt_template.replace("{article_style_reference}", article_style_reference)
                 .replace("{title}", str(article.get("title", "")))
                 .replace("{abstract}", str(article.get("abstract", "")))
                 .replace("{grouped_afs}", grouped_afs)
@@ -257,6 +259,7 @@ def generate_summaries(
             abstract_claim_plan, sentences, validation_errors, skipped_sentences = _validate_generation(
                 obj,
                 valid_af_ids=valid_af_ids,
+                valid_abstract_indices=valid_abstract_indices,
             )
             if validation_errors:
                 raise ValueError("; ".join(validation_errors))
@@ -325,10 +328,12 @@ def generate_summaries(
             "prompt_version": PROMPT_VERSION,
             "prompt_file": str(prompt_path),
             "prompt_sha256": sha256_text(prompt_template),
-            "few_shot_file": str(PROMPTS_DIR / "few_shot_summary_examples.json"),
+            "few_shot_file": None,
+            "style_reference_policy": "same_article_abstract_and_expert_summary",
             "length_policy": {
                 "min_word_count": "expert_summary_word_count",
                 "max_word_count": "none (longer allowed)",
+                "uncovered_abstract_sentences": "skip",
             },
             "summaries_total": len(all_rows),
             "parse_error_count": sum(1 for r in all_rows if r.get("parse_error")),
@@ -800,23 +805,85 @@ def _rewritten_dir(run_name: str, model_key: str) -> Path:
     return path
 
 
-def _format_rewrite_feedback(wrong_rows: list[dict[str, Any]]) -> str:
+def _classify_wrong_error_type(row: dict[str, Any]) -> str:
+    if row.get("parse_error"):
+        return "omission"
+
+    option_eval = row.get("option_evaluation") or {}
+    correct = str(row.get("correct_letter", "")).strip().upper()
+    predicted = str(row.get("predicted_letter", "")).strip().upper()
+
+    supported_letters = [
+        letter
+        for letter in "ABCD"
+        if str((option_eval.get(letter) or {}).get("status", "")).strip() == "supported"
+    ]
+    if len(supported_letters) > 1:
+        return "checker_false_negative"
+    if correct in supported_letters and predicted == "E":
+        return "checker_false_negative"
+
+    correct_status = str((option_eval.get(correct) or {}).get("status", "")).strip()
+    predicted_status = (
+        str((option_eval.get(predicted) or {}).get("status", "")).strip() if predicted in "ABCD" else ""
+    )
+
+    if predicted_status == "contradicted":
+        return "contradiction"
+    if correct_status == "contradicted" and predicted != correct:
+        return "contradiction"
+    if predicted == "E" or correct_status == "insufficient":
+        return "omission"
+    return "omission"
+
+
+def _sentences_from_generated_row(gen_row: dict[str, Any]) -> list[str]:
+    structured = gen_row.get("sentences") or []
+    if structured:
+        return [str(s.get("text", "")).strip() for s in structured if str(s.get("text", "")).strip()]
+    text = str(gen_row.get("generated_summary", "")).strip()
+    if not text:
+        return []
+    parts = [part.strip() for part in text.replace("\n", " ").split(". ") if part.strip()]
+    return [f"{part}." if not part.endswith((".", "!", "?")) else part for part in parts]
+
+
+def _format_numbered_sentences(sentences: list[str]) -> str:
+    return "\n".join(f"{idx}. {sentence}" for idx, sentence in enumerate(sentences, start=1))
+
+
+def _format_surgical_feedback(
+    wrong_rows: list[dict[str, Any]],
+) -> tuple[str, list[dict[str, Any]]]:
     blocks: list[str] = []
+    items: list[dict[str, Any]] = []
     for i, row in enumerate(wrong_rows, start=1):
+        error_type = _classify_wrong_error_type(row)
+        if error_type == "checker_false_negative":
+            continue
         fact = str(row.get("fact", "")).strip()
+        af_id = str(row.get("af_id", "")).strip()
         correct_letter = str(row.get("correct_letter", "")).strip().upper()
-        correct_answer = str(row.get("correct_answer", "")).strip()
         predicted_letter = str(row.get("predicted_letter", "")).strip().upper()
         reasoning = str(row.get("reasoning", "")).strip()
-        af_id = str(row.get("af_id", "")).strip()
-        lines = [f"- AF {af_id}: {fact}"]
-        if row.get("parse_error"):
-            lines.append("  Quiz checker: parse error (fact still must be covered).")
-        else:
-            lines.append(f'  Quiz: correct={correct_letter} "{correct_answer}"')
-            lines.append(f"  Checker chose: {predicted_letter} — {reasoning}")
-        blocks.append("\n".join(lines))
-    return "\n\n".join(blocks) if blocks else "(no feedback)"
+        items.append(
+            {
+                "af_id": af_id,
+                "fact": fact,
+                "error_type": error_type,
+                "correct_letter": correct_letter,
+                "predicted_letter": predicted_letter,
+                "reasoning": reasoning,
+                "parse_error": bool(row.get("parse_error")),
+            }
+        )
+        blocks.append(
+            f"{i}. [{error_type}] AF {af_id}\n"
+            f"   Claim: {fact}\n"
+            f"   Quiz: correct={correct_letter}; checker chose {predicted_letter}\n"
+            f"   Note: {reasoning}"
+        )
+    return ("\n\n".join(blocks) if blocks else "(no actionable feedback)"), items
 
 
 def rewrite_summaries(
@@ -874,23 +941,15 @@ def rewrite_summaries(
         generated_summary = str(gen_row["generated_summary"]).strip()
         expert_wc = int(article.get("expert_summary_word_count") or word_count(article.get("expert_summary", "")))
         generated_wc = int(gen_row.get("generated_word_count") or word_count(generated_summary))
-        min_word_count = max(expert_wc, generated_wc)
+        max_word_count = max(int(generated_wc * 1.10), 1)
+        current_sentences = _sentences_from_generated_row(gen_row)
+        numbered_sentences = _format_numbered_sentences(current_sentences)
 
         wrong_rows = wrong_by_article.get(article_id, [])
-        feedback_items = [
-            {
-                "af_id": row.get("af_id"),
-                "fact": row.get("fact", ""),
-                "correct_letter": row.get("correct_letter"),
-                "predicted_letter": row.get("predicted_letter"),
-                "reasoning": row.get("reasoning", ""),
-                "parse_error": bool(row.get("parse_error")),
-            }
-            for row in wrong_rows
-        ]
-        wrong_af_ids = sorted({str(r.get("af_id")) for r in wrong_rows if r.get("af_id")})
+        feedback, feedback_items = _format_surgical_feedback(wrong_rows)
+        wrong_af_ids = sorted({str(item["af_id"]) for item in feedback_items if item.get("af_id")})
 
-        if not wrong_rows:
+        if not wrong_rows or not feedback_items:
             rewritten_summary = generated_summary
             return {
                 "article_id": article_id,
@@ -906,30 +965,33 @@ def rewrite_summaries(
                 "rewritten_summary": rewritten_summary,
                 "rewrite_skipped_no_errors": True,
                 "wrong_feedback_count": 0,
+                "actionable_feedback_count": 0,
                 "wrong_af_ids": [],
                 "feedback_items": [],
-                "revision_notes": ["no wrong quiz answers; copied generated summary"],
+                "edits": [],
+                "revision_notes": ["no actionable quiz feedback; copied generated summary"],
                 "expert_summary_word_count": expert_wc,
                 "generated_word_count": generated_wc,
                 "rewritten_word_count": word_count(rewritten_summary),
-                "min_word_count": min_word_count,
-                "below_min_length": word_count(rewritten_summary) < min_word_count,
+                "max_word_count": max_word_count,
+                "above_max_length": False,
                 "parse_error": False,
                 "raw_response": None,
             }
 
-        feedback = _format_rewrite_feedback(wrong_rows)
         raw = ""
         rewritten_summary = generated_summary
         revision_notes: list[str] = []
+        edits: list[dict[str, Any]] = []
         parse_error = False
 
         try:
             prompt = (
                 prompt_template.replace("{abstract}", str(article.get("abstract", "")))
-                .replace("{generated_summary}", generated_summary)
+                .replace("{numbered_sentences}", numbered_sentences)
                 .replace("{feedback}", feedback)
-                .replace("{min_word_count}", str(min_word_count))
+                .replace("{max_word_count}", str(max_word_count))
+                .replace("{current_word_count}", str(generated_wc))
             )
             raw = client.chat(
                 stage=f"phase_b.rewrite_summary:{model_key}",
@@ -945,6 +1007,9 @@ def rewrite_summaries(
                 revision_notes = [str(x).strip() for x in raw_notes if str(x).strip()]
             elif raw_notes:
                 revision_notes = [str(raw_notes).strip()]
+            raw_edits = obj.get("edits", [])
+            if isinstance(raw_edits, list):
+                edits = [e for e in raw_edits if isinstance(e, dict)]
             if not rewritten_summary:
                 raise ValueError("empty rewritten_summary")
         except Exception as exc:
@@ -953,6 +1018,11 @@ def rewrite_summaries(
             rewritten_summary = generated_summary
 
         rewritten_wc = word_count(rewritten_summary)
+        above_max_length = rewritten_wc > max_word_count
+        if above_max_length and not parse_error:
+            revision_notes.append(
+                f"warning: rewritten_word_count={rewritten_wc} exceeds max_word_count={max_word_count}"
+            )
         return {
             "article_id": article_id,
             "source_dataset": article.get("source_dataset"),
@@ -967,14 +1037,16 @@ def rewrite_summaries(
             "rewritten_summary": rewritten_summary,
             "rewrite_skipped_no_errors": False,
             "wrong_feedback_count": len(wrong_rows),
+            "actionable_feedback_count": len(feedback_items),
             "wrong_af_ids": wrong_af_ids,
             "feedback_items": feedback_items,
+            "edits": edits,
             "revision_notes": revision_notes,
             "expert_summary_word_count": expert_wc,
             "generated_word_count": generated_wc,
             "rewritten_word_count": rewritten_wc,
-            "min_word_count": min_word_count,
-            "below_min_length": rewritten_wc < min_word_count,
+            "max_word_count": max_word_count,
+            "above_max_length": above_max_length,
             "parse_error": parse_error,
             "raw_response": raw if parse_error else None,
         }
@@ -1011,8 +1083,12 @@ def rewrite_summaries(
             "rewritten_total": len(all_rows),
             "skipped_no_errors_count": sum(1 for r in all_rows if r.get("rewrite_skipped_no_errors")),
             "parse_error_count": sum(1 for r in all_rows if r.get("parse_error")),
-            "below_min_length_count": sum(1 for r in all_rows if r.get("below_min_length")),
+            "above_max_length_count": sum(1 for r in all_rows if r.get("above_max_length")),
+            "rewrite_length_policy": {"max_word_count": "generated_word_count * 1.10"},
             "wrong_feedback_stats": _word_stats([int(r.get("wrong_feedback_count") or 0) for r in all_rows]),
+            "actionable_feedback_stats": _word_stats(
+                [int(r.get("actionable_feedback_count") or 0) for r in all_rows]
+            ),
             "rewritten_word_count_stats": _word_stats([int(r.get("rewritten_word_count") or 0) for r in all_rows]),
             "usage_summary": usage.summarize(),
         },
@@ -1023,7 +1099,7 @@ def rewrite_summaries(
         f"[phase_b] rewrite_summary {model_key} rewritten={len(all_rows)} "
         f"skipped={sum(1 for r in all_rows if r.get('rewrite_skipped_no_errors'))} "
         f"parse_errors={sum(1 for r in all_rows if r.get('parse_error'))} "
-        f"below_min_length={sum(1 for r in all_rows if r.get('below_min_length'))}"
+        f"above_max_length={sum(1 for r in all_rows if r.get('above_max_length'))}"
     )
     print(f"[phase_b] output -> {out_path}")
     return all_rows
@@ -1055,11 +1131,17 @@ def repair_summaries(*, run_name: str, model_key: str) -> list[dict[str, Any]]:
             continue
         article_id = str(row["article_id"])
         valid_af_ids = {str(af["af_id"]) for af in af_by_article.get(article_id, [])}
+        valid_abstract_indices = {
+            int(af["abstract_sentence_idx"])
+            for af in af_by_article.get(article_id, [])
+            if af.get("abstract_sentence_idx") not in {None, "", "null", "None"}
+        }
         try:
             obj = json.loads(str(row["raw_response"]))
             abstract_claim_plan, sentences, validation_errors, skipped_sentences = _validate_generation(
                 obj,
                 valid_af_ids=valid_af_ids,
+                valid_abstract_indices=valid_abstract_indices,
             )
             if validation_errors:
                 continue

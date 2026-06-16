@@ -1,0 +1,135 @@
+{
+  "time": "2026-06-16T01:20:56",
+  "run_name": "pilot_n20_v2",
+  "stage": "06_rewritten",
+  "model_key": "gemini3_flash_preview_minimal",
+  "provider": "gemini",
+  "model": "gemini-3-flash-preview",
+  "max_workers": 4,
+  "articles_limit": null,
+  "prompt_version": "rewrite_lay_summary_v2",
+  "prompt_file": "C:\\Users\\bugee\\OneDrive\\桌面\\chiehshukou_master\\src\\thesis_laysumm\\prompts\\rewrite_lay_summary.txt",
+  "prompt_sha256": "653d74a38b8315e6ac188b9d0342812612f3c0f32bba3b9bda000ea26faa951e",
+  "rewritten_total": 20,
+  "skipped_no_errors_count": 9,
+  "parse_error_count": 0,
+  "above_max_length_count": 1,
+  "rewrite_length_policy": {
+    "max_word_count": "generated_word_count * 1.10"
+  },
+  "wrong_feedback_stats": {
+    "min": 0,
+    "max": 5,
+    "mean": 1.2
+  },
+  "actionable_feedback_stats": {
+    "min": 0,
+    "max": 5,
+    "mean": 1.2
+  },
+  "rewritten_word_count_stats": {
+    "min": 199,
+    "max": 389,
+    "mean": 309.6
+  },
+  "usage_summary": {
+    "api_calls": 1840,
+    "prompt_tokens": 1669670,
+    "cached_prompt_tokens": 0,
+    "billable_prompt_tokens": 1669670,
+    "completion_tokens": 410677,
+    "billable_output_tokens": 410677,
+    "total_tokens": 2080347,
+    "api_elapsed_seconds": 4533.9028,
+    "cost_currencies": [
+      "USD"
+    ],
+    "estimated_cost": 2.066866,
+    "by_stage": {
+      "module1.candidate_af:gemini3_flash_preview_minimal": {
+        "api_calls": 175,
+        "prompt_tokens": 377713,
+        "cached_prompt_tokens": 0,
+        "billable_prompt_tokens": 377713,
+        "completion_tokens": 140720,
+        "billable_output_tokens": 140720,
+        "total_tokens": 518433,
+        "api_elapsed_seconds": 876.661,
+        "cost_currencies": [
+          "USD"
+        ],
+        "estimated_cost": 0.611017
+      },
+      "module2.judge_abstract:gemini3_flash_preview_minimal": {
+        "api_calls": 1314,
+        "prompt_tokens": 1034971,
+        "cached_prompt_tokens": 0,
+        "billable_prompt_tokens": 1034971,
+        "completion_tokens": 144543,
+        "billable_output_tokens": 144543,
+        "total_tokens": 1179514,
+        "api_elapsed_seconds": 2689.5538,
+        "cost_currencies": [
+          "USD"
+        ],
+        "estimated_cost": 0.951115
+      },
+      "module3.questions:gemini3_flash_preview_minimal": {
+        "api_calls": 160,
+        "prompt_tokens": 43276,
+        "cached_prompt_tokens": 0,
+        "billable_prompt_tokens": 43276,
+        "completion_tokens": 26549,
+        "billable_output_tokens": 26549,
+        "total_tokens": 69825,
+        "api_elapsed_seconds": 322.6964,
+        "cost_currencies": [
+          "USD"
+        ],
+        "estimated_cost": 0.101285
+      },
+      "phase_b.answer_questions:gemini3_flash_preview_minimal": {
+        "api_calls": 160,
+        "prompt_tokens": 159420,
+        "cached_prompt_tokens": 0,
+        "billable_prompt_tokens": 159420,
+        "completion_tokens": 55423,
+        "billable_output_tokens": 55423,
+        "total_tokens": 214843,
+        "api_elapsed_seconds": 428.4245,
+        "cost_currencies": [
+          "USD"
+        ],
+        "estimated_cost": 0.245979
+      },
+      "phase_b.generate_summary:gemini3_flash_preview_minimal": {
+        "api_calls": 20,
+        "prompt_tokens": 40295,
+        "cached_prompt_tokens": 0,
+        "billable_prompt_tokens": 40295,
+        "completion_tokens": 35888,
+        "billable_output_tokens": 35888,
+        "total_tokens": 76183,
+        "api_elapsed_seconds": 172.5582,
+        "cost_currencies": [
+          "USD"
+        ],
+        "estimated_cost": 0.127811
+      },
+      "phase_b.rewrite_summary:gemini3_flash_preview_minimal": {
+        "api_calls": 11,
+        "prompt_tokens": 13995,
+        "cached_prompt_tokens": 0,
+        "billable_prompt_tokens": 13995,
+        "completion_tokens": 7554,
+        "billable_output_tokens": 7554,
+        "total_tokens": 21549,
+        "api_elapsed_seconds": 44.0089,
+        "cost_currencies": [
+          "USD"
+        ],
+        "estimated_cost": 0.02966
+      }
+    }
+  }
+}

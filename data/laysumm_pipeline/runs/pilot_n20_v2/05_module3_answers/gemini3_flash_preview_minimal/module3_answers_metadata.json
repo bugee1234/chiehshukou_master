@@ -1,0 +1,129 @@
+{
+  "time": "2026-06-16T01:20:41",
+  "run_name": "pilot_n20_v2",
+  "stage": "05_module3_answers",
+  "model_key": "gemini3_flash_preview_minimal",
+  "provider": "gemini",
+  "model": "gemini-3-flash-preview",
+  "max_workers": 8,
+  "articles_limit": null,
+  "context_mode": "full_generated_summary",
+  "prompt_file_system": "C:\\Users\\bugee\\OneDrive\\桌面\\chiehshukou_master\\src\\thesis_laysumm\\prompts\\answer_1t3f_setup_c.txt",
+  "prompt_file_user": "C:\\Users\\bugee\\OneDrive\\桌面\\chiehshukou_master\\src\\thesis_laysumm\\prompts\\answer_1t3f_user.txt",
+  "prompt_sha256_system": "b56c24148834a951174bd30454d2aabcf79e77e34035a83999857b933172d9c9",
+  "prompt_sha256_user": "6d4a7ca2dc261f2cdfc88891109f5a262b8a9341b090da05d6915d615daebed4",
+  "questions_total": 160,
+  "questions_expected": 160,
+  "parse_error_count": 0,
+  "json_repaired_count": 0,
+  "correct_count": 135,
+  "wrong_count": 25,
+  "accuracy_excluding_parse_errors": 0.8438,
+  "accuracy_all_rows": 0.8438,
+  "predicted_letter_counts": {
+    "C": 28,
+    "E": 25,
+    "D": 40,
+    "B": 31,
+    "A": 36
+  },
+  "wrong_by_article": {
+    "laysumm_elife_0006": 1,
+    "laysumm_elife_0026": 3,
+    "laysumm_elife_0057": 2,
+    "laysumm_elife_0062": 1,
+    "laysumm_elife_0188": 3,
+    "laysumm_plos_0178": 3,
+    "laysumm_plos_0209": 1,
+    "laysumm_plos_0228": 1,
+    "laysumm_plos_0501": 5,
+    "laysumm_plos_0563": 1,
+    "laysumm_plos_1116": 4
+  },
+  "usage_summary": {
+    "api_calls": 1829,
+    "prompt_tokens": 1655675,
+    "cached_prompt_tokens": 0,
+    "billable_prompt_tokens": 1655675,
+    "completion_tokens": 403123,
+    "billable_output_tokens": 403123,
+    "total_tokens": 2058798,
+    "api_elapsed_seconds": 4489.8939,
+    "cost_currencies": [
+      "USD"
+    ],
+    "estimated_cost": 2.037206,
+    "by_stage": {
+      "module1.candidate_af:gemini3_flash_preview_minimal": {
+        "api_calls": 175,
+        "prompt_tokens": 377713,
+        "cached_prompt_tokens": 0,
+        "billable_prompt_tokens": 377713,
+        "completion_tokens": 140720,
+        "billable_output_tokens": 140720,
+        "total_tokens": 518433,
+        "api_elapsed_seconds": 876.661,
+        "cost_currencies": [
+          "USD"
+        ],
+        "estimated_cost": 0.611017
+      },
+      "module2.judge_abstract:gemini3_flash_preview_minimal": {
+        "api_calls": 1314,
+        "prompt_tokens": 1034971,
+        "cached_prompt_tokens": 0,
+        "billable_prompt_tokens": 1034971,
+        "completion_tokens": 144543,
+        "billable_output_tokens": 144543,
+        "total_tokens": 1179514,
+        "api_elapsed_seconds": 2689.5538,
+        "cost_currencies": [
+          "USD"
+        ],
+        "estimated_cost": 0.951115
+      },
+      "module3.questions:gemini3_flash_preview_minimal": {
+        "api_calls": 160,
+        "prompt_tokens": 43276,
+        "cached_prompt_tokens": 0,
+        "billable_prompt_tokens": 43276,
+        "completion_tokens": 26549,
+        "billable_output_tokens": 26549,
+        "total_tokens": 69825,
+        "api_elapsed_seconds": 322.6964,
+        "cost_currencies": [
+          "USD"
+        ],
+        "estimated_cost": 0.101285
+      },
+      "phase_b.answer_questions:gemini3_flash_preview_minimal": {
+        "api_calls": 160,
+        "prompt_tokens": 159420,
+        "cached_prompt_tokens": 0,
+        "billable_prompt_tokens": 159420,
+        "completion_tokens": 55423,
+        "billable_output_tokens": 55423,
+        "total_tokens": 214843,
+        "api_elapsed_seconds": 428.4245,
+        "cost_currencies": [
+          "USD"
+        ],
+        "estimated_cost": 0.245979
+      },
+      "phase_b.generate_summary:gemini3_flash_preview_minimal": {
+        "api_calls": 20,
+        "prompt_tokens": 40295,
+        "cached_prompt_tokens": 0,
+        "billable_prompt_tokens": 40295,
+        "completion_tokens": 35888,
+        "billable_output_tokens": 35888,
+        "total_tokens": 76183,
+        "api_elapsed_seconds": 172.5582,
+        "cost_currencies": [
+          "USD"
+        ],
+        "estimated_cost": 0.127811
+      }
+    }
+  }
+}
