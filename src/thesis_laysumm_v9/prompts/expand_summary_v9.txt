@@ -1,0 +1,77 @@
+﻿You are repairing the length of a controlled biomedical lay summary.
+
+MODE: {mode}
+DATASET PROFILE: {dataset_profile}
+STYLE PROFILE: {style_profile}
+
+The current summary is below the minimum length. Add only a small amount of
+evidence-grounded explanation while preserving readability.
+
+This is a minimal length repair, not a relevance rewrite. The v8 GPT eLife
+pilot showed that expanding summaries can severely lower LENS and SummaC.
+Add only the smallest supported amount needed to reach the minimum length.
+
+Rules:
+- Use only the current slots and evidence table.
+- Prefer adding one short clarification to an existing central slot.
+- If needed, add multiple short clarifications.
+- Add one unused central evidence row only when the summary still cannot reach
+  the minimum. Prefer rows whose core_keep_af or abstract_claim states a main
+  result, method, or mechanism step.
+- Do not add broad implications or outside background.
+- Every added sentence must be self-contained. Do not start added sentences with
+  "This", "These", "It", "They", "This change", "This finding", or "This means".
+  Name the entity, method, condition, or result.
+- Do not add analogies, textbook definitions, public-health background, or broad
+  consequences unless the evidence row itself states them.
+- Use causal verbs such as "causes", "ensures", "confirms", "allows", "makes",
+  "drives", or "explains" only when the evidence row states that relation.
+- Keep sentences short: one factual relation per sentence.
+- Added sentences should usually be 8-14 words and must stay below 18 words.
+- Do not increase technical density. If a term has already appeared, use a
+  short alias instead of repeating the full technical term.
+- Do not add extra numbers, organisms, methods, genes, proteins, or conditions
+  unless they are essential to the central claim.
+- Prefer abstract_claim or core_keep_af over lay_context. Use lay_context only
+  for a short local definition that does not add a new claim.
+- Prefer local definitions over new claims. Keep the exact term first, then use
+  a short alias if the term repeats.
+- Avoid unsupported implication/metaphor phrases: "suggests", "may be able",
+  "could help", "important for", "acted like", "call for help".
+
+Length:
+- Target about {target_word_count} words.
+- Minimum {min_word_count} words.
+- Maximum {max_word_count} words.
+- These limits are chosen for leaderboard metrics, not to match the expert
+  summary length.
+- The repaired summary must be at least {min_word_count} words.
+- Add only enough short sentences to reach the minimum. Do not target the full
+  target length if the minimum is already met.
+- If the summary is close to the minimum, prefer one simple clarification over
+  a new evidence row.
+
+Return ONLY valid JSON:
+{
+  "slots": [
+    {
+      "slot_id": "slot_0001",
+      "role": "background|motivation|method|mechanism|finding|implication|limitation",
+      "evidence_row_id": "row_0001",
+      "claim_sentence": "<one short grounded sentence>",
+      "clarification_sentence": "<optional short grounded sentence or empty string>",
+      "used_for_summary": true
+    }
+  ],
+  "summary": "<full summary made by joining slot sentences in order>"
+}
+
+CURRENT SLOTS:
+{current_slots}
+
+CURRENT SUMMARY:
+{current_summary}
+
+EVIDENCE TABLE:
+{evidence_table}
+

@@ -1,0 +1,139 @@
+﻿You are revising a controlled biomedical lay summary.
+
+MODE: {mode}
+DATASET PROFILE: {dataset_profile}
+STYLE PROFILE: {style_profile}
+
+V8 rewrite objective:
+1. Repair failed 1T3F factual checks.
+2. Preserve or improve document entailment.
+3. Keep the current summary's main story and length.
+4. Improve readability only when it does not weaken factual anchors.
+5. Produce a repair candidate, not a guaranteed final answer. The selector may
+   reject this rewrite if it becomes harder to read or more paper-like.
+6. Make the smallest possible patch. Across v5-v7 pilots, broad rewrites often
+   reduced AlignScore, especially for Gemini. Do not rewrite a sentence unless
+   it directly contains the failed factual issue.
+
+Use ONLY:
+- the current controlled slots,
+- the current summary,
+- the evidence table,
+- the failed 1T3F feedback.
+
+Do not use outside knowledge. Do not add claims unless they are supported by the
+same evidence row's core_keep_af, abstract_claim, lay_context,
+expert_summary_hint, or allowed_evidence_spans.
+
+Readability policy:
+{readability_policy}
+
+Current readability stats:
+{current_readability_stats}
+
+Factuality-preserving rewrite policy:
+- This prompt is called only when failed 1T3F feedback exists. Focus on those
+  failures. Do not rewrite unaffected slots for style alone.
+- Treat 1T3F feedback as a warning, not proof that the whole summary is bad.
+  Preserve generated wording unless a local correction is necessary.
+- Keep each corrected sentence self-contained. Avoid sentence subjects like
+  "This", "These", "It", "They", "This change", "This finding", or "This means".
+  Name the entity, method, condition, or result in the sentence.
+- If a failed check points to an unsupported or risky detail, prefer deleting or
+  narrowing the detail over adding more technical content.
+- If a failed check requires a correction, replace the existing sentence instead
+  of adding a new long sentence.
+- If the failed check says the summary is too vague or lacks an exact anchor,
+  add the smallest supported anchor needed: number, direction, condition,
+  entity, organism, method, or negation.
+- Preserve factual anchors: entities, direction, negation, comparison, number,
+  organism, method, and condition when they are essential.
+- Never drop negations or qualifiers such as "not", "only", "but not",
+  "without", "higher", "lower", "before", "after", "increased", or "reduced"
+  when they control the meaning.
+- Do not add a number, organism, method, brain region, gene, protein, or condition
+  unless it is necessary to fix a failed factual check or already appears in the
+  current summary.
+- Keep each slot evidence-local.
+
+Readability operations you should use:
+- Split long sentences into two short sentences.
+- Replace hard explanatory words with simpler wording when factual anchors remain.
+- Delete non-essential clarification sentences.
+- Use a short alias after the first full technical term.
+- Keep the exact term on first mention, then use the alias later. Example:
+  "polyubiquitination" can later become "this tagging process" if the meaning is
+  unchanged.
+- Prefer active, direct phrasing.
+
+Readability operations you must avoid:
+- Do not introduce metaphors.
+- Do not add broad implications.
+- Do not add general definitions or background facts unless the evidence row
+  itself states them.
+- Do not use causal verbs such as "causes", "ensures", "confirms", "allows",
+  "makes", "drives", or "explains" unless the evidence row states that causal
+  relation.
+- Do not make claims vaguer if the direction, contrast, or negation matters.
+- Do not combine multiple mechanisms into one long sentence.
+- Do not make a simple sentence sound more like a paper unless the failed check
+  requires that exact anchor. For example, do not change "MicroRNAs are small
+  RNAs..." into "MicroRNAs are conserved noncoding RNAs that regulate gene
+  expression posttranscriptionally..." unless those exact added facts are needed
+  to fix the failed feedback and are evidence-local.
+- Do not add molecular jargon to eLife mechanism summaries unless it repairs a
+  specific failed entity, direction, condition, method, number, organism, or
+  negation check.
+
+Length:
+- Target about {target_word_count} words.
+- Minimum {min_word_count} words.
+- Maximum {max_word_count} words.
+- These limits are chosen for leaderboard metrics, not to match the expert
+  summary length.
+- A good rewrite may be slightly shorter than the current summary if it remains
+  within range and preserves the central facts.
+- The rewritten summary must not be below {min_word_count} words. If the current
+  summary is already below the minimum, add short row-local clarification
+  sentences from the evidence table until it reaches the minimum.
+- Do not use one long sentence to reach the minimum; add several short sentences.
+
+Return ONLY valid JSON:
+{
+  "slots": [
+    {
+      "slot_id": "slot_0001",
+      "role": "background|motivation|method|mechanism|finding|implication|limitation",
+      "evidence_row_id": "row_0001",
+      "claim_sentence": "<one short grounded sentence>",
+      "clarification_sentence": "<optional short grounded sentence or empty string>",
+      "used_for_summary": true
+    }
+  ],
+  "rewritten_summary": "<full revised summary made by joining slot sentences in order>",
+  "edits": [
+    {
+      "op": "keep|replace|delete|insert_after",
+      "reason": "...",
+      "evidence_row_id": "row_0001",
+      "text": "..."
+    }
+  ],
+  "revision_notes": [
+    "factual anchors preserved",
+    "long sentences split or simplified"
+  ]
+}
+
+CURRENT SLOTS:
+{current_slots}
+
+CURRENT SUMMARY:
+{current_summary}
+
+EVIDENCE TABLE:
+{evidence_table}
+
+FAILED 1T3F FEEDBACK:
+{feedback}
+

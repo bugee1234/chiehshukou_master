@@ -1,4 +1,4 @@
-from __future__ import annotations
+﻿from __future__ import annotations
 
 import argparse
 import json
@@ -15,7 +15,7 @@ if str(ROOT_DIR) not in sys.path:
 from src.experiment_2.run_three_model_exp2 import MODEL_CONFIGS, ProviderClient
 from src.thesis_laysumm.llm_utils import load_articles, run_parallel, save_usage, sha256_text, usage_tracker
 from src.thesis_laysumm.paths import run_data_dir
-from src.thesis_laysumm_v7.common import (
+from src.thesis_laysumm_v8.common import (
     BANNED_FREE_IMPLICATION_PHRASES,
     PROMPTS_DIR,
     compact_json,
@@ -41,7 +41,7 @@ def _evidence_dir(run_name: str, model_key: str, mode: str) -> Path:
 
 
 def _questions_dir(run_name: str, model_key: str, mode: str) -> Path:
-    return run_data_dir(run_name) / "03_questions_v7" / mode / model_key
+    return run_data_dir(run_name) / "03_questions_v8" / mode / model_key
 
 
 def _summaries_dir(run_name: str, model_key: str) -> Path:
@@ -51,7 +51,7 @@ def _summaries_dir(run_name: str, model_key: str) -> Path:
 
 
 def _answers_dir(run_name: str, model_key: str, mode: str) -> Path:
-    path = run_data_dir(run_name) / "05_module3_answers_v7" / mode / model_key
+    path = run_data_dir(run_name) / "05_module3_answers_v8" / mode / model_key
     path.mkdir(parents=True, exist_ok=True)
     return path
 
@@ -291,7 +291,7 @@ def _expand_if_needed(
     if safe_word_count(summary) >= int(policy["min_word_count"]):
         return slots, summary, attempts, errors
 
-    prompt_path = PROMPTS_DIR / "expand_summary_v7.txt"
+    prompt_path = PROMPTS_DIR / "expand_summary_v8.txt"
     prompt_template = prompt_path.read_text(encoding="utf-8")
     current_slots = slots
     current_summary = summary
@@ -355,7 +355,7 @@ def generate_summaries(
         articles = articles[:limit_articles]
     evidence_by_article = _load_evidence_by_article(run_name, model_key, mode)
 
-    prompt_path = PROMPTS_DIR / "generate_summary_v7.txt"
+    prompt_path = PROMPTS_DIR / "generate_summary_v8.txt"
     prompt_template = prompt_path.read_text(encoding="utf-8")
     out_dir = _summaries_dir(run_name, model_key)
     out_path = out_dir / "generated_summaries.jsonl"
@@ -408,7 +408,7 @@ def generate_summaries(
                 )
             )
             raw = client.chat(
-                stage=f"v7.generate_summary.{mode}:{model_key}",
+                stage=f"V8.generate_summary.{mode}:{model_key}",
                 item_id=aid,
                 messages=[{"role": "user", "content": prompt}],
                 temperature=0.0,
@@ -422,7 +422,7 @@ def generate_summaries(
             if not validation_errors:
                 slots, generated_summary, expansion_attempts, expand_errors = _expand_if_needed(
                     client=client,
-                    stage_prefix=f"v7.generate_summary.{model_key}",
+                    stage_prefix=f"V8.generate_summary.{model_key}",
                     item_id=aid,
                     mode=mode,
                     source_dataset=str(article.get("source_dataset", "")),
@@ -448,7 +448,7 @@ def generate_summaries(
             "original_index": article.get("original_index"),
             "model_key": model_key,
             "mode": mode,
-            "prompt_version": f"v7_generate_{mode}",
+            "prompt_version": f"V8_generate_{mode}",
             "prompt_file": str(prompt_path),
             "prompt_sha256": sha256_text(prompt_template),
             "dataset_profile": dataset_profile(str(article.get("source_dataset", ""))),
@@ -475,7 +475,7 @@ def generate_summaries(
         }
 
     todo = [a for a in articles if str(a["id"]) not in done]
-    new_rows = run_parallel(todo, worker, max_workers=max_workers, desc=f"v7 generate | {mode} | {model_key}")
+    new_rows = run_parallel(todo, worker, max_workers=max_workers, desc=f"V8 generate | {mode} | {model_key}")
     all_rows = existing + new_rows
     all_rows.sort(key=lambda r: str(r["article_id"]))
     save_jsonl(all_rows, out_path)
@@ -484,7 +484,7 @@ def generate_summaries(
         {
             "time": datetime.now().isoformat(timespec="seconds"),
             "run_name": run_name,
-            "stage": "v7_04_summaries",
+            "stage": "V8_04_summaries",
             "mode": mode,
             "model_key": model_key,
             "prompt_file": str(prompt_path),
@@ -497,7 +497,7 @@ def generate_summaries(
         },
         out_dir / "generated_summaries_metadata.json",
     )
-    print(f"[v7 generate] {mode} {model_key} summaries={len(all_rows)} -> {out_path}")
+    print(f"[V8 generate] {mode} {model_key} summaries={len(all_rows)} -> {out_path}")
     return all_rows
 
 
@@ -561,9 +561,9 @@ def answer_questions(
     questions_path = _questions_dir(run_name, model_key, mode) / "questions_1t3f_nota.jsonl"
     summaries_path = _summaries_dir(run_name, model_key) / "generated_summaries.jsonl"
     if not questions_path.exists():
-        raise FileNotFoundError(f"Missing v7 questions: {questions_path}")
+        raise FileNotFoundError(f"Missing V8 questions: {questions_path}")
     if not summaries_path.exists():
-        raise FileNotFoundError(f"Missing v7 generated summaries: {summaries_path}")
+        raise FileNotFoundError(f"Missing V8 generated summaries: {summaries_path}")
 
     questions = load_jsonl(questions_path)
     if limit_articles is not None:
@@ -610,7 +610,7 @@ def answer_questions(
                 .replace("{option_e}", opts["E"])
             )
             raw = client.chat(
-                stage=f"v7.answer_questions.{mode}:{model_key}",
+                stage=f"V8.answer_questions.{mode}:{model_key}",
                 item_id=str(question["question_id"]),
                 messages=[{"role": "system", "content": system_prompt}, {"role": "user", "content": user_prompt}],
                 temperature=0.0,
@@ -649,11 +649,11 @@ def answer_questions(
             "reasoning": reasoning,
             "parse_error": parse_error,
             "raw_response": raw if parse_error else None,
-            "context_mode": "v7_full_generated_summary",
+            "context_mode": "V8_full_generated_summary",
         }
 
     todo = [q for q in questions if str(q.get("question_id")) not in done]
-    new_rows = run_parallel(todo, worker, max_workers=max_workers, desc=f"v7 answer | {mode} | {model_key}")
+    new_rows = run_parallel(todo, worker, max_workers=max_workers, desc=f"V8 answer | {mode} | {model_key}")
     all_rows = existing + new_rows
     all_rows.sort(key=lambda r: (str(r["article_id"]), str(r["question_id"])))
     wrong_rows = [r for r in all_rows if not r.get("correct")]
@@ -664,7 +664,7 @@ def answer_questions(
         {
             "time": datetime.now().isoformat(timespec="seconds"),
             "run_name": run_name,
-            "stage": "v7_05_answers",
+            "stage": "V8_05_answers",
             "mode": mode,
             "model_key": model_key,
             "questions_total": len(questions),
@@ -677,7 +677,7 @@ def answer_questions(
         },
         out_dir / "module3_answers_metadata.json",
     )
-    print(f"[v7 answer] {mode} {model_key} answers={len(all_rows)} wrong={len(wrong_rows)}")
+    print(f"[V8 answer] {mode} {model_key} answers={len(all_rows)} wrong={len(wrong_rows)}")
     return all_rows
 
 
@@ -713,6 +713,75 @@ def _first_sentence(text: str, *, max_words: int = 18) -> str:
     return " ".join(words[:max_words]).rstrip(" ,;:") + "."
 
 
+def _clean_extra_sentence(text: str, *, max_words: int = 16) -> str:
+    sentence = _first_sentence(str(text or "").strip(), max_words=max_words)
+    sentence = sentence.strip().strip("\"'")
+    if not sentence:
+        return ""
+    if not sentence.endswith((".", "!", "?")):
+        sentence = sentence.rstrip(" ,;:") + "."
+    if find_mojibake(sentence):
+        return ""
+    if safe_word_count(sentence) < 5 or safe_word_count(sentence) > max_words + 1:
+        return ""
+    lower = sentence.lower()
+    if lower.startswith(("this ", "these ", "it ", "they ", "this change", "this finding", "this means", "this shows")):
+        return ""
+    if any(term in lower for term in ("important for", "helps scientists", "could lead to", "may help")):
+        return ""
+    return sentence
+
+
+def _extra_sentences_for_row(erow: dict[str, Any], existing_summary: str) -> list[str]:
+    existing_lower = str(existing_summary or "").lower()
+    out: list[str] = []
+    for key, max_words in (
+        ("lay_context", 15),
+        ("expert_summary_hint", 14),
+        ("abstract_claim", 16),
+        ("core_keep_af", 16),
+    ):
+        candidate = _clean_extra_sentence(str(erow.get(key, "")), max_words=max_words)
+        if not candidate:
+            continue
+        if candidate.lower() in existing_lower:
+            continue
+        out.append(candidate)
+    for span in erow.get("allowed_evidence_spans") or []:
+        candidate = _clean_extra_sentence(str(span), max_words=15)
+        if not candidate:
+            continue
+        if candidate.lower() in existing_lower:
+            continue
+        out.append(candidate)
+    deduped: list[str] = []
+    seen: set[str] = set()
+    for sentence in out:
+        key = sentence.lower()
+        if key in seen:
+            continue
+        seen.add(key)
+        deduped.append(sentence)
+    return deduped
+
+
+def _sentence_align_risk_score(sentence: str) -> int:
+    text = str(sentence or "").strip()
+    lower = text.lower()
+    score = 0
+    if lower.startswith(("this ", "these ", "it ", "they ", "this change", "this finding", "this means", "this shows")):
+        score += 3
+    if any(term in lower for term in ("means that", "shows that", "confirms", "ensures", "causes", "allows", "makes", "drives", "explains")):
+        score += 2
+    if any(term in lower for term in ("like ", "as if", "similar to", "magnet", "sponge", "machine")):
+        score += 2
+    if any(term in lower for term in ("most common", "currently too", "helps scientists", "important for", "better repair")):
+        score += 2
+    if safe_word_count(text) > 22:
+        score += 1
+    return score
+
+
 def _deterministic_expand_slots(
     *,
     evidence: dict[str, Any],
@@ -739,9 +808,11 @@ def _deterministic_expand_slots(
         erow = rows_by_id.get(str(slot.get("evidence_row_id")))
         if not erow:
             continue
-        for key in ("lay_context", "expert_summary_hint", "abstract_claim"):
-            candidate = _first_sentence(str(erow.get(key, "")).strip(), max_words=16)
+        for key in ("abstract_claim", "core_keep_af", "expert_summary_hint", "lay_context"):
+            candidate = _first_sentence(str(erow.get(key, "")).strip(), max_words=12)
             if not candidate or candidate in summary():
+                continue
+            if key == "lay_context" and safe_word_count(candidate) > 10:
                 continue
             old = slot.get("clarification_sentence", "")
             slot["clarification_sentence"] = candidate
@@ -758,12 +829,15 @@ def _deterministic_expand_slots(
         row_id = str(erow.get("evidence_row_id"))
         if row_id in used_rows:
             continue
-        claim = _first_sentence(str(erow.get("core_keep_af") or erow.get("abstract_claim") or "").strip(), max_words=18)
+        role = str(erow.get("story_role") or "finding").strip().lower()
+        if role not in {"method", "mechanism", "finding"}:
+            continue
+        claim = _first_sentence(str(erow.get("core_keep_af") or erow.get("abstract_claim") or "").strip(), max_words=14)
         if not claim:
             continue
         candidate_slot = {
             "slot_id": f"slot_auto_{next_idx:04d}",
-            "role": str(erow.get("story_role") or "finding"),
+            "role": role,
             "evidence_row_id": row_id,
             "claim_sentence": claim,
             "clarification_sentence": "",
@@ -778,34 +852,87 @@ def _deterministic_expand_slots(
             continue
         expanded.pop()
 
-    extra_sources = ("lay_context", "expert_summary_hint")
-    for erow in evidence.get("evidence_rows") or []:
+    # Last-resort length floor: add one short evidence-local sentence to existing
+    # slots. This prevents invalid below-min finals without letting the model
+    # invent broad background or unsupported implications.
+    for slot in expanded:
         if safe_word_count(summary()) >= min_words:
             break
-        row_id = str(erow.get("evidence_row_id"))
-        for key in extra_sources:
-            if safe_word_count(summary()) >= min_words:
-                break
-            sentence = _first_sentence(str(erow.get(key, "")).strip(), max_words=16)
-            if not sentence or sentence in summary():
+        if not slot.get("used_for_summary", True):
+            continue
+        erow = rows_by_id.get(str(slot.get("evidence_row_id")))
+        if not erow:
+            continue
+        for candidate in _extra_sentences_for_row(erow, summary()):
+            old = str(slot.get("clarification_sentence", "")).strip()
+            if candidate in old or candidate in str(slot.get("claim_sentence", "")):
                 continue
-            candidate_slot = {
-                "slot_id": f"slot_extra_{next_idx:04d}",
-                "role": str(erow.get("story_role") or "finding"),
-                "evidence_row_id": row_id,
-                "claim_sentence": sentence,
-                "clarification_sentence": "",
-                "used_for_summary": True,
-                "banned_phrase_warnings": _contains_banned_phrase(sentence),
-            }
-            expanded.append(candidate_slot)
+            slot["clarification_sentence"] = f"{old} {candidate}".strip()
             if safe_word_count(summary()) <= max_words:
-                notes.append(f"added extra supported sentence for {row_id} from {key}")
-                next_idx += 1
-                continue
-            expanded.pop()
+                notes.append(f"added short evidence-local sentence to {slot.get('slot_id')} for length")
+                break
+            slot["clarification_sentence"] = old
 
     return expanded, summary(), notes
+
+
+def _deterministic_trim_slots(
+    *,
+    slots: list[dict[str, Any]],
+    policy: dict[str, Any],
+) -> tuple[list[dict[str, Any]], str, list[str]]:
+    trimmed = [dict(slot) for slot in slots]
+    notes: list[str] = []
+    min_words = int(policy["min_word_count"])
+
+    def summary() -> str:
+        return _summary_from_slots(trimmed)
+
+    if safe_word_count(summary()) <= min_words:
+        return trimmed, summary(), notes
+
+    role_drop_order = {
+        "implication": 0,
+        "limitation": 1,
+        "background": 2,
+        "motivation": 3,
+        "method": 4,
+        "mechanism": 5,
+        "finding": 6,
+    }
+    candidates = sorted(
+        [
+            (
+                -_sentence_align_risk_score(str(slot.get("clarification_sentence", ""))),
+                role_drop_order.get(str(slot.get("role")), 4),
+                -idx,
+                slot,
+            )
+            for idx, slot in enumerate(trimmed)
+            if str(slot.get("clarification_sentence", "")).strip()
+        ],
+        key=lambda item: (item[0], item[1], item[2]),
+    )
+    before_score = readability_proxy_score(summary())
+    for _, _, _, slot in candidates:
+        current_summary = summary()
+        if safe_word_count(current_summary) <= min_words:
+            break
+        old = str(slot.get("clarification_sentence", "")).strip()
+        slot["clarification_sentence"] = ""
+        new_summary = summary()
+        if safe_word_count(new_summary) < min_words:
+            slot["clarification_sentence"] = old
+            continue
+        old_risk = _sentence_align_risk_score(old)
+        new_score = readability_proxy_score(new_summary)
+        if new_score <= before_score or old_risk >= 2:
+            notes.append(f"removed non-essential/risky clarification from {slot.get('slot_id')}")
+            before_score = readability_proxy_score(new_summary)
+            continue
+        slot["clarification_sentence"] = old
+
+    return trimmed, summary(), notes
 
 
 def _valid_candidate(text: str, policy: dict[str, Any]) -> tuple[bool, list[str]]:
@@ -824,28 +951,155 @@ def _valid_candidate(text: str, policy: dict[str, Any]) -> tuple[bool, list[str]
     return not reasons, reasons
 
 
-def _select_final_candidate(candidates: list[dict[str, Any]], *, wrong_count: int, policy: dict[str, Any]) -> dict[str, Any]:
+def _candidate_by_variant(candidates: list[dict[str, Any]], variant: str) -> dict[str, Any] | None:
+    return next((c for c in candidates if c.get("variant") == variant), None)
+
+
+def _estimate_repair_wrong_count(wrong_count: int, edits: list[dict[str, Any]], parse_error: bool) -> int:
+    if parse_error:
+        return wrong_count
+    if wrong_count <= 0:
+        return 0
+    material_edits = [
+        edit
+        for edit in edits
+        if str(edit.get("op", "")).strip().lower() in {"replace", "delete", "insert_after"}
+    ]
+    return max(0, wrong_count - len(material_edits))
+
+
+def _annotate_candidates(
+    candidates: list[dict[str, Any]],
+    *,
+    wrong_count: int,
+    repair_wrong_count_proxy: int | None,
+    policy: dict[str, Any],
+) -> None:
     for candidate in candidates:
-        ok, reasons = _valid_candidate(str(candidate.get("summary", "")), policy)
+        text = str(candidate.get("summary", ""))
+        ok, reasons = _valid_candidate(text, policy)
+        variant = str(candidate.get("variant", ""))
         candidate["valid"] = ok
         candidate["invalid_reasons"] = reasons
-        candidate["readability_proxy_score"] = readability_proxy_score(str(candidate.get("summary", "")))
-        candidate["word_count"] = safe_word_count(str(candidate.get("summary", "")))
+        candidate["readability_stats"] = readability_stats(text)
+        candidate["readability_proxy_score"] = readability_proxy_score(text)
+        candidate["word_count"] = safe_word_count(text)
+        if variant == "factual_repair":
+            candidate["wrong_count_proxy"] = int(repair_wrong_count_proxy if repair_wrong_count_proxy is not None else wrong_count)
+        else:
+            candidate["wrong_count_proxy"] = int(wrong_count)
+
+
+def _repair_is_too_costly(repair: dict[str, Any], baseline: dict[str, Any], *, wrong_count: int) -> tuple[bool, list[str]]:
+    reasons: list[str] = []
+    repair_wrong = int(repair.get("wrong_count_proxy") or 0)
+    baseline_wrong = int(baseline.get("wrong_count_proxy") or wrong_count)
+    wrong_drop = baseline_wrong - repair_wrong
+    if wrong_count < 4:
+        reasons.append("wrong_feedback_not_severe_enough_for_rewrite")
+    if wrong_drop < 2:
+        reasons.append("wrong_count_proxy_drop_too_small")
+    if repair_wrong >= baseline_wrong:
+        reasons.append("wrong_count_not_reduced")
+
+    repair_score = float(repair.get("readability_proxy_score", 999.0))
+    baseline_score = float(baseline.get("readability_proxy_score", 999.0))
+    stats = repair.get("readability_stats") if isinstance(repair.get("readability_stats"), dict) else {}
+    baseline_stats = baseline.get("readability_stats") if isinstance(baseline.get("readability_stats"), dict) else {}
+
+    readability_slack = 0.0 if wrong_count < 4 else 0.75
+    if repair_score > baseline_score + readability_slack:
+        reasons.append("readability_proxy_worse")
+    hard_word_slack = 0.0 if wrong_count < 4 else 0.01
+    if float(stats.get("long_word_ratio", 0.0)) > float(baseline_stats.get("long_word_ratio", 0.0)) + hard_word_slack:
+        reasons.append("hard_word_density_worse")
+    if int(stats.get("very_long_sentence_count", 0)) > int(baseline_stats.get("very_long_sentence_count", 0)):
+        reasons.append("more_very_long_sentences")
+    if int(stats.get("max_sentence_words", 0)) > int(baseline_stats.get("max_sentence_words", 0)) + 8:
+        reasons.append("max_sentence_longer")
+
+    return bool(reasons), reasons
+
+
+def _is_safe_readability_gain(candidate: dict[str, Any], baseline: dict[str, Any]) -> tuple[bool, list[str]]:
+    reasons: list[str] = []
+    if not candidate.get("valid"):
+        reasons.append("candidate_invalid")
+    if int(candidate.get("wrong_count_proxy") or 0) > int(baseline.get("wrong_count_proxy") or 0):
+        reasons.append("wrong_count_proxy_worse")
+    cand_score = float(candidate.get("readability_proxy_score", 999.0))
+    base_score = float(baseline.get("readability_proxy_score", 999.0))
+    if cand_score > base_score - 0.35:
+        reasons.append("readability_gain_too_small")
+    cand_wc = int(candidate.get("word_count") or 0)
+    base_wc = int(baseline.get("word_count") or 0)
+    if cand_wc < int(base_wc * 0.9):
+        reasons.append("too_much_content_removed")
+    stats = candidate.get("readability_stats") if isinstance(candidate.get("readability_stats"), dict) else {}
+    base_stats = baseline.get("readability_stats") if isinstance(baseline.get("readability_stats"), dict) else {}
+    if float(stats.get("long_word_ratio", 0.0)) > float(base_stats.get("long_word_ratio", 0.0)):
+        reasons.append("hard_word_density_worse")
+    return not reasons, reasons
+
+
+def _select_final_candidate(
+    candidates: list[dict[str, Any]],
+    *,
+    wrong_count: int,
+    repair_wrong_count_proxy: int | None,
+    policy: dict[str, Any],
+) -> dict[str, Any]:
+    _annotate_candidates(
+        candidates,
+        wrong_count=wrong_count,
+        repair_wrong_count_proxy=repair_wrong_count_proxy,
+        policy=policy,
+    )
 
     valid = [c for c in candidates if c.get("valid")]
     if not valid:
-        return min(candidates, key=lambda c: len(c.get("invalid_reasons", [])))
+        selected = min(candidates, key=lambda c: len(c.get("invalid_reasons", [])))
+        selected["selection_reason"] = "least_invalid_candidate"
+        return selected
 
-    if wrong_count:
-        preferred = [c for c in valid if c.get("variant") == "factual_repair"]
-        if preferred:
-            return preferred[0]
+    generated = _candidate_by_variant(valid, "generated")
+    expanded = _candidate_by_variant(valid, "expanded_generated")
+    readability_trim = _candidate_by_variant(valid, "readability_trim")
+    repair = _candidate_by_variant(valid, "factual_repair")
 
-    generated = next((c for c in valid if c.get("variant") == "generated"), None)
     if generated and wrong_count == 0:
+        if readability_trim:
+            ok, reject_reasons = _is_safe_readability_gain(readability_trim, generated)
+            readability_trim["readability_trim_reject_reasons"] = reject_reasons
+            if ok:
+                readability_trim["selection_reason"] = "safe_readability_gain_without_factual_feedback"
+                return readability_trim
+        generated["selection_reason"] = "generated_valid_no_wrong_feedback"
         return generated
 
-    return min(valid, key=lambda c: (float(c.get("readability_proxy_score", 999.0)), -int(c.get("word_count", 0))))
+    if generated and "below_min" not in generated.get("invalid_reasons", []):
+        baseline = generated
+    else:
+        baseline = expanded or generated or min(valid, key=lambda c: len(c.get("invalid_reasons", [])))
+
+    if repair:
+        too_costly, repair_reject_reasons = _repair_is_too_costly(repair, baseline, wrong_count=wrong_count)
+        repair["repair_reject_reasons"] = repair_reject_reasons
+        if not too_costly:
+            repair["selection_reason"] = "repair_reduced_wrong_proxy_without_readability_cost"
+            return repair
+
+    if generated and generated.get("valid") and "below_min" not in generated.get("invalid_reasons", []):
+        generated["selection_reason"] = "kept_generated_conservative_factuality_gate"
+        return generated
+
+    if expanded and expanded.get("valid"):
+        expanded["selection_reason"] = "expanded_generated_fixed_length_or_validity"
+        return expanded
+
+    selected = min(valid, key=lambda c: (float(c.get("readability_proxy_score", 999.0)), -int(c.get("word_count", 0))))
+    selected["selection_reason"] = "best_valid_readability_proxy"
+    return selected
 
 
 def rewrite_summaries(
@@ -874,7 +1128,7 @@ def rewrite_summaries(
         for row in load_jsonl(wrong_path):
             wrong_by_article[str(row["article_id"])].append(row)
 
-    prompt_path = PROMPTS_DIR / "rewrite_summary_v7.txt"
+    prompt_path = PROMPTS_DIR / "rewrite_summary_v8.txt"
     prompt_template = prompt_path.read_text(encoding="utf-8")
     out_dir = _rewritten_dir(run_name, model_key)
     out_path = out_dir / "rewritten_summaries.jsonl"
@@ -911,6 +1165,10 @@ def rewrite_summaries(
         )
         current_slots, generated_fit_notes = _fit_slots_to_length(current_slots, policy)
         current = _summary_from_slots(current_slots) or current
+        trim_slots, trim_summary, trim_notes = _deterministic_trim_slots(
+            slots=current_slots,
+            policy=policy,
+        )
         needs_factual_repair = bool(wrong_rows)
         needs_length_repair = safe_word_count(original_generated) < int(policy["min_word_count"])
 
@@ -949,7 +1207,7 @@ def rewrite_summaries(
                     .replace("{current_readability_stats}", compact_json(readability_stats(current)))
                 )
                 raw = client.chat(
-                    stage=f"v7.rewrite_summary.{mode}:{model_key}",
+                    stage=f"V8.rewrite_summary.{mode}:{model_key}",
                     item_id=aid,
                     messages=[{"role": "user", "content": prompt}],
                     temperature=0.0,
@@ -966,7 +1224,7 @@ def rewrite_summaries(
                     raise ValueError("empty rewritten_summary")
                 repair_slots, repair_summary, expansion_attempts, expand_errors = _expand_if_needed(
                     client=client,
-                    stage_prefix=f"v7.rewrite_summary.{model_key}",
+                    stage_prefix=f"V8.rewrite_summary.{model_key}",
                     item_id=aid,
                     mode=mode,
                     source_dataset=str(article.get("source_dataset", "")),
@@ -998,6 +1256,7 @@ def rewrite_summaries(
                 repair_summary = current
                 repair_slots = current_slots
 
+        repair_wrong_count_proxy = _estimate_repair_wrong_count(len(wrong_rows), edits, parse_error) if rewrite_invoked else None
         candidates = [
             {
                 "variant": "generated",
@@ -1005,14 +1264,26 @@ def rewrite_summaries(
                 "slots": summary_row.get("slots") if isinstance(summary_row.get("slots"), list) else current_slots,
             },
             {
-                "variant": "expanded_generated" if needs_length_repair else "generated_gated",
+                "variant": "expanded_generated",
                 "summary": current,
                 "slots": current_slots,
+                "expansion_needed": needs_length_repair,
+            },
+            {
+                "variant": "readability_trim",
+                "summary": trim_summary,
+                "slots": trim_slots,
+                "trim_notes": trim_notes,
             },
         ]
         if rewrite_invoked:
             candidates.append({"variant": "factual_repair", "summary": repair_summary, "slots": repair_slots})
-        selected = _select_final_candidate(candidates, wrong_count=len(wrong_rows), policy=policy)
+        selected = _select_final_candidate(
+            candidates,
+            wrong_count=len(wrong_rows),
+            repair_wrong_count_proxy=repair_wrong_count_proxy,
+            policy=policy,
+        )
         rewritten = str(selected.get("summary", "")).strip()
         rewritten_slots = selected.get("slots") if isinstance(selected.get("slots"), list) else current_slots
 
@@ -1023,7 +1294,7 @@ def rewrite_summaries(
             "original_index": article.get("original_index"),
             "model_key": model_key,
             "mode": mode,
-            "prompt_version": f"v7_rewrite_{mode}",
+            "prompt_version": f"V8_rewrite_{mode}",
             "prompt_file": str(prompt_path),
             "prompt_sha256": sha256_text(prompt_template),
             "dataset_profile": dataset_profile(str(article.get("source_dataset", ""))),
@@ -1033,22 +1304,30 @@ def rewrite_summaries(
             "slots": rewritten_slots,
             "sentences": _slots_to_sentences(rewritten_slots),
             "selected_variant": selected.get("variant"),
+            "selection_reason": selected.get("selection_reason"),
             "candidate_summaries": [
                 {
                     "variant": c.get("variant"),
+                    "summary": c.get("summary"),
                     "word_count": c.get("word_count"),
+                    "readability_stats": c.get("readability_stats"),
                     "valid": c.get("valid"),
                     "invalid_reasons": c.get("invalid_reasons"),
+                    "wrong_count_proxy": c.get("wrong_count_proxy"),
                     "readability_proxy_score": c.get("readability_proxy_score"),
+                    "repair_reject_reasons": c.get("repair_reject_reasons", []),
+                    "readability_trim_reject_reasons": c.get("readability_trim_reject_reasons", []),
+                    "trim_notes": c.get("trim_notes", []),
                 }
                 for c in candidates
             ],
             "rewrite_invoked": rewrite_invoked,
             "rewrite_skipped_no_errors": not rewrite_invoked,
             "wrong_feedback_count": len(wrong_rows),
+            "repair_wrong_count_proxy": repair_wrong_count_proxy,
             "feedback_items": wrong_rows,
             "edits": edits,
-            "revision_notes": notes + skip_fit_notes + deterministic_notes + generated_fit_notes,
+            "revision_notes": notes + skip_fit_notes + deterministic_notes + generated_fit_notes + trim_notes,
             "expert_summary_word_count": int(article.get("expert_summary_word_count") or 0),
             "generated_word_count": int(summary_row.get("generated_word_count") or safe_word_count(original_generated)),
             "expanded_generated_word_count": safe_word_count(current),
@@ -1073,7 +1352,7 @@ def rewrite_summaries(
         }
 
     todo = [a for a in articles if str(a["id"]) not in done]
-    new_rows = run_parallel(todo, worker, max_workers=max_workers, desc=f"v7 rewrite | {mode} | {model_key}")
+    new_rows = run_parallel(todo, worker, max_workers=max_workers, desc=f"V8 rewrite | {mode} | {model_key}")
     all_rows = existing + new_rows
     all_rows.sort(key=lambda r: str(r["article_id"]))
     save_jsonl(all_rows, out_path)
@@ -1082,7 +1361,7 @@ def rewrite_summaries(
         {
             "time": datetime.now().isoformat(timespec="seconds"),
             "run_name": run_name,
-            "stage": "v7_06_rewritten",
+            "stage": "V8_06_rewritten",
             "mode": mode,
             "model_key": model_key,
             "rewritten_total": len(all_rows),
@@ -1096,12 +1375,12 @@ def rewrite_summaries(
         },
         out_dir / "rewritten_summaries_metadata.json",
     )
-    print(f"[v7 rewrite] {mode} {model_key} rewritten={len(all_rows)} -> {out_path}")
+    print(f"[V8 rewrite] {mode} {model_key} rewritten={len(all_rows)} -> {out_path}")
     return all_rows
 
 
 def build_parser() -> argparse.ArgumentParser:
-    parser = argparse.ArgumentParser(description="V7 Phase B: generate, answer 1T3F, and rewrite.")
+    parser = argparse.ArgumentParser(description="V8 Phase B: generate, answer 1T3F, and rewrite.")
     parser.add_argument("--run-name", required=True)
     parser.add_argument("--model-key", default=DEFAULT_MODEL_KEY)
     parser.add_argument("--mode", choices=["balanced", "factuality_chase"], required=True)
@@ -1134,3 +1413,4 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+

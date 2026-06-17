@@ -1,0 +1,76 @@
+{
+  "time": "2026-06-17T15:47:44",
+  "run_name": "pilot_n20_v7_factuality_chase",
+  "stage": "v7_02_5_evidence_table",
+  "mode": "factuality_chase",
+  "model_key": "gpt41_mini",
+  "prompt_file": "C:\\Users\\bugee\\OneDrive\\桌面\\chiehshukou_master\\src\\thesis_laysumm_v7\\prompts\\build_evidence_table.txt",
+  "prompt_sha256": "c3cb7b59c2b3b7e804fedef117d845f500669773b1440aff89f25384d6384844",
+  "articles_total": 20,
+  "parse_error_count": 0,
+  "evidence_rows_total": 159,
+  "core_keep_af_total": 159,
+  "check_af_total": 214,
+  "check_type_counts": {
+    "core": 159,
+    "high_risk": 55
+  },
+  "usage_summary": {
+    "api_calls": 1877,
+    "prompt_tokens": 1753188,
+    "cached_prompt_tokens": 0,
+    "billable_prompt_tokens": 1753188,
+    "completion_tokens": 444272,
+    "billable_output_tokens": 444272,
+    "total_tokens": 2197460,
+    "api_elapsed_seconds": 6724.0762,
+    "cost_currencies": [
+      "USD"
+    ],
+    "estimated_cost": 1.41211,
+    "by_stage": {
+      "module1.candidate_af:gpt41_mini": {
+        "api_calls": 175,
+        "prompt_tokens": 366087,
+        "cached_prompt_tokens": 0,
+        "billable_prompt_tokens": 366087,
+        "completion_tokens": 206429,
+        "billable_output_tokens": 206429,
+        "total_tokens": 572516,
+        "api_elapsed_seconds": 2760.5693,
+        "cost_currencies": [
+          "USD"
+        ],
+        "estimated_cost": 0.476721
+      },
+      "module2.judge_abstract:gpt41_mini": {
+        "api_calls": 1682,
+        "prompt_tokens": 1259150,
+        "cached_prompt_tokens": 0,
+        "billable_prompt_tokens": 1259150,
+        "completion_tokens": 168124,
+        "billable_output_tokens": 168124,
+        "total_tokens": 1427274,
+        "api_elapsed_seconds": 3256.6633,
+        "cost_currencies": [
+          "USD"
+        ],
+        "estimated_cost": 0.772658
+      },
+      "v7.evidence_table.factuality_chase:gpt41_mini": {
+        "api_calls": 20,
+        "prompt_tokens": 127951,
+        "cached_prompt_tokens": 0,
+        "billable_prompt_tokens": 127951,
+        "completion_tokens": 69719,
+        "billable_output_tokens": 69719,
+        "total_tokens": 197670,
+        "api_elapsed_seconds": 706.8436,
+        "cost_currencies": [
+          "USD"
+        ],
+        "estimated_cost": 0.162731
+      }
+    }
+  }
+}

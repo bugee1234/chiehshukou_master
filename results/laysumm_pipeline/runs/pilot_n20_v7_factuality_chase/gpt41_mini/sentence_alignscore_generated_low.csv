@@ -1,0 +1,67 @@
+﻿article_id,source_dataset,original_index,model_key,variant,sentence_index,alignscore,word_count,risk_tags,sentence
+laysumm_plos_1309,PLOS,1309,gpt41_mini,generated,5,0.068565,15,,This tagging leads to their breakdown by the cell's protein recycling system called the proteasome.
+laysumm_plos_1309,PLOS,1309,gpt41_mini,generated,11,0.080817,11,number|hard_word_dense,This tagging process is called ubiquitylation and marks Met30 for destruction.
+laysumm_elife_0026,eLife,26,gpt41_mini,generated,2,0.081853,15,number,This chemical change is called deamidation and is specific to one amino acid in UBC13.
+laysumm_elife_0028,eLife,28,gpt41_mini,generated,6,0.090142,10,,It is unclear how changing brain waves affects human behavior.
+laysumm_plos_1309,PLOS,1309,gpt41_mini,generated,4,0.121742,20,,"F-box proteins, the substrate receptors of SCF ligases, are normally controlled by tagging themselves for destruction within intact SCF complexes."
+laysumm_plos_0457,PLOS,457,gpt41_mini,generated,3,0.146062,19,,"In fruit flies, Notch signaling increases with age in female germline stem cells, causing them to leave the niche."
+laysumm_plos_1116,PLOS,1116,gpt41_mini,generated,2,0.173321,10,,DENV is a common mosquito-borne virus affecting many people globally.
+laysumm_plos_0457,PLOS,457,gpt41_mini,generated,7,0.184131,21,,"Increasing Notch signaling in stem cells speeds up their age-related loss from the niche, partly through a protein called Sex lethal."
+laysumm_elife_0026,eLife,26,gpt41_mini,generated,5,0.184179,17,negation_or_contrast|number,Deamidation stops UBC13 from binding to the TRAF6 RING domain without changing UBC13’s shape or enzyme function.
+laysumm_plos_1309,PLOS,1309,gpt41_mini,generated,1,0.194099,25,long_sentence,The levels of substrate receptor proteins in Cullin-RING ubiquitin ligases (CRLs) are tightly controlled to keep all CRL types functional and avoid trapping core components.
+laysumm_elife_0188,eLife,188,gpt41_mini,generated,6,0.202778,13,negation_or_contrast,These temperatures mark the thermal limits where the virus can no longer spread.
+laysumm_plos_0051,PLOS,51,gpt41_mini,generated,4,0.224727,12,number,"SFN is produced when these vegetables are damaged, triggering Nrf2 inside cells."
+laysumm_elife_0026,eLife,26,gpt41_mini,generated,3,0.24831,14,number,This change silences UBC13’s polyubiquitination activity with TRAF6 and blocks the NF-κB inflammatory response.
+laysumm_elife_0026,eLife,26,gpt41_mini,generated,6,0.283516,11,number,Binding to TRAF6 is needed for UBC13 to activate immune signaling.
+laysumm_elife_0070,eLife,70,gpt41_mini,generated,13,0.29728,17,number,"The Cdc48-Npl4-Ufd1 complex, Doa1, and the mitochondrial adaptor Ubx2 help remove these damaged proteins from the membrane."
+laysumm_elife_0057,eLife,57,gpt41_mini,generated,9,0.303108,21,number,Arabidopsis thaliana APETALA1 makes petal number stable by hiding the effects of other genes that control petal number in Cardamine hirsuta.
+laysumm_plos_0563,PLOS,563,gpt41_mini,generated,2,0.311935,21,,"These proteins contribute to how harmful the bacteria are during skin infections by mediating adhesion, invasion, biofilm formation, and immune evasion."
+laysumm_plos_1309,PLOS,1309,gpt41_mini,generated,13,0.318888,15,number,This binding depends on a specific sequence called the degron region that controls Met30 stability.
+laysumm_plos_0209,PLOS,209,gpt41_mini,generated,9,0.338468,24,hard_word_dense,"Even under nitrogen-rich conditions, HetR expression fluctuates due to developmental controls and forms clusters that grow after nitrogen removal before resolving into single heterocysts."
+laysumm_plos_0209,PLOS,209,gpt41_mini,generated,7,0.34375,17,,These linked expression patterns mainly result from molecules moving between cells rather than from recent cell division.
+laysumm_elife_0057,eLife,57,gpt41_mini,generated,7,0.354601,20,number,Differences in the floral regulator gene APETALA1 explain why petal number is stable in Arabidopsis but variable in Cardamine hirsuta.
+laysumm_plos_1309,PLOS,1309,gpt41_mini,generated,10,0.357867,20,negation_or_contrast|number,"The SCF core proteins Cdc53, Rbx1, and the enzyme Cdc34 work together to tag unbound Met30 for degradation without Skp1."
+laysumm_plos_0228,PLOS,228,gpt41_mini,generated,14,0.35983,15,,The Bayesian model assumes people choose the closest learned movement rather than a smooth rule.
+laysumm_plos_0178,PLOS,178,gpt41_mini,generated,11,0.361857,12,number,R0 measures how many people one infected person can infect on average.
+laysumm_elife_0057,eLife,57,gpt41_mini,generated,6,0.36198,16,negation_or_contrast,This means petal number is not stable in Cardamine hirsuta like it is in Arabidopsis thaliana.
+laysumm_plos_0209,PLOS,209,gpt41_mini,generated,11,0.379842,24,hard_word_dense,"Under nitrogen-rich conditions, the HetR inhibitor PatS, cell communication via the septal protein SepJ, and HetR’s positive feedback regulate hetR expression fluctuations along filaments."
+laysumm_elife_0057,eLife,57,gpt41_mini,generated,11,0.408795,15,negation_or_contrast|number,The Cardamine hirsuta version of APETALA1 cannot replace the Arabidopsis version to stabilize petal number.
+laysumm_elife_0062,eLife,62,gpt41_mini,generated,8,0.436758,10,,This shows the method is more sensitive than earlier approaches.
+laysumm_elife_0028,eLife,28,gpt41_mini,generated,8,0.440626,14,,tACS is a non-invasive electrical method that applies rhythmic currents to specific brain areas.
+laysumm_plos_0051,PLOS,51,gpt41_mini,generated,12,0.447177,12,,This means SFN blocks HIV by a different method than these proteins.
+laysumm_plos_0209,PLOS,209,gpt41_mini,generated,3,0.466704,25,long_sentence|hard_word_dense,"The HetR protein, essential for heterocyst formation, was studied using a chromosomal hetR-gfp fusion to track its gene expression under both nitrogen-rich and nitrogen-poor conditions."
+laysumm_plos_0178,PLOS,178,gpt41_mini,generated,4,0.477967,10,,Retrospective data means looking back at already collected health records.
+laysumm_plos_0228,PLOS,228,gpt41_mini,generated,11,0.48179,16,negation_or_contrast,"After training, participants were tested without feedback on novel target shapes they had not seen before."
+laysumm_elife_0026,eLife,26,gpt41_mini,generated,1,0.482492,13,number,The enzyme OspI from Shigella flexneri changes glutamine 100 in UBC13 to glutamate.
+laysumm_plos_0209,PLOS,209,gpt41_mini,generated,12,0.490471,28,long_sentence,"PatS and HetN inhibit heterocyst formation at early and later stages, respectively, while septal proteins SepJ and FraC/FraD differ in how they affect cell communication and hetR expression."
+laysumm_plos_0563,PLOS,563,gpt41_mini,generated,9,0.503207,19,,The vaccine reduced abscess size and bacterial levels in infected mice by inducing both humoral and cellular immune responses.
+laysumm_elife_0026,eLife,26,gpt41_mini,generated,11,0.503364,17,number,"The negative charge on E100 repels the negatively charged surface of TRAF6 RING, further blocking transient interactions."
+laysumm_plos_1309,PLOS,1309,gpt41_mini,generated,15,0.506602,16,number|hard_word_dense,"Cadmium stress causes Met30 to detach from Skp1, increasing the need for this alternative degradation route."
+laysumm_plos_1309,PLOS,1309,gpt41_mini,generated,6,0.506773,20,negation_or_contrast|number,"When Met30 is not bound to Skp1, due to mutations or cadmium stress, it is rapidly degraded by the cell."
+laysumm_elife_0057,eLife,57,gpt41_mini,generated,2,0.506968,16,,"Petals open the flower and attract pollinators, so their number affects how flowers signal to insects."
+laysumm_elife_0163,eLife,163,gpt41_mini,generated,3,0.510686,18,negation_or_contrast|number,miR-9’s role in dendritic and synaptic development is not well understood despite its known function in early neurons.
+laysumm_elife_0006,eLife,6,gpt41_mini,generated,9,0.515169,17,,"In humans and monkeys, increasing noise caused faster decisions and higher confidence with little loss in accuracy."
+laysumm_plos_0501,PLOS,501,gpt41_mini,generated,16,0.521175,19,hard_word_dense,The models include a reliability measure based on similarity to known virus sequences to inform users about prediction trustworthiness.
+laysumm_elife_0006,eLife,6,gpt41_mini,generated,5,0.54863,12,hard_word_dense,"Increasing noise leads to faster decisions, lower accuracy, and paradoxically higher confidence."
+laysumm_elife_0035,eLife,35,gpt41_mini,generated,10,0.560172,13,negation_or_contrast,This arrangement lets LR and RS neurons receive different input types without overlap.
+laysumm_elife_0189,eLife,189,gpt41_mini,generated,6,0.564359,16,,"They held the beta power steady to move a cursor, then reached to get a reward."
+laysumm_plos_0457,PLOS,457,gpt41_mini,generated,9,0.564738,24,negation_or_contrast,"Blocking Notch signaling in stem cells does not stop their loss with age and does not change BMP signaling, which supports stem cell renewal."
+laysumm_plos_1309,PLOS,1309,gpt41_mini,generated,14,0.573128,18,number,This Skp1-independent degradation pathway is important for chromosome stability and helps yeast survive heavy metal stress like cadmium.
+laysumm_elife_0070,eLife,70,gpt41_mini,generated,8,0.581422,15,,The cell tags these proteins with ubiquitin to mark them for destruction by the proteasome.
+laysumm_elife_0163,eLife,163,gpt41_mini,generated,9,0.583294,16,number,"miR-9 lowers levels of REST, a protein that represses gene activity, to allow normal dendritic growth."
+laysumm_plos_0563,PLOS,563,gpt41_mini,generated,7,0.587579,25,long_sentence,"This binding affects how the abscess forms and how many bacteria grow at the start of infection, as loricrin is expressed within the abscess tissue."
+laysumm_plos_0501,PLOS,501,gpt41_mini,generated,9,0.591322,22,number,"The study used a large clinical database with about 300,000 drug-mutant bioactivity data points covering multiple drugs and thousands of HIV mutants."
+laysumm_elife_0057,eLife,57,gpt41_mini,generated,12,0.597309,11,number|hard_word_dense,Differences in gene regulation regions of APETALA1 contribute to this failure.
+laysumm_plos_0051,PLOS,51,gpt41_mini,generated,10,0.598692,15,number,2-LTR circles are a step before the virus inserts its DNA into the cell genome.
+laysumm_plos_1116,PLOS,1116,gpt41_mini,generated,6,0.599958,17,negation_or_contrast,The reasons why some patients worsen from DF to DHF at this time are not well understood.
+laysumm_plos_0051,PLOS,51,gpt41_mini,generated,7,0.613973,12,number,Removing Nrf2 increases HIV infection in macrophages and reduces SFN’s antiviral effect.
+laysumm_elife_0189,eLife,189,gpt41_mini,generated,10,0.614107,16,,This means neurons were in a state less ready to start moving during high beta periods.
+laysumm_plos_0228,PLOS,228,gpt41_mini,generated,8,0.616107,11,,"The feedback was shifted sideways, forcing different movements for different shapes."
+laysumm_elife_0070,eLife,70,gpt41_mini,generated,7,0.627023,18,number,The damaged proteins sen2-1HAts and sam35-2HAts are broken down at the mitochondrial outer membrane by the ubiquitin-proteasome system.
+laysumm_plos_0563,PLOS,563,gpt41_mini,generated,3,0.628359,24,,Clumping factor B (ClfB) is a surface protein that helps S. aureus attach inside the nose by binding to a skin protein called loricrin.
+laysumm_plos_1309,PLOS,1309,gpt41_mini,generated,2,0.62865,11,,"Substrate receptors help CRLs recognize targets, so their balance is essential."
+laysumm_elife_0035,eLife,35,gpt41_mini,generated,4,0.636684,16,,This method activates neurons with light to measure how different brain areas connect to the RSG.
+laysumm_elife_0070,eLife,70,gpt41_mini,generated,4,0.636759,14,,"While cells remove misfolded proteins in general, how this happens in mitochondria is unclear."
+laysumm_plos_0051,PLOS,51,gpt41_mini,generated,9,0.642498,15,number,SFN blocks HIV after the virus enters macrophages but before viral DNA forms 2-LTR circles.
+laysumm_plos_0285,PLOS,285,gpt41_mini,generated,8,0.645451,21,hard_word_dense,"ITM uses WHO-recommended disease indicators and age groups, sampling mostly at the district level except for schistosomiasis, which uses sub-district sampling."
+laysumm_plos_0051,PLOS,51,gpt41_mini,generated,8,0.64643,13,number,This shows Nrf2 is needed for SFN to block HIV in these cells.

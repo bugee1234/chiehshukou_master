@@ -1,0 +1,383 @@
+﻿article_id,source_dataset,original_index,model_key,variant,sentence_index,alignscore,word_count,risk_tags,sentence
+laysumm_elife_0006,eLife,6,gemini3_flash_preview_minimal,generated,1,0.951559,17,,Many decisions are thought to arise from the accumulation of noisy evidence until a threshold is reached.
+laysumm_elife_0006,eLife,6,gemini3_flash_preview_minimal,generated,2,0.971739,13,,This process continues until the gathered information hits a specific limit or bound.
+laysumm_elife_0006,eLife,6,gemini3_flash_preview_minimal,generated,3,0.86083,12,,"This mechanism explains how stimulus strength affects decision speed, accuracy, and confidence."
+laysumm_elife_0006,eLife,6,gemini3_flash_preview_minimal,generated,4,0.958054,14,,These three factors are the key observable parts of how a decision is formed.
+laysumm_elife_0006,eLife,6,gemini3_flash_preview_minimal,generated,5,0.933876,13,,Increased noise is predicted to lead to faster decisions and paradoxically higher confidence.
+laysumm_elife_0006,eLife,6,gemini3_flash_preview_minimal,generated,6,0.713472,12,,The extra noise pushes the evidence toward the decision bounds more quickly.
+laysumm_elife_0006,eLife,6,gemini3_flash_preview_minimal,generated,7,0.370319,14,,Researchers tested this using a sensory manipulation that mimics noise in the visual cortex.
+laysumm_elife_0006,eLife,6,gemini3_flash_preview_minimal,generated,8,0.910827,12,,They verified this method using neuronal recordings from macaque brain areas MT/MST.
+laysumm_elife_0006,eLife,6,gemini3_flash_preview_minimal,generated,9,0.743644,13,,"In humans and monkeys, increased noise led to faster decisions and greater confidence."
+laysumm_elife_0006,eLife,6,gemini3_flash_preview_minimal,generated,10,0.706901,13,negation_or_contrast,These effects occurred while the accuracy of the choices was only minimally impaired.
+laysumm_elife_0006,eLife,6,gemini3_flash_preview_minimal,generated,11,0.728642,14,,The results were in agreement with the predictions of the bounded evidence accumulation model.
+laysumm_elife_0006,eLife,6,gemini3_flash_preview_minimal,generated,12,0.82221,12,,The size of the observed effects matched what the mathematical model expected.
+laysumm_elife_0006,eLife,6,gemini3_flash_preview_minimal,generated,13,0.949529,14,hedged_or_implication,The model suggests that volatility disperses the decision variable away from its expected path.
+laysumm_elife_0006,eLife,6,gemini3_flash_preview_minimal,generated,14,0.530268,13,,This dispersion causes the brain to reach a final choice in less time.
+laysumm_elife_0006,eLife,6,gemini3_flash_preview_minimal,generated,15,0.790526,14,,The sensory manipulation added unbiased noise to regions of the brain that select motion.
+laysumm_elife_0006,eLife,6,gemini3_flash_preview_minimal,generated,16,0.404479,13,,The macaque recordings confirmed that the visual cortex responded to this added noise.
+laysumm_elife_0006,eLife,6,gemini3_flash_preview_minimal,generated,17,0.988095,13,,The increase in confidence was observed across a range of different visual stimuli.
+laysumm_elife_0006,eLife,6,gemini3_flash_preview_minimal,generated,18,0.835981,13,,Both species showed similar changes in how they reacted to the noisy signals.
+laysumm_elife_0026,eLife,26,gemini3_flash_preview_minimal,generated,1,0.709217,16,number,The bacterial enzyme OspI from Shigella flexneri changes a specific part of the human protein UBC13.
+laysumm_elife_0026,eLife,26,gemini3_flash_preview_minimal,generated,2,0.543802,18,number,This enzyme converts a glutamine residue at site Q100 into a glutamate residue through a process called deamidation.
+laysumm_elife_0026,eLife,26,gemini3_flash_preview_minimal,generated,3,0.21069,12,number,This chemical change stops UBC13 from working with another protein called TRAF6.
+laysumm_elife_0026,eLife,26,gemini3_flash_preview_minimal,generated,4,0.109577,15,,"Normally, these two proteins work together to signal the immune system to fight the infection."
+laysumm_elife_0026,eLife,26,gemini3_flash_preview_minimal,generated,5,0.508353,12,negation_or_contrast,"When they cannot work together, the body's NF-κB inflammatory response is silenced."
+laysumm_elife_0026,eLife,26,gemini3_flash_preview_minimal,generated,6,0.393888,13,number|hard_word_dense,The modification inhibits the interaction between UBC13 and TRAF6 by disrupting their connections.
+laysumm_elife_0026,eLife,26,gemini3_flash_preview_minimal,generated,7,0.023655,20,negation_or_contrast,"Even though the overall shape of the protein does not change, it loses its ability to stick to its partner."
+laysumm_elife_0026,eLife,26,gemini3_flash_preview_minimal,generated,8,0.419417,13,,It specifically perturbs both the stable native and temporary transient interactions between them.
+laysumm_elife_0026,eLife,26,gemini3_flash_preview_minimal,generated,9,0.194453,12,number,The change causes UBC13 to form a new intramolecular salt-bridge within itself.
+laysumm_elife_0026,eLife,26,gemini3_flash_preview_minimal,generated,10,0.967867,14,hard_word_dense,A salt-bridge is an electrical attraction between positive and negative parts of the proteins.
+laysumm_elife_0026,eLife,26,gemini3_flash_preview_minimal,generated,11,0.80994,13,number,This internal bond competes with the intermolecular salt-bridge needed to bind to TRAF6.
+laysumm_elife_0026,eLife,26,gemini3_flash_preview_minimal,generated,12,0.378893,14,number,Electrostatic repulsion between the new glutamate and the surface of TRAF6 also prevents binding.
+laysumm_elife_0026,eLife,26,gemini3_flash_preview_minimal,generated,13,0.318447,14,number,The new negative charge on UBC13 repels the negatively charged surface of its partner.
+laysumm_elife_0026,eLife,26,gemini3_flash_preview_minimal,generated,14,0.110426,21,,"Like two magnets with the same poles facing each other, the similar negative charges push the proteins away from one another."
+laysumm_elife_0026,eLife,26,gemini3_flash_preview_minimal,generated,15,0.817153,11,hard_word_dense,This study shows how a post-translational modification can control protein-protein association.
+laysumm_elife_0026,eLife,26,gemini3_flash_preview_minimal,generated,16,0.964234,12,,Small chemical changes interfere with how transient complexes briefly touch and bind.
+laysumm_elife_0026,eLife,26,gemini3_flash_preview_minimal,generated,17,0.18577,13,,This discovery explains a subtle way that pathogens can hijack human cell signaling.
+laysumm_elife_0028,eLife,28,gemini3_flash_preview_minimal,generated,1,0.996318,10,hard_word_dense,Working memory emerges from large-scale network interactions in the brain.
+laysumm_elife_0028,eLife,28,gemini3_flash_preview_minimal,generated,2,0.713453,12,,This memory allows people to hold and use information for short periods.
+laysumm_elife_0028,eLife,28,gemini3_flash_preview_minimal,generated,3,0.56567,11,,It is an emergent property of many brain regions working together.
+laysumm_elife_0028,eLife,28,gemini3_flash_preview_minimal,generated,4,0.989641,10,hard_word_dense,Brain regions exchange information through the synchronization of rhythmic activity.
+laysumm_elife_0028,eLife,28,gemini3_flash_preview_minimal,generated,5,0.94994,11,,These rhythmic waves occur when many brain cells send signals together.
+laysumm_elife_0028,eLife,28,gemini3_flash_preview_minimal,generated,6,0.962699,11,hard_word_dense,This synchronization allows for coordination across long distances in the brain.
+laysumm_elife_0028,eLife,28,gemini3_flash_preview_minimal,generated,7,0.974658,12,number,Researchers used tACS to modulate the right frontoparietal network at 6 Hz.
+laysumm_elife_0028,eLife,28,gemini3_flash_preview_minimal,generated,8,0.688526,11,,This method uses mild electrical currents to influence brain wave timing.
+laysumm_elife_0028,eLife,28,gemini3_flash_preview_minimal,generated,9,0.984615,12,,The right frontoparietal network includes frontal and parietal regions that support memory.
+laysumm_elife_0028,eLife,28,gemini3_flash_preview_minimal,generated,10,0.997607,9,hard_word_dense,Induced synchronization improved performance when cognitive demands were high.
+laysumm_elife_0028,eLife,28,gemini3_flash_preview_minimal,generated,11,0.873556,11,,Participants performed better on difficult tasks requiring them to remember sequences.
+laysumm_elife_0028,eLife,28,gemini3_flash_preview_minimal,generated,12,0.743751,16,number,The improvement was seen in a 2-back task where people remember items from two steps back.
+laysumm_elife_0028,eLife,28,gemini3_flash_preview_minimal,generated,13,0.988355,12,,The effects of stimulation depend on the relative phase and cognitive state.
+laysumm_elife_0028,eLife,28,gemini3_flash_preview_minimal,generated,14,0.965044,11,,Researchers used fMRI to track how these factors changed brain activity.
+laysumm_elife_0028,eLife,28,gemini3_flash_preview_minimal,generated,15,0.600718,13,,This imaging technique measures changes in blood flow to track active brain areas.
+laysumm_elife_0028,eLife,28,gemini3_flash_preview_minimal,generated,16,0.997137,10,hard_word_dense,Synchronous tACS increased parietal activity which correlated with behavioral performance.
+laysumm_elife_0028,eLife,28,gemini3_flash_preview_minimal,generated,17,0.981096,11,,The parietal region helps the brain process sensory and spatial information.
+laysumm_elife_0028,eLife,28,gemini3_flash_preview_minimal,generated,18,0.987733,12,,Increased activity in the right inferior parietal lobe led to faster responses.
+laysumm_elife_0028,eLife,28,gemini3_flash_preview_minimal,generated,19,0.99754,11,hard_word_dense,The relative phase of stimulation influences information flow within the network.
+laysumm_elife_0028,eLife,28,gemini3_flash_preview_minimal,generated,20,0.664631,12,,This flow describes how different brain parts send signals to each other.
+laysumm_elife_0028,eLife,28,gemini3_flash_preview_minimal,generated,21,0.969769,9,,Altering phase synchrony shapes how these network interactions occur.
+laysumm_elife_0028,eLife,28,gemini3_flash_preview_minimal,generated,22,0.99127,13,,There is a link between brain synchronization and success in a demanding task.
+laysumm_elife_0028,eLife,28,gemini3_flash_preview_minimal,generated,23,0.9788,11,hard_word_dense,Helping brain regions sync up can improve performance on mental challenges.
+laysumm_elife_0028,eLife,28,gemini3_flash_preview_minimal,generated,24,0.534203,14,,This link shows that the beat of brain waves is vital for task success.
+laysumm_elife_0035,eLife,35,gemini3_flash_preview_minimal,generated,1,0.972652,13,,The granular retrosplenial cortex (RSG) is essential for both spatial and non-spatial behaviors.
+laysumm_elife_0035,eLife,35,gemini3_flash_preview_minimal,generated,2,0.975028,9,,"This brain region helps with navigation, learning, and memory."
+laysumm_elife_0035,eLife,35,gemini3_flash_preview_minimal,generated,3,0.274021,7,,Damage to this area causes spatial disorientation.
+laysumm_elife_0035,eLife,35,gemini3_flash_preview_minimal,generated,4,0.050985,9,,This makes it hard to find your way home.
+laysumm_elife_0035,eLife,35,gemini3_flash_preview_minimal,generated,5,0.327136,14,,It is one of the first regions to show altered activity in Alzheimer’s disease.
+laysumm_elife_0035,eLife,35,gemini3_flash_preview_minimal,generated,6,0.877077,14,hard_word_dense,Researchers used optogenetic circuit mapping in mice to study two types of excitatory neurons.
+laysumm_elife_0035,eLife,35,gemini3_flash_preview_minimal,generated,7,0.996623,10,hard_word_dense,These types are low-rheobase (LR) neurons and regular-spiking (RS) neurons.
+laysumm_elife_0035,eLife,35,gemini3_flash_preview_minimal,generated,8,0.960001,11,,Optogenetics is a technique that activates neurons using pulses of light.
+laysumm_elife_0035,eLife,35,gemini3_flash_preview_minimal,generated,9,0.929629,10,,These two types of neurons have very different physical shapes.
+laysumm_elife_0035,eLife,35,gemini3_flash_preview_minimal,generated,10,0.813899,9,,They also have different ways of firing electrical signals.
+laysumm_elife_0035,eLife,35,gemini3_flash_preview_minimal,generated,11,0.969054,14,,Spatial information from the anterior thalamus and dorsal subiculum is processed by LR cells.
+laysumm_elife_0035,eLife,35,gemini3_flash_preview_minimal,generated,12,0.972447,12,negation_or_contrast,These LR cells are unique to the RSG and not found elsewhere.
+laysumm_elife_0035,eLife,35,gemini3_flash_preview_minimal,generated,13,0.982286,11,,Brain areas involved in direction and position communicate with these cells.
+laysumm_elife_0035,eLife,35,gemini3_flash_preview_minimal,generated,14,0.981964,11,,These excitable cells are unique among pyramidal cells in this region.
+laysumm_elife_0035,eLife,35,gemini3_flash_preview_minimal,generated,15,0.963146,14,,Non-spatial information from the claustrum and anterior cingulate cortex is processed by RS cells.
+laysumm_elife_0035,eLife,35,gemini3_flash_preview_minimal,generated,16,0.682624,11,,These RS cells focus on different inputs than their LR neighbors.
+laysumm_elife_0035,eLife,35,gemini3_flash_preview_minimal,generated,17,0.964407,8,,Standard neurons in this cortex handle different signals.
+laysumm_elife_0035,eLife,35,gemini3_flash_preview_minimal,generated,18,0.986441,10,hard_word_dense,They are preferentially controlled by sources of mostly non-spatial information.
+laysumm_elife_0035,eLife,35,gemini3_flash_preview_minimal,generated,19,0.945838,15,number|hard_word_dense,Parallel processing is enabled by the anatomical organization of axons and dendrites in layer 1.
+laysumm_elife_0035,eLife,35,gemini3_flash_preview_minimal,generated,20,0.915292,10,,The physical overlap of these branches allows for specific communication.
+laysumm_elife_0035,eLife,35,gemini3_flash_preview_minimal,generated,21,0.988459,10,,Precise overlap exists between apical dendrites and dense thalamic axons.
+laysumm_elife_0035,eLife,35,gemini3_flash_preview_minimal,generated,22,0.62916,8,,This structure permits the separation of input streams.
+laysumm_elife_0035,eLife,35,gemini3_flash_preview_minimal,generated,23,0.968871,13,,LR neurons can compute the speed of head rotation from head direction inputs.
+laysumm_elife_0035,eLife,35,gemini3_flash_preview_minimal,generated,24,0.953486,13,,Specific synaptic dynamics allow the brain to calculate how fast the head turns.
+laysumm_elife_0035,eLife,35,gemini3_flash_preview_minimal,generated,25,0.431984,9,,These neurons turn compass-like signals into a gyroscope signal.
+laysumm_elife_0035,eLife,35,gemini3_flash_preview_minimal,generated,26,0.981483,9,,This allows for the robust encoding of angular speed.
+laysumm_elife_0035,eLife,35,gemini3_flash_preview_minimal,generated,27,0.982137,14,,The discovery of parallel input streams identifies a neuronal subtype that supports spatial orientation.
+laysumm_elife_0057,eLife,57,gemini3_flash_preview_minimal,generated,1,0.864158,11,hard_word_dense,Stable petal numbers ensure reliable attraction of pollinators to reproductive organs.
+laysumm_elife_0057,eLife,57,gemini3_flash_preview_minimal,generated,2,0.878564,13,,Petals are usually required to open the flower and help attract these insects.
+laysumm_elife_0057,eLife,57,gemini3_flash_preview_minimal,generated,3,0.95066,11,,Different insects are attracted to flowers of different shapes and colors.
+laysumm_elife_0057,eLife,57,gemini3_flash_preview_minimal,generated,4,0.993568,11,hard_word_dense,The plant Arabidopsis thaliana consistently produces four petals in its flowers.
+laysumm_elife_0057,eLife,57,gemini3_flash_preview_minimal,generated,5,0.291787,12,negation_or_contrast,This petal count is invariant and does not change with genetic diversity.
+laysumm_elife_0057,eLife,57,gemini3_flash_preview_minimal,generated,6,0.060621,19,negation_or_contrast,This plant is often used in research studies and its petal count does not change even with genetic diversity.
+laysumm_elife_0057,eLife,57,gemini3_flash_preview_minimal,generated,7,0.997945,10,,The related species Cardamine hirsuta has a variable petal number.
+laysumm_elife_0057,eLife,57,gemini3_flash_preview_minimal,generated,8,0.695312,11,,A single plant can have flowers with zero to four petals.
+laysumm_elife_0057,eLife,57,gemini3_flash_preview_minimal,generated,9,0.773784,11,hard_word_dense,"Unlike Arabidopsis, this related species lacks robustness in its petal count."
+laysumm_elife_0057,eLife,57,gemini3_flash_preview_minimal,generated,10,0.87788,11,number|hard_word_dense,Divergence in the floral regulator gene APETALA1 explains this species difference.
+laysumm_elife_0057,eLife,57,gemini3_flash_preview_minimal,generated,11,0.965474,12,number,"This gene, also called AP1, is a major factor in petal evolution."
+laysumm_elife_0057,eLife,57,gemini3_flash_preview_minimal,generated,12,0.599867,18,,"Mutations in this gene cause petal loss in both species, making it a strong candidate for the difference."
+laysumm_elife_0057,eLife,57,gemini3_flash_preview_minimal,generated,13,0.991048,9,number|hard_word_dense,Arabidopsis AP1 confers robustness by masking quantitative trait loci.
+laysumm_elife_0057,eLife,57,gemini3_flash_preview_minimal,generated,14,0.905303,11,,"These loci, or QTL, are other genes that control petal number."
+laysumm_elife_0057,eLife,57,gemini3_flash_preview_minimal,generated,15,0.599782,22,,Introducing the Arabidopsis version of the gene into Cardamine hirsuta converts its petal number from variable to a stable count of four.
+laysumm_elife_0057,eLife,57,gemini3_flash_preview_minimal,generated,16,0.503208,11,number,The Cardamine version of AP1 fails to complement this masking function.
+laysumm_elife_0057,eLife,57,gemini3_flash_preview_minimal,generated,17,0.588301,12,,This difference is caused by regulatory regions rather than protein coding regions.
+laysumm_elife_0057,eLife,57,gemini3_flash_preview_minimal,generated,18,0.115807,19,negation_or_contrast,The Cardamine version of the gene cannot restore a stable count of four petals when tested in the lab.
+laysumm_elife_0057,eLife,57,gemini3_flash_preview_minimal,generated,19,0.954809,11,hedged_or_implication,Cardamine hirsuta maintains variation despite having the potential for four petals.
+laysumm_elife_0057,eLife,57,gemini3_flash_preview_minimal,generated,20,0.535056,13,hard_word_dense,Natural populations have enough standing genetic variation to produce four-petalled flowers through recombination.
+laysumm_elife_0057,eLife,57,gemini3_flash_preview_minimal,generated,21,0.944602,20,hedged_or_implication|negation_or_contrast,"Natural populations of Cardamine hirsuta typically do not have four petals, but they have the genetic potential to do so."
+laysumm_elife_0062,eLife,62,gemini3_flash_preview_minimal,generated,1,0.969571,12,negation_or_contrast|hard_word_dense,The way digestive organs undergo regeneration in planarians is not well understood.
+laysumm_elife_0062,eLife,62,gemini3_flash_preview_minimal,generated,2,0.829687,12,,Planarians are flatworms that can regrow their entire gut after an injury.
+laysumm_elife_0062,eLife,62,gemini3_flash_preview_minimal,generated,3,0.670579,12,hard_word_dense,Researchers used laser-capture microdissection and RNA-seq to study the Schmidtea mediterranea gut.
+laysumm_elife_0062,eLife,62,gemini3_flash_preview_minimal,generated,4,0.79098,17,hard_word_dense,"Laser-capture microdissection, or LCM, allows scientists to isolate specific tissue regions from the planarian flatworm Schmidtea mediterranea."
+laysumm_elife_0062,eLife,62,gemini3_flash_preview_minimal,generated,5,0.93154,12,negation_or_contrast|number|hard_word_dense,The study identified 809 intestine-enriched transcripts that previous studies did not find.
+laysumm_elife_0062,eLife,62,gemini3_flash_preview_minimal,generated,6,0.026842,18,,These transcripts are genetic messages that are highly active in the gut and were missed by single-cell studies.
+laysumm_elife_0062,eLife,62,gemini3_flash_preview_minimal,generated,7,0.969302,14,,"The planarian gut transcriptome is similar to the human duodenum, small intestine, and liver."
+laysumm_elife_0062,eLife,62,gemini3_flash_preview_minimal,generated,8,0.606679,16,hard_word_dense,"This similarity includes genes used for metabolism, bile transport, and transporting nutrients like glucose and fats."
+laysumm_elife_0062,eLife,62,gemini3_flash_preview_minimal,generated,9,0.980978,11,hard_word_dense,Gene expression shows regionalization along the medio-lateral axis of the intestine.
+laysumm_elife_0062,eLife,62,gemini3_flash_preview_minimal,generated,10,0.385105,17,,"This means different genes are active in the center versus the outer edges, especially among goblet cells."
+laysumm_elife_0062,eLife,62,gemini3_flash_preview_minimal,generated,11,0.927464,12,number,The factor gli-1 controls the regeneration of goblet cells in the gut.
+laysumm_elife_0062,eLife,62,gemini3_flash_preview_minimal,generated,12,0.908409,18,number,A second factor called RREB2 is required for the maintenance and survival of these cells after they form.
+laysumm_elife_0062,eLife,62,gemini3_flash_preview_minimal,generated,13,0.521816,12,hard_word_dense,This intestinal map serves as a resource for studying regeneration and physiology.
+laysumm_elife_0062,eLife,62,gemini3_flash_preview_minimal,generated,14,0.913499,18,,The data helps researchers understand how digestive tissues repair themselves after damage and provides insights into cellular processes.
+laysumm_elife_0062,eLife,62,gemini3_flash_preview_minimal,generated,15,0.084909,14,hedged_or_implication,This genetic map helps scientists understand how other animals might better repair digestive damage.
+laysumm_elife_0062,eLife,62,gemini3_flash_preview_minimal,generated,16,0.929427,14,hard_word_dense,The study generates new insights into cellular processes whose dysregulation underlies human gastrointestinal pathologies.
+laysumm_elife_0070,eLife,70,gemini3_flash_preview_minimal,generated,1,0.961722,13,,Mitochondria are essential for cell energy and must remove misfolded proteins to function.
+laysumm_elife_0070,eLife,70,gemini3_flash_preview_minimal,generated,2,0.721059,13,negation_or_contrast,Damaged proteins can cause these powerhouses to fail if they are not removed.
+laysumm_elife_0070,eLife,70,gemini3_flash_preview_minimal,generated,3,0.131028,11,,These organelles are the primary source of energy for the cell.
+laysumm_elife_0070,eLife,70,gemini3_flash_preview_minimal,generated,4,0.923791,6,,They are also vital for metabolism.
+laysumm_elife_0070,eLife,70,gemini3_flash_preview_minimal,generated,5,0.989157,7,,Ongoing damage can lead to organelle dysfunction.
+laysumm_elife_0070,eLife,70,gemini3_flash_preview_minimal,generated,6,0.768198,12,hard_word_dense,Researchers used Saccharomyces cerevisiae yeast with temperature-sensitive proteins to study this process.
+laysumm_elife_0070,eLife,70,gemini3_flash_preview_minimal,generated,7,0.322865,12,number,These proteins misfold when the temperature is raised from 25°C to 37°C.
+laysumm_elife_0070,eLife,70,gemini3_flash_preview_minimal,generated,8,0.100777,8,,This change allows scientists to trigger the damage.
+laysumm_elife_0070,eLife,70,gemini3_flash_preview_minimal,generated,9,0.865631,10,,The yeast serves as a model organism for the study.
+laysumm_elife_0070,eLife,70,gemini3_flash_preview_minimal,generated,10,0.345668,10,,This method helps observe the cleanup process in real time.
+laysumm_elife_0070,eLife,70,gemini3_flash_preview_minimal,generated,11,0.859927,12,,The ubiquitin-proteasome system breaks down these proteins at the mitochondrial outer membrane.
+laysumm_elife_0070,eLife,70,gemini3_flash_preview_minimal,generated,12,0.013122,12,,This means the cleanup happens directly on the surface of the mitochondria.
+laysumm_elife_0070,eLife,70,gemini3_flash_preview_minimal,generated,13,0.132778,8,negation_or_contrast,The proteins are degraded without being moved elsewhere.
+laysumm_elife_0070,eLife,70,gemini3_flash_preview_minimal,generated,14,0.911045,9,hard_word_dense,The proteasome acts as a molecular machine for destruction.
+laysumm_elife_0070,eLife,70,gemini3_flash_preview_minimal,generated,15,0.893716,9,,This confirms the location of the quality control pathway.
+laysumm_elife_0070,eLife,70,gemini3_flash_preview_minimal,generated,16,0.371506,13,number,The ubiquitin ligase enzymes Ubr1 and San1 tag the misfolded proteins for destruction.
+laysumm_elife_0070,eLife,70,gemini3_flash_preview_minimal,generated,17,0.592651,13,,These ligases act as markers to identify which proteins the cell should destroy.
+laysumm_elife_0070,eLife,70,gemini3_flash_preview_minimal,generated,18,0.978804,8,hard_word_dense,They function as components of the mitochondrial machinery.
+laysumm_elife_0070,eLife,70,gemini3_flash_preview_minimal,generated,19,0.468106,8,,The tags are molecular signals for the proteasome.
+laysumm_elife_0070,eLife,70,gemini3_flash_preview_minimal,generated,20,0.019768,9,negation_or_contrast,This specific tagging ensures only damaged proteins are removed.
+laysumm_elife_0070,eLife,70,gemini3_flash_preview_minimal,generated,21,0.088634,14,number,This cleanup requires Hsp70 chaperones from the SSA family and the Hsp40 chaperone Sis1.
+laysumm_elife_0070,eLife,70,gemini3_flash_preview_minimal,generated,22,0.976247,12,,Chaperones are helper proteins that recognize and bind to the misshapen targets.
+laysumm_elife_0070,eLife,70,gemini3_flash_preview_minimal,generated,23,0.84323,11,,This is the first evidence for chaperone involvement in this pathway.
+laysumm_elife_0070,eLife,70,gemini3_flash_preview_minimal,generated,24,0.9768,8,,They position themselves to recognize the misfolded proteins.
+laysumm_elife_0070,eLife,70,gemini3_flash_preview_minimal,generated,25,0.890397,8,,These helpers are essential for the degradation process.
+laysumm_elife_0070,eLife,70,gemini3_flash_preview_minimal,generated,26,0.933133,14,number,The Cdc48 complex and a mitochondrial pool of Ubx2 also help degrade the proteins.
+laysumm_elife_0070,eLife,70,gemini3_flash_preview_minimal,generated,27,0.947491,12,,This study reveals a unique pathway using both cytosolic and mitochondrial factors.
+laysumm_elife_0163,eLife,163,gemini3_flash_preview_minimal,generated,1,0.851094,12,,MicroRNAs are small molecules that control how genes work in the body.
+laysumm_elife_0163,eLife,163,gemini3_flash_preview_minimal,generated,2,0.945523,13,number,One specific type called miR-9 is very common in the brain and neurons.
+laysumm_elife_0163,eLife,163,gemini3_flash_preview_minimal,generated,3,0.938997,12,number,The role of miR-9 in dendritic and synaptic development was previously unknown.
+laysumm_elife_0163,eLife,163,gemini3_flash_preview_minimal,generated,4,0.404339,12,,Dendrites are the tree-like branches that help neurons receive signals from others.
+laysumm_elife_0163,eLife,163,gemini3_flash_preview_minimal,generated,5,0.851801,11,number|hard_word_dense,Researchers created a transgenic miRNA sponge mouse line to inactivate miR-9.
+laysumm_elife_0163,eLife,163,gemini3_flash_preview_minimal,generated,6,0.148041,13,,This sponge mouse allows scientists to turn off the molecule at specific times.
+laysumm_elife_0163,eLife,163,gemini3_flash_preview_minimal,generated,7,0.885885,11,number,The study found that miR-9 controls dendritic growth and synaptic transmission.
+laysumm_elife_0163,eLife,163,gemini3_flash_preview_minimal,generated,8,0.401481,12,,Neurons in the hippocampus had shorter branches when this molecule was blocked.
+laysumm_elife_0163,eLife,163,gemini3_flash_preview_minimal,generated,9,0.988781,12,,The downregulation of a transcriptional repressor called REST is essential for growth.
+laysumm_elife_0163,eLife,163,gemini3_flash_preview_minimal,generated,10,0.294419,13,number,The miR-9 molecule keeps REST levels low so that dendrites can grow properly.
+laysumm_elife_0163,eLife,163,gemini3_flash_preview_minimal,generated,11,0.258902,12,,High levels of REST prevent the normal development of these neuronal branches.
+laysumm_elife_0163,eLife,163,gemini3_flash_preview_minimal,generated,12,0.122688,12,number,"By lowering REST, miR-9 ensures that the genes for growth stay active."
+laysumm_elife_0163,eLife,163,gemini3_flash_preview_minimal,generated,13,0.878311,12,number,Blocking miR-9 also led to weaker electrical signals between the brain cells.
+laysumm_elife_0163,eLife,163,gemini3_flash_preview_minimal,generated,14,0.04706,13,,This shows that the molecule is vital for healthy communication in the brain.
+laysumm_elife_0163,eLife,163,gemini3_flash_preview_minimal,generated,15,0.929372,12,,The new mouse model helped track these changes in a living system.
+laysumm_elife_0163,eLife,163,gemini3_flash_preview_minimal,generated,16,0.903583,13,,This method provides a way to study gene regulation in specific brain regions.
+laysumm_elife_0163,eLife,163,gemini3_flash_preview_minimal,generated,17,0.571902,12,number,The transcriptional repressor REST is a direct target of the miR-9 molecule.
+laysumm_elife_0163,eLife,163,gemini3_flash_preview_minimal,generated,18,0.12587,14,,Increased REST levels are the major cause of reduced dendritic growth in these mice.
+laysumm_elife_0163,eLife,163,gemini3_flash_preview_minimal,generated,19,0.972005,11,number|hard_word_dense,The loss of miR-9 reduced the complexity of the dendritic arborization.
+laysumm_elife_0163,eLife,163,gemini3_flash_preview_minimal,generated,20,0.318995,11,hard_word_dense,This reduction in complexity impairs how neurons connect within the hippocampus.
+laysumm_elife_0188,eLife,188,gemini3_flash_preview_minimal,generated,1,0.80858,12,hard_word_dense,Disease transmission by insects peaks at intermediate temperatures and declines at extremes.
+laysumm_elife_0188,eLife,188,gemini3_flash_preview_minimal,generated,2,0.751073,15,hard_word_dense,Mosquitoes are cold-blooded and depend on the temperature of their environment to survive and perform.
+laysumm_elife_0188,eLife,188,gemini3_flash_preview_minimal,generated,3,0.998207,13,,Researchers built a mechanistic model for the thermal response of Ross River virus.
+laysumm_elife_0188,eLife,188,gemini3_flash_preview_minimal,generated,4,0.360307,21,number,"This virus is a significant mosquito-borne pathogen found in Australia and the Pacific that infects 2,000 to 9,000 people each year."
+laysumm_elife_0188,eLife,188,gemini3_flash_preview_minimal,generated,5,0.405806,11,hard_word_dense,The virus causes debilitating symptoms like long-term joint pain and disability.
+laysumm_elife_0188,eLife,188,gemini3_flash_preview_minimal,generated,6,0.458087,16,hedged_or_implication,It is the most common mosquito-borne disease in Australia and has the potential to emerge globally.
+laysumm_elife_0188,eLife,188,gemini3_flash_preview_minimal,generated,7,0.954384,12,number,Transmission of Ross River virus reaches a peak at a moderate 26.4°C.
+laysumm_elife_0188,eLife,188,gemini3_flash_preview_minimal,generated,8,0.201994,17,hard_word_dense,This temperature represents the ideal sweet spot for the virus to spread efficiently between mosquitoes and humans.
+laysumm_elife_0188,eLife,188,gemini3_flash_preview_minimal,generated,9,0.769437,12,number,The spread declines to zero at thermal limits of 17.0°C and 31.5°C.
+laysumm_elife_0188,eLife,188,gemini3_flash_preview_minimal,generated,10,0.330328,14,,Biological processes in the mosquito stop the disease from spreading outside this specific range.
+laysumm_elife_0188,eLife,188,gemini3_flash_preview_minimal,generated,11,0.977334,13,,The virus is endemic year-round in the tropics but seasonal in temperate areas.
+laysumm_elife_0188,eLife,188,gemini3_flash_preview_minimal,generated,12,0.078133,14,,Southern winters in Australia are currently too cold for the virus to spread effectively.
+laysumm_elife_0188,eLife,188,gemini3_flash_preview_minimal,generated,13,0.838112,13,,Climate warming will likely increase transmission in temperate areas but decrease tropical spread.
+laysumm_elife_0188,eLife,188,gemini3_flash_preview_minimal,generated,14,0.820904,18,hedged_or_implication,Warming pushes temperate regions closer to the ideal temperature but may push tropical regions past the upper limit.
+laysumm_elife_0188,eLife,188,gemini3_flash_preview_minimal,generated,15,0.965993,13,hard_word_dense,A nonlinear mechanistic model is more accurate for estimating temperature impacts on transmission.
+laysumm_elife_0188,eLife,188,gemini3_flash_preview_minimal,generated,16,0.955958,16,hard_word_dense,"Simple models are inaccurate because temperature increases can have positive, negligible, or negative effects on biology."
+laysumm_elife_0188,eLife,188,gemini3_flash_preview_minimal,generated,17,0.98913,12,hard_word_dense,"In northern Australia, the temperature remains suitable for transmission throughout the year."
+laysumm_elife_0188,eLife,188,gemini3_flash_preview_minimal,generated,18,0.694632,19,,This results in a nationwide seasonal peak in human cases across the country as different regions reach their limits.
+laysumm_elife_0189,eLife,189,gemini3_flash_preview_minimal,generated,1,0.989722,9,,Motor cortical beta oscillations have been known for decades.
+laysumm_elife_0189,eLife,189,gemini3_flash_preview_minimal,generated,2,0.590236,15,,These brain waves occur at twenty-five to forty cycles per second in the motor system.
+laysumm_elife_0189,eLife,189,gemini3_flash_preview_minimal,generated,3,0.958933,9,negation_or_contrast|hard_word_dense,"However, their exact behavioral correlates remain unresolved in neuroscience."
+laysumm_elife_0189,eLife,189,gemini3_flash_preview_minimal,generated,4,0.901792,13,,These waves often emerge when individuals are paying attention or waiting to move.
+laysumm_elife_0189,eLife,189,gemini3_flash_preview_minimal,generated,5,0.782365,10,hard_word_dense,Researchers studied three macaque monkeys to investigate these brain waves.
+laysumm_elife_0189,eLife,189,gemini3_flash_preview_minimal,generated,6,0.865348,10,,They recorded activity from the motor cortex using electrode arrays.
+laysumm_elife_0189,eLife,189,gemini3_flash_preview_minimal,generated,7,0.981856,9,,The monkeys were rhesus macaques implanted with microwire electrodes.
+laysumm_elife_0189,eLife,189,gemini3_flash_preview_minimal,generated,8,0.84361,15,,These electrodes recorded multi-scale neural activity from the primary motor cortex and dorsal premotor cortex.
+laysumm_elife_0189,eLife,189,gemini3_flash_preview_minimal,generated,9,0.969721,10,hard_word_dense,The monkeys used neurofeedback to volitionally control their beta power.
+laysumm_elife_0189,eLife,189,gemini3_flash_preview_minimal,generated,10,0.891034,14,,"After reaching a specific power state, they performed an arm reach to a target."
+laysumm_elife_0189,eLife,189,gemini3_flash_preview_minimal,generated,11,0.988665,11,,A reduction in beta power led to faster movement onset times.
+laysumm_elife_0189,eLife,189,gemini3_flash_preview_minimal,generated,12,0.810404,15,,"In contrast, an increase in power caused slower movement onset times for the arm reach."
+laysumm_elife_0189,eLife,189,gemini3_flash_preview_minimal,generated,13,0.961951,10,hard_word_dense,"During beta oscillations, population neural activity shifts farther from movement."
+laysumm_elife_0189,eLife,189,gemini3_flash_preview_minimal,generated,14,0.977141,14,,The collective activity of many neurons moves away from the required movement onset state.
+laysumm_elife_0189,eLife,189,gemini3_flash_preview_minimal,generated,15,0.885079,11,,The distance to the movement threshold is greatest during high beta.
+laysumm_elife_0189,eLife,189,gemini3_flash_preview_minimal,generated,16,0.28347,16,,This distance explains why it takes longer to start a reach when these waves are present.
+laysumm_elife_0189,eLife,189,gemini3_flash_preview_minimal,generated,17,0.997589,10,,This finding establishes a neural basis for slowed movement onset.
+laysumm_elife_0189,eLife,189,gemini3_flash_preview_minimal,generated,18,0.722367,13,,These oscillations compromise the readiness of the motor system to initiate new actions.
+laysumm_elife_0189,eLife,189,gemini3_flash_preview_minimal,generated,19,0.96283,10,,Beta oscillations are linked to patterns that slow new movements.
+laysumm_elife_0189,eLife,189,gemini3_flash_preview_minimal,generated,20,0.623719,13,,The brain favors a low-risk state over immediate movement readiness during these periods.
+laysumm_plos_0051,PLOS,51,gemini3_flash_preview_minimal,generated,1,0.986159,11,number,Some viruses like Marburg and Dengue benefit from the Nrf2 protein.
+laysumm_plos_0051,PLOS,51,gemini3_flash_preview_minimal,generated,2,0.904741,14,number,Nrf2 is a protein that helps cells turn on genes to protect against damage.
+laysumm_plos_0051,PLOS,51,gemini3_flash_preview_minimal,generated,3,0.561511,12,number|hard_word_dense,Sulforaphane is a natural product found in cruciferous vegetables that activates Nrf2.
+laysumm_plos_0051,PLOS,51,gemini3_flash_preview_minimal,generated,4,0.351111,14,,This compound is produced in vegetables like broccoli when they are damaged or chewed.
+laysumm_plos_0051,PLOS,51,gemini3_flash_preview_minimal,generated,5,0.943933,13,negation_or_contrast,Sulforaphane blocks HIV infection in primary human macrophages but not in T cells.
+laysumm_plos_0051,PLOS,51,gemini3_flash_preview_minimal,generated,6,0.981784,14,,Macrophages and T cells are both types of immune cells in the human body.
+laysumm_plos_0051,PLOS,51,gemini3_flash_preview_minimal,generated,7,0.979338,10,number|hard_word_dense,Reducing Nrf2 levels using siRNA boosted HIV infectivity in macrophages.
+laysumm_plos_0051,PLOS,51,gemini3_flash_preview_minimal,generated,8,0.101174,13,,This depletion also made the Sulforaphane treatment less effective at stopping the virus.
+laysumm_plos_0051,PLOS,51,gemini3_flash_preview_minimal,generated,9,0.966234,11,number|hard_word_dense,The anti-viral effects of Sulforaphane are specifically mediated through Nrf2 activation.
+laysumm_plos_0051,PLOS,51,gemini3_flash_preview_minimal,generated,10,0.107581,12,,This confirms the compound works by triggering the cell's own defense system.
+laysumm_plos_0051,PLOS,51,gemini3_flash_preview_minimal,generated,11,0.9758,11,number,Sulforaphane blocks HIV after entry but before formation of 2-LTR circles.
+laysumm_plos_0051,PLOS,51,gemini3_flash_preview_minimal,generated,12,0.081674,13,,The treatment stops the virus before its genetic material is ready for integration.
+laysumm_plos_0051,PLOS,51,gemini3_flash_preview_minimal,generated,13,0.938076,10,negation_or_contrast|number,Common anti-viral proteins like SAMHD1 or MX2 were not upregulated.
+laysumm_plos_0051,PLOS,51,gemini3_flash_preview_minimal,generated,14,0.896266,12,hedged_or_implication|number,This suggests that Nrf2 uses a different mechanism to fight the virus.
+laysumm_plos_0051,PLOS,51,gemini3_flash_preview_minimal,generated,15,0.975257,13,number,Activating Nrf2 is a novel way to trigger a potent block against HIV.
+laysumm_plos_0051,PLOS,51,gemini3_flash_preview_minimal,generated,16,0.775791,12,hard_word_dense,This discovery highlights new therapeutic alternatives for controlling infection in immune cells.
+laysumm_plos_0178,PLOS,178,gemini3_flash_preview_minimal,generated,1,0.989701,12,hard_word_dense,Aedes-borne arboviruses like dengue and Zika cause increasing illness and death worldwide.
+laysumm_plos_0178,PLOS,178,gemini3_flash_preview_minimal,generated,2,0.953559,13,,Arboviruses are specific types of viruses that spread to people through mosquito bites.
+laysumm_plos_0178,PLOS,178,gemini3_flash_preview_minimal,generated,3,0.987081,13,,Researchers compared transmission drivers for these viruses using data from the Dominican Republic.
+laysumm_plos_0178,PLOS,178,gemini3_flash_preview_minimal,generated,4,0.996464,14,,Transmission drivers are the factors that influence how a disease spreads through a population.
+laysumm_plos_0178,PLOS,178,gemini3_flash_preview_minimal,generated,5,0.996367,10,number,About 75% of dengue cases occurred in people age <20.
+laysumm_plos_0178,PLOS,178,gemini3_flash_preview_minimal,generated,6,0.544836,14,negation_or_contrast|number,"In contrast, only 42% of Zika cases occurred in that same young age group."
+laysumm_plos_0178,PLOS,178,gemini3_flash_preview_minimal,generated,7,0.991134,12,number,Reported Zika infections were highly concentrated among females at 73.8% of cases.
+laysumm_plos_0178,PLOS,178,gemini3_flash_preview_minimal,generated,8,0.863779,14,,This shows a much higher proportion of women affected compared to the dengue outbreak.
+laysumm_plos_0178,PLOS,178,gemini3_flash_preview_minimal,generated,9,0.987477,13,,Guillain-Barre syndrome or GBS rates were slightly higher in males than in females.
+laysumm_plos_0178,PLOS,178,gemini3_flash_preview_minimal,generated,10,0.030306,14,,GBS is a rare condition where the immune system attacks the body's own nerves.
+laysumm_plos_0178,PLOS,178,gemini3_flash_preview_minimal,generated,11,0.759611,12,,Existing dengue immunity had little impact on the rates of Zika infection.
+laysumm_plos_0178,PLOS,178,gemini3_flash_preview_minimal,generated,12,0.952255,15,negation_or_contrast,Having had dengue before did not seem to protect people from catching the Zika virus.
+laysumm_plos_0178,PLOS,178,gemini3_flash_preview_minimal,generated,13,0.986531,11,hard_word_dense,Awareness campaigns likely increased health-seeking behavior among women of reproductive age.
+laysumm_plos_0178,PLOS,178,gemini3_flash_preview_minimal,generated,14,0.116525,13,,Health-seeking behavior refers to the choice to visit a doctor when symptoms appear.
+laysumm_plos_0178,PLOS,178,gemini3_flash_preview_minimal,generated,15,0.983535,13,,Experts recommend media campaigns and screening for women of reproductive age during outbreaks.
+laysumm_plos_0178,PLOS,178,gemini3_flash_preview_minimal,generated,16,0.727464,15,negation_or_contrast,Screening involves testing people for the virus even if they do not feel very sick.
+laysumm_plos_0209,PLOS,209,gemini3_flash_preview_minimal,generated,1,0.960697,11,hard_word_dense,Anabaena filaments develop a pattern of nitrogen-fixing heterocysts under nitrogen deprivation.
+laysumm_plos_0209,PLOS,209,gemini3_flash_preview_minimal,generated,2,0.908958,10,hard_word_dense,These specialized cells are separated by about ten photosynthetic cells.
+laysumm_plos_0209,PLOS,209,gemini3_flash_preview_minimal,generated,3,0.841633,11,hard_word_dense,The study measured fluctuations of the master regulator HetR using fluorescence.
+laysumm_plos_0209,PLOS,209,gemini3_flash_preview_minimal,generated,4,0.867839,13,,This method allowed researchers to track gene activity at the individual cell level.
+laysumm_plos_0209,PLOS,209,gemini3_flash_preview_minimal,generated,5,0.898785,13,,HetR expression fluctuations in nearby cells are coupled over two to three cells.
+laysumm_plos_0209,PLOS,209,gemini3_flash_preview_minimal,generated,6,0.703624,11,hard_word_dense,This coupling shows that neighboring cells coordinate their internal gene activity.
+laysumm_plos_0209,PLOS,209,gemini3_flash_preview_minimal,generated,7,0.798761,10,hard_word_dense,Correlations arise from intercellular molecular transfer rather than cell division.
+laysumm_plos_0209,PLOS,209,gemini3_flash_preview_minimal,generated,8,0.516927,12,,Cells communicate by swapping molecules instead of just inheriting traits from parents.
+laysumm_plos_0209,PLOS,209,gemini3_flash_preview_minimal,generated,9,0.931584,11,hard_word_dense,Fluctuations under nitrogen-poor conditions build up on those in nitrogen-replete conditions.
+laysumm_plos_0209,PLOS,209,gemini3_flash_preview_minimal,generated,10,0.896029,12,,Small differences already exist before the cells face a lack of nitrogen.
+laysumm_plos_0209,PLOS,209,gemini3_flash_preview_minimal,generated,11,0.857468,10,hard_word_dense,"PatS, SepJ, and HetR auto-regulation determine the distribution of fluctuations."
+laysumm_plos_0209,PLOS,209,gemini3_flash_preview_minimal,generated,12,0.850814,11,,These factors act as controls to manage how gene signals spread.
+laysumm_plos_0209,PLOS,209,gemini3_flash_preview_minimal,generated,13,0.955524,11,hard_word_dense,Different inhibitors and septal proteins act at different stages of development.
+laysumm_plos_0209,PLOS,209,gemini3_flash_preview_minimal,generated,14,0.896586,10,,The study noted specificity between proteins like HetN and FraC/FraD.
+laysumm_plos_0209,PLOS,209,gemini3_flash_preview_minimal,generated,15,0.557821,9,hard_word_dense,Cell-cell communication controls noise to ensure correct developmental patterns.
+laysumm_plos_0209,PLOS,209,gemini3_flash_preview_minimal,generated,16,0.101118,10,,Managing stochasticity prevents cells from choosing the wrong cell fates.
+laysumm_plos_0228,PLOS,228,gemini3_flash_preview_minimal,generated,1,0.997379,13,,Humans can learn and store multiple visuomotor mappings through a process called dual-adaptation.
+laysumm_plos_0228,PLOS,228,gemini3_flash_preview_minimal,generated,2,0.984009,12,,This coordination happens when the brain receives feedback for different movements alternately.
+laysumm_plos_0228,PLOS,228,gemini3_flash_preview_minimal,generated,3,0.995791,13,,Researchers used a target-pointing task where they changed the visual feedback of movements.
+laysumm_plos_0228,PLOS,228,gemini3_flash_preview_minimal,generated,4,0.954158,12,,This change simulated environmental shifts like those caused by wearing optical glasses.
+laysumm_plos_0228,PLOS,228,gemini3_flash_preview_minimal,generated,5,0.984941,13,,The visual feedback included horizontal offsets that changed based on the target shape.
+laysumm_plos_0228,PLOS,228,gemini3_flash_preview_minimal,generated,6,0.989021,12,,Participants saw shapes that ranged from spiky to circular during the training.
+laysumm_plos_0228,PLOS,228,gemini3_flash_preview_minimal,generated,7,0.86643,13,negation_or_contrast,The team tested how well participants handled novel target shapes without visual feedback.
+laysumm_plos_0228,PLOS,228,gemini3_flash_preview_minimal,generated,8,0.965252,12,,These catch trials showed if the learned skills transferred to new situations.
+laysumm_plos_0228,PLOS,228,gemini3_flash_preview_minimal,generated,9,0.977336,12,,A Bayesian learning model called a Mixture-of-Kalman-Filters was developed for the study.
+laysumm_plos_0228,PLOS,228,gemini3_flash_preview_minimal,generated,10,0.960002,12,,This model describes how the brain learns to associate cues with actions.
+laysumm_plos_0228,PLOS,228,gemini3_flash_preview_minimal,generated,11,0.994168,14,,Participants applied the mapping for the trained shape most similar to the current one.
+laysumm_plos_0228,PLOS,228,gemini3_flash_preview_minimal,generated,12,0.529564,13,negation_or_contrast,They did not learn a linear relationship between the shapes and the movements.
+laysumm_plos_0228,PLOS,228,gemini3_flash_preview_minimal,generated,13,0.986228,11,,The learning rate decreases as the number of training pairs increases.
+laysumm_plos_0228,PLOS,228,gemini3_flash_preview_minimal,generated,14,0.784708,13,,Learning slows down when the brain must manage many different associations at once.
+laysumm_plos_0228,PLOS,228,gemini3_flash_preview_minimal,generated,15,0.989969,12,,The Bayesian model provides a possible mechanism for learning multiple mappings simultaneously.
+laysumm_plos_0228,PLOS,228,gemini3_flash_preview_minimal,generated,16,0.645236,13,,It explains how the brain keeps separate learning processes for different visual cues.
+laysumm_plos_0285,PLOS,285,gemini3_flash_preview_minimal,generated,1,0.925944,15,,Many countries where neglected tropical diseases are common lack the baseline data needed for planning.
+laysumm_plos_0285,PLOS,285,gemini3_flash_preview_minimal,generated,2,0.93006,15,negation_or_contrast,"Without this initial data, health officials cannot prove a disease has passed a treatment threshold."
+laysumm_plos_0285,PLOS,285,gemini3_flash_preview_minimal,generated,3,0.479973,15,,Researchers created a new system called Integrated Threshold Mapping to map four diseases at once.
+laysumm_plos_0285,PLOS,285,gemini3_flash_preview_minimal,generated,4,0.874578,11,hard_word_dense,"This ITM system targets lymphatic filariasis, trachoma, schistosomiasis, and soil-transmitted helminths."
+laysumm_plos_0285,PLOS,285,gemini3_flash_preview_minimal,generated,5,0.87276,16,,The ITM tool tells health officials if a disease is common enough for public health interventions.
+laysumm_plos_0285,PLOS,285,gemini3_flash_preview_minimal,generated,6,0.781331,15,,It focuses on whether a specific treatment limit has been hit rather than exact numbers.
+laysumm_plos_0285,PLOS,285,gemini3_flash_preview_minimal,generated,7,0.978085,11,hard_word_dense,The new mapping system uses WHO-recommended indicators and specific age groups.
+laysumm_plos_0285,PLOS,285,gemini3_flash_preview_minimal,generated,8,0.195206,13,hard_word_dense,This ensures the data collected is consistent with international standards for disease monitoring.
+laysumm_plos_0285,PLOS,285,gemini3_flash_preview_minimal,generated,9,0.97504,14,,Researchers tested the ITM protocol in Mali and Senegal against standard WHO mapping methodologies.
+laysumm_plos_0285,PLOS,285,gemini3_flash_preview_minimal,generated,10,0.838338,14,,The test evaluated how well the integrated approach worked compared to doing separate surveys.
+laysumm_plos_0285,PLOS,285,gemini3_flash_preview_minimal,generated,11,0.291108,13,,The ITM method reached the same conclusions as standard methods for three diseases.
+laysumm_plos_0285,PLOS,285,gemini3_flash_preview_minimal,generated,12,0.787783,12,negation_or_contrast|hard_word_dense,"However, it provided more targeted recommendations for treating schistosomiasis in specific sub-districts."
+laysumm_plos_0285,PLOS,285,gemini3_flash_preview_minimal,generated,13,0.98633,13,,"The integrated approach was practical, feasible, and resulted in an overall cost saving."
+laysumm_plos_0285,PLOS,285,gemini3_flash_preview_minimal,generated,14,0.941362,14,number,Combining the surveys led to savings of 31% in Mali and 19% in Senegal.
+laysumm_plos_0285,PLOS,285,gemini3_flash_preview_minimal,generated,15,0.950086,14,hedged_or_implication,This new mapping tool could facilitate the implementation of treatment programs in endemic countries.
+laysumm_plos_0285,PLOS,285,gemini3_flash_preview_minimal,generated,16,0.880779,14,,Making the first step of mapping more affordable helps start broader disease control efforts.
+laysumm_plos_0457,PLOS,457,gemini3_flash_preview_minimal,generated,1,0.967508,13,,Organ aging is associated with a reduction in the number of stem cells.
+laysumm_plos_0457,PLOS,457,gemini3_flash_preview_minimal,generated,2,0.980197,11,hard_word_dense,These cells live in a specialized environment known as the niche.
+laysumm_plos_0457,PLOS,457,gemini3_flash_preview_minimal,generated,3,0.748667,10,,This niche provides the necessary support for stem cell maintenance.
+laysumm_plos_0457,PLOS,457,gemini3_flash_preview_minimal,generated,4,0.88321,11,,"As organs age, fewer stem cells remain in these specialized homes."
+laysumm_plos_0457,PLOS,457,gemini3_flash_preview_minimal,generated,5,0.986646,12,,"In Drosophila female germline stem cells, Notch signaling levels increase with age."
+laysumm_plos_0457,PLOS,457,gemini3_flash_preview_minimal,generated,6,0.737228,12,,This increase in signaling promotes the removal of cells from the niche.
+laysumm_plos_0457,PLOS,457,gemini3_flash_preview_minimal,generated,7,0.312703,14,,Researchers used the fruit fly ovary as an excellent model to study these changes.
+laysumm_plos_0457,PLOS,457,gemini3_flash_preview_minimal,generated,8,0.982829,10,,The germline stem cells are often called GSCs for short.
+laysumm_plos_0457,PLOS,457,gemini3_flash_preview_minimal,generated,9,0.934224,12,,Notch signaling regulates the adhesion of germline stem cells to the niche.
+laysumm_plos_0457,PLOS,457,gemini3_flash_preview_minimal,generated,10,0.304309,10,,It controls this sticking by altering the expression of E-cadherin.
+laysumm_plos_0457,PLOS,457,gemini3_flash_preview_minimal,generated,11,0.976778,11,,E-cadherin acts like a glue that holds the GSCs in place.
+laysumm_plos_0457,PLOS,457,gemini3_flash_preview_minimal,generated,12,0.351636,9,,High levels of Notch signaling reduce this cellular glue.
+laysumm_plos_0457,PLOS,457,gemini3_flash_preview_minimal,generated,13,0.009323,9,,This reduction makes the cells less competitive for space.
+laysumm_plos_0457,PLOS,457,gemini3_flash_preview_minimal,generated,14,0.988847,11,,The age-dependent induction of Notch signaling is partially mediated by Sxl.
+laysumm_plos_0457,PLOS,457,gemini3_flash_preview_minimal,generated,15,0.746296,12,,Sxl is a protein that normally suppresses Notch signaling in these cells.
+laysumm_plos_0457,PLOS,457,gemini3_flash_preview_minimal,generated,16,0.991196,7,,It is also known as Sex lethal.
+laysumm_plos_0457,PLOS,457,gemini3_flash_preview_minimal,generated,17,0.421925,9,,The levels of Sxl drop as the flies age.
+laysumm_plos_0457,PLOS,457,gemini3_flash_preview_minimal,generated,18,0.681888,9,,This drop allows Notch signaling to increase over time.
+laysumm_plos_0457,PLOS,457,gemini3_flash_preview_minimal,generated,19,0.979202,11,,Notch signaling in the niche cells decreases as the organism ages.
+laysumm_plos_0457,PLOS,457,gemini3_flash_preview_minimal,generated,20,0.761044,12,,This decrease reduces niche integrity and the ability to keep stem cells.
+laysumm_plos_0457,PLOS,457,gemini3_flash_preview_minimal,generated,21,0.952118,14,,"While signaling goes up in the GSCs, it goes down in the surrounding niche."
+laysumm_plos_0457,PLOS,457,gemini3_flash_preview_minimal,generated,22,0.334567,11,,This loss of integrity affects the stem cells from the outside.
+laysumm_plos_0457,PLOS,457,gemini3_flash_preview_minimal,generated,23,0.982219,11,hedged_or_implication,These findings regarding cell adhesion may be relevant to metastatic cancer.
+laysumm_plos_0501,PLOS,501,gemini3_flash_preview_minimal,generated,1,0.997307,16,negation_or_contrast|hard_word_dense,HIV infection currently cannot be cured but can be controlled using combinations of multiple anti-retroviral drugs.
+laysumm_plos_0501,PLOS,501,gemini3_flash_preview_minimal,generated,2,0.197155,13,,These drugs work together to stop the virus from making copies of itself.
+laysumm_plos_0501,PLOS,501,gemini3_flash_preview_minimal,generated,3,0.98458,19,,"Because HIV genotypes vary between individual patients, it is difficult to determine which drug combination will provide effective treatment."
+laysumm_plos_0501,PLOS,501,gemini3_flash_preview_minimal,generated,4,0.971272,13,,A genotype is the specific genetic makeup of the virus in a person.
+laysumm_plos_0501,PLOS,501,gemini3_flash_preview_minimal,generated,5,0.958423,21,negation_or_contrast,Existing HIV treatment models are typically based only on sequence data and do not account for the chemical similarity of drugs.
+laysumm_plos_0501,PLOS,501,gemini3_flash_preview_minimal,generated,6,0.201916,13,,Sequence data refers to the order of genetic building blocks in the virus.
+laysumm_plos_0501,PLOS,501,gemini3_flash_preview_minimal,generated,7,0.992424,17,hard_word_dense,Researchers applied proteochemometric models that combine chemical properties and protein target properties into a single bioactivity model.
+laysumm_plos_0501,PLOS,501,gemini3_flash_preview_minimal,generated,8,0.643777,13,,This method looks at both the drug structure and the virus proteins simultaneously.
+laysumm_plos_0501,PLOS,501,gemini3_flash_preview_minimal,generated,9,0.987663,15,number|hard_word_dense,"Researchers constructed robust models to predict HIV drug resistance based on 300,000 bioactivity data points."
+laysumm_plos_0501,PLOS,501,gemini3_flash_preview_minimal,generated,10,0.946698,13,,"The study included three major drug classes known as NRTIs, PIs, and NNRTIs."
+laysumm_plos_0501,PLOS,501,gemini3_flash_preview_minimal,generated,11,0.976296,14,negation_or_contrast|hard_word_dense,Proteochemometric models outperform sequence-only models in classifying resistance and predicting changes in drug susceptibility.
+laysumm_plos_0501,PLOS,501,gemini3_flash_preview_minimal,generated,12,0.546247,11,hard_word_dense,Susceptibility describes how sensitive the virus is to a specific medication.
+laysumm_plos_0501,PLOS,501,gemini3_flash_preview_minimal,generated,13,0.991234,12,hard_word_dense,The study identified previously unpublished mutations in HIV that confer drug resistance.
+laysumm_plos_0501,PLOS,501,gemini3_flash_preview_minimal,generated,14,0.925971,11,,Mutations are permanent changes in the genetic sequence of the virus.
+laysumm_plos_0501,PLOS,501,gemini3_flash_preview_minimal,generated,15,0.995796,17,number|hard_word_dense,The proteochemometric models achieved an 84% correct resistance prediction rate on the Stanford University HIV resistance database.
+laysumm_plos_0501,PLOS,501,gemini3_flash_preview_minimal,generated,16,0.415414,13,,This database is a public record used by scientists to track viral changes.
+laysumm_plos_0501,PLOS,501,gemini3_flash_preview_minimal,generated,17,0.990403,19,hard_word_dense,The researchers added an applicability domain to the prediction tool to inform users about the reliability of specific predictions.
+laysumm_plos_0563,PLOS,563,gemini3_flash_preview_minimal,generated,1,0.89857,11,,The protein clumping factor B helps S. aureus colonize the nose.
+laysumm_plos_0563,PLOS,563,gemini3_flash_preview_minimal,generated,2,0.711471,12,,It does this by binding to the cornified envelope in the nostrils.
+laysumm_plos_0563,PLOS,563,gemini3_flash_preview_minimal,generated,3,0.998943,8,,Clumping factor B is a cell wall-anchored protein.
+laysumm_plos_0563,PLOS,563,gemini3_flash_preview_minimal,generated,4,0.769483,11,,This surface protein allows the bacteria to attach to host tissues.
+laysumm_plos_0563,PLOS,563,gemini3_flash_preview_minimal,generated,5,0.95743,12,,ClfB is also a major virulence determinant during S. aureus skin infection.
+laysumm_plos_0563,PLOS,563,gemini3_flash_preview_minimal,generated,6,0.276563,12,,This means the protein helps the bacteria cause disease in skin tissue.
+laysumm_plos_0563,PLOS,563,gemini3_flash_preview_minimal,generated,7,0.620934,15,,Researchers found this new role for the protein beyond its known function in the nose.
+laysumm_plos_0563,PLOS,563,gemini3_flash_preview_minimal,generated,8,0.690179,12,,ClfB promotes skin abscess formation by binding to the host protein loricrin.
+laysumm_plos_0563,PLOS,563,gemini3_flash_preview_minimal,generated,9,0.720189,11,,This interaction increases the bacterial burden within the infected skin site.
+laysumm_plos_0563,PLOS,563,gemini3_flash_preview_minimal,generated,10,0.924807,12,,Loricrin is a protein found in the protective barrier of the skin.
+laysumm_plos_0563,PLOS,563,gemini3_flash_preview_minimal,generated,11,0.88569,12,,Loricrin is a critical ligand that the bacteria use to build abscesses.
+laysumm_plos_0563,PLOS,563,gemini3_flash_preview_minimal,generated,12,0.961431,12,,An abscess is a pocket of infection that forms in the skin.
+laysumm_plos_0563,PLOS,563,gemini3_flash_preview_minimal,generated,13,0.187185,14,,The bacteria hijack this host ligand to create a robust structure for the infection.
+laysumm_plos_0563,PLOS,563,gemini3_flash_preview_minimal,generated,14,0.996036,9,hard_word_dense,Vaccination with ClfB induces protective humoral and cellular responses.
+laysumm_plos_0563,PLOS,563,gemini3_flash_preview_minimal,generated,15,0.927734,12,,These immune responses provide protection and reduce the severity of skin infections.
+laysumm_plos_0563,PLOS,563,gemini3_flash_preview_minimal,generated,16,0.937163,12,,The vaccine triggers the immune system to produce antibodies and T cells.
+laysumm_plos_0563,PLOS,563,gemini3_flash_preview_minimal,generated,17,0.722622,12,,The vaccine significantly lowers the number of bacteria found in the skin.
+laysumm_plos_0563,PLOS,563,gemini3_flash_preview_minimal,generated,18,0.794091,10,,This reduction helps the body clear the infection more effectively.
+laysumm_plos_0563,PLOS,563,gemini3_flash_preview_minimal,generated,19,0.544514,13,,A lower bacterial burden means the infection is less severe for the host.
+laysumm_plos_0563,PLOS,563,gemini3_flash_preview_minimal,generated,20,0.990718,10,,ClfB is an important antigen for next-generation vaccines targeting SSTI.
+laysumm_plos_0563,PLOS,563,gemini3_flash_preview_minimal,generated,21,0.983055,12,,SSTI refers to common skin and soft tissue infections caused by bacteria.
+laysumm_plos_0563,PLOS,563,gemini3_flash_preview_minimal,generated,22,0.943573,12,hard_word_dense,Identifying this therapeutic target is a key step for future medical treatments.
+laysumm_plos_1116,PLOS,1116,gemini3_flash_preview_minimal,generated,1,0.989173,10,number|hard_word_dense,Dengue virus causes about 100 million symptomatic infections every year.
+laysumm_plos_1116,PLOS,1116,gemini3_flash_preview_minimal,generated,2,0.044576,21,,This virus is the most common mosquito-borne virus in the world and half of the world’s population is now at risk.
+laysumm_plos_1116,PLOS,1116,gemini3_flash_preview_minimal,generated,3,0.978362,11,hard_word_dense,Infection ranges from mild dengue fever to life-threatening dengue hemorrhagic fever.
+laysumm_plos_1116,PLOS,1116,gemini3_flash_preview_minimal,generated,4,0.977673,11,,Dengue fever is called DF and the severe form is DHF.
+laysumm_plos_1116,PLOS,1116,gemini3_flash_preview_minimal,generated,5,0.995671,10,hard_word_dense,Researchers used mass spectrometry for metabolomic profiling of patient sera.
+laysumm_plos_1116,PLOS,1116,gemini3_flash_preview_minimal,generated,6,0.621254,20,,This method identifies small molecules in the blood called metabolites to see how they differ between mild and severe cases.
+laysumm_plos_1116,PLOS,1116,gemini3_flash_preview_minimal,generated,7,0.994406,11,number,The study found 29 metabolites that differed during the critical phase.
+laysumm_plos_1116,PLOS,1116,gemini3_flash_preview_minimal,generated,8,0.99394,18,,The critical phase occurs five to seven days after fever starts and is when severe symptoms usually appear.
+laysumm_plos_1116,PLOS,1116,gemini3_flash_preview_minimal,generated,9,0.983374,13,number,Bile acids were 5 fold higher in DHF and linked to liver injury.
+laysumm_plos_1116,PLOS,1116,gemini3_flash_preview_minimal,generated,10,0.966231,17,,These levels correlated with higher liver enzymes called AST and ALT which are markers of liver damage.
+laysumm_plos_1116,PLOS,1116,gemini3_flash_preview_minimal,generated,11,0.794941,11,number,Uric acid was 1.5 fold lower in patients with severe DHF.
+laysumm_plos_1116,PLOS,1116,gemini3_flash_preview_minimal,generated,12,0.916553,14,hedged_or_implication,Low levels may lead to a decreased capacity for antioxidant defense against cellular stress.
+laysumm_plos_1116,PLOS,1116,gemini3_flash_preview_minimal,generated,13,0.975892,10,number,Chenodeoxyglycocholic acid remained 3 times higher during the recovery phase.
+laysumm_plos_1116,PLOS,1116,gemini3_flash_preview_minimal,generated,14,0.800596,17,,This specific bile acid shows that liver impact can last longer even after the initial fever passes.
+laysumm_plos_1116,PLOS,1116,gemini3_flash_preview_minimal,generated,15,0.96641,10,hedged_or_implication,These findings suggest new therapeutic targets for managing severe dengue.
+laysumm_plos_1116,PLOS,1116,gemini3_flash_preview_minimal,generated,16,0.970384,12,hard_word_dense,Understanding the disease pathogenesis helps in finding better medical treatments for patients.
+laysumm_plos_1309,PLOS,1309,gemini3_flash_preview_minimal,generated,1,0.973022,11,hard_word_dense,Cullin-RING ubiquitin ligases must have their substrate receptor subunits tightly controlled.
+laysumm_plos_1309,PLOS,1309,gemini3_flash_preview_minimal,generated,2,0.504855,13,,This control ensures the cell maintains a balanced variety of these ligase machines.
+laysumm_plos_1309,PLOS,1309,gemini3_flash_preview_minimal,generated,3,0.99708,13,hard_word_dense,Unbalanced levels of substrate receptors can lead to the sequestration of core components.
+laysumm_plos_1309,PLOS,1309,gemini3_flash_preview_minimal,generated,4,0.349177,8,,This competition for parts disrupts normal cellular functions.
+laysumm_plos_1309,PLOS,1309,gemini3_flash_preview_minimal,generated,5,0.99689,12,hard_word_dense,Misregulation of substrate receptor components in SCF ligases is associated with cancer.
+laysumm_plos_1309,PLOS,1309,gemini3_flash_preview_minimal,generated,6,0.278658,10,,Many other diseases are also linked to these protein-marking errors.
+laysumm_plos_1309,PLOS,1309,gemini3_flash_preview_minimal,generated,7,0.982681,11,hard_word_dense,F-box proteins are typically regulated by autocatalytic ubiquitylation and proteasome-mediated degradation.
+laysumm_plos_1309,PLOS,1309,gemini3_flash_preview_minimal,generated,8,0.983232,13,,This process happens when the proteins are part of an intact SCF complex.
+laysumm_plos_1309,PLOS,1309,gemini3_flash_preview_minimal,generated,9,0.966575,12,number|hard_word_dense,Researchers identified a new degradation pathway for the yeast F-box protein Met30.
+laysumm_plos_1309,PLOS,1309,gemini3_flash_preview_minimal,generated,10,0.985741,11,number,This pathway acts when Met30 is dissociated from the Skp1 protein.
+laysumm_plos_1309,PLOS,1309,gemini3_flash_preview_minimal,generated,11,0.961345,12,number,The new Met30 degradation pathway requires Cdc53/Cul1 but is independent of Skp1.
+laysumm_plos_1309,PLOS,1309,gemini3_flash_preview_minimal,generated,12,0.004331,11,negation_or_contrast,It uses only specific parts of the usual machine to function.
+laysumm_plos_1309,PLOS,1309,gemini3_flash_preview_minimal,generated,13,0.994801,13,,This pathway is essential for chromosome stability and defense against heavy metal stress.
+laysumm_plos_1309,PLOS,1309,gemini3_flash_preview_minimal,generated,14,0.043212,11,,It specifically helps yeast cells recover from stress caused by cadmium.
+laysumm_plos_1309,PLOS,1309,gemini3_flash_preview_minimal,generated,15,0.989171,13,number,"The study assigns biological functions to a sub-complex of Cdc53, Rbx1, and Cdc34."
+laysumm_plos_1309,PLOS,1309,gemini3_flash_preview_minimal,generated,16,0.664255,11,number,This smaller team of proteins works independently of the Skp1 component.

@@ -1,0 +1,136 @@
+{
+  "time": "2026-06-17T15:52:16",
+  "run_name": "pilot_n20_v7_factuality_chase",
+  "stage": "v7_05_answers",
+  "mode": "factuality_chase",
+  "model_key": "gpt41_mini",
+  "questions_total": 214,
+  "answers_total": 214,
+  "wrong_total": 23,
+  "accuracy": 0.8925,
+  "wrong_check_type_counts": {
+    "high_risk": 11,
+    "core": 12
+  },
+  "wrong_slot_type_counts": {
+    "measurement": 4,
+    "core_claim": 12,
+    "mechanism": 4,
+    "organism": 1,
+    "method": 2
+  },
+  "usage_summary": {
+    "api_calls": 2338,
+    "prompt_tokens": 2138549,
+    "cached_prompt_tokens": 5120,
+    "billable_prompt_tokens": 2133429,
+    "completion_tokens": 582527,
+    "billable_output_tokens": 582527,
+    "total_tokens": 2721076,
+    "api_elapsed_seconds": 8662.0864,
+    "cost_currencies": [
+      "USD"
+    ],
+    "estimated_cost": 1.785927,
+    "by_stage": {
+      "module1.candidate_af:gpt41_mini": {
+        "api_calls": 175,
+        "prompt_tokens": 366087,
+        "cached_prompt_tokens": 0,
+        "billable_prompt_tokens": 366087,
+        "completion_tokens": 206429,
+        "billable_output_tokens": 206429,
+        "total_tokens": 572516,
+        "api_elapsed_seconds": 2760.5693,
+        "cost_currencies": [
+          "USD"
+        ],
+        "estimated_cost": 0.476721
+      },
+      "module2.judge_abstract:gpt41_mini": {
+        "api_calls": 1682,
+        "prompt_tokens": 1259150,
+        "cached_prompt_tokens": 0,
+        "billable_prompt_tokens": 1259150,
+        "completion_tokens": 168124,
+        "billable_output_tokens": 168124,
+        "total_tokens": 1427274,
+        "api_elapsed_seconds": 3256.6633,
+        "cost_currencies": [
+          "USD"
+        ],
+        "estimated_cost": 0.772658
+      },
+      "v7.answer_questions.factuality_chase:gpt41_mini": {
+        "api_calls": 214,
+        "prompt_tokens": 189441,
+        "cached_prompt_tokens": 0,
+        "billable_prompt_tokens": 189441,
+        "completion_tokens": 75514,
+        "billable_output_tokens": 75514,
+        "total_tokens": 264955,
+        "api_elapsed_seconds": 1002.4843,
+        "cost_currencies": [
+          "USD"
+        ],
+        "estimated_cost": 0.196599
+      },
+      "v7.evidence_table.factuality_chase:gpt41_mini": {
+        "api_calls": 20,
+        "prompt_tokens": 127951,
+        "cached_prompt_tokens": 0,
+        "billable_prompt_tokens": 127951,
+        "completion_tokens": 69719,
+        "billable_output_tokens": 69719,
+        "total_tokens": 197670,
+        "api_elapsed_seconds": 706.8436,
+        "cost_currencies": [
+          "USD"
+        ],
+        "estimated_cost": 0.162731
+      },
+      "v7.generate_summary.factuality_chase:gpt41_mini": {
+        "api_calls": 20,
+        "prompt_tokens": 79724,
+        "cached_prompt_tokens": 0,
+        "billable_prompt_tokens": 79724,
+        "completion_tokens": 20721,
+        "billable_output_tokens": 20721,
+        "total_tokens": 100445,
+        "api_elapsed_seconds": 256.4641,
+        "cost_currencies": [
+          "USD"
+        ],
+        "estimated_cost": 0.065043
+      },
+      "v7.generate_summary.gpt41_mini.expand_length.factuality_chase": {
+        "api_calls": 13,
+        "prompt_tokens": 47385,
+        "cached_prompt_tokens": 5120,
+        "billable_prompt_tokens": 42265,
+        "completion_tokens": 11365,
+        "billable_output_tokens": 11365,
+        "total_tokens": 58750,
+        "api_elapsed_seconds": 132.9882,
+        "cost_currencies": [
+          "USD"
+        ],
+        "estimated_cost": 0.035602
+      },
+      "v7.questions.factuality_chase:gpt41_mini": {
+        "api_calls": 214,
+        "prompt_tokens": 68811,
+        "cached_prompt_tokens": 0,
+        "billable_prompt_tokens": 68811,
+        "completion_tokens": 30655,
+        "billable_output_tokens": 30655,
+        "total_tokens": 99466,
+        "api_elapsed_seconds": 546.0736,
+        "cost_currencies": [
+          "USD"
+        ],
+        "estimated_cost": 0.076572
+      }
+    }
+  }
+}

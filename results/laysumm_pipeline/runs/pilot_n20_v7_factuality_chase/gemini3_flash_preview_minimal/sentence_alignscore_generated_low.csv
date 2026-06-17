@@ -1,0 +1,105 @@
+﻿article_id,source_dataset,original_index,model_key,variant,sentence_index,alignscore,word_count,risk_tags,sentence
+laysumm_plos_1309,PLOS,1309,gemini3_flash_preview_minimal,generated,12,0.004331,11,negation_or_contrast,It uses only specific parts of the usual machine to function.
+laysumm_plos_0457,PLOS,457,gemini3_flash_preview_minimal,generated,13,0.009323,9,,This reduction makes the cells less competitive for space.
+laysumm_elife_0070,eLife,70,gemini3_flash_preview_minimal,generated,12,0.013122,12,,This means the cleanup happens directly on the surface of the mitochondria.
+laysumm_elife_0070,eLife,70,gemini3_flash_preview_minimal,generated,20,0.019768,9,negation_or_contrast,This specific tagging ensures only damaged proteins are removed.
+laysumm_elife_0026,eLife,26,gemini3_flash_preview_minimal,generated,7,0.023655,20,negation_or_contrast,"Even though the overall shape of the protein does not change, it loses its ability to stick to its partner."
+laysumm_elife_0062,eLife,62,gemini3_flash_preview_minimal,generated,6,0.026842,18,,These transcripts are genetic messages that are highly active in the gut and were missed by single-cell studies.
+laysumm_plos_0178,PLOS,178,gemini3_flash_preview_minimal,generated,10,0.030306,14,,GBS is a rare condition where the immune system attacks the body's own nerves.
+laysumm_plos_1309,PLOS,1309,gemini3_flash_preview_minimal,generated,14,0.043212,11,,It specifically helps yeast cells recover from stress caused by cadmium.
+laysumm_plos_1116,PLOS,1116,gemini3_flash_preview_minimal,generated,2,0.044576,21,,This virus is the most common mosquito-borne virus in the world and half of the world’s population is now at risk.
+laysumm_elife_0163,eLife,163,gemini3_flash_preview_minimal,generated,14,0.04706,13,,This shows that the molecule is vital for healthy communication in the brain.
+laysumm_elife_0035,eLife,35,gemini3_flash_preview_minimal,generated,4,0.050985,9,,This makes it hard to find your way home.
+laysumm_elife_0057,eLife,57,gemini3_flash_preview_minimal,generated,6,0.060621,19,negation_or_contrast,This plant is often used in research studies and its petal count does not change even with genetic diversity.
+laysumm_elife_0188,eLife,188,gemini3_flash_preview_minimal,generated,12,0.078133,14,,Southern winters in Australia are currently too cold for the virus to spread effectively.
+laysumm_plos_0051,PLOS,51,gemini3_flash_preview_minimal,generated,12,0.081674,13,,The treatment stops the virus before its genetic material is ready for integration.
+laysumm_elife_0062,eLife,62,gemini3_flash_preview_minimal,generated,15,0.084909,14,hedged_or_implication,This genetic map helps scientists understand how other animals might better repair digestive damage.
+laysumm_elife_0070,eLife,70,gemini3_flash_preview_minimal,generated,21,0.088634,14,number,This cleanup requires Hsp70 chaperones from the SSA family and the Hsp40 chaperone Sis1.
+laysumm_elife_0070,eLife,70,gemini3_flash_preview_minimal,generated,8,0.100777,8,,This change allows scientists to trigger the damage.
+laysumm_plos_0209,PLOS,209,gemini3_flash_preview_minimal,generated,16,0.101118,10,,Managing stochasticity prevents cells from choosing the wrong cell fates.
+laysumm_plos_0051,PLOS,51,gemini3_flash_preview_minimal,generated,8,0.101174,13,,This depletion also made the Sulforaphane treatment less effective at stopping the virus.
+laysumm_plos_0051,PLOS,51,gemini3_flash_preview_minimal,generated,10,0.107581,12,,This confirms the compound works by triggering the cell's own defense system.
+laysumm_elife_0026,eLife,26,gemini3_flash_preview_minimal,generated,4,0.109577,15,,"Normally, these two proteins work together to signal the immune system to fight the infection."
+laysumm_elife_0026,eLife,26,gemini3_flash_preview_minimal,generated,14,0.110426,21,,"Like two magnets with the same poles facing each other, the similar negative charges push the proteins away from one another."
+laysumm_elife_0057,eLife,57,gemini3_flash_preview_minimal,generated,18,0.115807,19,negation_or_contrast,The Cardamine version of the gene cannot restore a stable count of four petals when tested in the lab.
+laysumm_plos_0178,PLOS,178,gemini3_flash_preview_minimal,generated,14,0.116525,13,,Health-seeking behavior refers to the choice to visit a doctor when symptoms appear.
+laysumm_elife_0163,eLife,163,gemini3_flash_preview_minimal,generated,12,0.122688,12,number,"By lowering REST, miR-9 ensures that the genes for growth stay active."
+laysumm_elife_0163,eLife,163,gemini3_flash_preview_minimal,generated,18,0.12587,14,,Increased REST levels are the major cause of reduced dendritic growth in these mice.
+laysumm_elife_0070,eLife,70,gemini3_flash_preview_minimal,generated,3,0.131028,11,,These organelles are the primary source of energy for the cell.
+laysumm_elife_0070,eLife,70,gemini3_flash_preview_minimal,generated,13,0.132778,8,negation_or_contrast,The proteins are degraded without being moved elsewhere.
+laysumm_elife_0163,eLife,163,gemini3_flash_preview_minimal,generated,6,0.148041,13,,This sponge mouse allows scientists to turn off the molecule at specific times.
+laysumm_elife_0026,eLife,26,gemini3_flash_preview_minimal,generated,17,0.18577,13,,This discovery explains a subtle way that pathogens can hijack human cell signaling.
+laysumm_plos_0563,PLOS,563,gemini3_flash_preview_minimal,generated,13,0.187185,14,,The bacteria hijack this host ligand to create a robust structure for the infection.
+laysumm_elife_0026,eLife,26,gemini3_flash_preview_minimal,generated,9,0.194453,12,number,The change causes UBC13 to form a new intramolecular salt-bridge within itself.
+laysumm_plos_0285,PLOS,285,gemini3_flash_preview_minimal,generated,8,0.195206,13,hard_word_dense,This ensures the data collected is consistent with international standards for disease monitoring.
+laysumm_plos_0501,PLOS,501,gemini3_flash_preview_minimal,generated,2,0.197155,13,,These drugs work together to stop the virus from making copies of itself.
+laysumm_plos_0501,PLOS,501,gemini3_flash_preview_minimal,generated,6,0.201916,13,,Sequence data refers to the order of genetic building blocks in the virus.
+laysumm_elife_0188,eLife,188,gemini3_flash_preview_minimal,generated,8,0.201994,17,hard_word_dense,This temperature represents the ideal sweet spot for the virus to spread efficiently between mosquitoes and humans.
+laysumm_elife_0026,eLife,26,gemini3_flash_preview_minimal,generated,3,0.21069,12,number,This chemical change stops UBC13 from working with another protein called TRAF6.
+laysumm_elife_0163,eLife,163,gemini3_flash_preview_minimal,generated,11,0.258902,12,,High levels of REST prevent the normal development of these neuronal branches.
+laysumm_elife_0035,eLife,35,gemini3_flash_preview_minimal,generated,3,0.274021,7,,Damage to this area causes spatial disorientation.
+laysumm_plos_0563,PLOS,563,gemini3_flash_preview_minimal,generated,6,0.276563,12,,This means the protein helps the bacteria cause disease in skin tissue.
+laysumm_plos_1309,PLOS,1309,gemini3_flash_preview_minimal,generated,6,0.278658,10,,Many other diseases are also linked to these protein-marking errors.
+laysumm_elife_0189,eLife,189,gemini3_flash_preview_minimal,generated,16,0.28347,16,,This distance explains why it takes longer to start a reach when these waves are present.
+laysumm_plos_0285,PLOS,285,gemini3_flash_preview_minimal,generated,11,0.291108,13,,The ITM method reached the same conclusions as standard methods for three diseases.
+laysumm_elife_0057,eLife,57,gemini3_flash_preview_minimal,generated,5,0.291787,12,negation_or_contrast,This petal count is invariant and does not change with genetic diversity.
+laysumm_elife_0163,eLife,163,gemini3_flash_preview_minimal,generated,10,0.294419,13,number,The miR-9 molecule keeps REST levels low so that dendrites can grow properly.
+laysumm_plos_0457,PLOS,457,gemini3_flash_preview_minimal,generated,10,0.304309,10,,It controls this sticking by altering the expression of E-cadherin.
+laysumm_plos_0457,PLOS,457,gemini3_flash_preview_minimal,generated,7,0.312703,14,,Researchers used the fruit fly ovary as an excellent model to study these changes.
+laysumm_elife_0026,eLife,26,gemini3_flash_preview_minimal,generated,13,0.318447,14,number,The new negative charge on UBC13 repels the negatively charged surface of its partner.
+laysumm_elife_0163,eLife,163,gemini3_flash_preview_minimal,generated,20,0.318995,11,hard_word_dense,This reduction in complexity impairs how neurons connect within the hippocampus.
+laysumm_elife_0070,eLife,70,gemini3_flash_preview_minimal,generated,7,0.322865,12,number,These proteins misfold when the temperature is raised from 25°C to 37°C.
+laysumm_elife_0035,eLife,35,gemini3_flash_preview_minimal,generated,5,0.327136,14,,It is one of the first regions to show altered activity in Alzheimer’s disease.
+laysumm_elife_0188,eLife,188,gemini3_flash_preview_minimal,generated,10,0.330328,14,,Biological processes in the mosquito stop the disease from spreading outside this specific range.
+laysumm_plos_0457,PLOS,457,gemini3_flash_preview_minimal,generated,22,0.334567,11,,This loss of integrity affects the stem cells from the outside.
+laysumm_elife_0070,eLife,70,gemini3_flash_preview_minimal,generated,10,0.345668,10,,This method helps observe the cleanup process in real time.
+laysumm_plos_1309,PLOS,1309,gemini3_flash_preview_minimal,generated,4,0.349177,8,,This competition for parts disrupts normal cellular functions.
+laysumm_plos_0051,PLOS,51,gemini3_flash_preview_minimal,generated,4,0.351111,14,,This compound is produced in vegetables like broccoli when they are damaged or chewed.
+laysumm_plos_0457,PLOS,457,gemini3_flash_preview_minimal,generated,12,0.351636,9,,High levels of Notch signaling reduce this cellular glue.
+laysumm_elife_0188,eLife,188,gemini3_flash_preview_minimal,generated,4,0.360307,21,number,"This virus is a significant mosquito-borne pathogen found in Australia and the Pacific that infects 2,000 to 9,000 people each year."
+laysumm_elife_0006,eLife,6,gemini3_flash_preview_minimal,generated,7,0.370319,14,,Researchers tested this using a sensory manipulation that mimics noise in the visual cortex.
+laysumm_elife_0070,eLife,70,gemini3_flash_preview_minimal,generated,16,0.371506,13,number,The ubiquitin ligase enzymes Ubr1 and San1 tag the misfolded proteins for destruction.
+laysumm_elife_0026,eLife,26,gemini3_flash_preview_minimal,generated,12,0.378893,14,number,Electrostatic repulsion between the new glutamate and the surface of TRAF6 also prevents binding.
+laysumm_elife_0062,eLife,62,gemini3_flash_preview_minimal,generated,10,0.385105,17,,"This means different genes are active in the center versus the outer edges, especially among goblet cells."
+laysumm_elife_0026,eLife,26,gemini3_flash_preview_minimal,generated,6,0.393888,13,number|hard_word_dense,The modification inhibits the interaction between UBC13 and TRAF6 by disrupting their connections.
+laysumm_elife_0163,eLife,163,gemini3_flash_preview_minimal,generated,8,0.401481,12,,Neurons in the hippocampus had shorter branches when this molecule was blocked.
+laysumm_elife_0163,eLife,163,gemini3_flash_preview_minimal,generated,4,0.404339,12,,Dendrites are the tree-like branches that help neurons receive signals from others.
+laysumm_elife_0006,eLife,6,gemini3_flash_preview_minimal,generated,16,0.404479,13,,The macaque recordings confirmed that the visual cortex responded to this added noise.
+laysumm_elife_0188,eLife,188,gemini3_flash_preview_minimal,generated,5,0.405806,11,hard_word_dense,The virus causes debilitating symptoms like long-term joint pain and disability.
+laysumm_plos_0501,PLOS,501,gemini3_flash_preview_minimal,generated,16,0.415414,13,,This database is a public record used by scientists to track viral changes.
+laysumm_elife_0026,eLife,26,gemini3_flash_preview_minimal,generated,8,0.419417,13,,It specifically perturbs both the stable native and temporary transient interactions between them.
+laysumm_plos_0457,PLOS,457,gemini3_flash_preview_minimal,generated,17,0.421925,9,,The levels of Sxl drop as the flies age.
+laysumm_elife_0035,eLife,35,gemini3_flash_preview_minimal,generated,25,0.431984,9,,These neurons turn compass-like signals into a gyroscope signal.
+laysumm_elife_0188,eLife,188,gemini3_flash_preview_minimal,generated,6,0.458087,16,hedged_or_implication,It is the most common mosquito-borne disease in Australia and has the potential to emerge globally.
+laysumm_elife_0070,eLife,70,gemini3_flash_preview_minimal,generated,19,0.468106,8,,The tags are molecular signals for the proteasome.
+laysumm_plos_0285,PLOS,285,gemini3_flash_preview_minimal,generated,3,0.479973,15,,Researchers created a new system called Integrated Threshold Mapping to map four diseases at once.
+laysumm_elife_0057,eLife,57,gemini3_flash_preview_minimal,generated,16,0.503208,11,number,The Cardamine version of AP1 fails to complement this masking function.
+laysumm_plos_1309,PLOS,1309,gemini3_flash_preview_minimal,generated,2,0.504855,13,,This control ensures the cell maintains a balanced variety of these ligase machines.
+laysumm_elife_0026,eLife,26,gemini3_flash_preview_minimal,generated,5,0.508353,12,negation_or_contrast,"When they cannot work together, the body's NF-κB inflammatory response is silenced."
+laysumm_plos_0209,PLOS,209,gemini3_flash_preview_minimal,generated,8,0.516927,12,,Cells communicate by swapping molecules instead of just inheriting traits from parents.
+laysumm_elife_0062,eLife,62,gemini3_flash_preview_minimal,generated,13,0.521816,12,hard_word_dense,This intestinal map serves as a resource for studying regeneration and physiology.
+laysumm_plos_0228,PLOS,228,gemini3_flash_preview_minimal,generated,12,0.529564,13,negation_or_contrast,They did not learn a linear relationship between the shapes and the movements.
+laysumm_elife_0006,eLife,6,gemini3_flash_preview_minimal,generated,14,0.530268,13,,This dispersion causes the brain to reach a final choice in less time.
+laysumm_elife_0028,eLife,28,gemini3_flash_preview_minimal,generated,24,0.534203,14,,This link shows that the beat of brain waves is vital for task success.
+laysumm_elife_0057,eLife,57,gemini3_flash_preview_minimal,generated,20,0.535056,13,hard_word_dense,Natural populations have enough standing genetic variation to produce four-petalled flowers through recombination.
+laysumm_elife_0026,eLife,26,gemini3_flash_preview_minimal,generated,2,0.543802,18,number,This enzyme converts a glutamine residue at site Q100 into a glutamate residue through a process called deamidation.
+laysumm_plos_0563,PLOS,563,gemini3_flash_preview_minimal,generated,19,0.544514,13,,A lower bacterial burden means the infection is less severe for the host.
+laysumm_plos_0178,PLOS,178,gemini3_flash_preview_minimal,generated,6,0.544836,14,negation_or_contrast|number,"In contrast, only 42% of Zika cases occurred in that same young age group."
+laysumm_plos_0501,PLOS,501,gemini3_flash_preview_minimal,generated,12,0.546247,11,hard_word_dense,Susceptibility describes how sensitive the virus is to a specific medication.
+laysumm_plos_0209,PLOS,209,gemini3_flash_preview_minimal,generated,15,0.557821,9,hard_word_dense,Cell-cell communication controls noise to ensure correct developmental patterns.
+laysumm_plos_0051,PLOS,51,gemini3_flash_preview_minimal,generated,3,0.561511,12,number|hard_word_dense,Sulforaphane is a natural product found in cruciferous vegetables that activates Nrf2.
+laysumm_elife_0028,eLife,28,gemini3_flash_preview_minimal,generated,3,0.56567,11,,It is an emergent property of many brain regions working together.
+laysumm_elife_0163,eLife,163,gemini3_flash_preview_minimal,generated,17,0.571902,12,number,The transcriptional repressor REST is a direct target of the miR-9 molecule.
+laysumm_elife_0057,eLife,57,gemini3_flash_preview_minimal,generated,17,0.588301,12,,This difference is caused by regulatory regions rather than protein coding regions.
+laysumm_elife_0189,eLife,189,gemini3_flash_preview_minimal,generated,2,0.590236,15,,These brain waves occur at twenty-five to forty cycles per second in the motor system.
+laysumm_elife_0070,eLife,70,gemini3_flash_preview_minimal,generated,17,0.592651,13,,These ligases act as markers to identify which proteins the cell should destroy.
+laysumm_elife_0057,eLife,57,gemini3_flash_preview_minimal,generated,15,0.599782,22,,Introducing the Arabidopsis version of the gene into Cardamine hirsuta converts its petal number from variable to a stable count of four.
+laysumm_elife_0057,eLife,57,gemini3_flash_preview_minimal,generated,12,0.599867,18,,"Mutations in this gene cause petal loss in both species, making it a strong candidate for the difference."
+laysumm_elife_0028,eLife,28,gemini3_flash_preview_minimal,generated,15,0.600718,13,,This imaging technique measures changes in blood flow to track active brain areas.
+laysumm_elife_0062,eLife,62,gemini3_flash_preview_minimal,generated,8,0.606679,16,hard_word_dense,"This similarity includes genes used for metabolism, bile transport, and transporting nutrients like glucose and fats."
+laysumm_plos_0563,PLOS,563,gemini3_flash_preview_minimal,generated,7,0.620934,15,,Researchers found this new role for the protein beyond its known function in the nose.
+laysumm_plos_1116,PLOS,1116,gemini3_flash_preview_minimal,generated,6,0.621254,20,,This method identifies small molecules in the blood called metabolites to see how they differ between mild and severe cases.
+laysumm_elife_0189,eLife,189,gemini3_flash_preview_minimal,generated,20,0.623719,13,,The brain favors a low-risk state over immediate movement readiness during these periods.
+laysumm_elife_0035,eLife,35,gemini3_flash_preview_minimal,generated,22,0.62916,8,,This structure permits the separation of input streams.
+laysumm_plos_0501,PLOS,501,gemini3_flash_preview_minimal,generated,8,0.643777,13,,This method looks at both the drug structure and the virus proteins simultaneously.
+laysumm_plos_0228,PLOS,228,gemini3_flash_preview_minimal,generated,16,0.645236,13,,It explains how the brain keeps separate learning processes for different visual cues.

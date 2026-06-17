@@ -1,0 +1,63 @@
+{
+  "time": "2026-06-17T19:31:35",
+  "run_name": "pilot_n20_v8_factuality_chase",
+  "stage": "V8_06_rewritten",
+  "mode": "factuality_chase",
+  "model_key": "gpt41_mini",
+  "rewritten_total": 20,
+  "skipped_no_errors_count": 7,
+  "rewrite_invoked_count": 13,
+  "selected_variant_counts": {
+    "expanded_generated": 8,
+    "generated": 10,
+    "readability_trim": 1,
+    "factual_repair": 1
+  },
+  "parse_error_count": 0,
+  "below_min_length_count": 0,
+  "above_max_length_count": 0,
+  "usage_summary": {
+    "api_calls": 24,
+    "prompt_tokens": 117493,
+    "cached_prompt_tokens": 10368,
+    "billable_prompt_tokens": 107125,
+    "completion_tokens": 26916,
+    "billable_output_tokens": 26916,
+    "total_tokens": 144409,
+    "api_elapsed_seconds": 382.6566,
+    "cost_currencies": [
+      "USD"
+    ],
+    "estimated_cost": 0.086952,
+    "by_stage": {
+      "V8.rewrite_summary.factuality_chase:gpt41_mini": {
+        "api_calls": 13,
+        "prompt_tokens": 71748,
+        "cached_prompt_tokens": 0,
+        "billable_prompt_tokens": 71748,
+        "completion_tokens": 16184,
+        "billable_output_tokens": 16184,
+        "total_tokens": 87932,
+        "api_elapsed_seconds": 230.8511,
+        "cost_currencies": [
+          "USD"
+        ],
+        "estimated_cost": 0.054594
+      },
+      "V8.rewrite_summary.gpt41_mini.expand_length.factuality_chase": {
+        "api_calls": 11,
+        "prompt_tokens": 45745,
+        "cached_prompt_tokens": 10368,
+        "billable_prompt_tokens": 35377,
+        "completion_tokens": 10732,
+        "billable_output_tokens": 10732,
+        "total_tokens": 56477,
+        "api_elapsed_seconds": 151.8055,
+        "cost_currencies": [
+          "USD"
+        ],
+        "estimated_cost": 0.032359
+      }
+    }
+  }
+}

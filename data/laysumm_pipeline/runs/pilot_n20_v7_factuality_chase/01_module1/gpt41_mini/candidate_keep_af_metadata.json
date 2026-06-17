@@ -1,0 +1,74 @@
+{
+  "time": "2026-06-17T15:38:49",
+  "run_name": "pilot_n20_v7_factuality_chase",
+  "stage": "01_module1",
+  "model_key": "gpt41_mini",
+  "provider": "openai",
+  "model": "gpt-4.1-mini",
+  "chunk_words": 1200,
+  "overlap_words": 120,
+  "max_workers": 8,
+  "prompt_file": "C:\\Users\\bugee\\OneDrive\\桌面\\chiehshukou_master\\src\\thesis_laysumm\\prompts\\select_summary_candidate_af.txt",
+  "prompt_sha256": "60afb5c26ff8c528eea6dce64e566438c54703225f96f391edff2b265e59988f",
+  "articles_total": 20,
+  "articles_limit": null,
+  "articles_completed": 20,
+  "candidate_keep_af_total": 1682,
+  "candidate_keep_af_by_source": {
+    "eLife": 986,
+    "PLOS": 696
+  },
+  "candidate_keep_af_by_article": {
+    "laysumm_elife_0006": 133,
+    "laysumm_elife_0026": 88,
+    "laysumm_elife_0028": 78,
+    "laysumm_elife_0035": 104,
+    "laysumm_elife_0057": 74,
+    "laysumm_elife_0062": 140,
+    "laysumm_elife_0070": 76,
+    "laysumm_elife_0163": 102,
+    "laysumm_elife_0188": 83,
+    "laysumm_elife_0189": 108,
+    "laysumm_plos_0051": 72,
+    "laysumm_plos_0178": 29,
+    "laysumm_plos_0209": 72,
+    "laysumm_plos_0228": 107,
+    "laysumm_plos_0285": 62,
+    "laysumm_plos_0457": 72,
+    "laysumm_plos_0501": 86,
+    "laysumm_plos_0563": 54,
+    "laysumm_plos_1116": 76,
+    "laysumm_plos_1309": 66
+  },
+  "failed_chunk_count": 0,
+  "usage_summary": {
+    "api_calls": 175,
+    "prompt_tokens": 366087,
+    "cached_prompt_tokens": 0,
+    "billable_prompt_tokens": 366087,
+    "completion_tokens": 206429,
+    "billable_output_tokens": 206429,
+    "total_tokens": 572516,
+    "api_elapsed_seconds": 2760.5693,
+    "cost_currencies": [
+      "USD"
+    ],
+    "estimated_cost": 0.476721,
+    "by_stage": {
+      "module1.candidate_af:gpt41_mini": {
+        "api_calls": 175,
+        "prompt_tokens": 366087,
+        "cached_prompt_tokens": 0,
+        "billable_prompt_tokens": 366087,
+        "completion_tokens": 206429,
+        "billable_output_tokens": 206429,
+        "total_tokens": 572516,
+        "api_elapsed_seconds": 2760.5693,
+        "cost_currencies": [
+          "USD"
+        ],
+        "estimated_cost": 0.476721
+      }
+    }
+  }
+}
