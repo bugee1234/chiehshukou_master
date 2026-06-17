@@ -1,0 +1,113 @@
+{
+  "time": "2026-06-17T07:32:10",
+  "run_name": "pilot_n20_v6_factuality_chase",
+  "stage": "v6_04_summaries",
+  "mode": "factuality_chase",
+  "model_key": "gpt41_mini",
+  "prompt_file": "C:\\Users\\bugee\\OneDrive\\桌面\\chiehshukou_master\\src\\thesis_laysumm_v6\\prompts\\generate_summary_v6.txt",
+  "prompt_sha256": "ca4ceaf765236e64b976c31596d4918a3c7633da6a6d01338d212e2124ca3a2a",
+  "summaries_total": 20,
+  "parse_error_count": 0,
+  "below_min_length_count": 8,
+  "above_max_length_count": 0,
+  "usage_summary": {
+    "api_calls": 2149,
+    "prompt_tokens": 1978325,
+    "cached_prompt_tokens": 23680,
+    "billable_prompt_tokens": 1954645,
+    "completion_tokens": 512106,
+    "billable_output_tokens": 512106,
+    "total_tokens": 2490431,
+    "api_elapsed_seconds": 7875.4489,
+    "cost_currencies": [
+      "USD"
+    ],
+    "estimated_cost": 1.603596,
+    "by_stage": {
+      "module1.candidate_af:gpt41_mini": {
+        "api_calls": 175,
+        "prompt_tokens": 366087,
+        "cached_prompt_tokens": 0,
+        "billable_prompt_tokens": 366087,
+        "completion_tokens": 204929,
+        "billable_output_tokens": 204929,
+        "total_tokens": 571016,
+        "api_elapsed_seconds": 2553.6318,
+        "cost_currencies": [
+          "USD"
+        ],
+        "estimated_cost": 0.474321
+      },
+      "module2.judge_abstract:gpt41_mini": {
+        "api_calls": 1693,
+        "prompt_tokens": 1267321,
+        "cached_prompt_tokens": 0,
+        "billable_prompt_tokens": 1267321,
+        "completion_tokens": 168979,
+        "billable_output_tokens": 168979,
+        "total_tokens": 1436300,
+        "api_elapsed_seconds": 3328.643,
+        "cost_currencies": [
+          "USD"
+        ],
+        "estimated_cost": 0.777295
+      },
+      "v6.evidence_table.factuality_chase:gpt41_mini": {
+        "api_calls": 20,
+        "prompt_tokens": 123848,
+        "cached_prompt_tokens": 0,
+        "billable_prompt_tokens": 123848,
+        "completion_tokens": 69212,
+        "billable_output_tokens": 69212,
+        "total_tokens": 193060,
+        "api_elapsed_seconds": 829.9427,
+        "cost_currencies": [
+          "USD"
+        ],
+        "estimated_cost": 0.160278
+      },
+      "v6.generate_summary.factuality_chase:gpt41_mini": {
+        "api_calls": 20,
+        "prompt_tokens": 77779,
+        "cached_prompt_tokens": 0,
+        "billable_prompt_tokens": 77779,
+        "completion_tokens": 20322,
+        "billable_output_tokens": 20322,
+        "total_tokens": 98101,
+        "api_elapsed_seconds": 325.5414,
+        "cost_currencies": [
+          "USD"
+        ],
+        "estimated_cost": 0.063627
+      },
+      "v6.generate_summary.gpt41_mini.expand_length.factuality_chase": {
+        "api_calls": 19,
+        "prompt_tokens": 72321,
+        "cached_prompt_tokens": 23680,
+        "billable_prompt_tokens": 48641,
+        "completion_tokens": 16829,
+        "billable_output_tokens": 16829,
+        "total_tokens": 89150,
+        "api_elapsed_seconds": 207.5882,
+        "cost_currencies": [
+          "USD"
+        ],
+        "estimated_cost": 0.048751
+      },
+      "v6.questions.factuality_chase:gpt41_mini": {
+        "api_calls": 222,
+        "prompt_tokens": 70969,
+        "cached_prompt_tokens": 0,
+        "billable_prompt_tokens": 70969,
+        "completion_tokens": 31835,
+        "billable_output_tokens": 31835,
+        "total_tokens": 102804,
+        "api_elapsed_seconds": 630.1018,
+        "cost_currencies": [
+          "USD"
+        ],
+        "estimated_cost": 0.079324
+      }
+    }
+  }
+}

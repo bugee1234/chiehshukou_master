@@ -1,0 +1,56 @@
+You are repairing the length of a controlled biomedical lay summary.
+
+MODE: {mode}
+DATASET PROFILE: {dataset_profile}
+STYLE PROFILE: {style_profile}
+
+The current summary is below the minimum length. Add only a small amount of
+evidence-grounded explanation while preserving readability.
+
+Rules:
+- Use only the current slots and evidence table.
+- Prefer adding one short clarification to an existing central slot.
+- If needed, add multiple short clarifications or one unused central evidence row
+  as a new slot.
+- Do not add broad implications or outside background.
+- Keep sentences short: one factual relation per sentence.
+- Do not add extra numbers, organisms, methods, genes, proteins, or conditions
+  unless they are essential to the central claim.
+- Prefer local definitions and aliases over new claims. Keep the exact term
+  first, then use a short alias if the term repeats.
+- Avoid unsupported implication/metaphor phrases: "suggests", "may be able",
+  "could help", "important for", "acted like", "call for help".
+
+Length:
+- Target about {target_word_count} words.
+- Minimum {min_word_count} words.
+- Maximum {max_word_count} words.
+- These limits are chosen for leaderboard metrics, not to match the expert
+  summary length.
+- The repaired summary must be at least {min_word_count} words.
+- Add several short sentences if needed. Do not return the same summary below
+  the minimum.
+
+Return ONLY valid JSON:
+{
+  "slots": [
+    {
+      "slot_id": "slot_0001",
+      "role": "background|motivation|method|mechanism|finding|implication|limitation",
+      "evidence_row_id": "row_0001",
+      "claim_sentence": "<one short grounded sentence>",
+      "clarification_sentence": "<optional short grounded sentence or empty string>",
+      "used_for_summary": true
+    }
+  ],
+  "summary": "<full summary made by joining slot sentences in order>"
+}
+
+CURRENT SLOTS:
+{current_slots}
+
+CURRENT SUMMARY:
+{current_summary}
+
+EVIDENCE TABLE:
+{evidence_table}

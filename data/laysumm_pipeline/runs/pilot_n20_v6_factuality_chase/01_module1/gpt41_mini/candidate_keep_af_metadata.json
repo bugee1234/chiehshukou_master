@@ -1,0 +1,74 @@
+{
+  "time": "2026-06-17T07:20:11",
+  "run_name": "pilot_n20_v6_factuality_chase",
+  "stage": "01_module1",
+  "model_key": "gpt41_mini",
+  "provider": "openai",
+  "model": "gpt-4.1-mini",
+  "chunk_words": 1200,
+  "overlap_words": 120,
+  "max_workers": 8,
+  "prompt_file": "C:\\Users\\bugee\\OneDrive\\桌面\\chiehshukou_master\\src\\thesis_laysumm\\prompts\\select_summary_candidate_af.txt",
+  "prompt_sha256": "60afb5c26ff8c528eea6dce64e566438c54703225f96f391edff2b265e59988f",
+  "articles_total": 20,
+  "articles_limit": null,
+  "articles_completed": 20,
+  "candidate_keep_af_total": 1693,
+  "candidate_keep_af_by_source": {
+    "eLife": 1003,
+    "PLOS": 690
+  },
+  "candidate_keep_af_by_article": {
+    "laysumm_elife_0006": 132,
+    "laysumm_elife_0026": 91,
+    "laysumm_elife_0028": 84,
+    "laysumm_elife_0035": 100,
+    "laysumm_elife_0057": 79,
+    "laysumm_elife_0062": 142,
+    "laysumm_elife_0070": 77,
+    "laysumm_elife_0163": 107,
+    "laysumm_elife_0188": 79,
+    "laysumm_elife_0189": 112,
+    "laysumm_plos_0051": 69,
+    "laysumm_plos_0178": 30,
+    "laysumm_plos_0209": 76,
+    "laysumm_plos_0228": 102,
+    "laysumm_plos_0285": 66,
+    "laysumm_plos_0457": 79,
+    "laysumm_plos_0501": 91,
+    "laysumm_plos_0563": 44,
+    "laysumm_plos_1116": 67,
+    "laysumm_plos_1309": 66
+  },
+  "failed_chunk_count": 0,
+  "usage_summary": {
+    "api_calls": 175,
+    "prompt_tokens": 366087,
+    "cached_prompt_tokens": 0,
+    "billable_prompt_tokens": 366087,
+    "completion_tokens": 204929,
+    "billable_output_tokens": 204929,
+    "total_tokens": 571016,
+    "api_elapsed_seconds": 2553.6318,
+    "cost_currencies": [
+      "USD"
+    ],
+    "estimated_cost": 0.474321,
+    "by_stage": {
+      "module1.candidate_af:gpt41_mini": {
+        "api_calls": 175,
+        "prompt_tokens": 366087,
+        "cached_prompt_tokens": 0,
+        "billable_prompt_tokens": 366087,
+        "completion_tokens": 204929,
+        "billable_output_tokens": 204929,
+        "total_tokens": 571016,
+        "api_elapsed_seconds": 2553.6318,
+        "cost_currencies": [
+          "USD"
+        ],
+        "estimated_cost": 0.474321
+      }
+    }
+  }
+}

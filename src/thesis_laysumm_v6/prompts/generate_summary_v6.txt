@@ -1,0 +1,87 @@
+You are building a controlled biomedical lay summary from evidence rows.
+
+MODE: {mode}
+DATASET PROFILE: {dataset_profile}
+STYLE PROFILE: {style_profile}
+
+V6 objective:
+- First priority: factual correctness and document entailment.
+- Second priority: readability metrics. Use short sentences, fewer hard words,
+  and fewer non-essential technical details.
+- Third priority: relevance to the expert lay summary and abstract.
+
+Inputs:
+- ABSTRACT controls the main story and order.
+- EVIDENCE TABLE contains the only document-backed details you may use.
+- Each evidence row is a final keep-AF group. Its core_keep_af is the source for
+  the claim sentence.
+
+Global rules:
+- Write for non-expert readers, but stay evidence-local.
+- Do not add outside knowledge.
+- Prefer fewer claims that are fully supported over many precise but risky details.
+- Preserve exact named entities, organisms, methods, directions, comparisons,
+  measurements, and numbers only when they are essential to the central claim.
+- Do not use broad implications unless the same evidence row's abstract_claim or
+  core_keep_af is itself an implication.
+- Avoid unsupported implication/metaphor phrases: "suggests", "may be able",
+  "could help", "important for", "acted like", "call for help".
+- Use short sentences. One factual relation per sentence.
+- Do not merely copy evidence spans.
+
+Readability policy:
+{readability_policy}
+
+Slot rules:
+- Build slots in abstract/story order.
+- Use about the target_slots in the readability policy.
+- Each slot must cite exactly one evidence_row_id.
+- claim_sentence: a short lay rewrite of the row's core_keep_af or abstract_claim.
+- clarification_sentence: optional and limited. Use it only when a reader would
+  misunderstand the claim without a definition or local explanation.
+- Each evidence row may contribute at most one claim_sentence and one
+  clarification_sentence.
+- If a clarification would introduce a new claim, leave it empty.
+
+Dataset profile:
+- plos_concise: prioritize the main disease/problem, intervention or method,
+  concrete finding, and one important number/comparison if central. Use fewer
+  clarifications.
+- elife_mechanism: preserve the main mechanism chain, but split each causal step
+  into a short sentence. Do not include every molecular or method detail.
+
+Length:
+- Target about {target_word_count} words.
+- Minimum {min_word_count} words.
+- Maximum {max_word_count} words.
+- Stay within range. The summary must be at least {min_word_count} words.
+- These limits are chosen for leaderboard metrics, not to match the expert
+  summary length.
+- Do not solve length by making long sentences. Add short, row-local
+  clarification sentences that define terms, explain a method, or connect one
+  causal step to the next.
+- Do not add unsupported background.
+
+Return ONLY valid JSON:
+{
+  "slots": [
+    {
+      "slot_id": "slot_0001",
+      "role": "background|motivation|method|mechanism|finding|implication|limitation",
+      "evidence_row_id": "row_0001",
+      "claim_sentence": "<one short grounded sentence>",
+      "clarification_sentence": "<optional short grounded sentence or empty string>",
+      "used_for_summary": true
+    }
+  ],
+  "summary": "<full summary made by joining slot sentences in order>"
+}
+
+TITLE:
+{title}
+
+ABSTRACT:
+{abstract}
+
+EVIDENCE TABLE:
+{evidence_table}

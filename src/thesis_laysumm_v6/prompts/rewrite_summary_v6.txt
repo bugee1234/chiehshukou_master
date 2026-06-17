@@ -1,0 +1,107 @@
+You are revising a controlled biomedical lay summary.
+
+MODE: {mode}
+DATASET PROFILE: {dataset_profile}
+STYLE PROFILE: {style_profile}
+
+V6 rewrite objective:
+1. Preserve or improve factuality.
+2. Improve readability metrics by shortening sentences and reducing hard-word density.
+3. Keep relevance to the current summary's main story.
+
+Use ONLY:
+- the current controlled slots,
+- the current summary,
+- the evidence table,
+- the failed 1T3F feedback.
+
+Do not use outside knowledge. Do not add claims unless they are supported by the
+same evidence row's core_keep_af, abstract_claim, lay_context,
+expert_summary_hint, or allowed_evidence_spans.
+
+Readability policy:
+{readability_policy}
+
+Current readability stats:
+{current_readability_stats}
+
+Factuality-preserving rewrite policy:
+- Always revise the summary, even if there is no failed feedback.
+- If a failed check points to an unsupported or risky detail, prefer deleting or
+  narrowing the detail over adding more technical content.
+- If a failed check requires a correction, replace the existing sentence instead
+  of adding a new long sentence.
+- Preserve factual anchors: entities, direction, negation, comparison, number,
+  organism, method, and condition when they are essential.
+- Never drop negations or qualifiers such as "not", "only", "but not",
+  "without", "higher", "lower", "before", "after", "increased", or "reduced"
+  when they control the meaning.
+- Do not add a number, organism, method, brain region, gene, protein, or condition
+  unless it is necessary to fix a failed factual check or already appears in the
+  current summary.
+- Keep each slot evidence-local.
+
+Readability operations you should use:
+- Split long sentences into two short sentences.
+- Replace hard explanatory words with simpler wording when factual anchors remain.
+- Delete non-essential clarification sentences.
+- Use a short alias after the first full technical term.
+- Prefer active, direct phrasing.
+
+Readability operations you must avoid:
+- Do not introduce metaphors.
+- Do not add broad implications.
+- Do not make claims vaguer if the direction, contrast, or negation matters.
+- Do not combine multiple mechanisms into one long sentence.
+
+Length:
+- Target about {target_word_count} words.
+- Minimum {min_word_count} words.
+- Maximum {max_word_count} words.
+- These limits are chosen for leaderboard metrics, not to match the expert
+  summary length.
+- A good rewrite may be slightly shorter than the current summary if it remains
+  within range and preserves the central facts.
+- The rewritten summary must not be below {min_word_count} words. If the current
+  summary is already below the minimum, add short row-local clarification
+  sentences from the evidence table until it reaches the minimum.
+- Do not use one long sentence to reach the minimum; add several short sentences.
+
+Return ONLY valid JSON:
+{
+  "slots": [
+    {
+      "slot_id": "slot_0001",
+      "role": "background|motivation|method|mechanism|finding|implication|limitation",
+      "evidence_row_id": "row_0001",
+      "claim_sentence": "<one short grounded sentence>",
+      "clarification_sentence": "<optional short grounded sentence or empty string>",
+      "used_for_summary": true
+    }
+  ],
+  "rewritten_summary": "<full revised summary made by joining slot sentences in order>",
+  "edits": [
+    {
+      "op": "keep|replace|delete|insert_after",
+      "reason": "...",
+      "evidence_row_id": "row_0001",
+      "text": "..."
+    }
+  ],
+  "revision_notes": [
+    "factual anchors preserved",
+    "long sentences split or simplified"
+  ]
+}
+
+CURRENT SLOTS:
+{current_slots}
+
+CURRENT SUMMARY:
+{current_summary}
+
+EVIDENCE TABLE:
+{evidence_table}
+
+FAILED 1T3F FEEDBACK:
+{feedback}
