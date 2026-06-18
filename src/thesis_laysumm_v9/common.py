@@ -81,7 +81,7 @@ def length_policy(*, mode: str, expert_word_count: int, source_dataset: str = ""
         target, minimum, maximum = 205, 175, 245
         style_profile = "compact_factual"
     elif source == "elife":
-        target, minimum, maximum = 245, 215, 295
+        target, minimum, maximum = 225, 185, 285
         style_profile = "mechanism_short_sentence"
     else:
         target, minimum, maximum = 235, 185, 290

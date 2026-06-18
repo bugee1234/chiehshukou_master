@@ -48,9 +48,11 @@ Each evidence row must include:
 
 Selection limits:
 - balanced: select about 6-10 final keep rows per article.
-- factuality_chase: select about 6-9 final keep rows per article. For eLife,
-  aim for 8-9 rows when the abstract has enough central claims. For PLOS, aim
-  for 6-8 rows. Skipping too much will hurt relevance and factual coverage.
+- factuality_chase: select enough rows to support a valid short summary. For
+  eLife, select 7-9 rows when the abstract has enough central claims; if the
+  abstract is short, split central method, finding, and mechanism claims into
+  separate rows rather than returning only 4-5 rows. For PLOS, select 6-8 rows.
+  Skipping too much will hurt relevance, LENS, and length validity.
 - If an abstract sentence is low-value background, you may skip it.
 - Do not include a support fact unless its source_span is useful for writing.
 - If a fact appears in the expert summary but cannot be supported by candidate facts

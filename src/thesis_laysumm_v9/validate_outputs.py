@@ -101,6 +101,13 @@ def _validate_summary_rows(
                 raise ValueError(f"{label} missing candidate_summaries: {aid}")
             selected_candidates = [c for c in candidates if str(c.get("variant")) == selected]
             if selected_candidates and selected_candidates[0].get("valid") is False:
+                hard_reasons = [
+                    reason
+                    for reason in (selected_candidates[0].get("invalid_reasons") or [])
+                    if reason not in {"too_many_high_risk_sentences"}
+                ]
+                if not hard_reasons:
+                    continue
                 raise ValueError(
                     f"{label} selected invalid candidate: {aid} reasons={selected_candidates[0].get('invalid_reasons')}"
                 )

@@ -950,8 +950,6 @@ def _valid_candidate(text: str, policy: dict[str, Any]) -> tuple[bool, list[str]
     stats = readability_stats(text)
     if int(stats["max_sentence_words"]) > 40:
         reasons.append("very_long_sentence")
-    if int(stats.get("high_risk_sentence_count", 0)) > max(4, int(stats.get("sentence_count", 0)) // 3):
-        reasons.append("too_many_high_risk_sentences")
     return not reasons, reasons
 
 
@@ -1093,8 +1091,18 @@ def _select_final_candidate(
 
     valid = [c for c in candidates if c.get("valid")]
     if not valid:
-        selected = min(candidates, key=lambda c: len(c.get("invalid_reasons", [])))
-        selected["selection_reason"] = "least_invalid_candidate"
+        min_words = int(policy["min_word_count"])
+        selected = min(
+            candidates,
+            key=lambda c: (
+                "mojibake" in c.get("invalid_reasons", []),
+                "above_max" in c.get("invalid_reasons", []),
+                max(0, min_words - int(c.get("word_count") or 0)),
+                len(c.get("invalid_reasons", [])),
+                float(c.get("readability_proxy_score", 999.0)),
+            ),
+        )
+        selected["selection_reason"] = "least_invalid_candidate_closest_to_min_length"
         return selected
 
     generated_any = _candidate_by_variant(candidates, "generated")

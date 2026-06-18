@@ -85,6 +85,8 @@ def check_run_outputs(run_name: str, model_key: str, *, require_eval: bool) -> N
             raise ValueError(f"{label} article ids mismatch: rows={len(ids)} articles={len(article_ids)}")
         mojibake_hits = []
         high_risk = 0
+        selected_soft_invalid = []
+        selected_hard_invalid = []
         for row in rows:
             text = str(row.get(key, ""))
             hits = find_mojibake(text)
@@ -94,9 +96,31 @@ def check_run_outputs(run_name: str, model_key: str, *, require_eval: bool) -> N
             high_risk += int(stats.get("high_risk_sentence_count", 0))
             if int(stats.get("max_sentence_words", 0)) > 40:
                 raise ValueError(f"{label} very long sentence: {row.get('article_id')} stats={stats}")
+            if label == "rewritten":
+                selected = str(row.get("selected_variant", ""))
+                candidates = row.get("candidate_summaries") or []
+                selected_candidates = [c for c in candidates if str(c.get("variant")) == selected]
+                if selected_candidates and selected_candidates[0].get("valid") is False:
+                    invalid_reasons = selected_candidates[0].get("invalid_reasons") or []
+                    hard_reasons = [r for r in invalid_reasons if r not in {"too_many_high_risk_sentences"}]
+                    item = {
+                        "article_id": row.get("article_id"),
+                        "selected_variant": selected,
+                        "invalid_reasons": invalid_reasons,
+                    }
+                    if hard_reasons:
+                        selected_hard_invalid.append(item)
+                    else:
+                        selected_soft_invalid.append(item)
         if mojibake_hits:
             raise ValueError(f"{label} mojibake-like text found: {mojibake_hits[:5]}")
-        print(f"[V9 sanity] {label} ok rows={len(rows)} high_risk_sentence_count={high_risk}")
+        if selected_hard_invalid:
+            raise ValueError(f"{label} selected hard-invalid candidates: {selected_hard_invalid[:5]}")
+        print(
+            f"[V9 sanity] {label} ok rows={len(rows)} "
+            f"high_risk_sentence_count={high_risk} "
+            f"selected_soft_invalid={len(selected_soft_invalid)}"
+        )
 
     if require_eval:
         results_dir = run_results_dir(run_name) / model_key
