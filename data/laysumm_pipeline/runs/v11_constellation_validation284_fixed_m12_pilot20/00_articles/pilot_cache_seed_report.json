@@ -1,0 +1,70 @@
+{
+  "time": "2026-06-20T03:09:43",
+  "final_run": "v11_constellation_validation284_fixed_m12_pilot20",
+  "pilot_run": "pilot_n20_v11_factuality_chase",
+  "fixed_phase_run": "pilot_n20_v11_fixed_m12_gemini25_same_model_phaseb_factuality_chase",
+  "pilot_article_count": 20,
+  "stages": {
+    "module1": {
+      "candidate_keep_af.jsonl": 2744,
+      "failed_chunks.jsonl": 0
+    },
+    "module2": {
+      "module2_judgements.jsonl": 2744
+    },
+    "evidence:gemini25_flash_non_thinking": {
+      "check_af.jsonl": 242,
+      "core_keep_af.jsonl": 152,
+      "evidence_table.jsonl": 20
+    },
+    "questions:gemini25_flash_non_thinking": {
+      "questions_1t3f_nota.jsonl": 242
+    },
+    "summaries:gemini25_flash_non_thinking": {
+      "generated_summaries.jsonl": 20
+    },
+    "answers:gemini25_flash_non_thinking": {
+      "module3_answers.jsonl": 242,
+      "wrong_answers.jsonl": 22
+    },
+    "rewritten:gemini25_flash_non_thinking": {
+      "rewritten_summaries.jsonl": 20
+    },
+    "evidence:gpt41_mini": {
+      "check_af.jsonl": 242,
+      "core_keep_af.jsonl": 152,
+      "evidence_table.jsonl": 20
+    },
+    "questions:gpt41_mini": {
+      "questions_1t3f_nota.jsonl": 242
+    },
+    "summaries:gpt41_mini": {
+      "generated_summaries.jsonl": 20
+    },
+    "answers:gpt41_mini": {
+      "module3_answers.jsonl": 242,
+      "wrong_answers.jsonl": 23
+    },
+    "rewritten:gpt41_mini": {
+      "rewritten_summaries.jsonl": 20
+    },
+    "evidence:gemini3_flash_preview_minimal": {
+      "check_af.jsonl": 242,
+      "core_keep_af.jsonl": 152,
+      "evidence_table.jsonl": 20
+    },
+    "questions:gemini3_flash_preview_minimal": {
+      "questions_1t3f_nota.jsonl": 242
+    },
+    "summaries:gemini3_flash_preview_minimal": {
+      "generated_summaries.jsonl": 20
+    },
+    "answers:gemini3_flash_preview_minimal": {
+      "module3_answers.jsonl": 242,
+      "wrong_answers.jsonl": 48
+    },
+    "rewritten:gemini3_flash_preview_minimal": {
+      "rewritten_summaries.jsonl": 20
+    }
+  }
+}

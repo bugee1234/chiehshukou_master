@@ -1,0 +1,4170 @@
+{
+  "selected_articles": [
+    {
+      "source_dataset": "PLOS",
+      "original_index": 0,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 315,
+      "article_word_count": 10029,
+      "expert_summary_word_count": 180
+    },
+    {
+      "source_dataset": "PLOS",
+      "original_index": 9,
+      "ok": true,
+      "errors": [],
+      "warnings": [],
+      "n_blocks": 5,
+      "n_headings": 5,
+      "first_heading": "Abstract",
+      "abstract_word_count": 178,
+      "article_word_count": 6168,
+      "expert_summary_word_count": 200
+    },
+    {
+      "source_dataset": "PLOS",
+      "original_index": 12,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 173,
+      "article_word_count": 6178,
+      "expert_summary_word_count": 158
+    },
+    {
+      "source_dataset": "PLOS",
+      "original_index": 28,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 214,
+      "article_word_count": 12244,
+      "expert_summary_word_count": 214
+    },
+    {
+      "source_dataset": "PLOS",
+      "original_index": 29,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 263,
+      "article_word_count": 5415,
+      "expert_summary_word_count": 172
+    },
+    {
+      "source_dataset": "PLOS",
+      "original_index": 44,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 335,
+      "article_word_count": 12739,
+      "expert_summary_word_count": 227
+    },
+    {
+      "source_dataset": "PLOS",
+      "original_index": 45,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (6) != article blocks (4); using first block as abstract"
+      ],
+      "n_blocks": 4,
+      "n_headings": 6,
+      "first_heading": "Abstract",
+      "abstract_word_count": 342,
+      "article_word_count": 5978,
+      "expert_summary_word_count": 185
+    },
+    {
+      "source_dataset": "PLOS",
+      "original_index": 46,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 151,
+      "article_word_count": 6447,
+      "expert_summary_word_count": 179
+    },
+    {
+      "source_dataset": "PLOS",
+      "original_index": 51,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 217,
+      "article_word_count": 6725,
+      "expert_summary_word_count": 217
+    },
+    {
+      "source_dataset": "PLOS",
+      "original_index": 58,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 142,
+      "article_word_count": 5960,
+      "expert_summary_word_count": 127
+    },
+    {
+      "source_dataset": "PLOS",
+      "original_index": 101,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 297,
+      "article_word_count": 6191,
+      "expert_summary_word_count": 173
+    },
+    {
+      "source_dataset": "PLOS",
+      "original_index": 106,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 274,
+      "article_word_count": 6562,
+      "expert_summary_word_count": 117
+    },
+    {
+      "source_dataset": "PLOS",
+      "original_index": 108,
+      "ok": true,
+      "errors": [],
+      "warnings": [],
+      "n_blocks": 5,
+      "n_headings": 5,
+      "first_heading": "Abstract",
+      "abstract_word_count": 233,
+      "article_word_count": 2761,
+      "expert_summary_word_count": 224
+    },
+    {
+      "source_dataset": "PLOS",
+      "original_index": 143,
+      "ok": true,
+      "errors": [],
+      "warnings": [],
+      "n_blocks": 5,
+      "n_headings": 5,
+      "first_heading": "Abstract",
+      "abstract_word_count": 277,
+      "article_word_count": 9440,
+      "expert_summary_word_count": 215
+    },
+    {
+      "source_dataset": "PLOS",
+      "original_index": 149,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 332,
+      "article_word_count": 9298,
+      "expert_summary_word_count": 217
+    },
+    {
+      "source_dataset": "PLOS",
+      "original_index": 172,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 246,
+      "article_word_count": 5500,
+      "expert_summary_word_count": 214
+    },
+    {
+      "source_dataset": "PLOS",
+      "original_index": 178,
+      "ok": true,
+      "errors": [],
+      "warnings": [],
+      "n_blocks": 5,
+      "n_headings": 5,
+      "first_heading": "Abstract",
+      "abstract_word_count": 381,
+      "article_word_count": 1990,
+      "expert_summary_word_count": 209
+    },
+    {
+      "source_dataset": "PLOS",
+      "original_index": 182,
+      "ok": true,
+      "errors": [],
+      "warnings": [],
+      "n_blocks": 5,
+      "n_headings": 5,
+      "first_heading": "Abstract",
+      "abstract_word_count": 159,
+      "article_word_count": 9243,
+      "expert_summary_word_count": 178
+    },
+    {
+      "source_dataset": "PLOS",
+      "original_index": 187,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 155,
+      "article_word_count": 4998,
+      "expert_summary_word_count": 142
+    },
+    {
+      "source_dataset": "PLOS",
+      "original_index": 191,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 204,
+      "article_word_count": 6044,
+      "expert_summary_word_count": 234
+    },
+    {
+      "source_dataset": "PLOS",
+      "original_index": 197,
+      "ok": true,
+      "errors": [],
+      "warnings": [],
+      "n_blocks": 5,
+      "n_headings": 5,
+      "first_heading": "Abstract",
+      "abstract_word_count": 395,
+      "article_word_count": 8184,
+      "expert_summary_word_count": 219
+    },
+    {
+      "source_dataset": "PLOS",
+      "original_index": 198,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 314,
+      "article_word_count": 4452,
+      "expert_summary_word_count": 133
+    },
+    {
+      "source_dataset": "PLOS",
+      "original_index": 202,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 307,
+      "article_word_count": 6973,
+      "expert_summary_word_count": 116
+    },
+    {
+      "source_dataset": "PLOS",
+      "original_index": 209,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 322,
+      "article_word_count": 7010,
+      "expert_summary_word_count": 170
+    },
+    {
+      "source_dataset": "PLOS",
+      "original_index": 228,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 342,
+      "article_word_count": 11272,
+      "expert_summary_word_count": 221
+    },
+    {
+      "source_dataset": "PLOS",
+      "original_index": 232,
+      "ok": true,
+      "errors": [],
+      "warnings": [],
+      "n_blocks": 5,
+      "n_headings": 5,
+      "first_heading": "Abstract",
+      "abstract_word_count": 172,
+      "article_word_count": 5095,
+      "expert_summary_word_count": 229
+    },
+    {
+      "source_dataset": "PLOS",
+      "original_index": 238,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 349,
+      "article_word_count": 6465,
+      "expert_summary_word_count": 209
+    },
+    {
+      "source_dataset": "PLOS",
+      "original_index": 246,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 282,
+      "article_word_count": 7695,
+      "expert_summary_word_count": 218
+    },
+    {
+      "source_dataset": "PLOS",
+      "original_index": 269,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 333,
+      "article_word_count": 13116,
+      "expert_summary_word_count": 221
+    },
+    {
+      "source_dataset": "PLOS",
+      "original_index": 273,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (8) != article blocks (6); using first block as abstract"
+      ],
+      "n_blocks": 6,
+      "n_headings": 8,
+      "first_heading": "Abstract",
+      "abstract_word_count": 237,
+      "article_word_count": 9211,
+      "expert_summary_word_count": 215
+    },
+    {
+      "source_dataset": "PLOS",
+      "original_index": 280,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 258,
+      "article_word_count": 7800,
+      "expert_summary_word_count": 158
+    },
+    {
+      "source_dataset": "PLOS",
+      "original_index": 284,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 329,
+      "article_word_count": 10453,
+      "expert_summary_word_count": 207
+    },
+    {
+      "source_dataset": "PLOS",
+      "original_index": 285,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 312,
+      "article_word_count": 4642,
+      "expert_summary_word_count": 177
+    },
+    {
+      "source_dataset": "PLOS",
+      "original_index": 289,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 147,
+      "article_word_count": 4501,
+      "expert_summary_word_count": 178
+    },
+    {
+      "source_dataset": "PLOS",
+      "original_index": 293,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 256,
+      "article_word_count": 6157,
+      "expert_summary_word_count": 196
+    },
+    {
+      "source_dataset": "PLOS",
+      "original_index": 298,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 138,
+      "article_word_count": 8707,
+      "expert_summary_word_count": 199
+    },
+    {
+      "source_dataset": "PLOS",
+      "original_index": 323,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 175,
+      "article_word_count": 9124,
+      "expert_summary_word_count": 243
+    },
+    {
+      "source_dataset": "PLOS",
+      "original_index": 334,
+      "ok": true,
+      "errors": [],
+      "warnings": [],
+      "n_blocks": 5,
+      "n_headings": 5,
+      "first_heading": "Abstract",
+      "abstract_word_count": 243,
+      "article_word_count": 6008,
+      "expert_summary_word_count": 207
+    },
+    {
+      "source_dataset": "PLOS",
+      "original_index": 336,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 220,
+      "article_word_count": 6892,
+      "expert_summary_word_count": 136
+    },
+    {
+      "source_dataset": "PLOS",
+      "original_index": 340,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 284,
+      "article_word_count": 7276,
+      "expert_summary_word_count": 164
+    },
+    {
+      "source_dataset": "PLOS",
+      "original_index": 360,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 333,
+      "article_word_count": 11598,
+      "expert_summary_word_count": 220
+    },
+    {
+      "source_dataset": "PLOS",
+      "original_index": 361,
+      "ok": true,
+      "errors": [],
+      "warnings": [],
+      "n_blocks": 5,
+      "n_headings": 5,
+      "first_heading": "Abstract",
+      "abstract_word_count": 308,
+      "article_word_count": 2811,
+      "expert_summary_word_count": 203
+    },
+    {
+      "source_dataset": "PLOS",
+      "original_index": 365,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 251,
+      "article_word_count": 9188,
+      "expert_summary_word_count": 221
+    },
+    {
+      "source_dataset": "PLOS",
+      "original_index": 384,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 310,
+      "article_word_count": 6251,
+      "expert_summary_word_count": 215
+    },
+    {
+      "source_dataset": "PLOS",
+      "original_index": 388,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 304,
+      "article_word_count": 8656,
+      "expert_summary_word_count": 216
+    },
+    {
+      "source_dataset": "PLOS",
+      "original_index": 389,
+      "ok": true,
+      "errors": [],
+      "warnings": [],
+      "n_blocks": 4,
+      "n_headings": 4,
+      "first_heading": "Abstract",
+      "abstract_word_count": 166,
+      "article_word_count": 5719,
+      "expert_summary_word_count": 188
+    },
+    {
+      "source_dataset": "PLOS",
+      "original_index": 412,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 210,
+      "article_word_count": 6636,
+      "expert_summary_word_count": 87
+    },
+    {
+      "source_dataset": "PLOS",
+      "original_index": 416,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 256,
+      "article_word_count": 6038,
+      "expert_summary_word_count": 209
+    },
+    {
+      "source_dataset": "PLOS",
+      "original_index": 420,
+      "ok": true,
+      "errors": [],
+      "warnings": [],
+      "n_blocks": 5,
+      "n_headings": 5,
+      "first_heading": "Abstract",
+      "abstract_word_count": 317,
+      "article_word_count": 5806,
+      "expert_summary_word_count": 206
+    },
+    {
+      "source_dataset": "PLOS",
+      "original_index": 424,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (8) != article blocks (4); using first block as abstract"
+      ],
+      "n_blocks": 4,
+      "n_headings": 8,
+      "first_heading": "Abstract",
+      "abstract_word_count": 315,
+      "article_word_count": 12098,
+      "expert_summary_word_count": 225
+    },
+    {
+      "source_dataset": "PLOS",
+      "original_index": 425,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 217,
+      "article_word_count": 5668,
+      "expert_summary_word_count": 233
+    },
+    {
+      "source_dataset": "PLOS",
+      "original_index": 446,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 208,
+      "article_word_count": 9831,
+      "expert_summary_word_count": 213
+    },
+    {
+      "source_dataset": "PLOS",
+      "original_index": 457,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 250,
+      "article_word_count": 7358,
+      "expert_summary_word_count": 142
+    },
+    {
+      "source_dataset": "PLOS",
+      "original_index": 470,
+      "ok": true,
+      "errors": [],
+      "warnings": [],
+      "n_blocks": 5,
+      "n_headings": 5,
+      "first_heading": "Abstract",
+      "abstract_word_count": 367,
+      "article_word_count": 5313,
+      "expert_summary_word_count": 118
+    },
+    {
+      "source_dataset": "PLOS",
+      "original_index": 471,
+      "ok": true,
+      "errors": [],
+      "warnings": [],
+      "n_blocks": 5,
+      "n_headings": 5,
+      "first_heading": "Abstract",
+      "abstract_word_count": 274,
+      "article_word_count": 5275,
+      "expert_summary_word_count": 174
+    },
+    {
+      "source_dataset": "PLOS",
+      "original_index": 501,
+      "ok": true,
+      "errors": [],
+      "warnings": [],
+      "n_blocks": 4,
+      "n_headings": 4,
+      "first_heading": "Abstract",
+      "abstract_word_count": 370,
+      "article_word_count": 9306,
+      "expert_summary_word_count": 219
+    },
+    {
+      "source_dataset": "PLOS",
+      "original_index": 508,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 232,
+      "article_word_count": 5999,
+      "expert_summary_word_count": 196
+    },
+    {
+      "source_dataset": "PLOS",
+      "original_index": 521,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 355,
+      "article_word_count": 7519,
+      "expert_summary_word_count": 224
+    },
+    {
+      "source_dataset": "PLOS",
+      "original_index": 525,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 230,
+      "article_word_count": 4040,
+      "expert_summary_word_count": 201
+    },
+    {
+      "source_dataset": "PLOS",
+      "original_index": 535,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 173,
+      "article_word_count": 10401,
+      "expert_summary_word_count": 222
+    },
+    {
+      "source_dataset": "PLOS",
+      "original_index": 539,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (8) != article blocks (4); using first block as abstract"
+      ],
+      "n_blocks": 4,
+      "n_headings": 8,
+      "first_heading": "Abstract",
+      "abstract_word_count": 182,
+      "article_word_count": 6168,
+      "expert_summary_word_count": 105
+    },
+    {
+      "source_dataset": "PLOS",
+      "original_index": 540,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 311,
+      "article_word_count": 6756,
+      "expert_summary_word_count": 196
+    },
+    {
+      "source_dataset": "PLOS",
+      "original_index": 555,
+      "ok": true,
+      "errors": [],
+      "warnings": [],
+      "n_blocks": 5,
+      "n_headings": 5,
+      "first_heading": "Abstract",
+      "abstract_word_count": 277,
+      "article_word_count": 10197,
+      "expert_summary_word_count": 220
+    },
+    {
+      "source_dataset": "PLOS",
+      "original_index": 558,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 158,
+      "article_word_count": 2578,
+      "expert_summary_word_count": 211
+    },
+    {
+      "source_dataset": "PLOS",
+      "original_index": 563,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 171,
+      "article_word_count": 4967,
+      "expert_summary_word_count": 152
+    },
+    {
+      "source_dataset": "PLOS",
+      "original_index": 573,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 280,
+      "article_word_count": 6440,
+      "expert_summary_word_count": 232
+    },
+    {
+      "source_dataset": "PLOS",
+      "original_index": 597,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 323,
+      "article_word_count": 9634,
+      "expert_summary_word_count": 204
+    },
+    {
+      "source_dataset": "PLOS",
+      "original_index": 601,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 258,
+      "article_word_count": 6903,
+      "expert_summary_word_count": 205
+    },
+    {
+      "source_dataset": "PLOS",
+      "original_index": 612,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 166,
+      "article_word_count": 6413,
+      "expert_summary_word_count": 115
+    },
+    {
+      "source_dataset": "PLOS",
+      "original_index": 616,
+      "ok": true,
+      "errors": [],
+      "warnings": [],
+      "n_blocks": 5,
+      "n_headings": 5,
+      "first_heading": "Abstract",
+      "abstract_word_count": 302,
+      "article_word_count": 4196,
+      "expert_summary_word_count": 215
+    },
+    {
+      "source_dataset": "PLOS",
+      "original_index": 617,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 210,
+      "article_word_count": 7511,
+      "expert_summary_word_count": 166
+    },
+    {
+      "source_dataset": "PLOS",
+      "original_index": 634,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 245,
+      "article_word_count": 8020,
+      "expert_summary_word_count": 216
+    },
+    {
+      "source_dataset": "PLOS",
+      "original_index": 652,
+      "ok": true,
+      "errors": [],
+      "warnings": [],
+      "n_blocks": 5,
+      "n_headings": 5,
+      "first_heading": "Abstract",
+      "abstract_word_count": 357,
+      "article_word_count": 4054,
+      "expert_summary_word_count": 168
+    },
+    {
+      "source_dataset": "PLOS",
+      "original_index": 659,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 213,
+      "article_word_count": 5911,
+      "expert_summary_word_count": 198
+    },
+    {
+      "source_dataset": "PLOS",
+      "original_index": 663,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 332,
+      "article_word_count": 7527,
+      "expert_summary_word_count": 187
+    },
+    {
+      "source_dataset": "PLOS",
+      "original_index": 667,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 232,
+      "article_word_count": 3159,
+      "expert_summary_word_count": 172
+    },
+    {
+      "source_dataset": "PLOS",
+      "original_index": 674,
+      "ok": true,
+      "errors": [],
+      "warnings": [],
+      "n_blocks": 5,
+      "n_headings": 5,
+      "first_heading": "Abstract",
+      "abstract_word_count": 272,
+      "article_word_count": 6443,
+      "expert_summary_word_count": 155
+    },
+    {
+      "source_dataset": "PLOS",
+      "original_index": 677,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 265,
+      "article_word_count": 5319,
+      "expert_summary_word_count": 146
+    },
+    {
+      "source_dataset": "PLOS",
+      "original_index": 686,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 346,
+      "article_word_count": 8313,
+      "expert_summary_word_count": 202
+    },
+    {
+      "source_dataset": "PLOS",
+      "original_index": 706,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 293,
+      "article_word_count": 4023,
+      "expert_summary_word_count": 199
+    },
+    {
+      "source_dataset": "PLOS",
+      "original_index": 709,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 179,
+      "article_word_count": 9094,
+      "expert_summary_word_count": 130
+    },
+    {
+      "source_dataset": "PLOS",
+      "original_index": 710,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 207,
+      "article_word_count": 6858,
+      "expert_summary_word_count": 171
+    },
+    {
+      "source_dataset": "PLOS",
+      "original_index": 711,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 228,
+      "article_word_count": 7232,
+      "expert_summary_word_count": 225
+    },
+    {
+      "source_dataset": "PLOS",
+      "original_index": 716,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 336,
+      "article_word_count": 4952,
+      "expert_summary_word_count": 176
+    },
+    {
+      "source_dataset": "PLOS",
+      "original_index": 720,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (11) != article blocks (6); using first block as abstract"
+      ],
+      "n_blocks": 6,
+      "n_headings": 11,
+      "first_heading": "Abstract",
+      "abstract_word_count": 320,
+      "article_word_count": 4408,
+      "expert_summary_word_count": 191
+    },
+    {
+      "source_dataset": "PLOS",
+      "original_index": 725,
+      "ok": true,
+      "errors": [],
+      "warnings": [],
+      "n_blocks": 5,
+      "n_headings": 5,
+      "first_heading": "Abstract",
+      "abstract_word_count": 141,
+      "article_word_count": 5643,
+      "expert_summary_word_count": 209
+    },
+    {
+      "source_dataset": "PLOS",
+      "original_index": 728,
+      "ok": true,
+      "errors": [],
+      "warnings": [],
+      "n_blocks": 5,
+      "n_headings": 5,
+      "first_heading": "Abstract",
+      "abstract_word_count": 147,
+      "article_word_count": 9919,
+      "expert_summary_word_count": 190
+    },
+    {
+      "source_dataset": "PLOS",
+      "original_index": 773,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 272,
+      "article_word_count": 7059,
+      "expert_summary_word_count": 222
+    },
+    {
+      "source_dataset": "PLOS",
+      "original_index": 785,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 238,
+      "article_word_count": 3839,
+      "expert_summary_word_count": 219
+    },
+    {
+      "source_dataset": "PLOS",
+      "original_index": 806,
+      "ok": true,
+      "errors": [],
+      "warnings": [],
+      "n_blocks": 5,
+      "n_headings": 5,
+      "first_heading": "Abstract",
+      "abstract_word_count": 319,
+      "article_word_count": 5582,
+      "expert_summary_word_count": 234
+    },
+    {
+      "source_dataset": "PLOS",
+      "original_index": 809,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 401,
+      "article_word_count": 4972,
+      "expert_summary_word_count": 202
+    },
+    {
+      "source_dataset": "PLOS",
+      "original_index": 819,
+      "ok": true,
+      "errors": [],
+      "warnings": [],
+      "n_blocks": 5,
+      "n_headings": 5,
+      "first_heading": "Abstract",
+      "abstract_word_count": 388,
+      "article_word_count": 3680,
+      "expert_summary_word_count": 198
+    },
+    {
+      "source_dataset": "PLOS",
+      "original_index": 847,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 266,
+      "article_word_count": 6602,
+      "expert_summary_word_count": 224
+    },
+    {
+      "source_dataset": "PLOS",
+      "original_index": 849,
+      "ok": true,
+      "errors": [],
+      "warnings": [],
+      "n_blocks": 5,
+      "n_headings": 5,
+      "first_heading": "Abstract",
+      "abstract_word_count": 207,
+      "article_word_count": 5412,
+      "expert_summary_word_count": 225
+    },
+    {
+      "source_dataset": "PLOS",
+      "original_index": 867,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 201,
+      "article_word_count": 7198,
+      "expert_summary_word_count": 213
+    },
+    {
+      "source_dataset": "PLOS",
+      "original_index": 883,
+      "ok": true,
+      "errors": [],
+      "warnings": [],
+      "n_blocks": 5,
+      "n_headings": 5,
+      "first_heading": "Abstract",
+      "abstract_word_count": 260,
+      "article_word_count": 6294,
+      "expert_summary_word_count": 208
+    },
+    {
+      "source_dataset": "PLOS",
+      "original_index": 892,
+      "ok": true,
+      "errors": [],
+      "warnings": [],
+      "n_blocks": 5,
+      "n_headings": 5,
+      "first_heading": "Abstract",
+      "abstract_word_count": 296,
+      "article_word_count": 4828,
+      "expert_summary_word_count": 119
+    },
+    {
+      "source_dataset": "PLOS",
+      "original_index": 897,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 247,
+      "article_word_count": 6290,
+      "expert_summary_word_count": 228
+    },
+    {
+      "source_dataset": "PLOS",
+      "original_index": 900,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 253,
+      "article_word_count": 10479,
+      "expert_summary_word_count": 306
+    },
+    {
+      "source_dataset": "PLOS",
+      "original_index": 911,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 261,
+      "article_word_count": 5395,
+      "expert_summary_word_count": 166
+    },
+    {
+      "source_dataset": "PLOS",
+      "original_index": 940,
+      "ok": true,
+      "errors": [],
+      "warnings": [],
+      "n_blocks": 4,
+      "n_headings": 4,
+      "first_heading": "Abstract",
+      "abstract_word_count": 344,
+      "article_word_count": 2786,
+      "expert_summary_word_count": 209
+    },
+    {
+      "source_dataset": "PLOS",
+      "original_index": 953,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 230,
+      "article_word_count": 7153,
+      "expert_summary_word_count": 217
+    },
+    {
+      "source_dataset": "PLOS",
+      "original_index": 958,
+      "ok": true,
+      "errors": [],
+      "warnings": [],
+      "n_blocks": 5,
+      "n_headings": 5,
+      "first_heading": "Abstract",
+      "abstract_word_count": 226,
+      "article_word_count": 8037,
+      "expert_summary_word_count": 218
+    },
+    {
+      "source_dataset": "PLOS",
+      "original_index": 962,
+      "ok": true,
+      "errors": [],
+      "warnings": [],
+      "n_blocks": 4,
+      "n_headings": 4,
+      "first_heading": "Abstract",
+      "abstract_word_count": 241,
+      "article_word_count": 7066,
+      "expert_summary_word_count": 218
+    },
+    {
+      "source_dataset": "PLOS",
+      "original_index": 975,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 314,
+      "article_word_count": 5885,
+      "expert_summary_word_count": 222
+    },
+    {
+      "source_dataset": "PLOS",
+      "original_index": 983,
+      "ok": true,
+      "errors": [],
+      "warnings": [],
+      "n_blocks": 5,
+      "n_headings": 5,
+      "first_heading": "Abstract",
+      "abstract_word_count": 269,
+      "article_word_count": 5445,
+      "expert_summary_word_count": 169
+    },
+    {
+      "source_dataset": "PLOS",
+      "original_index": 993,
+      "ok": true,
+      "errors": [],
+      "warnings": [],
+      "n_blocks": 5,
+      "n_headings": 5,
+      "first_heading": "Abstract",
+      "abstract_word_count": 330,
+      "article_word_count": 5726,
+      "expert_summary_word_count": 212
+    },
+    {
+      "source_dataset": "PLOS",
+      "original_index": 994,
+      "ok": true,
+      "errors": [],
+      "warnings": [],
+      "n_blocks": 5,
+      "n_headings": 5,
+      "first_heading": "Abstract",
+      "abstract_word_count": 278,
+      "article_word_count": 3980,
+      "expert_summary_word_count": 239
+    },
+    {
+      "source_dataset": "PLOS",
+      "original_index": 1016,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 288,
+      "article_word_count": 5007,
+      "expert_summary_word_count": 152
+    },
+    {
+      "source_dataset": "PLOS",
+      "original_index": 1017,
+      "ok": true,
+      "errors": [],
+      "warnings": [],
+      "n_blocks": 5,
+      "n_headings": 5,
+      "first_heading": "Abstract",
+      "abstract_word_count": 251,
+      "article_word_count": 5601,
+      "expert_summary_word_count": 203
+    },
+    {
+      "source_dataset": "PLOS",
+      "original_index": 1024,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 178,
+      "article_word_count": 8156,
+      "expert_summary_word_count": 191
+    },
+    {
+      "source_dataset": "PLOS",
+      "original_index": 1029,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 218,
+      "article_word_count": 8171,
+      "expert_summary_word_count": 116
+    },
+    {
+      "source_dataset": "PLOS",
+      "original_index": 1039,
+      "ok": true,
+      "errors": [],
+      "warnings": [],
+      "n_blocks": 5,
+      "n_headings": 5,
+      "first_heading": "Abstract",
+      "abstract_word_count": 259,
+      "article_word_count": 9392,
+      "expert_summary_word_count": 162
+    },
+    {
+      "source_dataset": "PLOS",
+      "original_index": 1041,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 213,
+      "article_word_count": 4731,
+      "expert_summary_word_count": 190
+    },
+    {
+      "source_dataset": "PLOS",
+      "original_index": 1084,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 317,
+      "article_word_count": 5465,
+      "expert_summary_word_count": 211
+    },
+    {
+      "source_dataset": "PLOS",
+      "original_index": 1111,
+      "ok": true,
+      "errors": [],
+      "warnings": [],
+      "n_blocks": 5,
+      "n_headings": 5,
+      "first_heading": "Abstract",
+      "abstract_word_count": 365,
+      "article_word_count": 3689,
+      "expert_summary_word_count": 186
+    },
+    {
+      "source_dataset": "PLOS",
+      "original_index": 1112,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 139,
+      "article_word_count": 4559,
+      "expert_summary_word_count": 151
+    },
+    {
+      "source_dataset": "PLOS",
+      "original_index": 1116,
+      "ok": true,
+      "errors": [],
+      "warnings": [],
+      "n_blocks": 5,
+      "n_headings": 5,
+      "first_heading": "Abstract",
+      "abstract_word_count": 342,
+      "article_word_count": 4866,
+      "expert_summary_word_count": 212
+    },
+    {
+      "source_dataset": "PLOS",
+      "original_index": 1127,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 256,
+      "article_word_count": 6319,
+      "expert_summary_word_count": 201
+    },
+    {
+      "source_dataset": "PLOS",
+      "original_index": 1142,
+      "ok": true,
+      "errors": [],
+      "warnings": [],
+      "n_blocks": 5,
+      "n_headings": 5,
+      "first_heading": "Abstract",
+      "abstract_word_count": 178,
+      "article_word_count": 5907,
+      "expert_summary_word_count": 153
+    },
+    {
+      "source_dataset": "PLOS",
+      "original_index": 1148,
+      "ok": true,
+      "errors": [],
+      "warnings": [],
+      "n_blocks": 5,
+      "n_headings": 5,
+      "first_heading": "Abstract",
+      "abstract_word_count": 331,
+      "article_word_count": 4118,
+      "expert_summary_word_count": 217
+    },
+    {
+      "source_dataset": "PLOS",
+      "original_index": 1164,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 261,
+      "article_word_count": 3322,
+      "expert_summary_word_count": 193
+    },
+    {
+      "source_dataset": "PLOS",
+      "original_index": 1173,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 187,
+      "article_word_count": 7524,
+      "expert_summary_word_count": 77
+    },
+    {
+      "source_dataset": "PLOS",
+      "original_index": 1174,
+      "ok": true,
+      "errors": [],
+      "warnings": [],
+      "n_blocks": 5,
+      "n_headings": 5,
+      "first_heading": "Abstract",
+      "abstract_word_count": 388,
+      "article_word_count": 4048,
+      "expert_summary_word_count": 191
+    },
+    {
+      "source_dataset": "PLOS",
+      "original_index": 1192,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 321,
+      "article_word_count": 13909,
+      "expert_summary_word_count": 226
+    },
+    {
+      "source_dataset": "PLOS",
+      "original_index": 1206,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (6) != article blocks (4); using first block as abstract"
+      ],
+      "n_blocks": 4,
+      "n_headings": 6,
+      "first_heading": "Abstract",
+      "abstract_word_count": 273,
+      "article_word_count": 3847,
+      "expert_summary_word_count": 193
+    },
+    {
+      "source_dataset": "PLOS",
+      "original_index": 1209,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 274,
+      "article_word_count": 9966,
+      "expert_summary_word_count": 199
+    },
+    {
+      "source_dataset": "PLOS",
+      "original_index": 1214,
+      "ok": true,
+      "errors": [],
+      "warnings": [],
+      "n_blocks": 5,
+      "n_headings": 5,
+      "first_heading": "Abstract",
+      "abstract_word_count": 246,
+      "article_word_count": 9227,
+      "expert_summary_word_count": 219
+    },
+    {
+      "source_dataset": "PLOS",
+      "original_index": 1218,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 227,
+      "article_word_count": 6858,
+      "expert_summary_word_count": 189
+    },
+    {
+      "source_dataset": "PLOS",
+      "original_index": 1226,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 192,
+      "article_word_count": 5913,
+      "expert_summary_word_count": 188
+    },
+    {
+      "source_dataset": "PLOS",
+      "original_index": 1246,
+      "ok": true,
+      "errors": [],
+      "warnings": [],
+      "n_blocks": 5,
+      "n_headings": 5,
+      "first_heading": "Abstract",
+      "abstract_word_count": 216,
+      "article_word_count": 4666,
+      "expert_summary_word_count": 151
+    },
+    {
+      "source_dataset": "PLOS",
+      "original_index": 1247,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 346,
+      "article_word_count": 6669,
+      "expert_summary_word_count": 102
+    },
+    {
+      "source_dataset": "PLOS",
+      "original_index": 1253,
+      "ok": true,
+      "errors": [],
+      "warnings": [],
+      "n_blocks": 5,
+      "n_headings": 5,
+      "first_heading": "Abstract",
+      "abstract_word_count": 292,
+      "article_word_count": 6872,
+      "expert_summary_word_count": 196
+    },
+    {
+      "source_dataset": "PLOS",
+      "original_index": 1291,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 324,
+      "article_word_count": 9858,
+      "expert_summary_word_count": 189
+    },
+    {
+      "source_dataset": "PLOS",
+      "original_index": 1303,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 329,
+      "article_word_count": 10492,
+      "expert_summary_word_count": 225
+    },
+    {
+      "source_dataset": "PLOS",
+      "original_index": 1309,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 192,
+      "article_word_count": 6477,
+      "expert_summary_word_count": 209
+    },
+    {
+      "source_dataset": "PLOS",
+      "original_index": 1310,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 183,
+      "article_word_count": 6687,
+      "expert_summary_word_count": 179
+    },
+    {
+      "source_dataset": "PLOS",
+      "original_index": 1322,
+      "ok": true,
+      "errors": [],
+      "warnings": [],
+      "n_blocks": 5,
+      "n_headings": 5,
+      "first_heading": "Abstract",
+      "abstract_word_count": 275,
+      "article_word_count": 3353,
+      "expert_summary_word_count": 211
+    },
+    {
+      "source_dataset": "PLOS",
+      "original_index": 1340,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 289,
+      "article_word_count": 6471,
+      "expert_summary_word_count": 258
+    },
+    {
+      "source_dataset": "PLOS",
+      "original_index": 1357,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 266,
+      "article_word_count": 7849,
+      "expert_summary_word_count": 219
+    },
+    {
+      "source_dataset": "PLOS",
+      "original_index": 1366,
+      "ok": true,
+      "errors": [],
+      "warnings": [],
+      "n_blocks": 5,
+      "n_headings": 5,
+      "first_heading": "Abstract",
+      "abstract_word_count": 234,
+      "article_word_count": 5663,
+      "expert_summary_word_count": 215
+    },
+    {
+      "source_dataset": "PLOS",
+      "original_index": 1368,
+      "ok": true,
+      "errors": [],
+      "warnings": [],
+      "n_blocks": 5,
+      "n_headings": 5,
+      "first_heading": "Abstract",
+      "abstract_word_count": 350,
+      "article_word_count": 5702,
+      "expert_summary_word_count": 210
+    },
+    {
+      "source_dataset": "eLife",
+      "original_index": 1,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 179,
+      "article_word_count": 9831,
+      "expert_summary_word_count": 333
+    },
+    {
+      "source_dataset": "eLife",
+      "original_index": 2,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 164,
+      "article_word_count": 7762,
+      "expert_summary_word_count": 460
+    },
+    {
+      "source_dataset": "eLife",
+      "original_index": 3,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 161,
+      "article_word_count": 7108,
+      "expert_summary_word_count": 390
+    },
+    {
+      "source_dataset": "eLife",
+      "original_index": 6,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 152,
+      "article_word_count": 17395,
+      "expert_summary_word_count": 401
+    },
+    {
+      "source_dataset": "eLife",
+      "original_index": 7,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 176,
+      "article_word_count": 11276,
+      "expert_summary_word_count": 473
+    },
+    {
+      "source_dataset": "eLife",
+      "original_index": 8,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 163,
+      "article_word_count": 14784,
+      "expert_summary_word_count": 485
+    },
+    {
+      "source_dataset": "eLife",
+      "original_index": 9,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 170,
+      "article_word_count": 10396,
+      "expert_summary_word_count": 317
+    },
+    {
+      "source_dataset": "eLife",
+      "original_index": 11,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 163,
+      "article_word_count": 8271,
+      "expert_summary_word_count": 318
+    },
+    {
+      "source_dataset": "eLife",
+      "original_index": 15,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 175,
+      "article_word_count": 10765,
+      "expert_summary_word_count": 381
+    },
+    {
+      "source_dataset": "eLife",
+      "original_index": 16,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 166,
+      "article_word_count": 9828,
+      "expert_summary_word_count": 307
+    },
+    {
+      "source_dataset": "eLife",
+      "original_index": 19,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 159,
+      "article_word_count": 9893,
+      "expert_summary_word_count": 453
+    },
+    {
+      "source_dataset": "eLife",
+      "original_index": 23,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 175,
+      "article_word_count": 10855,
+      "expert_summary_word_count": 321
+    },
+    {
+      "source_dataset": "eLife",
+      "original_index": 24,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 160,
+      "article_word_count": 10569,
+      "expert_summary_word_count": 279
+    },
+    {
+      "source_dataset": "eLife",
+      "original_index": 25,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 145,
+      "article_word_count": 8735,
+      "expert_summary_word_count": 540
+    },
+    {
+      "source_dataset": "eLife",
+      "original_index": 26,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 164,
+      "article_word_count": 11908,
+      "expert_summary_word_count": 439
+    },
+    {
+      "source_dataset": "eLife",
+      "original_index": 27,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 171,
+      "article_word_count": 16477,
+      "expert_summary_word_count": 345
+    },
+    {
+      "source_dataset": "eLife",
+      "original_index": 28,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 169,
+      "article_word_count": 8224,
+      "expert_summary_word_count": 404
+    },
+    {
+      "source_dataset": "eLife",
+      "original_index": 32,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 169,
+      "article_word_count": 15672,
+      "expert_summary_word_count": 337
+    },
+    {
+      "source_dataset": "eLife",
+      "original_index": 34,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 165,
+      "article_word_count": 6636,
+      "expert_summary_word_count": 470
+    },
+    {
+      "source_dataset": "eLife",
+      "original_index": 35,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 173,
+      "article_word_count": 10728,
+      "expert_summary_word_count": 338
+    },
+    {
+      "source_dataset": "eLife",
+      "original_index": 38,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 158,
+      "article_word_count": 8249,
+      "expert_summary_word_count": 312
+    },
+    {
+      "source_dataset": "eLife",
+      "original_index": 41,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (8) != article blocks (4); using first block as abstract"
+      ],
+      "n_blocks": 4,
+      "n_headings": 8,
+      "first_heading": "Abstract",
+      "abstract_word_count": 127,
+      "article_word_count": 5911,
+      "expert_summary_word_count": 406
+    },
+    {
+      "source_dataset": "eLife",
+      "original_index": 42,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (8) != article blocks (4); using first block as abstract"
+      ],
+      "n_blocks": 4,
+      "n_headings": 8,
+      "first_heading": "Abstract",
+      "abstract_word_count": 169,
+      "article_word_count": 9340,
+      "expert_summary_word_count": 346
+    },
+    {
+      "source_dataset": "eLife",
+      "original_index": 43,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 169,
+      "article_word_count": 13333,
+      "expert_summary_word_count": 294
+    },
+    {
+      "source_dataset": "eLife",
+      "original_index": 44,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 162,
+      "article_word_count": 7248,
+      "expert_summary_word_count": 464
+    },
+    {
+      "source_dataset": "eLife",
+      "original_index": 45,
+      "ok": true,
+      "errors": [],
+      "warnings": [],
+      "n_blocks": 5,
+      "n_headings": 5,
+      "first_heading": "Abstract",
+      "abstract_word_count": 161,
+      "article_word_count": 10832,
+      "expert_summary_word_count": 672
+    },
+    {
+      "source_dataset": "eLife",
+      "original_index": 46,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 183,
+      "article_word_count": 12655,
+      "expert_summary_word_count": 444
+    },
+    {
+      "source_dataset": "eLife",
+      "original_index": 47,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 165,
+      "article_word_count": 7108,
+      "expert_summary_word_count": 359
+    },
+    {
+      "source_dataset": "eLife",
+      "original_index": 50,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 165,
+      "article_word_count": 8837,
+      "expert_summary_word_count": 369
+    },
+    {
+      "source_dataset": "eLife",
+      "original_index": 54,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 152,
+      "article_word_count": 13187,
+      "expert_summary_word_count": 334
+    },
+    {
+      "source_dataset": "eLife",
+      "original_index": 55,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (6) != article blocks (4); using first block as abstract"
+      ],
+      "n_blocks": 4,
+      "n_headings": 6,
+      "first_heading": "Abstract",
+      "abstract_word_count": 172,
+      "article_word_count": 4684,
+      "expert_summary_word_count": 359
+    },
+    {
+      "source_dataset": "eLife",
+      "original_index": 56,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 164,
+      "article_word_count": 11910,
+      "expert_summary_word_count": 341
+    },
+    {
+      "source_dataset": "eLife",
+      "original_index": 57,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 171,
+      "article_word_count": 7935,
+      "expert_summary_word_count": 318
+    },
+    {
+      "source_dataset": "eLife",
+      "original_index": 59,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 173,
+      "article_word_count": 12014,
+      "expert_summary_word_count": 396
+    },
+    {
+      "source_dataset": "eLife",
+      "original_index": 60,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 160,
+      "article_word_count": 7134,
+      "expert_summary_word_count": 407
+    },
+    {
+      "source_dataset": "eLife",
+      "original_index": 62,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 171,
+      "article_word_count": 14226,
+      "expert_summary_word_count": 306
+    },
+    {
+      "source_dataset": "eLife",
+      "original_index": 64,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 174,
+      "article_word_count": 10219,
+      "expert_summary_word_count": 382
+    },
+    {
+      "source_dataset": "eLife",
+      "original_index": 66,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 170,
+      "article_word_count": 9846,
+      "expert_summary_word_count": 405
+    },
+    {
+      "source_dataset": "eLife",
+      "original_index": 67,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 165,
+      "article_word_count": 13346,
+      "expert_summary_word_count": 318
+    },
+    {
+      "source_dataset": "eLife",
+      "original_index": 68,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 158,
+      "article_word_count": 12070,
+      "expert_summary_word_count": 337
+    },
+    {
+      "source_dataset": "eLife",
+      "original_index": 70,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 178,
+      "article_word_count": 9009,
+      "expert_summary_word_count": 437
+    },
+    {
+      "source_dataset": "eLife",
+      "original_index": 72,
+      "ok": true,
+      "errors": [],
+      "warnings": [],
+      "n_blocks": 4,
+      "n_headings": 4,
+      "first_heading": "Abstract",
+      "abstract_word_count": 155,
+      "article_word_count": 13157,
+      "expert_summary_word_count": 486
+    },
+    {
+      "source_dataset": "eLife",
+      "original_index": 73,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 162,
+      "article_word_count": 16598,
+      "expert_summary_word_count": 359
+    },
+    {
+      "source_dataset": "eLife",
+      "original_index": 76,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 145,
+      "article_word_count": 14105,
+      "expert_summary_word_count": 427
+    },
+    {
+      "source_dataset": "eLife",
+      "original_index": 77,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 160,
+      "article_word_count": 13015,
+      "expert_summary_word_count": 299
+    },
+    {
+      "source_dataset": "eLife",
+      "original_index": 79,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 165,
+      "article_word_count": 13922,
+      "expert_summary_word_count": 436
+    },
+    {
+      "source_dataset": "eLife",
+      "original_index": 80,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 165,
+      "article_word_count": 8943,
+      "expert_summary_word_count": 481
+    },
+    {
+      "source_dataset": "eLife",
+      "original_index": 83,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 150,
+      "article_word_count": 9824,
+      "expert_summary_word_count": 469
+    },
+    {
+      "source_dataset": "eLife",
+      "original_index": 84,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 156,
+      "article_word_count": 9657,
+      "expert_summary_word_count": 483
+    },
+    {
+      "source_dataset": "eLife",
+      "original_index": 85,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 170,
+      "article_word_count": 10637,
+      "expert_summary_word_count": 482
+    },
+    {
+      "source_dataset": "eLife",
+      "original_index": 86,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (6) != article blocks (4); using first block as abstract"
+      ],
+      "n_blocks": 4,
+      "n_headings": 6,
+      "first_heading": "Abstract",
+      "abstract_word_count": 167,
+      "article_word_count": 5713,
+      "expert_summary_word_count": 451
+    },
+    {
+      "source_dataset": "eLife",
+      "original_index": 87,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 156,
+      "article_word_count": 7830,
+      "expert_summary_word_count": 348
+    },
+    {
+      "source_dataset": "eLife",
+      "original_index": 88,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 160,
+      "article_word_count": 9514,
+      "expert_summary_word_count": 477
+    },
+    {
+      "source_dataset": "eLife",
+      "original_index": 89,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 158,
+      "article_word_count": 5869,
+      "expert_summary_word_count": 299
+    },
+    {
+      "source_dataset": "eLife",
+      "original_index": 90,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (8) != article blocks (4); using first block as abstract"
+      ],
+      "n_blocks": 4,
+      "n_headings": 8,
+      "first_heading": "Abstract",
+      "abstract_word_count": 164,
+      "article_word_count": 6500,
+      "expert_summary_word_count": 381
+    },
+    {
+      "source_dataset": "eLife",
+      "original_index": 91,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 218,
+      "article_word_count": 8054,
+      "expert_summary_word_count": 351
+    },
+    {
+      "source_dataset": "eLife",
+      "original_index": 93,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 159,
+      "article_word_count": 12112,
+      "expert_summary_word_count": 486
+    },
+    {
+      "source_dataset": "eLife",
+      "original_index": 94,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 164,
+      "article_word_count": 14889,
+      "expert_summary_word_count": 363
+    },
+    {
+      "source_dataset": "eLife",
+      "original_index": 95,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 157,
+      "article_word_count": 6812,
+      "expert_summary_word_count": 281
+    },
+    {
+      "source_dataset": "eLife",
+      "original_index": 96,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (8) != article blocks (4); using first block as abstract"
+      ],
+      "n_blocks": 4,
+      "n_headings": 8,
+      "first_heading": "Abstract",
+      "abstract_word_count": 170,
+      "article_word_count": 6350,
+      "expert_summary_word_count": 440
+    },
+    {
+      "source_dataset": "eLife",
+      "original_index": 97,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 163,
+      "article_word_count": 19103,
+      "expert_summary_word_count": 437
+    },
+    {
+      "source_dataset": "eLife",
+      "original_index": 98,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (8) != article blocks (4); using first block as abstract"
+      ],
+      "n_blocks": 4,
+      "n_headings": 8,
+      "first_heading": "Abstract",
+      "abstract_word_count": 167,
+      "article_word_count": 6203,
+      "expert_summary_word_count": 238
+    },
+    {
+      "source_dataset": "eLife",
+      "original_index": 100,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 159,
+      "article_word_count": 6744,
+      "expert_summary_word_count": 379
+    },
+    {
+      "source_dataset": "eLife",
+      "original_index": 103,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (3); using first block as abstract"
+      ],
+      "n_blocks": 3,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 178,
+      "article_word_count": 6227,
+      "expert_summary_word_count": 359
+    },
+    {
+      "source_dataset": "eLife",
+      "original_index": 104,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 164,
+      "article_word_count": 16559,
+      "expert_summary_word_count": 271
+    },
+    {
+      "source_dataset": "eLife",
+      "original_index": 105,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (8) != article blocks (4); using first block as abstract"
+      ],
+      "n_blocks": 4,
+      "n_headings": 8,
+      "first_heading": "Abstract",
+      "abstract_word_count": 142,
+      "article_word_count": 8995,
+      "expert_summary_word_count": 458
+    },
+    {
+      "source_dataset": "eLife",
+      "original_index": 106,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 150,
+      "article_word_count": 5519,
+      "expert_summary_word_count": 382
+    },
+    {
+      "source_dataset": "eLife",
+      "original_index": 107,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 174,
+      "article_word_count": 9278,
+      "expert_summary_word_count": 312
+    },
+    {
+      "source_dataset": "eLife",
+      "original_index": 109,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 163,
+      "article_word_count": 7681,
+      "expert_summary_word_count": 313
+    },
+    {
+      "source_dataset": "eLife",
+      "original_index": 113,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 183,
+      "article_word_count": 8732,
+      "expert_summary_word_count": 434
+    },
+    {
+      "source_dataset": "eLife",
+      "original_index": 116,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 171,
+      "article_word_count": 13945,
+      "expert_summary_word_count": 392
+    },
+    {
+      "source_dataset": "eLife",
+      "original_index": 117,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 141,
+      "article_word_count": 7010,
+      "expert_summary_word_count": 397
+    },
+    {
+      "source_dataset": "eLife",
+      "original_index": 118,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 171,
+      "article_word_count": 14073,
+      "expert_summary_word_count": 387
+    },
+    {
+      "source_dataset": "eLife",
+      "original_index": 122,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 135,
+      "article_word_count": 6145,
+      "expert_summary_word_count": 309
+    },
+    {
+      "source_dataset": "eLife",
+      "original_index": 125,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 165,
+      "article_word_count": 10051,
+      "expert_summary_word_count": 528
+    },
+    {
+      "source_dataset": "eLife",
+      "original_index": 126,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 163,
+      "article_word_count": 14906,
+      "expert_summary_word_count": 443
+    },
+    {
+      "source_dataset": "eLife",
+      "original_index": 127,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 169,
+      "article_word_count": 4701,
+      "expert_summary_word_count": 348
+    },
+    {
+      "source_dataset": "eLife",
+      "original_index": 128,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (8) != article blocks (4); using first block as abstract"
+      ],
+      "n_blocks": 4,
+      "n_headings": 8,
+      "first_heading": "Abstract",
+      "abstract_word_count": 166,
+      "article_word_count": 4824,
+      "expert_summary_word_count": 511
+    },
+    {
+      "source_dataset": "eLife",
+      "original_index": 129,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 157,
+      "article_word_count": 9673,
+      "expert_summary_word_count": 360
+    },
+    {
+      "source_dataset": "eLife",
+      "original_index": 130,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 157,
+      "article_word_count": 8393,
+      "expert_summary_word_count": 409
+    },
+    {
+      "source_dataset": "eLife",
+      "original_index": 131,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 166,
+      "article_word_count": 14625,
+      "expert_summary_word_count": 325
+    },
+    {
+      "source_dataset": "eLife",
+      "original_index": 132,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 147,
+      "article_word_count": 10061,
+      "expert_summary_word_count": 269
+    },
+    {
+      "source_dataset": "eLife",
+      "original_index": 133,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 171,
+      "article_word_count": 9155,
+      "expert_summary_word_count": 466
+    },
+    {
+      "source_dataset": "eLife",
+      "original_index": 135,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 167,
+      "article_word_count": 10387,
+      "expert_summary_word_count": 408
+    },
+    {
+      "source_dataset": "eLife",
+      "original_index": 139,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 162,
+      "article_word_count": 10087,
+      "expert_summary_word_count": 547
+    },
+    {
+      "source_dataset": "eLife",
+      "original_index": 140,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 162,
+      "article_word_count": 10231,
+      "expert_summary_word_count": 405
+    },
+    {
+      "source_dataset": "eLife",
+      "original_index": 141,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 173,
+      "article_word_count": 6442,
+      "expert_summary_word_count": 403
+    },
+    {
+      "source_dataset": "eLife",
+      "original_index": 142,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (5) != article blocks (3); using first block as abstract"
+      ],
+      "n_blocks": 3,
+      "n_headings": 5,
+      "first_heading": "Abstract",
+      "abstract_word_count": 164,
+      "article_word_count": 5486,
+      "expert_summary_word_count": 460
+    },
+    {
+      "source_dataset": "eLife",
+      "original_index": 144,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 159,
+      "article_word_count": 3408,
+      "expert_summary_word_count": 386
+    },
+    {
+      "source_dataset": "eLife",
+      "original_index": 145,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 169,
+      "article_word_count": 15648,
+      "expert_summary_word_count": 409
+    },
+    {
+      "source_dataset": "eLife",
+      "original_index": 146,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 141,
+      "article_word_count": 8584,
+      "expert_summary_word_count": 270
+    },
+    {
+      "source_dataset": "eLife",
+      "original_index": 150,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 160,
+      "article_word_count": 11483,
+      "expert_summary_word_count": 326
+    },
+    {
+      "source_dataset": "eLife",
+      "original_index": 151,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (9) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 9,
+      "first_heading": "Abstract",
+      "abstract_word_count": 169,
+      "article_word_count": 8936,
+      "expert_summary_word_count": 405
+    },
+    {
+      "source_dataset": "eLife",
+      "original_index": 154,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 154,
+      "article_word_count": 7884,
+      "expert_summary_word_count": 377
+    },
+    {
+      "source_dataset": "eLife",
+      "original_index": 156,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 171,
+      "article_word_count": 16046,
+      "expert_summary_word_count": 455
+    },
+    {
+      "source_dataset": "eLife",
+      "original_index": 161,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 169,
+      "article_word_count": 11566,
+      "expert_summary_word_count": 340
+    },
+    {
+      "source_dataset": "eLife",
+      "original_index": 162,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 168,
+      "article_word_count": 9216,
+      "expert_summary_word_count": 347
+    },
+    {
+      "source_dataset": "eLife",
+      "original_index": 163,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 118,
+      "article_word_count": 11463,
+      "expert_summary_word_count": 257
+    },
+    {
+      "source_dataset": "eLife",
+      "original_index": 164,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 164,
+      "article_word_count": 9781,
+      "expert_summary_word_count": 378
+    },
+    {
+      "source_dataset": "eLife",
+      "original_index": 165,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 163,
+      "article_word_count": 9297,
+      "expert_summary_word_count": 353
+    },
+    {
+      "source_dataset": "eLife",
+      "original_index": 166,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 175,
+      "article_word_count": 10048,
+      "expert_summary_word_count": 412
+    },
+    {
+      "source_dataset": "eLife",
+      "original_index": 167,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 169,
+      "article_word_count": 8305,
+      "expert_summary_word_count": 450
+    },
+    {
+      "source_dataset": "eLife",
+      "original_index": 168,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 184,
+      "article_word_count": 9063,
+      "expert_summary_word_count": 444
+    },
+    {
+      "source_dataset": "eLife",
+      "original_index": 169,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 160,
+      "article_word_count": 15800,
+      "expert_summary_word_count": 351
+    },
+    {
+      "source_dataset": "eLife",
+      "original_index": 172,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 170,
+      "article_word_count": 6661,
+      "expert_summary_word_count": 474
+    },
+    {
+      "source_dataset": "eLife",
+      "original_index": 173,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 170,
+      "article_word_count": 10634,
+      "expert_summary_word_count": 319
+    },
+    {
+      "source_dataset": "eLife",
+      "original_index": 174,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 159,
+      "article_word_count": 10351,
+      "expert_summary_word_count": 342
+    },
+    {
+      "source_dataset": "eLife",
+      "original_index": 176,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 161,
+      "article_word_count": 6913,
+      "expert_summary_word_count": 414
+    },
+    {
+      "source_dataset": "eLife",
+      "original_index": 178,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 161,
+      "article_word_count": 9757,
+      "expert_summary_word_count": 408
+    },
+    {
+      "source_dataset": "eLife",
+      "original_index": 179,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (8) != article blocks (4); using first block as abstract"
+      ],
+      "n_blocks": 4,
+      "n_headings": 8,
+      "first_heading": "Abstract",
+      "abstract_word_count": 167,
+      "article_word_count": 7985,
+      "expert_summary_word_count": 395
+    },
+    {
+      "source_dataset": "eLife",
+      "original_index": 181,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 162,
+      "article_word_count": 9791,
+      "expert_summary_word_count": 435
+    },
+    {
+      "source_dataset": "eLife",
+      "original_index": 182,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 164,
+      "article_word_count": 6542,
+      "expert_summary_word_count": 436
+    },
+    {
+      "source_dataset": "eLife",
+      "original_index": 183,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 160,
+      "article_word_count": 10530,
+      "expert_summary_word_count": 374
+    },
+    {
+      "source_dataset": "eLife",
+      "original_index": 184,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (8) != article blocks (4); using first block as abstract"
+      ],
+      "n_blocks": 4,
+      "n_headings": 8,
+      "first_heading": "Abstract",
+      "abstract_word_count": 135,
+      "article_word_count": 7347,
+      "expert_summary_word_count": 348
+    },
+    {
+      "source_dataset": "eLife",
+      "original_index": 186,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 180,
+      "article_word_count": 12029,
+      "expert_summary_word_count": 489
+    },
+    {
+      "source_dataset": "eLife",
+      "original_index": 187,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 150,
+      "article_word_count": 15421,
+      "expert_summary_word_count": 295
+    },
+    {
+      "source_dataset": "eLife",
+      "original_index": 188,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 174,
+      "article_word_count": 7043,
+      "expert_summary_word_count": 389
+    },
+    {
+      "source_dataset": "eLife",
+      "original_index": 189,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 163,
+      "article_word_count": 15736,
+      "expert_summary_word_count": 441
+    },
+    {
+      "source_dataset": "eLife",
+      "original_index": 190,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 167,
+      "article_word_count": 10823,
+      "expert_summary_word_count": 311
+    },
+    {
+      "source_dataset": "eLife",
+      "original_index": 192,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 306,
+      "article_word_count": 6950,
+      "expert_summary_word_count": 443
+    },
+    {
+      "source_dataset": "eLife",
+      "original_index": 194,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 175,
+      "article_word_count": 9853,
+      "expert_summary_word_count": 364
+    },
+    {
+      "source_dataset": "eLife",
+      "original_index": 195,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 162,
+      "article_word_count": 4804,
+      "expert_summary_word_count": 291
+    },
+    {
+      "source_dataset": "eLife",
+      "original_index": 196,
+      "ok": true,
+      "errors": [],
+      "warnings": [],
+      "n_blocks": 4,
+      "n_headings": 4,
+      "first_heading": "Abstract",
+      "abstract_word_count": 158,
+      "article_word_count": 6470,
+      "expert_summary_word_count": 356
+    },
+    {
+      "source_dataset": "eLife",
+      "original_index": 200,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 153,
+      "article_word_count": 14132,
+      "expert_summary_word_count": 396
+    },
+    {
+      "source_dataset": "eLife",
+      "original_index": 207,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 164,
+      "article_word_count": 8855,
+      "expert_summary_word_count": 290
+    },
+    {
+      "source_dataset": "eLife",
+      "original_index": 210,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 151,
+      "article_word_count": 14206,
+      "expert_summary_word_count": 456
+    },
+    {
+      "source_dataset": "eLife",
+      "original_index": 212,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 185,
+      "article_word_count": 7934,
+      "expert_summary_word_count": 506
+    },
+    {
+      "source_dataset": "eLife",
+      "original_index": 214,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 171,
+      "article_word_count": 3423,
+      "expert_summary_word_count": 319
+    },
+    {
+      "source_dataset": "eLife",
+      "original_index": 216,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 165,
+      "article_word_count": 8906,
+      "expert_summary_word_count": 332
+    },
+    {
+      "source_dataset": "eLife",
+      "original_index": 217,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 161,
+      "article_word_count": 14849,
+      "expert_summary_word_count": 374
+    },
+    {
+      "source_dataset": "eLife",
+      "original_index": 218,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 165,
+      "article_word_count": 23048,
+      "expert_summary_word_count": 446
+    },
+    {
+      "source_dataset": "eLife",
+      "original_index": 221,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (10) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 10,
+      "first_heading": "Abstract",
+      "abstract_word_count": 165,
+      "article_word_count": 4282,
+      "expert_summary_word_count": 331
+    },
+    {
+      "source_dataset": "eLife",
+      "original_index": 222,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 163,
+      "article_word_count": 15247,
+      "expert_summary_word_count": 383
+    },
+    {
+      "source_dataset": "eLife",
+      "original_index": 223,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 160,
+      "article_word_count": 6793,
+      "expert_summary_word_count": 346
+    },
+    {
+      "source_dataset": "eLife",
+      "original_index": 225,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 150,
+      "article_word_count": 9837,
+      "expert_summary_word_count": 428
+    },
+    {
+      "source_dataset": "eLife",
+      "original_index": 228,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 150,
+      "article_word_count": 6642,
+      "expert_summary_word_count": 383
+    },
+    {
+      "source_dataset": "eLife",
+      "original_index": 230,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 168,
+      "article_word_count": 10064,
+      "expert_summary_word_count": 318
+    },
+    {
+      "source_dataset": "eLife",
+      "original_index": 232,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 165,
+      "article_word_count": 5023,
+      "expert_summary_word_count": 390
+    },
+    {
+      "source_dataset": "eLife",
+      "original_index": 235,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 171,
+      "article_word_count": 12480,
+      "expert_summary_word_count": 442
+    },
+    {
+      "source_dataset": "eLife",
+      "original_index": 237,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 162,
+      "article_word_count": 9186,
+      "expert_summary_word_count": 376
+    },
+    {
+      "source_dataset": "eLife",
+      "original_index": 238,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 151,
+      "article_word_count": 6460,
+      "expert_summary_word_count": 446
+    },
+    {
+      "source_dataset": "eLife",
+      "original_index": 240,
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "section_headings (7) != article blocks (5); using first block as abstract"
+      ],
+      "n_blocks": 5,
+      "n_headings": 7,
+      "first_heading": "Abstract",
+      "abstract_word_count": 142,
+      "article_word_count": 9176,
+      "expert_summary_word_count": 392
+    }
+  ]
+}
