@@ -1,0 +1,32 @@
+{
+  "time": "2026-06-19T21:46:25",
+  "run_name": "pilot_n20_v11_fixed_m12_gemini25_same_model_phaseb_factuality_chase",
+  "model_key": "gemini25_flash_non_thinking",
+  "summac_document": "original",
+  "variants": {
+    "generated": {
+      "ROUGE": 0.30489497547449157,
+      "BLEU": 6.15866362689082,
+      "METEOR": 0.23864499150571242,
+      "BERTScore": 0.847356104850769,
+      "FKGL": 12.11434992650712,
+      "DCRS": 13.456629421265863,
+      "CLI": 16.588207291774744,
+      "LENS": 66.33131193737736,
+      "AlignScore": 0.941337987780571,
+      "SummaC": 0.9187874168157577
+    },
+    "rewritten": {
+      "ROUGE": 0.32390083144376125,
+      "BLEU": 8.207904569601956,
+      "METEOR": 0.26355588508141514,
+      "BERTScore": 0.8483900099992752,
+      "FKGL": 12.01920428869898,
+      "DCRS": 13.382183630770577,
+      "CLI": 16.433809463878717,
+      "LENS": 58.472852588102214,
+      "AlignScore": 0.9328356713056565,
+      "SummaC": 0.9240107715129853
+    }
+  }
+}

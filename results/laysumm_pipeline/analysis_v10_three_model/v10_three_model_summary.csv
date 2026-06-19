@@ -1,0 +1,4 @@
+﻿model,final_score,relevance,readability,factuality,overall_alignscore,overall_summac,sentence_count,sentence_mean_alignscore,sentence_median_alignscore,low_sentence_count,low_sentence_rate,min_sentence_alignscore
+gpt41_mini,0.6333,0.6261,0.4867,0.7871,0.8403,0.7634,327,0.841005,0.933364,50,0.1529,0.033784
+gemini3_flash_preview_minimal,0.6075,0.6236,0.567,0.632,0.7732,0.6823,323,0.77489,0.897627,79,0.2446,0.043825
+gemini25_flash_non_thinking,0.6921,0.6948,0.4115,0.9699,0.9262,0.9018,325,0.925961,0.980316,18,0.0554,0.054796

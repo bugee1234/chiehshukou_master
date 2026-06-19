@@ -1,0 +1,129 @@
+﻿You are building a controlled biomedical lay summary from evidence rows.
+
+MODE: {mode}
+DATASET PROFILE: {dataset_profile}
+STYLE PROFILE: {style_profile}
+
+V10 objective, based on the v7/v8 pilot results:
+- First priority: factual correctness and document entailment. Keep the V8
+  discipline: every sentence must be supported by one evidence row.
+- Second priority: readability as a hard constraint. The v8 outputs had strong
+  factuality but weak FKGL/DCRS/CLI because they used dense technical wording.
+  Use short sentences, fewer hard words, and aliases after first mention.
+- Third priority: relevance to the expert lay summary and abstract. Cover the
+  central disease/problem, method/intervention, result, number/comparison, or
+  mechanism chain only when directly supported by an evidence row.
+- V10-specific priority: make the initial generated summary valid on length.
+  The v9 eLife outputs lost LENS and factuality after forced expansion, so do
+  not rely on later expansion to reach the minimum.
+
+Inputs:
+- ABSTRACT controls the main story and order.
+- EVIDENCE TABLE contains the only document-backed details you may use.
+- Each evidence row is a final keep-AF group. Its core_keep_af is the source for
+  the claim sentence.
+
+Global rules:
+- Write for non-expert readers, but stay evidence-local.
+- Do not add outside knowledge.
+- Prefer fewer claims that are fully supported over many precise but risky details.
+- Do not add a claim only to improve ROUGE/METEOR. Relevance gains are useful
+  only when the claim is tightly anchored in core_keep_af or abstract_claim.
+- Make every sentence self-contained. AlignScore evaluates each sentence against
+  the source document, so avoid sentence subjects like "This", "These", "It",
+  "They", "This change", "This finding", or "This means". Name the entity,
+  method, condition, or result inside the sentence.
+- Preserve exact named entities, organisms, methods, directions, comparisons,
+  measurements, and numbers only when they are essential to the central claim.
+- Do not use broad implications unless the same evidence row's abstract_claim or
+  core_keep_af is itself an implication.
+- Avoid unsupported implication/metaphor phrases: "suggests", "may be able",
+  "could help", "important for", "acted like", "call for help".
+- Do not use metaphors or analogies, even simple ones. They often lower
+  sentence-level factual alignment.
+- Do not add general definitions, public-health background, or textbook facts
+  unless the evidence row itself states them.
+- Use causal verbs such as "causes", "ensures", "confirms", "allows", "makes",
+  "drives", or "explains" only when the evidence row states that causal relation.
+- Use short sentences. One factual relation per sentence.
+- Aim for 9-15 words per sentence. A sentence above 18 words is usually too
+  long. Split it unless an exact name makes that impossible.
+- Avoid dense noun strings. Do not put a method name, organism, gene/protein,
+  condition, and result in the same sentence.
+- Do not merely copy evidence spans.
+- Use aliases actively: keep each essential technical term on first mention,
+  then use a short plain alias later when it is unambiguous.
+- Do not add paper-like wording such as "transcriptome", "posttranscriptional",
+  "intramolecular", "predominantly", or "pathologies" unless the exact word is
+  needed for an evidence anchor. Prefer simpler wording when the fact remains
+  exact.
+- Do not replace exact factual anchors with vague language. Exact anchors matter
+  more than readability when they control a claim.
+- Do not output incomplete sentences or fragments. Avoid endings such as "of.",
+  "for.", "to.", "was previously.", "known as.", or "called.".
+- Do not repeat the same sentence or near-identical sentence.
+
+Readability policy:
+{readability_policy}
+
+Slot rules:
+- Build slots in abstract/story order.
+- Use about the target_slots in the readability policy.
+- Each slot must cite exactly one evidence_row_id.
+- claim_sentence: a short lay rewrite of the row's core_keep_af or abstract_claim.
+- clarification_sentence: optional and limited. Use it only when a reader would
+  misunderstand the claim without a definition or local explanation.
+- A clarification_sentence must be self-contained and evidence-local. Do not use
+  it for a broad inference, analogy, or general definition.
+- Each evidence row may contribute at most one claim_sentence and one
+  clarification_sentence.
+- If a clarification would introduce a new claim, leave it empty.
+
+Dataset profile:
+- plos_concise: prioritize the main disease/problem, intervention or method,
+  concrete finding, and one important number/comparison if central. Use fewer
+  clarifications. Do not add secondary outcomes just for coverage. Prefer 6-8
+  slots and avoid long public-health background definitions.
+- elife_mechanism: preserve the main mechanism chain, but split each causal step
+  into a short sentence. Do not include every molecular or method detail. Include
+  exact anchors only when they control a 1T3F-style distinction. Prefer 8-10
+  slots, but avoid making the summary sound like a methods paragraph.
+
+Length:
+- Target about {target_word_count} words.
+- Minimum {min_word_count} words.
+- Maximum {max_word_count} words.
+- Stay within range. The summary must be at least {min_word_count} words.
+- Plan enough slots and clarifications so the first summary reaches the minimum
+  without a later expansion pass.
+- These limits are chosen for leaderboard metrics, not to match the expert
+  summary length.
+- Do not solve length by making long sentences. Add short, row-local
+  clarification sentences that define terms, explain a method, or connect one
+  causal step to the next.
+- Do not add unsupported background.
+
+Return ONLY valid JSON:
+{
+  "slots": [
+    {
+      "slot_id": "slot_0001",
+      "role": "background|motivation|method|mechanism|finding|implication|limitation",
+      "evidence_row_id": "row_0001",
+      "claim_sentence": "<one short grounded sentence>",
+      "clarification_sentence": "<optional short grounded sentence or empty string>",
+      "used_for_summary": true
+    }
+  ],
+  "summary": "<full summary made by joining slot sentences in order>"
+}
+
+TITLE:
+{title}
+
+ABSTRACT:
+{abstract}
+
+EVIDENCE TABLE:
+{evidence_table}
+

@@ -1,0 +1,80 @@
+﻿article_id,source_dataset,original_index,model_key,variant,sentence_index,alignscore,word_count,risk_tags,sentence
+laysumm_elife_0057,eLife,57,gemini3_flash_preview_minimal,rewritten,3,0.043825,11,,The plant Arabidopsis thaliana always produces flowers with exactly four petals.
+laysumm_plos_0051,PLOS,51,gemini3_flash_preview_minimal,rewritten,16,0.046098,12,deictic_subject|negation_or_contrast|number,This result was surprising because Nrf2 does not activate recognized anti-viral genes.
+laysumm_elife_0188,eLife,188,gemini3_flash_preview_minimal,rewritten,10,0.047128,12,,Low temperatures in southern regions prevent the virus from spreading all year.
+laysumm_elife_0026,eLife,26,gemini3_flash_preview_minimal,rewritten,14,0.04937,12,,The bacterial enzyme silences this immune signaling to help the pathogen survive.
+laysumm_plos_1309,PLOS,1309,gemini3_flash_preview_minimal,rewritten,6,0.054165,13,deictic_subject|causal_or_inferential|negation_or_contrast,This proteasome-mediated degradation ensures that the cell does not have too many receptors.
+laysumm_plos_1309,PLOS,1309,gemini3_flash_preview_minimal,rewritten,10,0.063705,14,deictic_subject|analogy_or_metaphor|number,This finding was unexpected because Skp1 is usually a central part of this machinery.
+laysumm_elife_0163,eLife,163,gemini3_flash_preview_minimal,rewritten,14,0.066352,12,,An increased REST level is the major cause of the growth problems.
+laysumm_plos_1116,PLOS,1116,gemini3_flash_preview_minimal,rewritten,2,0.067584,10,deictic_subject|background_or_definition,This virus is the most common infection spread by mosquitoes.
+laysumm_plos_0051,PLOS,51,gemini3_flash_preview_minimal,rewritten,15,0.069945,12,negation_or_contrast,The drug did not use common defense proteins to fight the virus.
+laysumm_plos_1309,PLOS,1309,gemini3_flash_preview_minimal,rewritten,7,0.081749,13,number,Researchers found a new pathway in yeast that destroys the F-box protein Met30.
+laysumm_plos_0051,PLOS,51,gemini3_flash_preview_minimal,rewritten,10,0.093423,12,negation_or_contrast,The virus enters the cell but cannot finish preparing its genetic material.
+laysumm_elife_0163,eLife,163,gemini3_flash_preview_minimal,rewritten,12,0.098789,12,deictic_subject|causal_or_inferential,This confirms that the molecule is necessary for building healthy brain connections.
+laysumm_plos_0563,PLOS,563,gemini3_flash_preview_minimal,rewritten,13,0.106652,14,,The lack of ClfB significantly weakened the bacteria's ability to survive in the skin.
+laysumm_plos_0209,PLOS,209,gemini3_flash_preview_minimal,rewritten,17,0.111153,10,hard_word_dense,Anabaena is a multicellular cyanobacterium that grows in long chains.
+laysumm_plos_0209,PLOS,209,gemini3_flash_preview_minimal,rewritten,18,0.126875,11,hard_word_dense,Specific proteins act as inhibitors to stop neighboring cells from changing.
+laysumm_elife_0070,eLife,70,gemini3_flash_preview_minimal,rewritten,5,0.130402,12,,The ubiquitin-proteasome system degrades these proteins directly from the mitochondrial outer membrane.
+laysumm_elife_0026,eLife,26,gemini3_flash_preview_minimal,rewritten,1,0.168901,13,,The bacteria Shigella flexneri uses an enzyme called OspI to modify human proteins.
+laysumm_elife_0026,eLife,26,gemini3_flash_preview_minimal,rewritten,4,0.177111,12,,The modification prevents the NF-κB pathway from starting a normal inflammatory response.
+laysumm_elife_0026,eLife,26,gemini3_flash_preview_minimal,rewritten,16,0.177797,13,deictic_subject,This specific electrical competition is a key part of the bacterial defense strategy.
+laysumm_elife_0026,eLife,26,gemini3_flash_preview_minimal,rewritten,3,0.201667,12,deictic_subject|number,This chemical change stops the UBC13 and TRAF6 proteins from working together.
+laysumm_plos_0209,PLOS,209,gemini3_flash_preview_minimal,rewritten,4,0.206806,13,,HetR acts as a master switch to trigger the change into a heterocyst.
+laysumm_plos_0051,PLOS,51,gemini3_flash_preview_minimal,rewritten,8,0.228628,12,deictic_subject|hard_word_dense,This reduction also diminished the effectiveness of Sulforaphane treatment against the virus.
+laysumm_plos_0501,PLOS,501,gemini3_flash_preview_minimal,rewritten,2,0.23168,12,deictic_subject,These drugs work by preventing the virus from making copies of itself.
+laysumm_elife_0035,eLife,35,gemini3_flash_preview_minimal,rewritten,10,0.231849,11,,The arrangement of axons and dendrites keeps these two pathways separate.
+laysumm_elife_0163,eLife,163,gemini3_flash_preview_minimal,rewritten,9,0.250816,13,deictic_subject,This molecule promotes growth by causing the downregulation of a protein called REST.
+laysumm_elife_0163,eLife,163,gemini3_flash_preview_minimal,rewritten,6,0.266321,13,deictic_subject|analogy_or_metaphor,This sponge technique uses a trap to soak up and disable the molecule.
+laysumm_plos_0563,PLOS,563,gemini3_flash_preview_minimal,rewritten,2,0.26678,13,deictic_subject,This protein helps the bacteria stick to the lining of the nasal passage.
+laysumm_elife_0028,eLife,28,gemini3_flash_preview_minimal,rewritten,16,0.293687,11,deictic_subject|hedged_or_implication|hard_word_dense,This finding could help develop treatments for people with memory impairments.
+laysumm_elife_0026,eLife,26,gemini3_flash_preview_minimal,rewritten,15,0.300613,12,,The competition for salt-bridges prevents the two proteins from sticking together properly.
+laysumm_elife_0070,eLife,70,gemini3_flash_preview_minimal,rewritten,3,0.320034,13,,Researchers studied this process in yeast using temperature-sensitive proteins that unravel when heated.
+laysumm_elife_0189,eLife,189,gemini3_flash_preview_minimal,rewritten,13,0.322865,12,,High beta power keeps the motor system away from the movement threshold.
+laysumm_elife_0070,eLife,70,gemini3_flash_preview_minimal,rewritten,15,0.330107,12,number,The SSA1 chaperone is specifically required for the tagging of these proteins.
+laysumm_elife_0188,eLife,188,gemini3_flash_preview_minimal,rewritten,15,0.332807,12,causal_or_inferential,The virus infects thousands of people each year and causes joint pain.
+laysumm_elife_0163,eLife,163,gemini3_flash_preview_minimal,rewritten,4,0.333063,13,analogy_or_metaphor,Dendrites are tree-like branches on neurons that help cells connect to each other.
+laysumm_elife_0026,eLife,26,gemini3_flash_preview_minimal,rewritten,2,0.33418,16,number,OspI converts a specific glutamine residue at position 100 in the host enzyme UBC13 into glutamate.
+laysumm_elife_0026,eLife,26,gemini3_flash_preview_minimal,rewritten,10,0.360921,13,number,The negatively charged surface of the RING domain pushes the modified UBC13 away.
+laysumm_plos_0457,PLOS,457,gemini3_flash_preview_minimal,rewritten,4,0.39179,12,,Drosophila is a type of fruit fly used to study biological processes.
+laysumm_plos_0457,PLOS,457,gemini3_flash_preview_minimal,rewritten,8,0.411323,13,deictic_subject,This gene helps drive the increase of Notch signaling during the aging process.
+laysumm_plos_1309,PLOS,1309,gemini3_flash_preview_minimal,rewritten,4,0.417896,12,,F-box proteins act as specific receptors that select which targets to destroy.
+laysumm_plos_0563,PLOS,563,gemini3_flash_preview_minimal,rewritten,10,0.425532,13,deictic_subject,These antibodies stop the bacteria from sticking to the loricrin in the skin.
+laysumm_plos_0209,PLOS,209,gemini3_flash_preview_minimal,rewritten,15,0.431995,10,hard_word_dense,Cell-cell communication controls stochasticity to ensure a precise developmental pattern.
+laysumm_elife_0188,eLife,188,gemini3_flash_preview_minimal,rewritten,6,0.434737,12,deictic_subject,This specific temperature is the optimal point for the disease to spread.
+laysumm_elife_0189,eLife,189,gemini3_flash_preview_minimal,rewritten,8,0.438497,12,,An increase in these waves caused the monkeys to start moving slower.
+laysumm_elife_0062,eLife,62,gemini3_flash_preview_minimal,rewritten,6,0.440501,11,deictic_subject|hard_word_dense,This method found hundreds of transcripts missed by previous single-cell profiling.
+laysumm_elife_0188,eLife,188,gemini3_flash_preview_minimal,rewritten,8,0.44633,13,negation_or_contrast,The disease cannot spread effectively when it is too cold or too hot.
+laysumm_plos_0563,PLOS,563,gemini3_flash_preview_minimal,rewritten,1,0.474976,13,,Staphylococcus aureus uses a protein called ClfB to live inside the human nose.
+laysumm_plos_1116,PLOS,1116,gemini3_flash_preview_minimal,rewritten,11,0.484996,11,number,Bile acids were 5 fold higher in patients with severe dengue.
+laysumm_plos_1309,PLOS,1309,gemini3_flash_preview_minimal,rewritten,8,0.490752,14,deictic_subject|negation_or_contrast|number,This specific pathway targets Met30 only when it is dissociated from its partner Skp1.
+laysumm_elife_0006,eLife,6,gemini3_flash_preview_minimal,rewritten,5,0.495285,15,,Models predict that an increase in noise should lead to faster decisions and reduced accuracy.
+laysumm_elife_0057,eLife,57,gemini3_flash_preview_minimal,rewritten,11,0.503208,11,number,The Cardamine version of AP1 fails to complement this masking function.
+laysumm_plos_0051,PLOS,51,gemini3_flash_preview_minimal,rewritten,2,0.507215,14,number,Nrf2 is a transcription regulator that typically helps human cells manage stress and antioxidants.
+laysumm_plos_0501,PLOS,501,gemini3_flash_preview_minimal,rewritten,16,0.51197,12,deictic_subject,This feature helps doctors understand how much to trust each specific result.
+laysumm_elife_0026,eLife,26,gemini3_flash_preview_minimal,rewritten,6,0.515226,13,deictic_subject,This change disrupts both the stable and transient interactions needed for protein binding.
+laysumm_plos_0051,PLOS,51,gemini3_flash_preview_minimal,rewritten,11,0.521266,13,negation_or_contrast|number,The anti-viral effect of Nrf2 does not involve the proteins SAMHD1 or MX2.
+laysumm_elife_0006,eLife,6,gemini3_flash_preview_minimal,rewritten,14,0.523985,12,deictic_subject|causal_or_inferential,This acceleration explains why decisions happen more quickly when noise is high.
+laysumm_plos_0457,PLOS,457,gemini3_flash_preview_minimal,rewritten,14,0.529728,13,,The protein regulates how the Notch signal changes over time in the fly.
+laysumm_plos_0563,PLOS,563,gemini3_flash_preview_minimal,rewritten,5,0.531059,13,,The protein promotes abscess formation by binding to a host protein called loricrin.
+laysumm_elife_0062,eLife,62,gemini3_flash_preview_minimal,rewritten,16,0.534486,11,deictic_subject,This resource helps others study how the digestive system repairs itself.
+laysumm_elife_0026,eLife,26,gemini3_flash_preview_minimal,rewritten,9,0.538559,16,number,Electrostatic repulsion between the new glutamate at position 100 and the TRAF6 surface destabilizes the complex.
+laysumm_plos_0178,PLOS,178,gemini3_flash_preview_minimal,rewritten,6,0.544836,14,negation_or_contrast|number,"In contrast, only 42% of Zika cases occurred in that same young age group."
+laysumm_elife_0189,eLife,189,gemini3_flash_preview_minimal,rewritten,14,0.548671,12,deictic_subject|causal_or_inferential,This distance explains the delay seen before the monkeys began their reach.
+laysumm_elife_0189,eLife,189,gemini3_flash_preview_minimal,rewritten,12,0.554424,12,deictic_subject|causal_or_inferential,This explains why high beta activity delays the start of physical actions.
+laysumm_elife_0070,eLife,70,gemini3_flash_preview_minimal,rewritten,12,0.556298,12,number,Ubx2 acts as a necessary partner to help pull the proteins away.
+laysumm_plos_0051,PLOS,51,gemini3_flash_preview_minimal,rewritten,3,0.561511,12,number|hard_word_dense,Sulforaphane is a natural product found in cruciferous vegetables that activates Nrf2.
+laysumm_plos_1309,PLOS,1309,gemini3_flash_preview_minimal,rewritten,14,0.567052,14,deictic_subject|causal_or_inferential,This discovery shows that parts of the ligase can work as a smaller team.
+laysumm_elife_0070,eLife,70,gemini3_flash_preview_minimal,rewritten,7,0.572622,13,number,The ubiquitin ligase enzymes Ubr1 and San1 are required to tag the proteins.
+laysumm_elife_0028,eLife,28,gemini3_flash_preview_minimal,rewritten,6,0.574344,12,deictic_subject|number,This tACS method uses low-level electrical currents at a 6 Hz frequency.
+laysumm_plos_0457,PLOS,457,gemini3_flash_preview_minimal,rewritten,9,0.574436,16,,Notch signaling is regulated in opposite directions in the niche versus the stem cells during aging.
+laysumm_elife_0070,eLife,70,gemini3_flash_preview_minimal,rewritten,11,0.589119,13,number,A mitochondrial pool of the protein Ubx2 helps the Cdc48 complex remove substrates.
+laysumm_elife_0026,eLife,26,gemini3_flash_preview_minimal,rewritten,12,0.593068,13,,The modification works by destabilizing transient complexes even away from the main interface.
+laysumm_elife_0189,eLife,189,gemini3_flash_preview_minimal,rewritten,15,0.597813,12,causal_or_inferential,The study confirms that beta power levels directly predict movement start times.
+laysumm_elife_0006,eLife,6,gemini3_flash_preview_minimal,rewritten,6,0.611089,12,,"Paradoxically, this extra noise is also predicted to lead to higher confidence."
+laysumm_elife_0026,eLife,26,gemini3_flash_preview_minimal,rewritten,5,0.61396,13,number,The bacterial modification inhibits the binding between UBC13 and the TRAF6 RING domain.
+laysumm_plos_0209,PLOS,209,gemini3_flash_preview_minimal,rewritten,6,0.615703,11,deictic_subject,This coupling sets the scale for cellular interactions along the filament.
+laysumm_plos_0051,PLOS,51,gemini3_flash_preview_minimal,rewritten,4,0.621289,11,analogy_or_metaphor|hard_word_dense,Vegetables like broccoli produce Sulforaphane when they are chopped or chewed.
+laysumm_elife_0163,eLife,163,gemini3_flash_preview_minimal,rewritten,13,0.624996,12,causal_or_inferential,Reducing the REST protein allows genes needed for growth to stay active.
+laysumm_elife_0062,eLife,62,gemini3_flash_preview_minimal,rewritten,8,0.628292,11,deictic_subject,These tissues share genes related to nutrient storage and innate immunity.
+laysumm_plos_0457,PLOS,457,gemini3_flash_preview_minimal,rewritten,6,0.641681,11,,E-cadherin is a protein that helps cells stick to their surroundings.
+laysumm_plos_0285,PLOS,285,gemini3_flash_preview_minimal,rewritten,2,0.645121,13,negation_or_contrast,"Without this data, health officials cannot easily launch or scale up treatment efforts."

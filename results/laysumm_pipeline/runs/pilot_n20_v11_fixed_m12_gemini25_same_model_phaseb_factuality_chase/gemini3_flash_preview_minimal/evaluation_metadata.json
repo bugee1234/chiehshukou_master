@@ -1,0 +1,32 @@
+{
+  "time": "2026-06-19T23:01:23",
+  "run_name": "pilot_n20_v11_fixed_m12_gemini25_same_model_phaseb_factuality_chase",
+  "model_key": "gemini3_flash_preview_minimal",
+  "summac_document": "original",
+  "variants": {
+    "generated": {
+      "ROUGE": 0.32810367548025016,
+      "BLEU": 4.563647532889581,
+      "METEOR": 0.25254608111615373,
+      "BERTScore": 0.8504370003938675,
+      "FKGL": 11.964602218884341,
+      "DCRS": 12.99046011034865,
+      "CLI": 16.22323969566123,
+      "LENS": 68.74465142919712,
+      "AlignScore": 0.8669635206460953,
+      "SummaC": 0.7889495640993118
+    },
+    "rewritten": {
+      "ROUGE": 0.3279809116819295,
+      "BLEU": 4.494612771484944,
+      "METEOR": 0.25464671107035375,
+      "BERTScore": 0.8500239729881287,
+      "FKGL": 11.96704446674252,
+      "DCRS": 12.9928520080611,
+      "CLI": 16.21579759695194,
+      "LENS": 68.56151083315027,
+      "AlignScore": 0.8647891581058502,
+      "SummaC": 0.7922401368618011
+    }
+  }
+}

@@ -1,0 +1,51 @@
+﻿article_id,source_dataset,original_index,model_key,variant,sentence_index,alignscore,word_count,risk_tags,sentence
+laysumm_plos_0228,PLOS,228,gpt41_mini,rewritten,6,0.033784,11,negation_or_contrast|hard_word_dense,"Most studies test only two fixed cue-mapping pairs, not continuous changes."
+laysumm_plos_1309,PLOS,1309,gpt41_mini,rewritten,6,0.045761,12,deictic_subject,This tagging leads to their breakdown by the cell's protein recycling system.
+laysumm_plos_0209,PLOS,209,gpt41_mini,rewritten,12,0.056083,13,,"PatS inhibits HetR, SepJ enables cell communication, and HetR boosts its own production."
+laysumm_plos_0563,PLOS,563,gpt41_mini,rewritten,2,0.061741,13,deictic_subject,"These proteins also help the bacteria avoid the immune system, increasing infection severity."
+laysumm_elife_0057,eLife,57,gpt41_mini,rewritten,6,0.075543,14,,"Arabidopsis flowers always have four petals, while Cardamine petals range from zero to four."
+laysumm_elife_0006,eLife,6,gpt41_mini,rewritten,12,0.109203,12,,Adding noise made humans and monkeys decide faster and feel more confident.
+laysumm_elife_0026,eLife,26,gpt41_mini,rewritten,4,0.112836,10,number|hard_word_dense,Deamidation stops UBC13 from working with TRAF6 to trigger inflammation.
+laysumm_plos_1309,PLOS,1309,gpt41_mini,rewritten,1,0.151774,16,,The levels of substrate receptor proteins in CRLs are tightly controlled to keep all types available.
+laysumm_plos_1309,PLOS,1309,gpt41_mini,rewritten,5,0.186298,13,hard_word_dense,F-box proteins are controlled by tagging themselves for destruction in intact SCF complexes.
+laysumm_elife_0188,eLife,188,gpt41_mini,rewritten,2,0.245413,11,negation_or_contrast|hard_word_dense,"Mosquitoes cannot regulate their body temperature, so environmental temperature controls transmission."
+laysumm_elife_0026,eLife,26,gpt41_mini,rewritten,5,0.247213,9,deictic_subject,This blocks the NF-κB pathway that controls immune responses.
+laysumm_elife_0026,eLife,26,gpt41_mini,rewritten,14,0.272659,9,hard_word_dense,Electrostatic repulsion prevents the proteins from coming close temporarily.
+laysumm_plos_0501,PLOS,501,gpt41_mini,rewritten,7,0.278292,17,number,"The study used about 300,000 drug-mutant data points covering multiple drug classes and thousands of HIV mutants."
+laysumm_plos_0209,PLOS,209,gpt41_mini,rewritten,7,0.290813,14,negation_or_contrast,"Correlations in HetR expression mainly come from molecules moving between cells, not cell division."
+laysumm_elife_0057,eLife,57,gpt41_mini,rewritten,12,0.321947,11,negation_or_contrast|number,Cardamine APETALA1 cannot replace Arabidopsis APETALA1 to keep petal number stable.
+laysumm_elife_0026,eLife,26,gpt41_mini,rewritten,2,0.337853,12,deictic_subject|number,This change is called deamidation and alters one amino acid in UBC13.
+laysumm_elife_0062,eLife,62,gpt41_mini,rewritten,10,0.34243,10,deictic_subject|hard_word_dense,"This similarity includes genes for metabolism, immunity, and nutrient transport."
+laysumm_elife_0062,eLife,62,gpt41_mini,rewritten,6,0.3496,11,deictic_subject,This method found hundreds of gut genes missed by earlier studies.
+laysumm_plos_1309,PLOS,1309,gpt41_mini,rewritten,13,0.354642,13,,Yeast cells lacking this pathway show increased chromosome loss and sensitivity to cadmium.
+laysumm_elife_0163,eLife,163,gpt41_mini,rewritten,7,0.35823,11,deictic_subject|number|hard_word_dense,This mouse produces RNA molecules that bind and inactivate miR-9 conditionally.
+laysumm_plos_0285,PLOS,285,gpt41_mini,rewritten,9,0.368598,12,,"The method follows WHO age-group indicators and samples districts, except for schistosomiasis."
+laysumm_plos_0563,PLOS,563,gpt41_mini,rewritten,9,0.371904,17,,ClfB controls abscess structure and bacterial levels early in skin infection by binding loricrin in abscess tissue.
+laysumm_plos_0051,PLOS,51,gpt41_mini,rewritten,13,0.406867,14,deictic_subject,This means SFN stops HIV before its DNA fully integrates into the host cell.
+laysumm_plos_1116,PLOS,1116,gpt41_mini,rewritten,13,0.40929,14,,"DHF patients have increased reactive oxygen species and nitric oxide species, indicating oxidative stress."
+laysumm_elife_0070,eLife,70,gpt41_mini,rewritten,10,0.465576,10,deictic_subject,This system tags and breaks down damaged proteins outside mitochondria.
+laysumm_plos_0051,PLOS,51,gpt41_mini,rewritten,5,0.479469,15,number,SFN raises levels of Nrf2 and related genes NQO1 and GCLM in these immune cells.
+laysumm_elife_0026,eLife,26,gpt41_mini,rewritten,1,0.482492,13,number,The enzyme OspI from Shigella flexneri changes glutamine 100 in UBC13 to glutamate.
+laysumm_elife_0163,eLife,163,gpt41_mini,rewritten,16,0.483903,11,number,Increased REST levels cause dendritic growth defects in neurons lacking miR-9.
+laysumm_elife_0026,eLife,26,gpt41_mini,rewritten,6,0.485698,13,number,"Normally, UBC13 teams up with another protein, TRAF6, to trigger an immune response."
+laysumm_plos_0051,PLOS,51,gpt41_mini,rewritten,8,0.512587,12,number,Removing Nrf2 increases HIV infection and reduces SFN’s antiviral effect in macrophages.
+laysumm_plos_0285,PLOS,285,gpt41_mini,rewritten,7,0.523097,15,,The ITM method uses fewer resources to check if disease levels need public health action.
+laysumm_plos_0457,PLOS,457,gpt41_mini,rewritten,12,0.529284,12,deictic_subject|negation_or_contrast,"It also does not affect BMP signaling, which helps stem cells renew."
+laysumm_plos_0457,PLOS,457,gpt41_mini,rewritten,5,0.532035,12,,Notch signaling increases with age in fruit fly female germline stem cells.
+laysumm_plos_0051,PLOS,51,gpt41_mini,rewritten,9,0.54089,10,deictic_subject|number,This shows SFN’s protection depends on Nrf2 in these cells.
+laysumm_elife_0057,eLife,57,gpt41_mini,rewritten,5,0.544031,13,,"Arabidopsis thaliana flowers have a fixed petal number, but Cardamine hirsuta flowers vary."
+laysumm_plos_0209,PLOS,209,gpt41_mini,rewritten,15,0.550175,15,hard_word_dense,"Activation, inhibition, and cell communication combine with gene expression noise to form the developmental pattern."
+laysumm_elife_0163,eLife,163,gpt41_mini,rewritten,12,0.553469,13,number,Pyramidal CA1 neurons showed reduced dendritic length and complexity when miR-9 was blocked.
+laysumm_elife_0006,eLife,6,gpt41_mini,rewritten,15,0.560472,9,,High noise increased confidence even when accuracy changed little.
+laysumm_plos_0209,PLOS,209,gpt41_mini,rewritten,16,0.56839,13,deictic_subject,These factors control coupled fluctuations that create the one-dimensional pattern in Anabaena filaments.
+laysumm_plos_0563,PLOS,563,gpt41_mini,rewritten,4,0.572116,14,,Loricrin is a protein found in the outer skin layer of the nose lining.
+laysumm_plos_0178,PLOS,178,gpt41_mini,rewritten,6,0.585797,10,,Zika infections were spread more evenly across all age groups.
+laysumm_elife_0163,eLife,163,gpt41_mini,rewritten,14,0.596799,13,number,"miR-9 lowers the level of REST, a protein that blocks dendritic growth genes."
+laysumm_plos_1116,PLOS,1116,gpt41_mini,rewritten,2,0.605712,14,,DENV infection ranges from mild dengue fever (DF) to severe dengue hemorrhagic fever (DHF).
+laysumm_plos_0457,PLOS,457,gpt41_mini,rewritten,9,0.608199,18,,Knockdown of Sex lethal in germline stem cells increases Notch signaling and promotes their loss from the niche.
+laysumm_plos_0457,PLOS,457,gpt41_mini,rewritten,6,0.610064,10,deictic_subject|causal_or_inferential,This increase causes these stem cells to leave their niche.
+laysumm_elife_0163,eLife,163,gpt41_mini,rewritten,15,0.619624,8,,Reducing REST is essential for proper dendrite development.
+laysumm_plos_0209,PLOS,209,gpt41_mini,rewritten,3,0.635172,15,hard_word_dense,Researchers used a chromosomal N-terminal hetR-gfp translational fusion to track HetR expression in Anabaena cells.
+laysumm_elife_0188,eLife,188,gpt41_mini,rewritten,8,0.641841,14,number,Ross River virus transmission peaks at 26.4°C and stops below 17.0°C and above 31.5°C.
+laysumm_elife_0035,eLife,35,gpt41_mini,rewritten,12,0.646891,14,causal_or_inferential|negation_or_contrast,"The inputs do not directly encode speed, but their changing strength allows this calculation."
+laysumm_plos_0051,PLOS,51,gpt41_mini,rewritten,15,0.647858,9,negation_or_contrast,SFN blocks HIV without raising these known antiviral proteins.

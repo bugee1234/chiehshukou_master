@@ -1,0 +1,62 @@
+{
+  "time": "2026-06-19T00:55:44",
+  "run_name": "pilot_n20_v10_factuality_chase",
+  "stage": "V10_06_rewritten",
+  "mode": "factuality_chase",
+  "model_key": "gemini25_flash_non_thinking",
+  "rewritten_total": 20,
+  "skipped_no_errors_count": 0,
+  "rewrite_invoked_count": 20,
+  "selected_variant_counts": {
+    "factual_repair": 17,
+    "generated": 2,
+    "readability_trim": 1
+  },
+  "parse_error_count": 0,
+  "below_min_length_count": 0,
+  "above_max_length_count": 0,
+  "usage_summary": {
+    "api_calls": 32,
+    "prompt_tokens": 168341,
+    "cached_prompt_tokens": 0,
+    "billable_prompt_tokens": 168341,
+    "completion_tokens": 37702,
+    "billable_output_tokens": 37702,
+    "total_tokens": 206043,
+    "api_elapsed_seconds": 181.444,
+    "cost_currencies": [
+      "USD"
+    ],
+    "estimated_cost": 0.144757,
+    "by_stage": {
+      "V10.rewrite_summary.factuality_chase:gemini25_flash_non_thinking": {
+        "api_calls": 20,
+        "prompt_tokens": 118421,
+        "cached_prompt_tokens": 0,
+        "billable_prompt_tokens": 118421,
+        "completion_tokens": 26702,
+        "billable_output_tokens": 26702,
+        "total_tokens": 145123,
+        "api_elapsed_seconds": 129.609,
+        "cost_currencies": [
+          "USD"
+        ],
+        "estimated_cost": 0.102281
+      },
+      "V10.rewrite_summary.gemini25_flash_non_thinking.expand_length.factuality_chase": {
+        "api_calls": 12,
+        "prompt_tokens": 49920,
+        "cached_prompt_tokens": 0,
+        "billable_prompt_tokens": 49920,
+        "completion_tokens": 11000,
+        "billable_output_tokens": 11000,
+        "total_tokens": 60920,
+        "api_elapsed_seconds": 51.835,
+        "cost_currencies": [
+          "USD"
+        ],
+        "estimated_cost": 0.042476
+      }
+    }
+  }
+}

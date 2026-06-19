@@ -1,0 +1,300 @@
+{
+  "time": "2026-06-19T00:46:37",
+  "run_name": "pilot_n20_v10_factuality_chase",
+  "stage": "V10_02_5_evidence_table",
+  "mode": "factuality_chase",
+  "model_key": "gemini25_flash_non_thinking",
+  "prompt_file": "C:\\Users\\bugee\\OneDrive\\桌面\\chiehshukou_master\\src\\thesis_laysumm_v10\\prompts\\build_evidence_table.txt",
+  "prompt_sha256": "c2d66f72418849c5d110750119e5533d63262a69ed19172d14962d1d8f790c5b",
+  "articles_total": 20,
+  "parse_error_count": 0,
+  "evidence_rows_total": 152,
+  "core_keep_af_total": 152,
+  "check_af_total": 217,
+  "check_type_counts": {
+    "core": 152,
+    "high_risk": 65
+  },
+  "usage_summary": {
+    "api_calls": 7484,
+    "prompt_tokens": 7214849,
+    "cached_prompt_tokens": 66304,
+    "billable_prompt_tokens": 7148545,
+    "completion_tokens": 1842810,
+    "billable_output_tokens": 1842810,
+    "total_tokens": 9057659,
+    "api_elapsed_seconds": 21640.0058,
+    "cost_currencies": [
+      "USD"
+    ],
+    "estimated_cost": 6.836683,
+    "by_stage": {
+      "V10.answer_questions.factuality_chase:gemini3_flash_preview_minimal": {
+        "api_calls": 253,
+        "prompt_tokens": 213129,
+        "cached_prompt_tokens": 0,
+        "billable_prompt_tokens": 213129,
+        "completion_tokens": 79602,
+        "billable_output_tokens": 79602,
+        "total_tokens": 292731,
+        "api_elapsed_seconds": 805.4923,
+        "cost_currencies": [
+          "USD"
+        ],
+        "estimated_cost": 0.34537
+      },
+      "V10.answer_questions.factuality_chase:gpt41_mini": {
+        "api_calls": 215,
+        "prompt_tokens": 179643,
+        "cached_prompt_tokens": 0,
+        "billable_prompt_tokens": 179643,
+        "completion_tokens": 73546,
+        "billable_output_tokens": 73546,
+        "total_tokens": 253189,
+        "api_elapsed_seconds": 1451.9684,
+        "cost_currencies": [
+          "USD"
+        ],
+        "estimated_cost": 0.189531
+      },
+      "V10.evidence_table.factuality_chase:gemini25_flash_non_thinking": {
+        "api_calls": 20,
+        "prompt_tokens": 152156,
+        "cached_prompt_tokens": 0,
+        "billable_prompt_tokens": 152156,
+        "completion_tokens": 72998,
+        "billable_output_tokens": 72998,
+        "total_tokens": 225154,
+        "api_elapsed_seconds": 332.4079,
+        "cost_currencies": [
+          "USD"
+        ],
+        "estimated_cost": 0.228142
+      },
+      "V10.evidence_table.factuality_chase:gemini3_flash_preview_minimal": {
+        "api_calls": 20,
+        "prompt_tokens": 115593,
+        "cached_prompt_tokens": 0,
+        "billable_prompt_tokens": 115593,
+        "completion_tokens": 54332,
+        "billable_output_tokens": 54332,
+        "total_tokens": 169925,
+        "api_elapsed_seconds": 270.0309,
+        "cost_currencies": [
+          "USD"
+        ],
+        "estimated_cost": 0.220792
+      },
+      "V10.evidence_table.factuality_chase:gpt41_mini": {
+        "api_calls": 20,
+        "prompt_tokens": 123240,
+        "cached_prompt_tokens": 15360,
+        "billable_prompt_tokens": 107880,
+        "completion_tokens": 67031,
+        "billable_output_tokens": 67031,
+        "total_tokens": 190271,
+        "api_elapsed_seconds": 869.0501,
+        "cost_currencies": [
+          "USD"
+        ],
+        "estimated_cost": 0.151938
+      },
+      "V10.generate_summary.factuality_chase:gemini3_flash_preview_minimal": {
+        "api_calls": 20,
+        "prompt_tokens": 76579,
+        "cached_prompt_tokens": 0,
+        "billable_prompt_tokens": 76579,
+        "completion_tokens": 20126,
+        "billable_output_tokens": 20126,
+        "total_tokens": 96705,
+        "api_elapsed_seconds": 119.5645,
+        "cost_currencies": [
+          "USD"
+        ],
+        "estimated_cost": 0.098668
+      },
+      "V10.generate_summary.factuality_chase:gpt41_mini": {
+        "api_calls": 20,
+        "prompt_tokens": 89640,
+        "cached_prompt_tokens": 13696,
+        "billable_prompt_tokens": 75944,
+        "completion_tokens": 18907,
+        "billable_output_tokens": 18907,
+        "total_tokens": 108547,
+        "api_elapsed_seconds": 277.6505,
+        "cost_currencies": [
+          "USD"
+        ],
+        "estimated_cost": 0.061998
+      },
+      "V10.generate_summary.gemini3_flash_preview_minimal.expand_length.factuality_chase": {
+        "api_calls": 11,
+        "prompt_tokens": 41047,
+        "cached_prompt_tokens": 0,
+        "billable_prompt_tokens": 41047,
+        "completion_tokens": 12434,
+        "billable_output_tokens": 12434,
+        "total_tokens": 53481,
+        "api_elapsed_seconds": 62.649,
+        "cost_currencies": [
+          "USD"
+        ],
+        "estimated_cost": 0.057825
+      },
+      "V10.generate_summary.gpt41_mini.expand_length.factuality_chase": {
+        "api_calls": 20,
+        "prompt_tokens": 81471,
+        "cached_prompt_tokens": 15104,
+        "billable_prompt_tokens": 66367,
+        "completion_tokens": 17070,
+        "billable_output_tokens": 17070,
+        "total_tokens": 98541,
+        "api_elapsed_seconds": 276.7989,
+        "cost_currencies": [
+          "USD"
+        ],
+        "estimated_cost": 0.055369
+      },
+      "V10.questions.factuality_chase:gemini3_flash_preview_minimal": {
+        "api_calls": 253,
+        "prompt_tokens": 64338,
+        "cached_prompt_tokens": 0,
+        "billable_prompt_tokens": 64338,
+        "completion_tokens": 35617,
+        "billable_output_tokens": 35617,
+        "total_tokens": 99955,
+        "api_elapsed_seconds": 586.7237,
+        "cost_currencies": [
+          "USD"
+        ],
+        "estimated_cost": 0.13902
+      },
+      "V10.questions.factuality_chase:gpt41_mini": {
+        "api_calls": 215,
+        "prompt_tokens": 67098,
+        "cached_prompt_tokens": 0,
+        "billable_prompt_tokens": 67098,
+        "completion_tokens": 29902,
+        "billable_output_tokens": 29902,
+        "total_tokens": 97000,
+        "api_elapsed_seconds": 576.8686,
+        "cost_currencies": [
+          "USD"
+        ],
+        "estimated_cost": 0.074682
+      },
+      "V10.rewrite_summary.factuality_chase:gemini3_flash_preview_minimal": {
+        "api_calls": 20,
+        "prompt_tokens": 104298,
+        "cached_prompt_tokens": 0,
+        "billable_prompt_tokens": 104298,
+        "completion_tokens": 26033,
+        "billable_output_tokens": 26033,
+        "total_tokens": 130331,
+        "api_elapsed_seconds": 128.6924,
+        "cost_currencies": [
+          "USD"
+        ],
+        "estimated_cost": 0.130248
+      },
+      "V10.rewrite_summary.factuality_chase:gpt41_mini": {
+        "api_calls": 20,
+        "prompt_tokens": 111543,
+        "cached_prompt_tokens": 0,
+        "billable_prompt_tokens": 111543,
+        "completion_tokens": 26059,
+        "billable_output_tokens": 26059,
+        "total_tokens": 137602,
+        "api_elapsed_seconds": 483.5571,
+        "cost_currencies": [
+          "USD"
+        ],
+        "estimated_cost": 0.086312
+      },
+      "V10.rewrite_summary.gemini3_flash_preview_minimal.expand_length.factuality_chase": {
+        "api_calls": 2,
+        "prompt_tokens": 8067,
+        "cached_prompt_tokens": 0,
+        "billable_prompt_tokens": 8067,
+        "completion_tokens": 2445,
+        "billable_output_tokens": 2445,
+        "total_tokens": 10512,
+        "api_elapsed_seconds": 11.3271,
+        "cost_currencies": [
+          "USD"
+        ],
+        "estimated_cost": 0.011369
+      },
+      "V10.rewrite_summary.gpt41_mini.expand_length.factuality_chase": {
+        "api_calls": 13,
+        "prompt_tokens": 53131,
+        "cached_prompt_tokens": 22144,
+        "billable_prompt_tokens": 30987,
+        "completion_tokens": 11557,
+        "billable_output_tokens": 11557,
+        "total_tokens": 64688,
+        "api_elapsed_seconds": 143.0366,
+        "cost_currencies": [
+          "USD"
+        ],
+        "estimated_cost": 0.0331
+      },
+      "module1.candidate_af:gemini25_flash_non_thinking": {
+        "api_calls": 175,
+        "prompt_tokens": 377713,
+        "cached_prompt_tokens": 0,
+        "billable_prompt_tokens": 377713,
+        "completion_tokens": 323917,
+        "billable_output_tokens": 323917,
+        "total_tokens": 701630,
+        "api_elapsed_seconds": 1608.5656,
+        "cost_currencies": [
+          "USD"
+        ],
+        "estimated_cost": 0.923106
+      },
+      "module1.candidate_af:gemini3_flash_preview_minimal": {
+        "api_calls": 175,
+        "prompt_tokens": 377713,
+        "cached_prompt_tokens": 0,
+        "billable_prompt_tokens": 377713,
+        "completion_tokens": 140007,
+        "billable_output_tokens": 140007,
+        "total_tokens": 517720,
+        "api_elapsed_seconds": 959.9904,
+        "cost_currencies": [
+          "USD"
+        ],
+        "estimated_cost": 0.608878
+      },
+      "module1.candidate_af:gpt41_mini": {
+        "api_calls": 175,
+        "prompt_tokens": 366087,
+        "cached_prompt_tokens": 0,
+        "billable_prompt_tokens": 366087,
+        "completion_tokens": 208752,
+        "billable_output_tokens": 208752,
+        "total_tokens": 574839,
+        "api_elapsed_seconds": 4785.5952,
+        "cost_currencies": [
+          "USD"
+        ],
+        "estimated_cost": 0.480438
+      },
+      "module2.judge_abstract:gemini25_flash_non_thinking": {
+        "api_calls": 5837,
+        "prompt_tokens": 4612363,
+        "cached_prompt_tokens": 0,
+        "billable_prompt_tokens": 4612363,
+        "completion_tokens": 622475,
+        "billable_output_tokens": 622475,
+        "total_tokens": 5234838,
+        "api_elapsed_seconds": 7890.0366,
+        "cost_currencies": [
+          "USD"
+        ],
+        "estimated_cost": 2.939896
+      }
+    }
+  }
+}

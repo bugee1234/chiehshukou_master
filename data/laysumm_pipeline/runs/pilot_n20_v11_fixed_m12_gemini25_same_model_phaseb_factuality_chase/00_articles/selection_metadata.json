@@ -1,0 +1,92 @@
+{
+  "time": "2026-06-15T21:28:30",
+  "pipeline": "thesis_laysumm",
+  "run_name": "pilot_n20_v1",
+  "split": "validation",
+  "seed": 42,
+  "n_per_source": 10,
+  "selection_mode": "random",
+  "require_expert_summary": true,
+  "thesis_sample_per_source": 142,
+  "validation_pool_size": {
+    "PLOS": 1376,
+    "eLife": 241
+  },
+  "paper_alignment": "Pilot/sample: random 10 per source from HuggingFace validation split.",
+  "datasets": {
+    "PLOS": {
+      "dataset_name": "BioLaySumm/BioLaySumm2025-PLOS",
+      "split_size": 1376,
+      "selected_count": 10,
+      "selected_indices": [
+        51,
+        178,
+        209,
+        228,
+        285,
+        457,
+        501,
+        563,
+        1116,
+        1309
+      ],
+      "columns": [
+        "article",
+        "summary",
+        "section_headings",
+        "keywords",
+        "year",
+        "title"
+      ],
+      "expert_summary_column": "summary",
+      "full_split_ok_count": 1376,
+      "full_split_error_count": 0,
+      "full_split_empty_expert_summary_count": 0
+    },
+    "eLife": {
+      "dataset_name": "BioLaySumm/BioLaySumm2025-eLife",
+      "split_size": 241,
+      "selected_count": 10,
+      "selected_indices": [
+        6,
+        26,
+        28,
+        35,
+        57,
+        62,
+        70,
+        163,
+        188,
+        189
+      ],
+      "columns": [
+        "article",
+        "summary",
+        "section_headings",
+        "keywords",
+        "year",
+        "title"
+      ],
+      "expert_summary_column": "summary",
+      "full_split_ok_count": 241,
+      "full_split_error_count": 0,
+      "full_split_empty_expert_summary_count": 0
+    }
+  },
+  "total_articles": 20,
+  "by_source": {
+    "PLOS": 10,
+    "eLife": 10
+  },
+  "empty_expert_summary_count": 0,
+  "abstract_sentence_stats": {
+    "min": 5,
+    "max": 32,
+    "mean": 10.55
+  },
+  "expert_summary_word_stats": {
+    "min": 142,
+    "max": 441,
+    "mean": 282.9
+  }
+}
