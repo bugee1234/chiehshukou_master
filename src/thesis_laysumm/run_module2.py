@@ -14,6 +14,7 @@ if str(ROOT_DIR) not in sys.path:
 
 from src.experiment_2.run_three_model_exp2 import MODEL_CONFIGS, ProviderClient
 from src.thesis_laysumm.llm_utils import (
+    ParallelExecutionError,
     load_articles,
     run_parallel,
     save_usage,
@@ -26,6 +27,7 @@ from src.utils import load_jsonl, save_json, save_jsonl
 PROMPTS_DIR = Path(__file__).resolve().parent / "prompts"
 DEFAULT_MODEL_KEY = "gemini3_flash_preview_minimal"
 DEFAULT_JUDGE_MODEL_KEY = "gemini3_flash_preview_minimal"
+MAX_ITEM_ATTEMPTS = 2
 
 
 def _coerce_bool(value: Any) -> bool:
@@ -99,40 +101,47 @@ def judge_candidate_af(
     usage = usage_tracker(run_name, resume=resume)
     client = ProviderClient(judge_model_key, usage)
     existing = load_jsonl(out_path) if resume and out_path.exists() else []
+    existing_parse_errors = [r.get("af_id") for r in existing if r.get("parse_error")]
+    if existing_parse_errors:
+        raise ValueError(
+            "Existing module2 parse_error rows must be removed before resume; "
+            f"examples={existing_parse_errors[:5]}"
+        )
     done = {str(r.get("af_id")) for r in existing}
 
     def worker(af: dict[str, Any]) -> dict[str, Any]:
         article = articles[str(af["article_id"])]
         abstract_sentences = article.get("abstract_sentences") or []
-        raw = ""
-        parse_error = False
-        try:
-            raw = client.chat(
-                stage=f"module2.judge_abstract:{judge_model_key}",
-                item_id=str(af["af_id"]),
-                messages=[
-                    {
-                        "role": "user",
-                        "content": prompt.replace("{atomic_fact}", str(af["fact"])).replace(
-                            "{abstract_sentences}",
-                            _format_abstract_sentences(abstract_sentences),
-                        ),
-                    }
-                ],
-                temperature=0.0,
-                response_format={"type": "json_object"},
-            )
-            obj = json.loads(raw)
-        except Exception as exc:
-            parse_error = True
-            obj = {
-                "aligned_with_abstract": False,
-                "abstract_sentence_idx": None,
-                "abstract_sentence": None,
-                "coverage_type": "absent",
-                "confidence": "low",
-                "reasoning": f"parse_or_runtime_error: {exc}",
-            }
+        last_exc: Exception | None = None
+        obj: dict[str, Any] | None = None
+        for attempt in range(1, MAX_ITEM_ATTEMPTS + 1):
+            try:
+                raw = client.chat(
+                    stage=f"module2.judge_abstract:{judge_model_key}",
+                    item_id=str(af["af_id"]),
+                    messages=[
+                        {
+                            "role": "user",
+                            "content": prompt.replace("{atomic_fact}", str(af["fact"])).replace(
+                                "{abstract_sentences}",
+                                _format_abstract_sentences(abstract_sentences),
+                            ),
+                        }
+                    ],
+                    temperature=0.0,
+                    response_format={"type": "json_object"},
+                )
+                obj = json.loads(raw)
+                break
+            except Exception as exc:
+                last_exc = exc
+                if attempt == MAX_ITEM_ATTEMPTS:
+                    raise RuntimeError(
+                        f"module2 failed after {MAX_ITEM_ATTEMPTS} attempts "
+                        f"for af_id={af['af_id']}: {exc}"
+                    ) from exc
+        if obj is None:
+            raise RuntimeError(f"module2 failed for af_id={af['af_id']}: {last_exc}")
 
         coverage_type = str(obj.get("coverage_type", "absent")).strip()
         if coverage_type not in {
@@ -174,18 +183,26 @@ def judge_candidate_af(
             "coverage_type": coverage_type,
             "confidence": confidence,
             "reasoning": str(obj.get("reasoning", "")).strip(),
-            "parse_error": parse_error,
+            "parse_error": False,
         }
         row["final_keep"] = _is_final_keep(row)
         return row
 
     todo = [r for r in candidate_rows if str(r["af_id"]) not in done]
-    new_rows = run_parallel(
-        todo,
-        worker,
-        max_workers=max_workers,
-        desc=f"module2 | {model_key}",
-    )
+    try:
+        new_rows = run_parallel(
+            todo,
+            worker,
+            max_workers=max_workers,
+            desc=f"module2 | {model_key}",
+        )
+    except ParallelExecutionError as exc:
+        partial_rows = existing + exc.partial_results
+        partial_rows.sort(key=lambda r: (str(r["article_id"]), str(r["af_id"])))
+        save_jsonl(partial_rows, out_path)
+        save_usage(run_name, usage)
+        print(f"[module2] checkpointed {len(partial_rows)} clean judgements before failure -> {out_path}")
+        raise
     all_rows = existing + new_rows
     all_rows.sort(key=lambda r: (str(r["article_id"]), str(r["af_id"])))
     save_jsonl(all_rows, out_path)

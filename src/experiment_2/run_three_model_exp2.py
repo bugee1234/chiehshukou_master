@@ -373,7 +373,7 @@ class ProviderClient:
             except ImportError as exc:
                 raise ImportError("Please install google-genai: pip install google-genai") from exc
             self.genai_types = genai_types
-            self.client = genai.Client(api_key=api_key)
+            self.client = genai.Client(api_key=api_key, http_options=genai_types.HttpOptions(timeout=120000))
         else:
             raise ValueError(f"Unknown provider: {self.provider}")
 

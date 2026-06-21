@@ -13,6 +13,12 @@ from src.thesis_laysumm.paths import run_data_dir
 from src.utils import load_jsonl, save_jsonl
 
 
+class ParallelExecutionError(RuntimeError):
+    def __init__(self, message: str, partial_results: list[Any]):
+        super().__init__(message)
+        self.partial_results = partial_results
+
+
 def norm_text(text: str) -> str:
     return re.sub(r"\s+", " ", str(text or "").strip().lower())
 
@@ -118,10 +124,34 @@ def run_parallel(
 ) -> list[Any]:
     item_list = list(items)
     if max_workers <= 1:
-        return [worker(item) for item in tqdm(item_list, desc=desc, total=len(item_list))]
+        out: list[Any] = []
+        for item in tqdm(item_list, desc=desc, total=len(item_list)):
+            try:
+                out.append(worker(item))
+            except Exception as exc:
+                raise ParallelExecutionError(
+                    f"{desc} failed after {len(out)} completed items: {exc}",
+                    out,
+                ) from exc
+        return out
     out: list[Any] = []
-    with ThreadPoolExecutor(max_workers=max_workers) as ex:
-        futures = [ex.submit(worker, item) for item in item_list]
+    ex = ThreadPoolExecutor(max_workers=max_workers)
+    futures = [ex.submit(worker, item) for item in item_list]
+    failed = False
+    try:
         for fut in tqdm(as_completed(futures), desc=desc, total=len(futures)):
-            out.append(fut.result())
+            try:
+                out.append(fut.result())
+            except Exception as exc:
+                failed = True
+                for pending in futures:
+                    pending.cancel()
+                ex.shutdown(wait=False, cancel_futures=True)
+                raise ParallelExecutionError(
+                    f"{desc} failed after {len(out)} completed items: {exc}",
+                    out,
+                ) from exc
+    finally:
+        if not failed:
+            ex.shutdown(wait=True, cancel_futures=False)
     return out

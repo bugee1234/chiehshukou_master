@@ -1,6 +1,6 @@
 {
-  "time": "2026-06-20T03:09:43",
-  "seeded_from": "C:\\Users\\bugee\\OneDrive\\桌面\\chiehshukou_master\\data\\laysumm_pipeline\\runs\\pilot_n20_v11_fixed_m12_gemini25_same_model_phaseb_factuality_chase\\02_5_evidence_table\\factuality_chase\\gemini3_flash_preview_minimal",
+  "time": "2026-06-20T03:09:42",
+  "seeded_from": "C:\\Users\\bugee\\OneDrive\\桌面\\chiehshukou_master\\data\\laysumm_pipeline\\runs\\pilot_n20_v11_fixed_m12_gemini25_same_model_phaseb_factuality_chase\\02_5_evidence_table\\factuality_chase\\gemini25_flash_non_thinking",
   "pilot_article_count": 20,
   "seeded_row_counts": {
     "check_af.jsonl": 242,

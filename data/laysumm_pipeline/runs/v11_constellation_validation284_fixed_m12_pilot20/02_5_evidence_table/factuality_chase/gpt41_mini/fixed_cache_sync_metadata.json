@@ -1,0 +1,6 @@
+{
+  "time": "2026-06-21T12:58:03",
+  "source_model": "gemini25_flash_non_thinking",
+  "target_model": "gpt41_mini",
+  "note": "Full fixed upstream evidence/questions copied for phase-B comparison."
+}

@@ -1,0 +1,88 @@
+{
+  "time": "2026-06-21T12:42:07",
+  "run_name": "v11_constellation_validation284_fixed_m12_pilot20",
+  "stage": "02_module2",
+  "model_key": "gemini25_flash_non_thinking",
+  "judge_model_key": "gemini25_flash_non_thinking",
+  "judge_model": "gemini-2.5-flash",
+  "max_workers": 8,
+  "articles_limit": null,
+  "prompt_file": "C:\\Users\\bugee\\OneDrive\\桌面\\chiehshukou_master\\src\\thesis_laysumm\\prompts\\judge_af_against_abstract.txt",
+  "prompt_sha256": "457c766e2817af202ac07e2259a5acffd2bf4af39f94f5373ed6b5eeb7c5b924",
+  "candidate_af_total": 35734,
+  "judgements_total": 35734,
+  "final_keep_total": 14896,
+  "coverage_type_counts": {
+    "exact": 5148,
+    "paraphrase": 9479,
+    "absent": 20471,
+    "lay_generalization": 269,
+    "topic_only": 159,
+    "contradicted": 208
+  },
+  "confidence_counts": {
+    "high": 35628,
+    "medium": 48,
+    "low": 58
+  },
+  "parse_error_count": 0,
+  "final_keep_rule": {
+    "aligned_with_abstract": true,
+    "coverage_type": [
+      "exact",
+      "paraphrase",
+      "lay_generalization"
+    ],
+    "confidence": [
+      "high",
+      "medium"
+    ],
+    "abstract_sentence_idx": "non-null",
+    "abstract_sentence": "non-empty",
+    "parse_error": false
+  },
+  "usage_summary": {
+    "api_calls": 35161,
+    "prompt_tokens": 30545920,
+    "cached_prompt_tokens": 0,
+    "billable_prompt_tokens": 30545920,
+    "completion_tokens": 7348773,
+    "billable_output_tokens": 7348773,
+    "total_tokens": 37894693,
+    "api_elapsed_seconds": 66739.2026,
+    "cost_currencies": [
+      "USD"
+    ],
+    "estimated_cost": 27.535709,
+    "by_stage": {
+      "module1.candidate_af:gemini25_flash_non_thinking": {
+        "api_calls": 2171,
+        "prompt_tokens": 4749446,
+        "cached_prompt_tokens": 0,
+        "billable_prompt_tokens": 4749446,
+        "completion_tokens": 3853509,
+        "billable_output_tokens": 3853509,
+        "total_tokens": 8602955,
+        "api_elapsed_seconds": 23785.2625,
+        "cost_currencies": [
+          "USD"
+        ],
+        "estimated_cost": 11.058606
+      },
+      "module2.judge_abstract:gemini25_flash_non_thinking": {
+        "api_calls": 32990,
+        "prompt_tokens": 25796474,
+        "cached_prompt_tokens": 0,
+        "billable_prompt_tokens": 25796474,
+        "completion_tokens": 3495264,
+        "billable_output_tokens": 3495264,
+        "total_tokens": 29291738,
+        "api_elapsed_seconds": 42953.9401,
+        "cost_currencies": [
+          "USD"
+        ],
+        "estimated_cost": 16.477102
+      }
+    }
+  }
+}

@@ -15,13 +15,22 @@ if str(ROOT_DIR) not in sys.path:
     sys.path.insert(0, str(ROOT_DIR))
 
 from src.experiment_2.run_three_model_exp2 import MODEL_CONFIGS, ProviderClient
-from src.thesis_laysumm.llm_utils import mutate_sentence, norm_text, run_parallel, save_usage, sha256_text, usage_tracker
+from src.thesis_laysumm.llm_utils import (
+    ParallelExecutionError,
+    mutate_sentence,
+    norm_text,
+    run_parallel,
+    save_usage,
+    sha256_text,
+    usage_tracker,
+)
 from src.thesis_laysumm.paths import run_data_dir
 from src.thesis_laysumm_v11.common import require_mode
 from src.utils import load_jsonl, save_json, save_jsonl
 
 PROMPTS_DIR_V2 = ROOT_DIR / "src" / "thesis_laysumm" / "prompts"
 DEFAULT_MODEL_KEY = "gpt41_mini"
+MAX_ITEM_ATTEMPTS = 2
 
 
 def _evidence_dir(run_name: str, model_key: str, mode: str) -> Path:
@@ -121,51 +130,73 @@ def generate_questions(
     usage = usage_tracker(run_name, resume=resume)
     client = ProviderClient(model_key, usage)
     existing = load_jsonl(out_path) if resume and out_path.exists() else []
+    existing_parse_errors = [r.get("question_id") for r in existing if r.get("parse_error")]
+    if existing_parse_errors:
+        raise ValueError(
+            "Existing question parse_error rows must be removed before resume; "
+            f"examples={existing_parse_errors[:5]}"
+        )
     done = {str(r.get("af_id")) for r in existing}
 
     def worker(af: dict[str, Any]) -> dict[str, Any]:
-        raw = ""
-        parse_error = False
         false_texts: list[str] = []
         false_strategies: list[str] = []
-        try:
-            raw = client.chat(
-                stage=f"V11.questions.{mode}:{model_key}",
-                item_id=str(af["af_id"]),
-                messages=[
-                    {
-                        "role": "user",
-                        "content": prompt_template.replace("{atomic_fact}", str(af["fact"])).replace(
-                            "{source_span}", str(af.get("source_span", ""))
-                        ),
-                    }
-                ],
-                temperature=0.0,
-                response_format={"type": "json_object"},
-            )
-            obj = json.loads(raw)
-            raw_false = obj.get("false_statements", [])
-            if not isinstance(raw_false, list):
-                raw_false = []
-            for item in raw_false:
-                if not isinstance(item, dict):
-                    continue
-                text = str(item.get("text", "")).strip()
-                if text and norm_text(text) != norm_text(af["fact"]):
-                    false_texts.append(text)
-                    false_strategies.append(str(item.get("strategy", "")).strip() or "llm")
-        except Exception:
-            parse_error = True
+        for attempt in range(1, MAX_ITEM_ATTEMPTS + 1):
+            false_texts = []
+            false_strategies = []
+            try:
+                raw = client.chat(
+                    stage=f"V11.questions.{mode}:{model_key}",
+                    item_id=str(af["af_id"]),
+                    messages=[
+                        {
+                            "role": "user",
+                            "content": prompt_template.replace("{atomic_fact}", str(af["fact"])).replace(
+                                "{source_span}", str(af.get("source_span", ""))
+                            ),
+                        }
+                    ],
+                    temperature=0.0,
+                    response_format={"type": "json_object"},
+                )
+                obj = json.loads(raw)
+                raw_false = obj.get("false_statements", [])
+                if not isinstance(raw_false, list):
+                    raise ValueError("false_statements must be a list")
+                for item in raw_false:
+                    if not isinstance(item, dict):
+                        continue
+                    text = str(item.get("text", "")).strip()
+                    if text and norm_text(text) != norm_text(af["fact"]):
+                        false_texts.append(text)
+                        false_strategies.append(str(item.get("strategy", "")).strip() or "llm")
+                if len(false_texts) < 3:
+                    raise ValueError(f"expected 3 false statements, got {len(false_texts)}")
+                break
+            except Exception as exc:
+                if attempt == MAX_ITEM_ATTEMPTS:
+                    raise RuntimeError(
+                        f"questions failed after {MAX_ITEM_ATTEMPTS} attempts "
+                        f"for af_id={af['af_id']}: {exc}"
+                    ) from exc
         return _build_question(
             af=af,
             model_key=model_key,
             false_texts=false_texts,
             false_strategies=false_strategies,
-            parse_error=parse_error,
+            parse_error=False,
         )
 
     todo = [r for r in check_af if str(r.get("af_id")) not in done]
-    new_rows = run_parallel(todo, worker, max_workers=max_workers, desc=f"V11 questions | {mode} | {model_key}")
+    try:
+        new_rows = run_parallel(todo, worker, max_workers=max_workers, desc=f"V11 questions | {mode} | {model_key}")
+    except ParallelExecutionError as exc:
+        partial_rows = existing + exc.partial_results
+        partial_rows.sort(key=lambda r: (str(r["article_id"]), str(r["af_id"])))
+        save_jsonl(partial_rows, out_path)
+        save_usage(run_name, usage)
+        print(f"[V11 questions] checkpointed {len(partial_rows)} clean questions before failure -> {out_path}")
+        raise
     all_rows = existing + new_rows
     all_rows.sort(key=lambda r: (str(r["article_id"]), str(r["af_id"])))
     save_jsonl(all_rows, out_path)

@@ -13,7 +13,14 @@ if str(ROOT_DIR) not in sys.path:
     sys.path.insert(0, str(ROOT_DIR))
 
 from src.experiment_2.run_three_model_exp2 import MODEL_CONFIGS, ProviderClient
-from src.thesis_laysumm.llm_utils import load_articles, run_parallel, save_usage, sha256_text, usage_tracker
+from src.thesis_laysumm.llm_utils import (
+    ParallelExecutionError,
+    load_articles,
+    run_parallel,
+    save_usage,
+    sha256_text,
+    usage_tracker,
+)
 from src.thesis_laysumm.paths import run_data_dir
 from src.thesis_laysumm_v11.common import (
     BANNED_FREE_IMPLICATION_PHRASES,
@@ -24,6 +31,7 @@ from src.thesis_laysumm_v11.common import (
     find_mojibake,
     length_policy,
     loads_json_object,
+    normalized_sentence_key,
     readability_policy,
     readability_proxy_score,
     readability_stats,
@@ -36,6 +44,7 @@ from src.utils import load_jsonl, save_json, save_jsonl
 
 PROMPTS_DIR_V2 = ROOT_DIR / "src" / "thesis_laysumm" / "prompts"
 DEFAULT_MODEL_KEY = "gpt41_mini"
+MAX_ITEM_ATTEMPTS = 2
 
 
 def _evidence_dir(run_name: str, model_key: str, mode: str) -> Path:
@@ -124,7 +133,12 @@ def _contains_banned_phrase(text: str) -> list[str]:
     return [phrase for phrase in BANNED_FREE_IMPLICATION_PHRASES if phrase in lower]
 
 
-def _normalize_slots(obj: dict[str, Any], valid_row_ids: set[str]) -> tuple[list[dict[str, Any]], list[str]]:
+def _normalize_slots(
+    obj: dict[str, Any],
+    valid_row_ids: set[str],
+    *,
+    drop_invalid_evidence: bool = True,
+) -> tuple[list[dict[str, Any]], list[str]]:
     errors: list[str] = []
     raw_slots = obj.get("slots", [])
     if not isinstance(raw_slots, list) or not raw_slots:
@@ -147,7 +161,8 @@ def _normalize_slots(obj: dict[str, Any], valid_row_ids: set[str]) -> tuple[list
         seen_slot_ids.add(slot_id)
         row_id = str(raw.get("evidence_row_id", "")).strip()
         if row_id not in valid_row_ids:
-            errors.append(f"{slot_id}: unknown evidence_row_id: {row_id}")
+            if not drop_invalid_evidence:
+                errors.append(f"{slot_id}: unknown evidence_row_id: {row_id}")
             continue
         role = str(raw.get("role", "finding")).strip().lower() or "finding"
         if role not in allowed_roles:
@@ -369,6 +384,12 @@ def generate_summaries(
     usage = usage_tracker(run_name, resume=resume)
     client = ProviderClient(model_key, usage)
     existing = load_jsonl(out_path) if resume and out_path.exists() else []
+    existing_parse_errors = [r.get("article_id") for r in existing if r.get("parse_error")]
+    if existing_parse_errors:
+        raise ValueError(
+            "Existing generated summary parse_error rows must be removed before resume; "
+            f"examples={existing_parse_errors[:5]}"
+        )
     done = {str(r.get("article_id")) for r in existing}
 
     def worker(article: dict[str, Any]) -> dict[str, Any]:
@@ -383,8 +404,6 @@ def generate_summaries(
         )
         valid_row_ids = {str(r["evidence_row_id"]) for r in evidence.get("evidence_rows") or []}
 
-        raw = ""
-        parse_error = False
         validation_errors: list[str] = []
         slots: list[dict[str, Any]] = []
         sentences: list[dict[str, Any]] = []
@@ -392,60 +411,72 @@ def generate_summaries(
         expansion_attempts: list[str] = []
         expansion_errors: list[str] = []
         length_fit_notes: list[str] = []
-        try:
-            prompt = (
-                prompt_template.replace("{mode}", mode)
-                .replace("{title}", str(article.get("title", "")))
-                .replace("{abstract}", str(article.get("abstract", "")))
-                .replace("{evidence_table}", _format_evidence_table(evidence))
-                .replace("{dataset_profile}", dataset_profile(str(article.get("source_dataset", ""))))
-                .replace("{target_word_count}", str(policy["target_word_count"]))
-                .replace("{min_word_count}", str(policy["min_word_count"]))
-                .replace("{max_word_count}", str(policy["max_word_count"]))
-                .replace("{style_profile}", str(policy.get("style_profile", "compact_factual")))
-                .replace(
-                    "{readability_policy}",
-                    compact_json(
-                        readability_policy(
-                            source_dataset=str(article.get("source_dataset", "")),
-                            expert_word_count=int(article.get("expert_summary_word_count") or 0),
-                        )
-                    ),
-                )
+        prompt = (
+            prompt_template.replace("{mode}", mode)
+            .replace("{title}", str(article.get("title", "")))
+            .replace("{abstract}", str(article.get("abstract", "")))
+            .replace("{evidence_table}", _format_evidence_table(evidence))
+            .replace("{dataset_profile}", dataset_profile(str(article.get("source_dataset", ""))))
+            .replace("{target_word_count}", str(policy["target_word_count"]))
+            .replace("{min_word_count}", str(policy["min_word_count"]))
+            .replace("{max_word_count}", str(policy["max_word_count"]))
+            .replace("{style_profile}", str(policy.get("style_profile", "compact_factual")))
+            .replace(
+                "{readability_policy}",
+                compact_json(
+                    readability_policy(
+                        source_dataset=str(article.get("source_dataset", "")),
+                        expert_word_count=int(article.get("expert_summary_word_count") or 0),
+                    )
+                ),
             )
-            raw = client.chat(
-                stage=f"V11.generate_summary.{mode}:{model_key}",
-                item_id=aid,
-                messages=[{"role": "user", "content": prompt}],
-                temperature=0.0,
-                response_format={"type": "json_object"},
-            )
-            obj = loads_json_object(raw)
-            slots, validation_errors = _normalize_slots(obj, valid_row_ids)
-            generated_summary = str(obj.get("summary", "")).strip()
-            if not generated_summary:
-                generated_summary = _summary_from_slots(slots)
-            if not validation_errors:
-                slots, generated_summary, expansion_attempts, expand_errors = _expand_if_needed(
-                    client=client,
-                    stage_prefix=f"V11.generate_summary.{model_key}",
+        )
+        for attempt in range(1, MAX_ITEM_ATTEMPTS + 1):
+            validation_errors = []
+            slots = []
+            sentences = []
+            generated_summary = ""
+            expansion_attempts = []
+            expansion_errors = []
+            length_fit_notes = []
+            try:
+                raw = client.chat(
+                    stage=f"V11.generate_summary.{mode}:{model_key}",
                     item_id=aid,
-                    mode=mode,
-                    source_dataset=str(article.get("source_dataset", "")),
-                    policy=policy,
-                    evidence=evidence,
-                    slots=slots,
-                    summary=generated_summary,
+                    messages=[{"role": "user", "content": prompt}],
+                    temperature=0.0,
+                    response_format={"type": "json_object"},
                 )
-                expansion_errors.extend(expand_errors)
-            slots, length_fit_notes = _fit_slots_to_length(slots, policy)
-            generated_summary = _summary_from_slots(slots)
-            sentences = _slots_to_sentences(slots)
-            if validation_errors or not generated_summary:
-                raise ValueError("; ".join(validation_errors) or "empty generated summary")
-        except Exception as exc:
-            parse_error = True
-            validation_errors = validation_errors or [str(exc)]
+                obj = loads_json_object(raw)
+                slots, validation_errors = _normalize_slots(obj, valid_row_ids)
+                generated_summary = str(obj.get("summary", "")).strip()
+                if not generated_summary:
+                    generated_summary = _summary_from_slots(slots)
+                if not validation_errors:
+                    slots, generated_summary, expansion_attempts, expand_errors = _expand_if_needed(
+                        client=client,
+                        stage_prefix=f"V11.generate_summary.{model_key}",
+                        item_id=aid,
+                        mode=mode,
+                        source_dataset=str(article.get("source_dataset", "")),
+                        policy=policy,
+                        evidence=evidence,
+                        slots=slots,
+                        summary=generated_summary,
+                    )
+                    expansion_errors.extend(expand_errors)
+                slots, length_fit_notes = _fit_slots_to_length(slots, policy)
+                generated_summary = _summary_from_slots(slots)
+                sentences = _slots_to_sentences(slots)
+                if validation_errors or not generated_summary:
+                    raise ValueError("; ".join(validation_errors) or "empty generated summary")
+                break
+            except Exception as exc:
+                if attempt == MAX_ITEM_ATTEMPTS:
+                    raise RuntimeError(
+                        f"generate-summary failed after {MAX_ITEM_ATTEMPTS} attempts "
+                        f"for article_id={aid}: {exc}"
+                    ) from exc
 
         wc = safe_word_count(generated_summary)
         return {
@@ -472,16 +503,24 @@ def generate_summaries(
             "mojibake_warnings": find_mojibake(generated_summary),
             "below_min_length": bool(generated_summary) and wc < policy["min_word_count"],
             "above_max_length": bool(generated_summary) and wc > policy["max_word_count"],
-            "parse_error": parse_error,
+            "parse_error": False,
             "validation_errors": validation_errors,
             "length_expansion_attempts": expansion_attempts,
             "length_expansion_errors": expansion_errors,
             "length_fit_notes": length_fit_notes,
-            "raw_response": raw if parse_error else None,
+            "raw_response": None,
         }
 
     todo = [a for a in articles if str(a["id"]) not in done]
-    new_rows = run_parallel(todo, worker, max_workers=max_workers, desc=f"V11 generate | {mode} | {model_key}")
+    try:
+        new_rows = run_parallel(todo, worker, max_workers=max_workers, desc=f"V11 generate | {mode} | {model_key}")
+    except ParallelExecutionError as exc:
+        partial_rows = existing + exc.partial_results
+        partial_rows.sort(key=lambda r: str(r["article_id"]))
+        save_jsonl(partial_rows, out_path)
+        save_usage(run_name, usage)
+        print(f"[V11 generate] checkpointed {len(partial_rows)} clean summaries before failure -> {out_path}")
+        raise
     all_rows = existing + new_rows
     all_rows.sort(key=lambda r: str(r["article_id"]))
     save_jsonl(all_rows, out_path)
@@ -592,6 +631,12 @@ def answer_questions(
     usage = usage_tracker(run_name, resume=resume)
     client = ProviderClient(model_key, usage)
     existing = load_jsonl(out_path) if resume and out_path.exists() else []
+    existing_parse_errors = [r.get("question_id") for r in existing if r.get("parse_error")]
+    if existing_parse_errors:
+        raise ValueError(
+            "Existing answer parse_error rows must be removed before resume; "
+            f"examples={existing_parse_errors[:5]}"
+        )
     done = {str(r.get("question_id")) for r in existing}
 
     def worker(question: dict[str, Any]) -> dict[str, Any]:
@@ -600,37 +645,40 @@ def answer_questions(
         if summary_row is None:
             raise RuntimeError(f"Missing generated summary for {aid}")
         opts = {letter: str((question.get("options") or {}).get(letter, "")).strip() for letter in "ABCDE"}
-        raw = ""
-        parse_error = False
         obj: dict[str, Any] = {}
         option_eval: dict[str, dict[str, Any]] = {}
         pred = "E"
         reasoning = ""
-        try:
-            user_prompt = (
-                user_template.replace("{generated_summary}", str(summary_row["generated_summary"]))
-                .replace("{option_a}", opts["A"])
-                .replace("{option_b}", opts["B"])
-                .replace("{option_c}", opts["C"])
-                .replace("{option_d}", opts["D"])
-                .replace("{option_e}", opts["E"])
-            )
-            raw = client.chat(
-                stage=f"V11.answer_questions.{mode}:{model_key}",
-                item_id=str(question["question_id"]),
-                messages=[{"role": "system", "content": system_prompt}, {"role": "user", "content": user_prompt}],
-                temperature=0.0,
-                response_format={"type": "json_object"},
-            )
-            obj = loads_json_object(raw)
-            option_eval = _parse_option_eval(obj)
-            pred = _decide_answer(option_eval, obj)
-            reasoning = str(obj.get("reasoning", "")).strip()
-        except Exception as exc:
-            parse_error = True
-            reasoning = f"parse_or_runtime_error: {exc}"
+        user_prompt = (
+            user_template.replace("{generated_summary}", str(summary_row["generated_summary"]))
+            .replace("{option_a}", opts["A"])
+            .replace("{option_b}", opts["B"])
+            .replace("{option_c}", opts["C"])
+            .replace("{option_d}", opts["D"])
+            .replace("{option_e}", opts["E"])
+        )
+        for attempt in range(1, MAX_ITEM_ATTEMPTS + 1):
+            try:
+                raw = client.chat(
+                    stage=f"V11.answer_questions.{mode}:{model_key}",
+                    item_id=str(question["question_id"]),
+                    messages=[{"role": "system", "content": system_prompt}, {"role": "user", "content": user_prompt}],
+                    temperature=0.0,
+                    response_format={"type": "json_object"},
+                )
+                obj = loads_json_object(raw)
+                option_eval = _parse_option_eval(obj)
+                pred = _decide_answer(option_eval, obj)
+                reasoning = str(obj.get("reasoning", "")).strip()
+                break
+            except Exception as exc:
+                if attempt == MAX_ITEM_ATTEMPTS:
+                    raise RuntimeError(
+                        f"answer-questions failed after {MAX_ITEM_ATTEMPTS} attempts "
+                        f"for question_id={question['question_id']}: {exc}"
+                    ) from exc
 
-        correct = (not parse_error) and pred == str(question.get("correct_letter", "")).strip().upper()
+        correct = pred == str(question.get("correct_letter", "")).strip().upper()
         return {
             "question_id": question["question_id"],
             "af_id": question["af_id"],
@@ -653,13 +701,22 @@ def answer_questions(
             "predicted_answer": opts.get(pred, ""),
             "option_evaluation": option_eval,
             "reasoning": reasoning,
-            "parse_error": parse_error,
-            "raw_response": raw if parse_error else None,
+            "parse_error": False,
+            "raw_response": None,
             "context_mode": "V11_full_generated_summary",
         }
 
     todo = [q for q in questions if str(q.get("question_id")) not in done]
-    new_rows = run_parallel(todo, worker, max_workers=max_workers, desc=f"V11 answer | {mode} | {model_key}")
+    try:
+        new_rows = run_parallel(todo, worker, max_workers=max_workers, desc=f"V11 answer | {mode} | {model_key}")
+    except ParallelExecutionError as exc:
+        partial_rows = existing + exc.partial_results
+        partial_rows.sort(key=lambda r: (str(r["article_id"]), str(r["question_id"])))
+        save_jsonl(partial_rows, out_path)
+        save_jsonl([r for r in partial_rows if not r.get("correct")], wrong_path)
+        save_usage(run_name, usage)
+        print(f"[V11 answer] checkpointed {len(partial_rows)} clean answers before failure -> {out_path}")
+        raise
     all_rows = existing + new_rows
     all_rows.sort(key=lambda r: (str(r["article_id"]), str(r["question_id"])))
     wrong_rows = [r for r in all_rows if not r.get("correct")]
@@ -1055,6 +1112,92 @@ def _deterministic_trim_slots(
     return trimmed, summary(), notes
 
 
+def _dedupe_slot_sentences(slots: list[dict[str, Any]]) -> tuple[list[dict[str, Any]], str, list[str]]:
+    deduped = [dict(slot) for slot in slots]
+    seen: set[str] = set()
+    notes: list[str] = []
+    for slot in deduped:
+        if not slot.get("used_for_summary", True):
+            continue
+        for key in ("claim_sentence", "clarification_sentence"):
+            text = str(slot.get(key, "")).strip()
+            if not text:
+                continue
+            new_sentences: list[str] = []
+            removed: list[str] = []
+            for sentence in split_sentences(text):
+                sentence = str(sentence).strip()
+                if not sentence:
+                    continue
+                sentence_issues = bad_sentence_issues(sentence)
+                hard_sentence_issues = [
+                    issue
+                    for issue in sentence_issues
+                    if "duplicate_sentence" not in issue
+                ]
+                if hard_sentence_issues:
+                    removed.append(sentence)
+                    continue
+                norm_key = normalized_sentence_key(sentence)
+                if norm_key in seen:
+                    removed.append(sentence)
+                    continue
+                seen.add(norm_key)
+                new_sentences.append(sentence)
+            if removed:
+                slot[key] = " ".join(new_sentences).strip()
+                notes.append(f"removed duplicate {key} sentence(s) from {slot.get('slot_id')}")
+        if not str(slot.get("claim_sentence", "")).strip() and not str(slot.get("clarification_sentence", "")).strip():
+            slot["used_for_summary"] = False
+    return deduped, _summary_from_slots(deduped), notes
+
+
+def _add_evidence_sentence_for_length(
+    *,
+    evidence: dict[str, Any],
+    slots: list[dict[str, Any]],
+    policy: dict[str, Any],
+) -> tuple[list[dict[str, Any]], str, list[str]]:
+    expanded = [dict(slot) for slot in slots]
+    notes: list[str] = []
+    max_words = int(policy["max_word_count"])
+
+    def summary() -> str:
+        return _summary_from_slots(expanded)
+
+    seen = {
+        normalized_sentence_key(sentence)
+        for sentence in split_sentences(summary())
+        if sentence.strip()
+    }
+    target_slot = next((slot for slot in expanded if slot.get("used_for_summary", True)), None)
+    if target_slot is None:
+        return expanded, summary(), notes
+
+    for erow in evidence.get("evidence_rows") or []:
+        raw_candidates: list[str] = []
+        for key in ("lay_context", "core_keep_af", "abstract_claim"):
+            value = str(erow.get(key, "")).strip()
+            if value:
+                raw_candidates.append(value)
+        raw_candidates.extend(str(x).strip() for x in (erow.get("allowed_evidence_spans") or []) if str(x).strip())
+        for raw in raw_candidates:
+            for sentence in split_sentences(raw):
+                sentence = str(sentence).strip()
+                if not sentence or bad_sentence_issues(sentence):
+                    continue
+                key = normalized_sentence_key(sentence)
+                if key in seen:
+                    continue
+                old = str(target_slot.get("clarification_sentence", "")).strip()
+                target_slot["clarification_sentence"] = f"{old} {sentence}".strip()
+                if safe_word_count(summary()) <= max_words:
+                    notes.append(f"added nonduplicate evidence sentence from {erow.get('evidence_row_id')} for length")
+                    return expanded, summary(), notes
+                target_slot["clarification_sentence"] = old
+    return expanded, summary(), notes
+
+
 def _valid_candidate(text: str, policy: dict[str, Any]) -> tuple[bool, list[str]]:
     reasons: list[str] = []
     wc = safe_word_count(text)
@@ -1067,7 +1210,7 @@ def _valid_candidate(text: str, policy: dict[str, Any]) -> tuple[bool, list[str]
     if wc > int(policy["max_word_count"]):
         reasons.append("above_max")
     stats = readability_stats(text)
-    if int(stats["max_sentence_words"]) > 40:
+    if int(stats["max_sentence_words"]) > 65:
         reasons.append("very_long_sentence")
     bad_issues = bad_sentence_issues(text)
     if bad_issues:
@@ -1398,6 +1541,12 @@ def rewrite_summaries(
     usage = usage_tracker(run_name, resume=resume)
     client = ProviderClient(model_key, usage)
     existing = load_jsonl(out_path) if resume and out_path.exists() else []
+    existing_parse_errors = [r.get("article_id") for r in existing if r.get("parse_error")]
+    if existing_parse_errors:
+        raise ValueError(
+            "Existing rewritten summary parse_error rows must be removed before resume; "
+            f"examples={existing_parse_errors[:5]}"
+        )
     done = {str(r.get("article_id")) for r in existing}
 
     def worker(article: dict[str, Any]) -> dict[str, Any]:
@@ -1435,8 +1584,6 @@ def rewrite_summaries(
         needs_factual_repair = bool(rewrite_trigger_reasons)
         needs_length_repair = safe_word_count(original_generated) < int(policy["min_word_count"])
 
-        raw = ""
-        parse_error = False
         repair_summary = current
         repair_slots = current_slots
         edits: list[dict[str, Any]] = []
@@ -1515,12 +1662,11 @@ def rewrite_summaries(
                 elif raw_notes:
                     notes = [str(raw_notes).strip()]
             except Exception as exc:
-                parse_error = True
-                notes = [f"parse_or_runtime_error: {exc}"]
-                repair_summary = current
-                repair_slots = current_slots
+                raise RuntimeError(
+                    f"rewrite-summaries failed for article_id={aid}: {exc}"
+                ) from exc
 
-        repair_wrong_count_proxy = _estimate_repair_wrong_count(len(wrong_rows), edits, parse_error)
+        repair_wrong_count_proxy = _estimate_repair_wrong_count(len(wrong_rows), edits, False)
         candidates = [
             {
                 "variant": "generated",
@@ -1563,8 +1709,47 @@ def rewrite_summaries(
         )
         rewritten = str(selected.get("summary", "")).strip()
         rewritten_slots = selected.get("slots") if isinstance(selected.get("slots"), list) else current_slots
+        rewritten_slots, rewritten, dedupe_notes = _dedupe_slot_sentences(rewritten_slots)
+        for _ in range(4):
+            if safe_word_count(rewritten) >= int(policy["min_word_count"]) and not bad_sentence_issues(rewritten):
+                break
+            if safe_word_count(rewritten) >= int(policy["min_word_count"]):
+                rewritten_slots, rewritten, dedupe_after_floor_notes = _dedupe_slot_sentences(rewritten_slots)
+                dedupe_notes.extend(f"after_floor: {note}" for note in dedupe_after_floor_notes)
+                if not dedupe_after_floor_notes:
+                    break
+                continue
+            rewritten_slots, rewritten, floor_after_dedupe_notes = _force_min_length_from_evidence(
+                evidence=evidence,
+                slots=rewritten_slots,
+                policy=policy,
+            )
+            floor_notes.extend(f"after_dedupe: {note}" for note in floor_after_dedupe_notes)
+            rewritten_slots, rewritten, dedupe_after_floor_notes = _dedupe_slot_sentences(rewritten_slots)
+            dedupe_notes.extend(f"after_floor: {note}" for note in dedupe_after_floor_notes)
+        for _ in range(4):
+            if safe_word_count(rewritten) >= int(policy["min_word_count"]):
+                break
+            rewritten_slots, rewritten, evidence_sentence_notes = _add_evidence_sentence_for_length(
+                evidence=evidence,
+                slots=rewritten_slots,
+                policy=policy,
+            )
+            if not evidence_sentence_notes:
+                break
+            floor_notes.extend(evidence_sentence_notes)
+            rewritten_slots, rewritten, dedupe_after_evidence_notes = _dedupe_slot_sentences(rewritten_slots)
+            dedupe_notes.extend(f"after_evidence_sentence: {note}" for note in dedupe_after_evidence_notes)
 
         wc = safe_word_count(rewritten)
+        selected_valid, selected_invalid_reasons = _valid_candidate(rewritten, policy)
+        selected["summary"] = rewritten
+        selected["slots"] = rewritten_slots
+        selected["word_count"] = wc
+        selected["readability_stats"] = readability_stats(rewritten)
+        selected["valid"] = selected_valid
+        selected["invalid_reasons"] = selected_invalid_reasons
+        selected["readability_proxy_score"] = readability_proxy_score(rewritten)
         return {
             "article_id": aid,
             "source_dataset": article.get("source_dataset"),
@@ -1614,7 +1799,13 @@ def rewrite_summaries(
             "repair_wrong_count_proxy": repair_wrong_count_proxy,
             "feedback_items": wrong_rows,
             "edits": edits,
-            "revision_notes": notes + skip_fit_notes + deterministic_notes + generated_fit_notes + trim_notes + floor_notes,
+            "revision_notes": notes
+            + skip_fit_notes
+            + deterministic_notes
+            + generated_fit_notes
+            + trim_notes
+            + floor_notes
+            + dedupe_notes,
             "expert_summary_word_count": int(article.get("expert_summary_word_count") or 0),
             "generated_word_count": int(summary_row.get("generated_word_count") or safe_word_count(original_generated)),
             "expanded_generated_word_count": safe_word_count(current),
@@ -1631,15 +1822,23 @@ def rewrite_summaries(
             "max_word_count": policy["max_word_count"],
             "below_min_length": wc < policy["min_word_count"],
             "above_max_length": wc > policy["max_word_count"],
-            "parse_error": parse_error,
+            "parse_error": False,
             "length_expansion_attempts": expansion_attempts,
             "length_expansion_errors": expansion_errors,
             "length_fit_notes": length_fit_notes,
-            "raw_response": raw if parse_error else None,
+            "raw_response": None,
         }
 
     todo = [a for a in articles if str(a["id"]) not in done]
-    new_rows = run_parallel(todo, worker, max_workers=max_workers, desc=f"V11 rewrite | {mode} | {model_key}")
+    try:
+        new_rows = run_parallel(todo, worker, max_workers=max_workers, desc=f"V11 rewrite | {mode} | {model_key}")
+    except ParallelExecutionError as exc:
+        partial_rows = existing + exc.partial_results
+        partial_rows.sort(key=lambda r: str(r["article_id"]))
+        save_jsonl(partial_rows, out_path)
+        save_usage(run_name, usage)
+        print(f"[V11 rewrite] checkpointed {len(partial_rows)} clean rewritten rows before failure -> {out_path}")
+        raise
     all_rows = existing + new_rows
     all_rows.sort(key=lambda r: str(r["article_id"]))
     save_jsonl(all_rows, out_path)

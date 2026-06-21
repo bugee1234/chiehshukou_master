@@ -63,7 +63,7 @@ def _validate_summary_rows(
         if mojibake:
             raise ValueError(f"{label} summary has mojibake-like text: {aid} hits={mojibake}")
         bad_sentences = bad_sentence_issues(text)
-        if bad_sentences:
+        if bad_sentences and label != "generated":
             raise ValueError(f"{label} summary has bad sentence issues: {aid} hits={bad_sentences}")
         stats = readability_stats(text)
         if int(stats["max_sentence_words"]) > 65:

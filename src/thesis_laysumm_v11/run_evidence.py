@@ -13,12 +13,20 @@ if str(ROOT_DIR) not in sys.path:
     sys.path.insert(0, str(ROOT_DIR))
 
 from src.experiment_2.run_three_model_exp2 import MODEL_CONFIGS, ProviderClient
-from src.thesis_laysumm.llm_utils import load_articles, run_parallel, save_usage, sha256_text, usage_tracker
+from src.thesis_laysumm.llm_utils import (
+    ParallelExecutionError,
+    load_articles,
+    run_parallel,
+    save_usage,
+    sha256_text,
+    usage_tracker,
+)
 from src.thesis_laysumm.paths import run_data_dir
 from src.thesis_laysumm_v11.common import PROMPTS_DIR, compact_json, format_numbered_sentences, loads_json_object, require_mode
 from src.utils import load_jsonl, save_json, save_jsonl
 
 DEFAULT_MODEL_KEY = "gpt41_mini"
+MAX_ITEM_ATTEMPTS = 2
 
 
 def _module2_dir(run_name: str, model_key: str) -> Path:
@@ -185,42 +193,52 @@ def build_evidence_tables(
     usage = usage_tracker(run_name, resume=resume)
     client = ProviderClient(model_key, usage)
     existing = load_jsonl(out_path) if resume and out_path.exists() else []
+    existing_parse_errors = [r.get("article_id") for r in existing if r.get("parse_error")]
+    if existing_parse_errors:
+        raise ValueError(
+            "Existing evidence parse_error rows must be removed before resume; "
+            f"examples={existing_parse_errors[:5]}"
+        )
     done = {str(r.get("article_id")) for r in existing}
 
     def worker(article: dict[str, Any]) -> dict[str, Any]:
         aid = str(article["id"])
         max_per_sentence = 10 if mode == "balanced" else 7
-        raw = ""
-        parse_error = False
-        validation_errors: list[str] = []
         rows: list[dict[str, Any]] = []
-        try:
-            prompt = (
-                prompt_template.replace("{mode}", mode)
-                .replace("{title}", str(article.get("title", "")))
-                .replace("{abstract_sentences}", format_numbered_sentences(article.get("abstract_sentences") or []))
-                .replace("{expert_summary}", str(article.get("expert_summary", "")))
-                .replace("{candidate_facts}", _candidate_blocks(by_article.get(aid, []), max_per_sentence=max_per_sentence))
-            )
-            raw = client.chat(
-                stage=f"V11.evidence_table.{mode}:{model_key}",
-                item_id=aid,
-                messages=[{"role": "user", "content": prompt}],
-                temperature=0.0,
-                response_format={"type": "json_object"},
-            )
-            obj = loads_json_object(raw)
-            rows, validation_errors = _normalize_evidence_rows(
-                obj=obj,
-                article=article,
-                valid_af_ids=valid_af_by_article.get(aid, set()),
-                mode=mode,
-            )
-            if validation_errors or not rows:
-                raise ValueError("; ".join(validation_errors) or "no evidence rows")
-        except Exception as exc:
-            parse_error = True
-            validation_errors = validation_errors or [str(exc)]
+        validation_errors: list[str] = []
+        prompt = (
+            prompt_template.replace("{mode}", mode)
+            .replace("{title}", str(article.get("title", "")))
+            .replace("{abstract_sentences}", format_numbered_sentences(article.get("abstract_sentences") or []))
+            .replace("{expert_summary}", str(article.get("expert_summary", "")))
+            .replace("{candidate_facts}", _candidate_blocks(by_article.get(aid, []), max_per_sentence=max_per_sentence))
+        )
+        for attempt in range(1, MAX_ITEM_ATTEMPTS + 1):
+            validation_errors = []
+            try:
+                raw = client.chat(
+                    stage=f"V11.evidence_table.{mode}:{model_key}",
+                    item_id=aid,
+                    messages=[{"role": "user", "content": prompt}],
+                    temperature=0.0,
+                    response_format={"type": "json_object"},
+                )
+                obj = loads_json_object(raw)
+                rows, validation_errors = _normalize_evidence_rows(
+                    obj=obj,
+                    article=article,
+                    valid_af_ids=valid_af_by_article.get(aid, set()),
+                    mode=mode,
+                )
+                if validation_errors or not rows:
+                    raise ValueError("; ".join(validation_errors) or "no evidence rows")
+                break
+            except Exception as exc:
+                if attempt == MAX_ITEM_ATTEMPTS:
+                    raise RuntimeError(
+                        f"evidence failed after {MAX_ITEM_ATTEMPTS} attempts "
+                        f"for article_id={aid}: {exc}"
+                    ) from exc
 
         return {
             "article_id": aid,
@@ -230,13 +248,21 @@ def build_evidence_tables(
             "model_key": model_key,
             "evidence_rows": rows,
             "evidence_row_count": len(rows),
-            "parse_error": parse_error,
+            "parse_error": False,
             "validation_errors": validation_errors,
-            "raw_response": raw if parse_error else None,
+            "raw_response": None,
         }
 
     todo = [a for a in articles if str(a["id"]) not in done]
-    new_rows = run_parallel(todo, worker, max_workers=max_workers, desc=f"V11 evidence | {mode} | {model_key}")
+    try:
+        new_rows = run_parallel(todo, worker, max_workers=max_workers, desc=f"V11 evidence | {mode} | {model_key}")
+    except ParallelExecutionError as exc:
+        partial_rows = existing + exc.partial_results
+        partial_rows.sort(key=lambda r: str(r["article_id"]))
+        save_jsonl(partial_rows, out_path)
+        save_usage(run_name, usage)
+        print(f"[V11 evidence] checkpointed {len(partial_rows)} clean article rows before failure -> {out_path}")
+        raise
     all_rows = existing + new_rows
     all_rows.sort(key=lambda r: str(r["article_id"]))
     save_jsonl(all_rows, out_path)
