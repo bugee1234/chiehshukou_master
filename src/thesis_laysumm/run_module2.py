@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 import sys
 from collections import Counter
 from datetime import datetime
@@ -28,6 +29,31 @@ PROMPTS_DIR = Path(__file__).resolve().parent / "prompts"
 DEFAULT_MODEL_KEY = "gemini3_flash_preview_minimal"
 DEFAULT_JUDGE_MODEL_KEY = "gemini3_flash_preview_minimal"
 MAX_ITEM_ATTEMPTS = 2
+
+
+def _loads_model_json(raw: str) -> dict[str, Any]:
+    text = str(raw or "").strip()
+    if text.startswith("```"):
+        lines = text.splitlines()
+        if lines and lines[0].startswith("```"):
+            lines = lines[1:]
+        if lines and lines[-1].strip() == "```":
+            lines = lines[:-1]
+        text = "\n".join(lines).strip()
+    # Some model responses include literal backslash-u text in reasoning fields
+    # that is not a valid JSON unicode escape. Preserve it as text.
+    text = re.sub(r"\\u(?![0-9a-fA-F]{4})", r"\\\\u", text)
+    try:
+        obj = json.loads(text)
+    except json.JSONDecodeError:
+        decoder = json.JSONDecoder()
+        start = text.find("{")
+        if start < 0:
+            raise
+        obj, _ = decoder.raw_decode(text[start:])
+    if not isinstance(obj, dict):
+        raise ValueError("model JSON response must be an object")
+    return obj
 
 
 def _coerce_bool(value: Any) -> bool:
@@ -131,7 +157,7 @@ def judge_candidate_af(
                     temperature=0.0,
                     response_format={"type": "json_object"},
                 )
-                obj = json.loads(raw)
+                obj = _loads_model_json(raw)
                 break
             except Exception as exc:
                 last_exc = exc
