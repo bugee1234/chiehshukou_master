@@ -1,0 +1,11 @@
+variant,metric,value,direction,metric_rank_among_17,nearest_team,nearest_team_score,difference_from_nearest
+direct_generated,ROUGE,0.313,higher,10,Aard,0.319,-0.006
+direct_generated,BLEU,4.780,higher,11,RainCityNLP,4.870,-0.090
+direct_generated,METEOR,0.294,higher,5,BDA-UCM,0.294,-0.000
+direct_generated,BERTScore,0.847,higher,12,MIRAGES,0.846,0.001
+direct_generated,FKGL,13.172,lower,11,LTRC,13.360,-0.188
+direct_generated,DCRS,11.766,lower,15,SXZ,11.830,-0.064
+direct_generated,CLI,13.738,lower,13,Baseline-qwen2.5-7B-sft,13.700,0.038
+direct_generated,LENS,75.696,higher,5,5cNLP,76.050,-0.354
+direct_generated,AlignScore,0.503,higher,16,CUTN_Bio,0.589,-0.086
+direct_generated,SummaC,0.485,higher,15,LTRC,0.476,0.009

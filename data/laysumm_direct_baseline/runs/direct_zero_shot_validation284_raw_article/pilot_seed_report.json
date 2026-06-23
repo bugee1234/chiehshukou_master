@@ -1,0 +1,20 @@
+{
+  "time": "2026-06-22T19:26:56",
+  "pilot_run": "direct_zero_shot_pilot20_raw_article",
+  "full_run": "direct_zero_shot_validation284_raw_article",
+  "models": {
+    "gemini25_flash_non_thinking": {
+      "seeded": 20,
+      "full_rows_after_seed": 20
+    },
+    "gpt41_mini": {
+      "seeded": 20,
+      "full_rows_after_seed": 20
+    },
+    "gemini3_flash_preview_minimal": {
+      "seeded": 20,
+      "full_rows_after_seed": 20
+    }
+  },
+  "usage_rows_seeded": 60
+}

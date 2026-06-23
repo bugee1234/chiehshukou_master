@@ -1,0 +1,25 @@
+{
+  "time": "2026-06-22T19:26:50",
+  "design": "direct_zero_shot_full_article",
+  "run_name": "direct_zero_shot_validation284_raw_article",
+  "scope": "full284",
+  "source_run": "v11_constellation_validation284_fixed_m12_pilot20",
+  "pilot_source_run": null,
+  "article_count": 284,
+  "by_source": {
+    "PLOS": 142,
+    "eLife": 142
+  },
+  "generation_visible_fields": [
+    "article"
+  ],
+  "reference_storage_separated": true,
+  "forbidden_generation_inputs": [
+    "expert_summary",
+    "evidence",
+    "questions",
+    "answers",
+    "module outputs",
+    "pipeline summaries"
+  ]
+}

@@ -1,0 +1,4 @@
+Write a lay summary of the following scientific article for a general audience.
+
+ARTICLE:
+{article}

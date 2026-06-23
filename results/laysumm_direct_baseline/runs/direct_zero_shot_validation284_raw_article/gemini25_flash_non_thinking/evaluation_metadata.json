@@ -1,0 +1,8 @@
+{
+  "time": "2026-06-23T03:02:35",
+  "run_name": "direct_zero_shot_validation284_raw_article",
+  "model_key": "gemini25_flash_non_thinking",
+  "design": "direct_zero_shot_full_article",
+  "article_count": 284,
+  "pipeline_comparison_run": "v11_constellation_validation284_fixed_m12_pilot20"
+}

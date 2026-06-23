@@ -144,6 +144,7 @@ def write_official_style_rank(
     leaderboard_path: Path,
     include_generated: bool = True,
     include_rewritten: bool = True,
+    caution: str | None = None,
 ) -> dict[str, Any]:
     leaderboard = load_leaderboard(leaderboard_path)
     generated = load_overall(metrics_dir / "generated_scores.json") if include_generated else None
@@ -158,7 +159,7 @@ def write_official_style_rank(
         our_systems["rewritten"] = _our_system_summary(table, "rewritten")
 
     payload: dict[str, Any] = {
-        "caution": CAUTION,
+        "caution": caution or CAUTION,
         "pool_size": pool_size,
         "our_systems": our_systems,
         "full_table": _table_records(table),

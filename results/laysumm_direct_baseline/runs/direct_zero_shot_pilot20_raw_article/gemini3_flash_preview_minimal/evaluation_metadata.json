@@ -1,0 +1,8 @@
+{
+  "time": "2026-06-22T19:02:55",
+  "run_name": "direct_zero_shot_pilot20_raw_article",
+  "model_key": "gemini3_flash_preview_minimal",
+  "design": "direct_zero_shot_full_article",
+  "article_count": 20,
+  "pipeline_comparison_run": "pilot_n20_v11_fixed_m12_gemini25_same_model_phaseb_factuality_chase"
+}

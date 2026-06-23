@@ -1,0 +1,11 @@
+variant,metric,value,direction,metric_rank_among_17,nearest_team,nearest_team_score,difference_from_nearest
+direct_generated,ROUGE,0.289,higher,10,MIRAGES,0.288,0.001
+direct_generated,BLEU,3.216,higher,14,CUTN_Bio,3.250,-0.034
+direct_generated,METEOR,0.310,higher,2,SUWMIT,0.308,0.002
+direct_generated,BERTScore,0.835,higher,14,RainCityNLP,0.840,-0.005
+direct_generated,FKGL,11.951,lower,4,SUWMIT,11.740,0.211
+direct_generated,DCRS,11.348,lower,14,MetinOZU,11.220,0.128
+direct_generated,CLI,12.798,lower,5,x2z,12.650,0.148
+direct_generated,LENS,64.509,higher,9,BDA-UCM,64.070,0.439
+direct_generated,AlignScore,0.458,higher,16,x2z,0.368,0.090
+direct_generated,SummaC,0.558,higher,9,CUTN_Bio,0.549,0.009

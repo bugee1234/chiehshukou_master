@@ -1,0 +1,71 @@
+{
+  "time": "2026-06-22T17:38:37",
+  "run_name": "direct_zero_shot_pilot20_raw_article",
+  "stage": "direct_zero_shot_generation",
+  "model_key": "gemini3_flash_preview_minimal",
+  "article_count": 20,
+  "new_article_count": 20,
+  "prompt_sha256": "f4f7a93129c28d08940e8c7f1aa198daf86163a395c6c2c0485c85b0afd3edc7",
+  "visible_input_fields": [
+    "article"
+  ],
+  "postprocessing": "strip_outer_whitespace_only",
+  "usage_summary": {
+    "api_calls": 60,
+    "prompt_tokens": 709130,
+    "cached_prompt_tokens": 0,
+    "billable_prompt_tokens": 709130,
+    "completion_tokens": 33726,
+    "billable_output_tokens": 33726,
+    "total_tokens": 742856,
+    "api_elapsed_seconds": 353.8794,
+    "cost_currencies": [
+      "USD"
+    ],
+    "estimated_cost": 0.366471,
+    "by_stage": {
+      "direct_zero_shot.generate:gemini25_flash_non_thinking": {
+        "api_calls": 20,
+        "prompt_tokens": 237737,
+        "cached_prompt_tokens": 0,
+        "billable_prompt_tokens": 237737,
+        "completion_tokens": 13508,
+        "billable_output_tokens": 13508,
+        "total_tokens": 251245,
+        "api_elapsed_seconds": 98.6413,
+        "cost_currencies": [
+          "USD"
+        ],
+        "estimated_cost": 0.105091
+      },
+      "direct_zero_shot.generate:gemini3_flash_preview_minimal": {
+        "api_calls": 20,
+        "prompt_tokens": 237737,
+        "cached_prompt_tokens": 0,
+        "billable_prompt_tokens": 237737,
+        "completion_tokens": 11929,
+        "billable_output_tokens": 11929,
+        "total_tokens": 249666,
+        "api_elapsed_seconds": 122.5131,
+        "cost_currencies": [
+          "USD"
+        ],
+        "estimated_cost": 0.154656
+      },
+      "direct_zero_shot.generate:gpt41_mini": {
+        "api_calls": 20,
+        "prompt_tokens": 233656,
+        "cached_prompt_tokens": 0,
+        "billable_prompt_tokens": 233656,
+        "completion_tokens": 8289,
+        "billable_output_tokens": 8289,
+        "total_tokens": 241945,
+        "api_elapsed_seconds": 132.725,
+        "cost_currencies": [
+          "USD"
+        ],
+        "estimated_cost": 0.106725
+      }
+    }
+  }
+}
