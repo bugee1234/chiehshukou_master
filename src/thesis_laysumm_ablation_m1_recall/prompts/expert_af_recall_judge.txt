@@ -1,0 +1,28 @@
+Decide whether the candidate summary covers the reference atomic fact.
+
+Use a very lenient semantic coverage standard.
+
+Definitions:
+- covered: The summary has any meaningful overlap with the reference fact. Count it as covered if it mentions the same core topic, entity, intervention, mechanism, result, implication, or relationship, even if the wording is different, simplified, incomplete, less specific, or spread across multiple sentences.
+- partially_covered: Use this label only when the summary is clearly related to the reference fact but the overlap is too vague to identify the same core idea.
+- not_covered: Use this label only when the summary has no meaningful overlap with the reference fact.
+
+Lenient rules:
+- Prefer covered whenever there is any reasonable semantic match.
+- Do not require exact wording, exact numbers, exact comparisons, exact conditions, or exact technical detail.
+- Do not penalize paraphrase, simplification, compression, or lay wording.
+- Do not penalize missing secondary details if the main idea is present.
+- A fact can be covered across multiple nearby or non-nearby sentences.
+- Ignore whether the candidate summary adds unsupported facts; this task measures recall/omission only.
+
+Return ONLY valid JSON:
+{
+  "label": "covered|partially_covered|not_covered",
+  "rationale": "<brief reason>"
+}
+
+REFERENCE ATOMIC FACT:
+{reference_fact}
+
+CANDIDATE SUMMARY:
+{candidate_summary}

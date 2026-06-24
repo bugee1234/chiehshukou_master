@@ -1,0 +1,23 @@
+Extract the core atomic facts from the expert lay summary.
+
+Atomic fact definition:
+- A single, independently checkable factual claim.
+- Split compound sentences into separate facts when they contain separate claims.
+- Preserve named entities, directions, comparisons, numbers, and conditions.
+- Do not add facts that are only in the article title or your outside knowledge.
+- Do not create duplicate or near-duplicate facts.
+- Keep each fact concise but complete enough to judge whether another summary covers it.
+
+Return ONLY valid JSON:
+{
+  "atomic_facts": [
+    {
+      "fact": "<one expert-summary atomic fact>",
+      "source_sentence": "<sentence from the expert summary that supports this fact>"
+    }
+  ]
+}
+
+EXPERT LAY SUMMARY:
+{expert_summary}
+

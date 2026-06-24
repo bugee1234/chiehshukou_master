@@ -19,3 +19,12 @@ results/experiment_0/*.csv
 .nltk_data/
 AlignScore/
 summac/
+
+# Generated LaySumm experiment artifacts. These can contain very deep legacy
+# evaluator paths that exceed Windows Git path limits.
+data/laysumm_ablation_m1_recall/runs/
+results/laysumm_ablation_m1_recall/runs/
+data/laysumm_pipeline/runs/*__legacy_eval__*/
+results/laysumm_pipeline/runs/*__legacy_eval__*/
+data/laysumm_pipeline/runs/le_*/
+results/laysumm_pipeline/runs/le_*/
