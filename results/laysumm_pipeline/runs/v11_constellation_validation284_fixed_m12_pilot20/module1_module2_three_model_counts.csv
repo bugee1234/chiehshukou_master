@@ -1,0 +1,4 @@
+model_key,module2_judge_model_key,articles_total,candidate_af_total,candidate_af_per_article,module2_judgements_total,final_af_total,final_af_per_article,module1_failed_chunks,module2_parse_error_count
+gemini25_flash_non_thinking,gemini25_flash_non_thinking,284,35734,125.8239,35734,14896,52.4507,0,0
+gpt41_mini,gpt41_mini,284,22124,77.9014,22124,11453,40.3275,0,2
+gemini3_flash_preview_minimal,gemini3_flash_preview_minimal,284,17446,61.4296,17446,10342,36.4155,1,0

@@ -1,0 +1,38 @@
+[
+  {
+    "model_key": "gemini25_flash_non_thinking",
+    "module2_judge_model_key": "gemini25_flash_non_thinking",
+    "articles_total": 284,
+    "candidate_af_total": 35734,
+    "candidate_af_per_article": 125.8239,
+    "module2_judgements_total": 35734,
+    "final_af_total": 14896,
+    "final_af_per_article": 52.4507,
+    "module1_failed_chunks": 0,
+    "module2_parse_error_count": 0
+  },
+  {
+    "model_key": "gpt41_mini",
+    "module2_judge_model_key": "gpt41_mini",
+    "articles_total": 284,
+    "candidate_af_total": 22124,
+    "candidate_af_per_article": 77.9014,
+    "module2_judgements_total": 22124,
+    "final_af_total": 11453,
+    "final_af_per_article": 40.3275,
+    "module1_failed_chunks": 0,
+    "module2_parse_error_count": 2
+  },
+  {
+    "model_key": "gemini3_flash_preview_minimal",
+    "module2_judge_model_key": "gemini3_flash_preview_minimal",
+    "articles_total": 284,
+    "candidate_af_total": 17446,
+    "candidate_af_per_article": 61.4296,
+    "module2_judgements_total": 17446,
+    "final_af_total": 10342,
+    "final_af_per_article": 36.4155,
+    "module1_failed_chunks": 1,
+    "module2_parse_error_count": 0
+  }
+]

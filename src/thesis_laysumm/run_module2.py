@@ -96,6 +96,65 @@ def _is_final_keep(judgement: dict[str, Any]) -> bool:
     )
 
 
+def _build_judgement_row(
+    *,
+    af: dict[str, Any],
+    model_key: str,
+    judge_model_key: str,
+    obj: dict[str, Any] | None,
+    parse_error: bool = False,
+    parse_error_message: str | None = None,
+    raw_response: str | None = None,
+) -> dict[str, Any]:
+    obj = obj or {}
+    coverage_type = str(obj.get("coverage_type", "absent")).strip()
+    if coverage_type not in {
+        "exact",
+        "paraphrase",
+        "lay_generalization",
+        "topic_only",
+        "absent",
+        "contradicted",
+    }:
+        coverage_type = "absent"
+    confidence = str(obj.get("confidence", "low")).strip()
+    if confidence not in {"high", "medium", "low"}:
+        confidence = "low"
+
+    abstract_sentence = obj.get("abstract_sentence", None)
+    abstract_sentence = None if abstract_sentence is None else str(abstract_sentence).strip()
+    if abstract_sentence in {"", "null", "None"}:
+        abstract_sentence = None
+
+    abstract_sentence_idx = obj.get("abstract_sentence_idx", None)
+    if abstract_sentence_idx in {"", "null", "None"}:
+        abstract_sentence_idx = None
+
+    row = {
+        "af_id": af["af_id"],
+        "model_key": model_key,
+        "article_id": af["article_id"],
+        "source_dataset": af["source_dataset"],
+        "original_index": af["original_index"],
+        "fact": af["fact"],
+        "source_span": af.get("source_span", ""),
+        "judge_model_key": judge_model_key,
+        "judge_provider": MODEL_CONFIGS[judge_model_key]["provider"],
+        "judge_model": MODEL_CONFIGS[judge_model_key]["model"],
+        "aligned_with_abstract": False if parse_error else _coerce_bool(obj.get("aligned_with_abstract", False)),
+        "abstract_sentence_idx": None if parse_error else abstract_sentence_idx,
+        "abstract_sentence": None if parse_error else abstract_sentence,
+        "coverage_type": "absent" if parse_error else coverage_type,
+        "confidence": "low" if parse_error else confidence,
+        "reasoning": str(obj.get("reasoning", "")).strip(),
+        "parse_error": parse_error,
+        "parse_error_message": parse_error_message,
+        "raw_response": raw_response if parse_error else None,
+    }
+    row["final_keep"] = _is_final_keep(row)
+    return row
+
+
 def judge_candidate_af(
     *,
     run_name: str,
@@ -127,12 +186,6 @@ def judge_candidate_af(
     usage = usage_tracker(run_name, resume=resume)
     client = ProviderClient(judge_model_key, usage)
     existing = load_jsonl(out_path) if resume and out_path.exists() else []
-    existing_parse_errors = [r.get("af_id") for r in existing if r.get("parse_error")]
-    if existing_parse_errors:
-        raise ValueError(
-            "Existing module2 parse_error rows must be removed before resume; "
-            f"examples={existing_parse_errors[:5]}"
-        )
     done = {str(r.get("af_id")) for r in existing}
 
     def worker(af: dict[str, Any]) -> dict[str, Any]:
@@ -140,6 +193,8 @@ def judge_candidate_af(
         abstract_sentences = article.get("abstract_sentences") or []
         last_exc: Exception | None = None
         obj: dict[str, Any] | None = None
+        raw = ""
+        saw_response = False
         for attempt in range(1, MAX_ITEM_ATTEMPTS + 1):
             try:
                 raw = client.chat(
@@ -157,62 +212,33 @@ def judge_candidate_af(
                     temperature=0.0,
                     response_format={"type": "json_object"},
                 )
+                saw_response = True
                 obj = _loads_model_json(raw)
                 break
             except Exception as exc:
                 last_exc = exc
-                if attempt == MAX_ITEM_ATTEMPTS:
-                    raise RuntimeError(
-                        f"module2 failed after {MAX_ITEM_ATTEMPTS} attempts "
-                        f"for af_id={af['af_id']}: {exc}"
-                    ) from exc
         if obj is None:
-            raise RuntimeError(f"module2 failed for af_id={af['af_id']}: {last_exc}")
+            if not saw_response:
+                raise RuntimeError(
+                    f"module2 failed after {MAX_ITEM_ATTEMPTS} attempts "
+                    f"for af_id={af['af_id']}: {last_exc}"
+                ) from last_exc
+            return _build_judgement_row(
+                af=af,
+                model_key=model_key,
+                judge_model_key=judge_model_key,
+                obj=None,
+                parse_error=True,
+                parse_error_message=str(last_exc) if last_exc else "unknown parse error",
+                raw_response=raw,
+            )
 
-        coverage_type = str(obj.get("coverage_type", "absent")).strip()
-        if coverage_type not in {
-            "exact",
-            "paraphrase",
-            "lay_generalization",
-            "topic_only",
-            "absent",
-            "contradicted",
-        }:
-            coverage_type = "absent"
-        confidence = str(obj.get("confidence", "low")).strip()
-        if confidence not in {"high", "medium", "low"}:
-            confidence = "low"
-
-        abstract_sentence = obj.get("abstract_sentence", None)
-        abstract_sentence = None if abstract_sentence is None else str(abstract_sentence).strip()
-        if abstract_sentence in {"", "null", "None"}:
-            abstract_sentence = None
-
-        abstract_sentence_idx = obj.get("abstract_sentence_idx", None)
-        if abstract_sentence_idx in {"", "null", "None"}:
-            abstract_sentence_idx = None
-
-        row = {
-            "af_id": af["af_id"],
-            "model_key": model_key,
-            "article_id": af["article_id"],
-            "source_dataset": af["source_dataset"],
-            "original_index": af["original_index"],
-            "fact": af["fact"],
-            "source_span": af.get("source_span", ""),
-            "judge_model_key": judge_model_key,
-            "judge_provider": MODEL_CONFIGS[judge_model_key]["provider"],
-            "judge_model": MODEL_CONFIGS[judge_model_key]["model"],
-            "aligned_with_abstract": _coerce_bool(obj.get("aligned_with_abstract", False)),
-            "abstract_sentence_idx": abstract_sentence_idx,
-            "abstract_sentence": abstract_sentence,
-            "coverage_type": coverage_type,
-            "confidence": confidence,
-            "reasoning": str(obj.get("reasoning", "")).strip(),
-            "parse_error": False,
-        }
-        row["final_keep"] = _is_final_keep(row)
-        return row
+        return _build_judgement_row(
+            af=af,
+            model_key=model_key,
+            judge_model_key=judge_model_key,
+            obj=obj,
+        )
 
     todo = [r for r in candidate_rows if str(r["af_id"]) not in done]
     try:
