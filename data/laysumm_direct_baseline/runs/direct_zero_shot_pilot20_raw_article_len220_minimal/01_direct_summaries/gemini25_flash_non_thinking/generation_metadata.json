@@ -1,0 +1,44 @@
+{
+  "time": "2026-06-25T17:32:19",
+  "run_name": "direct_zero_shot_pilot20_raw_article_len220_minimal",
+  "stage": "direct_zero_shot_generation",
+  "model_key": "gemini25_flash_non_thinking",
+  "article_count": 20,
+  "new_article_count": 20,
+  "prompt_sha256": "020bebe906680440817194f1614fe646ad1da65659ce29908f9432b7b12a2edb",
+  "visible_input_fields": [
+    "article"
+  ],
+  "postprocessing": "strip_outer_whitespace_then_word_truncate",
+  "max_summary_words": 220,
+  "usage_summary": {
+    "api_calls": 20,
+    "prompt_tokens": 238357,
+    "cached_prompt_tokens": 0,
+    "billable_prompt_tokens": 238357,
+    "completion_tokens": 4979,
+    "billable_output_tokens": 4979,
+    "total_tokens": 243336,
+    "api_elapsed_seconds": 49.7438,
+    "cost_currencies": [
+      "USD"
+    ],
+    "estimated_cost": 0.083955,
+    "by_stage": {
+      "direct_zero_shot.generate:gemini25_flash_non_thinking": {
+        "api_calls": 20,
+        "prompt_tokens": 238357,
+        "cached_prompt_tokens": 0,
+        "billable_prompt_tokens": 238357,
+        "completion_tokens": 4979,
+        "billable_output_tokens": 4979,
+        "total_tokens": 243336,
+        "api_elapsed_seconds": 49.7438,
+        "cost_currencies": [
+          "USD"
+        ],
+        "estimated_cost": 0.083955
+      }
+    }
+  }
+}

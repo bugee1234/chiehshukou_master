@@ -38,7 +38,7 @@ def _ids(rows: list[dict[str, Any]], key: str) -> list[str]:
     return [str(row.get(key) or "") for row in rows]
 
 
-def validate(*, run_name: str, model_key: str | None, expected_count: int | None) -> None:
+def validate(*, run_name: str, model_key: str | None, expected_count: int | None, prompt_path: Path) -> None:
     in_path = inputs_path(run_name)
     ref_path = references_path(run_name)
     if not in_path.exists() or not ref_path.exists():
@@ -90,7 +90,7 @@ def validate(*, run_name: str, model_key: str | None, expected_count: int | None
             f"Direct summary IDs do not match inputs for {model_key}: "
             f"missing={missing[:5]} extra={extra[:5]}"
         )
-    prompt_hash = sha256_text(PROMPT_PATH.read_text(encoding="utf-8"))
+    prompt_hash = sha256_text(prompt_path.read_text(encoding="utf-8"))
     word_counts: list[int] = []
     mojibake_rows = 0
     for row in rows:
@@ -104,7 +104,8 @@ def validate(*, run_name: str, model_key: str | None, expected_count: int | None
             raise ValueError(f"Unexpected visible input fields: {aid}")
         if row.get("prompt_sha256") != prompt_hash:
             raise ValueError(f"Prompt hash mismatch: {aid}")
-        if str(row.get("raw_response") or "").strip() != summary:
+        raw_response = str(row.get("raw_response") or "").strip()
+        if not row.get("truncated_by_word_limit") and raw_response != summary:
             raise ValueError(f"Direct summary was altered after model response: {aid}")
         word_counts.append(safe_word_count(summary))
         mojibake_rows += bool(find_mojibake(summary))
@@ -120,12 +121,18 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--run-name", required=True)
     parser.add_argument("--model-key")
     parser.add_argument("--expected-count", type=int)
+    parser.add_argument("--prompt-path", type=Path, default=PROMPT_PATH)
     return parser
 
 
 def main() -> None:
     args = build_parser().parse_args()
-    validate(run_name=args.run_name, model_key=args.model_key, expected_count=args.expected_count)
+    validate(
+        run_name=args.run_name,
+        model_key=args.model_key,
+        expected_count=args.expected_count,
+        prompt_path=args.prompt_path,
+    )
 
 
 if __name__ == "__main__":

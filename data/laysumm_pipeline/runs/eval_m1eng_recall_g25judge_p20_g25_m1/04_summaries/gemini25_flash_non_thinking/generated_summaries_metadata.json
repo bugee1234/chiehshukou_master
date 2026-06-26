@@ -1,0 +1,7 @@
+{
+  "time": "2026-06-25T03:43:14",
+  "legacy_run_name": "eval_m1eng_recall_g25judge_p20_g25_m1",
+  "model_key": "gemini25_flash_non_thinking",
+  "variant": "module1",
+  "rows": 20
+}

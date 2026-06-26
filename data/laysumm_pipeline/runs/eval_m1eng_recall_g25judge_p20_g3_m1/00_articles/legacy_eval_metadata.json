@@ -1,0 +1,9 @@
+{
+  "time": "2026-06-25T04:04:51",
+  "source_run_name": "m1eng_recall_g25judge_p20",
+  "legacy_run_name": "eval_m1eng_recall_g25judge_p20_g3_m1",
+  "model_key": "gemini3_flash_preview_minimal",
+  "variant": "module1",
+  "phase_label": "Module 1",
+  "purpose": "Compatibility wrapper for src.thesis_laysumm.run_evaluate."
+}

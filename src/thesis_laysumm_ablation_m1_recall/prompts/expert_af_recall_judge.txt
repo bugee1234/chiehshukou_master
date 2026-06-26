@@ -1,27 +1,35 @@
-Decide whether the candidate summary covers the reference atomic fact.
+Decide whether the candidate lay summary covers the abstract-grounded reference claim.
 
-Use a very lenient semantic coverage standard.
+This task measures omission: whether the candidate summary includes the reference information.
+Judge only the candidate summary text. Do not use outside knowledge.
 
-Definitions:
-- covered: The summary has any meaningful overlap with the reference fact. Count it as covered if it mentions the same core topic, entity, intervention, mechanism, result, implication, or relationship, even if the wording is different, simplified, incomplete, less specific, or spread across multiple sentences.
-- partially_covered: Use this label only when the summary is clearly related to the reference fact but the overlap is too vague to identify the same core idea.
-- not_covered: Use this label only when the summary has no meaningful overlap with the reference fact.
+Important:
+- The reference claim is scientific wording grounded in the article abstract.
+- The candidate summary may express the same information with lay wording, simplification, compression, or a different but equivalent concept.
+- Do not require the same terminology, exact numbers, exact experimental detail, or exact sentence structure.
+- However, mentioning only the same broad topic, disease, method, organism, drug, or gene is not enough.
 
-Lenient rules:
-- Prefer covered whenever there is any reasonable semantic match.
-- Do not require exact wording, exact numbers, exact comparisons, exact conditions, or exact technical detail.
-- Do not penalize paraphrase, simplification, compression, or lay wording.
-- Do not penalize missing secondary details if the main idea is present.
-- A fact can be covered across multiple nearby or non-nearby sentences.
-- Ignore whether the candidate summary adds unsupported facts; this task measures recall/omission only.
+Labels:
 
-Return ONLY valid JSON:
+covered:
+The candidate summary expresses the same core information as the reference claim. The main entity/topic and the main finding, outcome, mechanism, relationship, or direction are present, even if simplified.
+
+partially_covered:
+The candidate summary clearly overlaps with the reference claim and gives part of the main information, but a key finding, outcome, mechanism, relationship, or direction is missing or too vague.
+
+not_covered:
+The candidate summary does not express the reference information, only mentions a broad related topic, or contradicts the reference claim.
+
+Decision rule:
+Ask whether a lay reader could learn the reference claim's main information from the candidate summary alone. If yes, label covered. If they could learn only a related partial idea, label partially_covered. Otherwise, label not_covered.
+
+Return ONLY valid JSON with no additional text:
 {
   "label": "covered|partially_covered|not_covered",
-  "rationale": "<brief reason>"
+  "rationale": "<one sentence explaining the decision>"
 }
 
-REFERENCE ATOMIC FACT:
+ABSTRACT-GROUNDED REFERENCE CLAIM:
 {reference_fact}
 
 CANDIDATE SUMMARY:

@@ -1,0 +1,20 @@
+{
+  "time": "2026-06-25T03:43:18",
+  "run_name": "eval_m1eng_recall_g25judge_p20_g25_m1",
+  "model_key": "gemini25_flash_non_thinking",
+  "summac_document": "original",
+  "variants": {
+    "generated": {
+      "ROUGE": 0.31553223770328986,
+      "BLEU": 4.639077154753907,
+      "METEOR": 0.31162966603963926,
+      "BERTScore": 0.8473562151193619,
+      "FKGL": 13.659499781737086,
+      "DCRS": 12.368149942968929,
+      "CLI": 15.113503957476052,
+      "LENS": 70.46376522787557,
+      "AlignScore": 0.6328218474984169,
+      "SummaC": 0.5563123673200607
+    }
+  }
+}

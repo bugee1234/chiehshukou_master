@@ -28,7 +28,7 @@ from src.utils import load_jsonl, save_json, save_jsonl
 
 DEFAULT_ATLAS_RUN = "v11_constellation_validation284_fixed_m12_pilot20"
 DEFAULT_PILOT_RUN = "pilot_n20_v11_factuality_chase"
-DEFAULT_DIRECT_RUN = "direct_zero_shot_pilot20_raw_article"
+DEFAULT_DIRECT_RUN = "direct_zero_shot_pilot20_raw_article_len220"
 DEFAULT_RUN_NAME = "module1_only_ablation_and_expert_af_recall_pilot20"
 DEFAULT_MODELS = ["gemini25_flash_non_thinking", "gemini3_flash_preview_minimal", "gpt41_mini"]
 DEFAULT_RECALL_JUDGE = "gemini25_flash_non_thinking"
@@ -94,6 +94,40 @@ def _loads_json_object(text: str) -> dict[str, Any]:
     if not isinstance(obj, dict):
         raise ValueError("Model response JSON was not an object")
     return obj
+
+
+def _parse_recall_judge_response(raw: str) -> dict[str, Any]:
+    try:
+        obj = _loads_json_object(raw)
+        obj["_parse_fallback"] = False
+        return obj
+    except Exception as exc:
+        text = str(raw or "").strip()
+        lower = text.lower()
+        label = ""
+        label_match = re.search(
+            r'"?label"?\s*[:=]\s*"?\b(covered|partially_covered|not_covered)\b"?',
+            lower,
+        )
+        if label_match:
+            label = label_match.group(1)
+        else:
+            for candidate in ("not_covered", "partially_covered", "covered"):
+                if re.search(rf"\b{candidate}\b", lower):
+                    label = candidate
+                    break
+        if not label:
+            raise ValueError(f"Could not parse recall judge response as JSON or label text: {text[:300]}") from exc
+        rationale = ""
+        rationale_match = re.search(r'"?rationale"?\s*[:=]\s*"?(.+?)"?\s*(?:\}|\n|$)', text, flags=re.IGNORECASE | re.DOTALL)
+        if rationale_match:
+            rationale = rationale_match.group(1).strip().strip('",')
+        return {
+            "label": label,
+            "rationale": rationale or "Recovered label from malformed judge JSON.",
+            "_parse_fallback": True,
+            "_parse_error": str(exc),
+        }
 
 
 def _summary_from_model_response(raw: str) -> str:
@@ -172,6 +206,10 @@ def _variants_path(run_name: str, model_key: str) -> Path:
 
 def _expert_af_path(run_name: str) -> Path:
     return run_data_dir(run_name) / "03_expert_summary_af" / "expert_summary_af.jsonl"
+
+
+def _abstract_claim_path(run_name: str) -> Path:
+    return run_data_dir(run_name) / "03b_abstract_grounded_reference" / "abstract_grounded_claims.jsonl"
 
 
 def _recall_judgements_path(run_name: str, model_key: str) -> Path:
@@ -722,6 +760,114 @@ def extract_expert_afs(
     print(f"[extract-expert-af] rows={len(combined)} -> {out_path}")
 
 
+def canonicalize_reference_claims(
+    *,
+    run_name: str,
+    judge_model_key: str,
+    max_workers: int,
+    resume: bool,
+) -> None:
+    articles = _load_sample(run_name)
+    order = _article_order(articles)
+    out_path = _abstract_claim_path(run_name)
+    existing = load_jsonl(out_path) if resume and out_path.exists() else []
+    done = {str(row.get("article_id")) for row in existing}
+    template = (PROMPTS_DIR / "expert_af_to_abstract_claim.txt").read_text(encoding="utf-8")
+    prompt_hash = sha256_text(template)
+    usage = _load_usage(run_name, resume=resume)
+    client = ProviderClient(judge_model_key, usage)
+
+    def worker(article: dict[str, Any]) -> dict[str, Any]:
+        aid = str(article["id"])
+        abstract = str(article.get("abstract") or "").strip()
+        expert_summary = str(article.get("expert_summary") or "").strip()
+        if not abstract:
+            raise RuntimeError(f"Empty abstract for {aid}")
+        if not expert_summary:
+            raise RuntimeError(f"Empty expert summary for {aid}")
+        prompt = (
+            template.replace("{abstract}", abstract)
+            .replace("{expert_summary}", expert_summary)
+        )
+        raw = client.chat(
+            stage=f"m1_ablation.select_expert_mentioned_abstract_af:{judge_model_key}",
+            item_id=aid,
+            messages=[{"role": "user", "content": prompt}],
+            response_format={"type": "json_object"},
+            temperature=0.0,
+        )
+        obj = _loads_json_object(raw)
+        claims: list[dict[str, Any]] = []
+        for idx, item in enumerate(obj.get("selected_abstract_facts") or [], start=1):
+            if not isinstance(item, dict):
+                continue
+            claim = str(item.get("abstract_grounded_claim") or "").strip()
+            if not claim:
+                continue
+            abstract_af_id = str(item.get("abstract_af_id") or f"A{idx}")
+            claims.append(
+                {
+                    "expert_af_id": f"{aid}_selected_abstract_af_{idx:04d}",
+                    "abstract_af_id": abstract_af_id,
+                    "expert_fact": "",
+                    "abstract_grounded_claim": claim,
+                    "support_level": "selected_by_expert_summary",
+                    "abstract_span": str(item.get("abstract_span") or "").strip(),
+                    "expert_summary_span": str(item.get("expert_summary_span") or "").strip(),
+                }
+            )
+        if not claims:
+            raise RuntimeError(f"No expert-mentioned abstract AFs selected for {aid}")
+        return {
+            "article_id": aid,
+            "source_dataset": article.get("source_dataset"),
+            "original_index": article.get("original_index"),
+            "judge_model_key": judge_model_key,
+            **_judge_cfg_payload(judge_model_key),
+            "prompt_file": str(PROMPTS_DIR / "expert_af_to_abstract_claim.txt"),
+            "prompt_sha256": prompt_hash,
+            "abstract": abstract,
+            "expert_summary": expert_summary,
+            "all_abstract_fact_count": int(obj.get("all_abstract_fact_count") or 0),
+            "claim_count": len(claims),
+            "claims": claims,
+            "raw_response": raw,
+            "parse_error": False,
+        }
+
+    todo = [row for row in articles if str(row["id"]) not in done]
+    try:
+        new_rows = run_parallel(
+            todo,
+            worker,
+            max_workers=max_workers,
+            desc=f"Abstract-grounded reference | {judge_model_key}",
+        )
+    except ParallelExecutionError as exc:
+        checkpoint = sorted(existing + exc.partial_results, key=lambda r: order[str(r["article_id"])])
+        save_jsonl(checkpoint, out_path)
+        _save_usage(run_name, usage)
+        print(f"[canonicalize-reference] checkpointed {len(checkpoint)} rows -> {out_path}")
+        raise
+    combined = sorted(existing + new_rows, key=lambda r: order[str(r["article_id"])])
+    save_jsonl(combined, out_path)
+    _save_usage(run_name, usage)
+    save_json(
+        {
+            "time": _now(),
+            "run_name": run_name,
+            "judge_model_key": judge_model_key,
+            "article_count": len(combined),
+            "claim_total": sum(int(row["claim_count"]) for row in combined),
+            "reference_definition": "abstract atomic facts selected when also expressed in the expert lay summary",
+            "prompt_sha256": prompt_hash,
+            "usage_summary": usage.summarize(),
+        },
+        out_path.parent / "abstract_grounded_claims_metadata.json",
+    )
+    print(f"[canonicalize-reference] rows={len(combined)} -> {out_path}")
+
+
 def judge_recall(
     *,
     run_name: str,
@@ -730,33 +876,65 @@ def judge_recall(
     max_workers: int,
     resume: bool,
 ) -> None:
-    expert_rows = load_jsonl(_expert_af_path(run_name))
+    abstract_claim_rows = load_jsonl(_abstract_claim_path(run_name)) if _abstract_claim_path(run_name).exists() else []
+    expert_rows = [] if abstract_claim_rows else load_jsonl(_expert_af_path(run_name))
     variants = load_jsonl(_variants_path(run_name, model_key))
     summary_by_key = {
         (str(row["article_id"]), str(row["variant"])): str(row["prediction"])
         for row in variants
     }
     tasks: list[dict[str, Any]] = []
-    for expert_row in expert_rows:
-        aid = str(expert_row["article_id"])
-        for af in expert_row.get("expert_afs") or []:
-            for variant in VARIANTS:
-                key = (aid, variant)
-                if key not in summary_by_key:
-                    raise ValueError(f"Missing summary for recall task: {model_key} {aid} {variant}")
-                tasks.append(
-                    {
-                        "article_id": aid,
-                        "source_dataset": expert_row.get("source_dataset"),
-                        "original_index": expert_row.get("original_index"),
-                        "model_key": model_key,
-                        "variant": variant,
-                        "phase_label": VARIANTS[variant],
-                        "expert_af_id": af["expert_af_id"],
-                        "reference_fact": af["fact"],
-                        "candidate_summary": summary_by_key[key],
-                    }
-                )
+    if abstract_claim_rows:
+        for reference_row in abstract_claim_rows:
+            aid = str(reference_row["article_id"])
+            for claim in reference_row.get("claims") or []:
+                for variant in VARIANTS:
+                    key = (aid, variant)
+                    if key not in summary_by_key:
+                        raise ValueError(f"Missing summary for recall task: {model_key} {aid} {variant}")
+                    tasks.append(
+                        {
+                            "article_id": aid,
+                            "source_dataset": reference_row.get("source_dataset"),
+                            "original_index": reference_row.get("original_index"),
+                            "model_key": model_key,
+                            "variant": variant,
+                            "phase_label": VARIANTS[variant],
+                            "expert_af_id": claim["expert_af_id"],
+                            "abstract_af_id": claim.get("abstract_af_id"),
+                            "expert_fact": "",
+                            "reference_fact": str(claim["abstract_grounded_claim"]),
+                            "reference_source": "expert_selected_abstract_af",
+                            "abstract_support_level": "selected_by_expert_summary",
+                            "abstract_span": str(claim.get("abstract_span") or ""),
+                            "expert_summary_span": str(claim.get("expert_summary_span") or ""),
+                            "candidate_summary": summary_by_key[key],
+                        }
+                    )
+    else:
+        for expert_row in expert_rows:
+            aid = str(expert_row["article_id"])
+            for af in expert_row.get("expert_afs") or []:
+                for variant in VARIANTS:
+                    key = (aid, variant)
+                    if key not in summary_by_key:
+                        raise ValueError(f"Missing summary for recall task: {model_key} {aid} {variant}")
+                    tasks.append(
+                        {
+                            "article_id": aid,
+                            "source_dataset": expert_row.get("source_dataset"),
+                            "original_index": expert_row.get("original_index"),
+                            "model_key": model_key,
+                            "variant": variant,
+                            "phase_label": VARIANTS[variant],
+                            "expert_af_id": af["expert_af_id"],
+                            "expert_fact": af["fact"],
+                            "reference_fact": af["fact"],
+                            "reference_source": "expert_fact",
+                            "abstract_support_level": "",
+                            "candidate_summary": summary_by_key[key],
+                        }
+                    )
     out_path = _recall_judgements_path(run_name, model_key)
     existing = load_jsonl(out_path) if resume and out_path.exists() else []
     done = {
@@ -782,10 +960,11 @@ def judge_recall(
             response_format={"type": "json_object"},
             temperature=0.0,
         )
-        obj = _loads_json_object(raw)
+        obj = _parse_recall_judge_response(raw)
         label = str(obj.get("label") or "").strip().lower()
         if label not in allowed:
             raise RuntimeError(f"Invalid recall label {label!r}")
+        weight = {"covered": 1.0, "partially_covered": 0.5, "not_covered": 0.0}[label]
         return {
             **{k: v for k, v in task.items() if k != "candidate_summary"},
             "judge_model_key": judge_model_key,
@@ -795,7 +974,10 @@ def judge_recall(
             "label": label,
             "covered_strict": label == "covered",
             "covered_lenient": label in {"covered", "partially_covered"},
+            "covered_weight": weight,
             "rationale": str(obj.get("rationale") or "").strip(),
+            "parse_fallback": bool(obj.get("_parse_fallback")),
+            "parse_error": str(obj.get("_parse_error") or ""),
             "raw_response": raw,
         }
 
@@ -842,6 +1024,7 @@ def _summarize_recall_for_model(*, run_name: str, model_key: str) -> None:
         denom = len(group)
         strict = sum(1 for row in group if row.get("covered_strict"))
         lenient = sum(1 for row in group if row.get("covered_lenient"))
+        weighted_sum = sum(float(row.get("covered_weight", 1.0 if row.get("covered_strict") else 0.5 if row.get("covered_lenient") else 0.0)) for row in group)
         source = str(group[0].get("source_dataset"))
         per_article.append(
             {
@@ -855,6 +1038,7 @@ def _summarize_recall_for_model(*, run_name: str, model_key: str) -> None:
                 "covered_lenient": lenient,
                 "expert_af_recall_strict": strict / denom if denom else 0.0,
                 "expert_af_recall_lenient": lenient / denom if denom else 0.0,
+                "expert_af_recall_weighted": weighted_sum / denom if denom else 0.0,
             }
         )
 
@@ -865,9 +1049,11 @@ def _summarize_recall_for_model(*, run_name: str, model_key: str) -> None:
             continue
         macro_strict = float(np.mean([row["expert_af_recall_strict"] for row in rows_v]))
         macro_lenient = float(np.mean([row["expert_af_recall_lenient"] for row in rows_v]))
+        macro_weighted = float(np.mean([row["expert_af_recall_weighted"] for row in rows_v]))
         micro_denom = sum(int(row["expert_af_count"]) for row in rows_v)
         micro_strict = sum(int(row["covered_strict"]) for row in rows_v)
         micro_lenient = sum(int(row["covered_lenient"]) for row in rows_v)
+        micro_weighted_num = sum(float(row["expert_af_recall_weighted"]) * int(row["expert_af_count"]) for row in rows_v)
         by_source: dict[str, Any] = {}
         for source in ("PLOS", "eLife"):
             rows_s = [row for row in rows_v if row["source_dataset"] == source]
@@ -875,6 +1061,7 @@ def _summarize_recall_for_model(*, run_name: str, model_key: str) -> None:
                 by_source[source] = {
                     "macro_strict": float(np.mean([row["expert_af_recall_strict"] for row in rows_s])),
                     "macro_lenient": float(np.mean([row["expert_af_recall_lenient"] for row in rows_s])),
+                    "macro_weighted": float(np.mean([row["expert_af_recall_weighted"] for row in rows_s])),
                     "article_count": len(rows_s),
                     "expert_af_total": sum(int(row["expert_af_count"]) for row in rows_s),
                 }
@@ -884,8 +1071,10 @@ def _summarize_recall_for_model(*, run_name: str, model_key: str) -> None:
             "expert_af_total": micro_denom,
             "micro_strict": micro_strict / micro_denom if micro_denom else 0.0,
             "micro_lenient": micro_lenient / micro_denom if micro_denom else 0.0,
+            "micro_weighted": micro_weighted_num / micro_denom if micro_denom else 0.0,
             "macro_strict": macro_strict,
             "macro_lenient": macro_lenient,
+            "macro_weighted": macro_weighted,
             "by_source": by_source,
         }
     out_dir = _recall_dir(run_name, model_key)
@@ -896,8 +1085,12 @@ def _summarize_recall_for_model(*, run_name: str, model_key: str) -> None:
             "time": _now(),
             "run_name": run_name,
             "model_key": model_key,
-            "primary_metric": "micro_strict",
-            "note": "Strict recall counts only label=covered. Lenient recall also counts partially_covered.",
+            "primary_metric": "micro_weighted",
+            "note": (
+                "Strict recall: covered/total. "
+                "Weighted recall: (covered*1.0 + partially_covered*0.5)/total [primary]. "
+                "Lenient recall: (covered+partially_covered)/total."
+            ),
             "variants": overall,
         },
         out_dir / "expert_af_recall_summary.json",
@@ -926,6 +1119,7 @@ def summarize_all(*, run_name: str, model_keys: list[str]) -> None:
                     "variant": variant,
                     "phase": label,
                     **{metric: metric_values[metric] for metric in METRICS},
+                    "Expert-AF Recall (weighted)": recall_values.get("micro_weighted", ""),
                     "Expert-AF Recall (strict)": recall_values["micro_strict"],
                     "Expert-AF Recall (lenient)": recall_values["micro_lenient"],
                 }
@@ -963,8 +1157,10 @@ def _write_recall_all_models_csv(*, run_name: str, model_keys: list[str]) -> Non
                     "variant": variant,
                     "phase": label,
                     "expert_af_total": values["expert_af_total"],
+                    "Expert-AF Recall (weighted)": values.get("micro_weighted", ""),
                     "Expert-AF Recall (strict)": values["micro_strict"],
                     "Expert-AF Recall (lenient)": values["micro_lenient"],
+                    "Expert-AF Recall macro weighted": values.get("macro_weighted", ""),
                     "Expert-AF Recall macro strict": values["macro_strict"],
                     "Expert-AF Recall macro lenient": values["macro_lenient"],
                 }
@@ -1034,10 +1230,10 @@ def _write_paper_table_html(rows: list[dict[str, Any]], path: Path) -> None:
         "<tr>",
         '<th class="model">Model</th>',
         '<th class="phase">Phase</th>',
-        '<th class="rel" colspan="4">Relevance (↑)</th>',
+        '<th class="rel" colspan="4">Relevance (up)</th>',
         '<th class="read" colspan="4">Readability</th>',
-        '<th class="fact" colspan="2">Factuality (↑)</th>',
-        '<th class="recall" colspan="1">Coverage (↑)</th>',
+        '<th class="fact" colspan="2">Factuality (up)</th>',
+        '<th class="recall" colspan="1">Coverage (up)</th>',
         "</tr>",
         "<tr>",
         '<th class="model"></th>',
@@ -1046,13 +1242,13 @@ def _write_paper_table_html(rows: list[dict[str, Any]], path: Path) -> None:
         '<th class="rel">BLEU</th>',
         '<th class="rel">METEOR</th>',
         '<th class="rel">BERTScore</th>',
-        '<th class="read">FKGL (↓)</th>',
-        '<th class="read">DCRS (↓)</th>',
-        '<th class="read">CLI (↓)</th>',
-        '<th class="read">LENS (↑)</th>',
+        '<th class="read">FKGL (down)</th>',
+        '<th class="read">DCRS (down)</th>',
+        '<th class="read">CLI (down)</th>',
+        '<th class="read">LENS (up)</th>',
         '<th class="fact">AlignScore</th>',
         '<th class="fact">SummaC</th>',
-        '<th class="recall">Expert-AF Recall</th>',
+        '<th class="recall">Expert-AF Recall (weighted)</th>',
         "</tr>",
         "</thead>",
         "<tbody>",
@@ -1076,7 +1272,7 @@ def _write_paper_table_html(rows: list[dict[str, Any]], path: Path) -> None:
                 f"<td>{_fmt(row.get('LENS'))}</td>",
                 f'<td class="fact-cell">{_fmt(row.get("AlignScore"))}</td>',
                 f'<td class="fact-cell">{_fmt(row.get("SummaC"))}</td>',
-                f'<td class="recall-cell">{_fmt(row.get("Expert-AF Recall (strict)"))}</td>',
+                f'<td class="recall-cell">{_fmt(row.get("Expert-AF Recall (weighted)"))}</td>',
                 "</tr>",
             ]
         )
@@ -1084,7 +1280,7 @@ def _write_paper_table_html(rows: list[dict[str, Any]], path: Path) -> None:
         [
             "</tbody>",
             "</table>",
-            '<div class="note">Expert-AF Recall is the strict micro recall: covered expert-summary atomic facts / total expert-summary atomic facts. Partial coverage is not counted in the displayed score.</div>',
+            '<div class="note">Expert-AF Recall is weighted micro recall: (covered*1.0 + partially_covered*0.5) / total expert-summary atomic facts.</div>',
             "</div>",
             "</body>",
             "</html>",
@@ -1108,7 +1304,7 @@ def _write_paper_table_markdown(rows: list[dict[str, Any]], path: Path) -> None:
         "LENS",
         "AlignScore",
         "SummaC",
-        "Expert-AF Recall",
+        "Expert-AF Recall (weighted)",
     ]
     lines = [
         "# Table 3. ATLAS Pipeline Module Ablation with Expert-AF Recall",
@@ -1130,11 +1326,11 @@ def _write_paper_table_markdown(rows: list[dict[str, Any]], path: Path) -> None:
             _fmt(row.get("LENS")),
             _fmt(row.get("AlignScore")),
             _fmt(row.get("SummaC")),
-            _fmt(row.get("Expert-AF Recall (strict)")),
+            _fmt(row.get("Expert-AF Recall (weighted)")),
         ]
         lines.append("| " + " | ".join(values) + " |")
     lines.append("")
-    lines.append("Expert-AF Recall is strict micro recall; partially_covered is not counted.")
+    lines.append("Expert-AF Recall is weighted micro recall: (covered*1.0 + partially_covered*0.5) / total expert-summary atomic facts.")
     path.write_text("\n".join(lines), encoding="utf-8")
 
 
@@ -1202,11 +1398,14 @@ def build_parser() -> argparse.ArgumentParser:
     sub.add_parser("build-variants")
     export_legacy_parser = sub.add_parser("export-legacy-eval")
     export_legacy_parser.add_argument("--variant", choices=list(VARIANTS), required=True)
+    legacy_name_parser = sub.add_parser("legacy-eval-name")
+    legacy_name_parser.add_argument("--variant", choices=list(VARIANTS), required=True)
     import_legacy_parser = sub.add_parser("import-legacy-eval")
     import_legacy_parser.add_argument("--variant", choices=list(VARIANTS), required=True)
     evaluate_parser = sub.add_parser("evaluate")
     evaluate_parser.add_argument("--variant", choices=list(VARIANTS), default=None)
     sub.add_parser("extract-expert-af")
+    sub.add_parser("canonicalize-reference")
     sub.add_parser("judge-recall")
     summarize_parser = sub.add_parser("summarize")
     summarize_parser.add_argument("--model-keys", nargs="+", default=None)
@@ -1239,6 +1438,10 @@ def main() -> None:
         if not model_key:
             raise ValueError("--model-key is required for export-legacy-eval")
         export_legacy_eval_run(run_name=args.run_name, model_key=model_key, variant=args.variant)
+    elif args.command == "legacy-eval-name":
+        if not model_key:
+            raise ValueError("--model-key is required for legacy-eval-name")
+        print(legacy_eval_run_name(run_name=args.run_name, model_key=model_key, variant=args.variant))
     elif args.command == "import-legacy-eval":
         if not model_key:
             raise ValueError("--model-key is required for import-legacy-eval")
@@ -1249,6 +1452,13 @@ def main() -> None:
         evaluate_official_metrics_variant(run_name=args.run_name, model_key=model_key, variant=args.variant)
     elif args.command == "extract-expert-af":
         extract_expert_afs(
+            run_name=args.run_name,
+            judge_model_key=args.judge_model_key,
+            max_workers=args.max_workers,
+            resume=resume,
+        )
+    elif args.command == "canonicalize-reference":
+        canonicalize_reference_claims(
             run_name=args.run_name,
             judge_model_key=args.judge_model_key,
             max_workers=args.max_workers,
@@ -1272,3 +1482,4 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+

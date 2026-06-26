@@ -1,0 +1,37 @@
+Extract abstract atomic facts, then keep only the abstract facts that are also expressed in the expert lay summary.
+
+Purpose:
+- The abstract is the source-grounded reference text.
+- The expert lay summary determines which abstract facts are summary-worthy for lay readers.
+- The final output should contain ONLY abstract-grounded facts that the expert summary mentions or clearly paraphrases.
+
+Step 1: Extract self-contained atomic facts from the abstract.
+Step 2: For each abstract fact, decide whether the expert lay summary expresses the same core information.
+Step 3: Return only the selected abstract facts that are expressed in the expert lay summary.
+
+Selection rules:
+- Select an abstract fact if the expert summary states, simplifies, paraphrases, or uses lay wording for the same core information.
+- Do not require the same terminology, exact numbers, exact experimental detail, or exact sentence structure.
+- Do not select an abstract fact if the expert summary only mentions the same broad topic, disease, method, organism, drug, or gene.
+- Do not invent facts that are not in the abstract.
+- Each selected fact must be a concise, self-contained scientific claim grounded in the abstract.
+
+Return ONLY valid JSON:
+{
+  "selected_abstract_facts": [
+    {
+      "abstract_af_id": "A1",
+      "abstract_grounded_claim": "<one selected abstract atomic fact>",
+      "abstract_span": "<short abstract text supporting the claim>",
+      "expert_summary_span": "<short expert-summary text showing this information is mentioned>"
+    }
+  ],
+  "all_abstract_fact_count": <integer>,
+  "selected_abstract_fact_count": <integer>
+}
+
+ABSTRACT:
+{abstract}
+
+EXPERT LAY SUMMARY:
+{expert_summary}

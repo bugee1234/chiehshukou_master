@@ -1,0 +1,8 @@
+Write an English biomedical lay summary of the following scientific article for a general audience.
+
+Length requirement:
+- Write 185 to 215 words.
+- Do not exceed 220 words.
+
+ARTICLE:
+{article}

@@ -1,0 +1,25 @@
+{
+  "time": "2026-06-25T15:57:05",
+  "design": "direct_zero_shot_full_article",
+  "run_name": "direct_zero_shot_pilot20_raw_article_len220",
+  "scope": "pilot20",
+  "source_run": "v11_constellation_validation284_fixed_m12_pilot20",
+  "pilot_source_run": "pilot_n20_v11_factuality_chase",
+  "article_count": 20,
+  "by_source": {
+    "PLOS": 10,
+    "eLife": 10
+  },
+  "generation_visible_fields": [
+    "article"
+  ],
+  "reference_storage_separated": true,
+  "forbidden_generation_inputs": [
+    "expert_summary",
+    "evidence",
+    "questions",
+    "answers",
+    "module outputs",
+    "pipeline summaries"
+  ]
+}

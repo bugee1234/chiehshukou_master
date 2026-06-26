@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import argparse
+import re
 import sys
 from datetime import datetime
 from pathlib import Path
@@ -19,6 +20,7 @@ from src.thesis_laysumm_direct_baseline.paths import (
     run_data_dir,
     summaries_path,
 )
+from src.thesis_laysumm_v11.common import safe_word_count
 from src.utils import load_jsonl, save_json, save_jsonl
 
 
@@ -28,6 +30,19 @@ ALLOWED_PROMPT_FIELDS = ("article",)
 
 def build_prompt(article: dict[str, Any], template: str) -> str:
     return template.replace("{article}", str(article.get("article") or ""))
+
+
+def truncate_words(text: str, max_words: int | None) -> tuple[str, bool]:
+    clean = str(text or "").strip()
+    if not max_words:
+        return clean, False
+    tokens = re.findall(r"\S+", clean)
+    if len(tokens) <= max_words:
+        return clean, False
+    truncated = " ".join(tokens[:max_words]).rstrip()
+    if truncated and truncated[-1] not in ".!?":
+        truncated += "."
+    return truncated, True
 
 
 def _usage_tracker(run_name: str, resume: bool) -> UsageTracker:
@@ -43,7 +58,15 @@ def _sorted(rows: list[dict[str, Any]], order: dict[str, int]) -> list[dict[str,
     return sorted(rows, key=lambda row: order[str(row["article_id"])])
 
 
-def generate(*, run_name: str, model_key: str, max_workers: int, resume: bool) -> list[dict[str, Any]]:
+def generate(
+    *,
+    run_name: str,
+    model_key: str,
+    max_workers: int,
+    resume: bool,
+    prompt_path: Path,
+    max_summary_words: int | None,
+) -> list[dict[str, Any]]:
     if model_key not in MODEL_CONFIGS:
         raise ValueError(f"Unknown model key: {model_key}. Valid: {sorted(MODEL_CONFIGS)}")
     in_path = inputs_path(run_name)
@@ -54,7 +77,7 @@ def generate(*, run_name: str, model_key: str, max_workers: int, resume: bool) -
     if len(order) != len(articles):
         raise ValueError("Direct-baseline inputs contain duplicate IDs")
 
-    template = PROMPT_PATH.read_text(encoding="utf-8")
+    template = prompt_path.read_text(encoding="utf-8")
     prompt_hash = sha256_text(template)
     out_path = summaries_path(run_name, model_key)
     existing = load_jsonl(out_path) if resume and out_path.exists() else []
@@ -92,7 +115,8 @@ def generate(*, run_name: str, model_key: str, max_workers: int, resume: bool) -
                 f"direct generation failed after {MAX_ITEM_ATTEMPTS} attempts "
                 f"for article_id={article_id}: {last_error}"
             )
-        summary = raw.strip()
+        raw_summary = raw.strip()
+        summary, truncated = truncate_words(raw_summary, max_summary_words)
         return {
             "article_id": article_id,
             "source_dataset": article.get("source_dataset"),
@@ -100,13 +124,18 @@ def generate(*, run_name: str, model_key: str, max_workers: int, resume: bool) -
             "model_key": model_key,
             "provider": MODEL_CONFIGS[model_key]["provider"],
             "model": MODEL_CONFIGS[model_key]["model"],
-            "baseline_design": "direct_zero_shot_full_article",
-            "prompt_version": "direct_lay_summary_v1",
-            "prompt_file": str(PROMPT_PATH),
+            "baseline_design": "direct_zero_shot_full_article_length_controlled"
+            if max_summary_words
+            else "direct_zero_shot_full_article",
+            "prompt_version": prompt_path.stem,
+            "prompt_file": str(prompt_path),
             "prompt_sha256": prompt_hash,
             "visible_input_fields": list(ALLOWED_PROMPT_FIELDS),
             "temperature": 0.0,
             "generated_summary": summary,
+            "word_count": safe_word_count(summary),
+            "max_summary_words": max_summary_words,
+            "truncated_by_word_limit": truncated,
             "raw_response": raw,
             "parse_error": False,
         }
@@ -138,7 +167,10 @@ def generate(*, run_name: str, model_key: str, max_workers: int, resume: bool) -
             "new_article_count": len(new_rows),
             "prompt_sha256": prompt_hash,
             "visible_input_fields": list(ALLOWED_PROMPT_FIELDS),
-            "postprocessing": "strip_outer_whitespace_only",
+            "postprocessing": "strip_outer_whitespace_then_word_truncate"
+            if max_summary_words
+            else "strip_outer_whitespace_only",
+            "max_summary_words": max_summary_words,
             "usage_summary": usage.summarize(),
         },
         out_path.parent / "generation_metadata.json",
@@ -152,6 +184,8 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--run-name", required=True)
     parser.add_argument("--model-key", required=True)
     parser.add_argument("--max-workers", type=int, default=8)
+    parser.add_argument("--prompt-path", type=Path, default=PROMPT_PATH)
+    parser.add_argument("--max-summary-words", type=int, default=None)
     parser.add_argument("--no-resume", action="store_true")
     return parser
 
@@ -163,6 +197,8 @@ def main() -> None:
         model_key=args.model_key,
         max_workers=args.max_workers,
         resume=not args.no_resume,
+        prompt_path=args.prompt_path,
+        max_summary_words=args.max_summary_words,
     )
 
 
