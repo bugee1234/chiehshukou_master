@@ -1,0 +1,33 @@
+{
+  "design": "fixed_gemini25_upstream_phase_b_backbone_ablation",
+  "run_name": "atlas_v11_gemini25_fixed_upstream_phaseb_n10",
+  "target_model_key": "gemini25_flash_non_thinking",
+  "source_run": "pilot_n20_v11_fixed_m12_gemini25_same_model_phaseb_factuality_chase",
+  "upstream_model_key": "gemini25_flash_non_thinking",
+  "mode": "factuality_chase",
+  "articles_per_source": 5,
+  "article_count": 10,
+  "article_ids": [
+    "laysumm_plos_0051",
+    "laysumm_plos_0178",
+    "laysumm_plos_0209",
+    "laysumm_plos_0228",
+    "laysumm_plos_0285",
+    "laysumm_elife_0006",
+    "laysumm_elife_0026",
+    "laysumm_elife_0028",
+    "laysumm_elife_0035",
+    "laysumm_elife_0057"
+  ],
+  "copied_counts": {
+    "core_keep_af.jsonl": 76,
+    "check_af.jsonl": 114,
+    "evidence_table.jsonl": 10,
+    "questions_1t3f_nota.jsonl": 114
+  },
+  "model_specific_stages": [
+    "generate-summary",
+    "answer-questions",
+    "rewrite-summaries"
+  ]
+}

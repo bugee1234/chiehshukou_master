@@ -1,0 +1,58 @@
+{
+  "design": "fixed_gemini25_upstream_phase_b_backbone_ablation",
+  "run_name": "atlas_v11_qwen25_7b_openrouter_fixed_gemini25_phaseb_n10_w4",
+  "target_model_key": "qwen25_7b_instruct_openrouter",
+  "target_model_config": {
+    "provider": "openrouter",
+    "model": "qwen/qwen-2.5-7b-instruct",
+    "quantization": "provider_managed",
+    "context_window": 32768,
+    "max_new_tokens": 2048,
+    "seed": 42,
+    "input_price_per_1m": 0.04,
+    "output_price_per_1m": 0.1,
+    "currency": "USD",
+    "pricing_note": "OpenRouter list price recorded 2026-07-26; provider-managed serving. Off-the-shelf Instruct checkpoint; no BioLaySumm task-specific fine-tuning."
+  },
+  "source_run": "pilot_n20_v11_fixed_m12_gemini25_same_model_phaseb_factuality_chase",
+  "upstream_model_key": "gemini25_flash_non_thinking",
+  "mode": "factuality_chase",
+  "articles_per_source": 5,
+  "selection_strategy": "Within each source, select the five articles with the fewest fixed Gemini 2.5 verification questions; break ties by original_index. This bounds local Phase-B runtime and is fixed before running Qwen or Llama.",
+  "article_count": 10,
+  "article_ids": [
+    "laysumm_plos_0051",
+    "laysumm_plos_0209",
+    "laysumm_plos_0563",
+    "laysumm_plos_0285",
+    "laysumm_plos_0228",
+    "laysumm_elife_0163",
+    "laysumm_elife_0006",
+    "laysumm_elife_0035",
+    "laysumm_elife_0057",
+    "laysumm_elife_0189"
+  ],
+  "question_counts_by_article": {
+    "laysumm_elife_0006": 10,
+    "laysumm_elife_0035": 10,
+    "laysumm_elife_0057": 10,
+    "laysumm_elife_0163": 8,
+    "laysumm_elife_0189": 10,
+    "laysumm_plos_0051": 10,
+    "laysumm_plos_0209": 10,
+    "laysumm_plos_0228": 12,
+    "laysumm_plos_0285": 11,
+    "laysumm_plos_0563": 10
+  },
+  "copied_counts": {
+    "core_keep_af.jsonl": 68,
+    "check_af.jsonl": 101,
+    "evidence_table.jsonl": 10,
+    "questions_1t3f_nota.jsonl": 101
+  },
+  "model_specific_stages": [
+    "generate-summary",
+    "answer-questions",
+    "rewrite-summaries"
+  ]
+}

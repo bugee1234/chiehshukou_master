@@ -52,6 +52,78 @@ PARTC_EVAL_PROMPT = PROMPTS_EXP2_DIR / "partc_selected_keep_covers_summary_af.tx
 # Prices are per 1M tokens. Keep these fixed in the metadata so each run is
 # reproducible even if provider pricing changes later.
 MODEL_CONFIGS: dict[str, dict[str, Any]] = {
+    "qwen25_7b_instruct_openrouter": {
+        "provider": "openrouter",
+        "model": "qwen/qwen-2.5-7b-instruct",
+        "quantization": "provider_managed",
+        "context_window": 32768,
+        "max_new_tokens": 2048,
+        "seed": 42,
+        "input_price_per_1m": 0.04,
+        "output_price_per_1m": 0.10,
+        "currency": "USD",
+        "pricing_note": (
+            "OpenRouter list price recorded 2026-07-26; provider-managed serving. "
+            "Off-the-shelf Instruct checkpoint; no BioLaySumm task-specific fine-tuning."
+        ),
+    },
+    "llama3_8b_instruct_openrouter": {
+        "provider": "openrouter",
+        "model": "meta-llama/llama-3-8b-instruct",
+        # OpenRouter currently has one endpoint for this legacy checkpoint, and
+        # that endpoint does not advertise every optional request parameter.
+        # Keep the exact model available instead of filtering its only endpoint.
+        "openrouter_require_parameters": False,
+        "quantization": "provider_managed",
+        "context_window": 8192,
+        "max_new_tokens": 1024,
+        "seed": 42,
+        "input_price_per_1m": 0.14,
+        "output_price_per_1m": 0.14,
+        "currency": "USD",
+        "pricing_note": (
+            "OpenRouter list price recorded 2026-07-26; provider-managed serving. "
+            "Off-the-shelf Instruct checkpoint; no BioLaySumm task-specific fine-tuning."
+        ),
+    },
+    "llama31_8b_instruct_openrouter": {
+        "provider": "openrouter",
+        "model": "meta-llama/llama-3.1-8b-instruct",
+        "quantization": "provider_managed",
+        "context_window": 131072,
+        "max_new_tokens": 2048,
+        "seed": 42,
+        "input_price_per_1m": 0.02,
+        "output_price_per_1m": 0.03,
+        "currency": "USD",
+        "pricing_note": (
+            "OpenRouter minimum list price recorded 2026-07-27; actual routed-provider price may vary. "
+            "Off-the-shelf Llama 3.1 Instruct checkpoint; no BioLaySumm task-specific fine-tuning. "
+            "Used as an availability-driven proxy, not as the exact official Llama 3 baseline backbone."
+        ),
+    },
+    "qwen25_7b_instruct_local_8bit": {
+        "provider": "local_hf",
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "quantization": "8bit",
+        "context_window": 16384,
+        "max_new_tokens": 2048,
+        "input_price_per_1m": 0.0,
+        "output_price_per_1m": 0.0,
+        "currency": "USD",
+        "pricing_note": "Off-the-shelf Instruct checkpoint; no BioLaySumm task-specific fine-tuning.",
+    },
+    "llama3_8b_instruct_local_8bit": {
+        "provider": "local_hf",
+        "model": "meta-llama/Meta-Llama-3-8B-Instruct",
+        "quantization": "8bit",
+        "context_window": 8192,
+        "max_new_tokens": 1536,
+        "input_price_per_1m": 0.0,
+        "output_price_per_1m": 0.0,
+        "currency": "USD",
+        "pricing_note": "Off-the-shelf Instruct checkpoint; no BioLaySumm task-specific fine-tuning.",
+    },
     "gpt41": {
         "provider": "openai",
         "model": "gpt-4.1",
@@ -338,6 +410,8 @@ class UsageTracker:
 
 
 class ProviderClient:
+    _local_hf_cache: dict[str, tuple[Any, Any]] = {}
+
     def __init__(self, model_key: str, usage: UsageTracker) -> None:
         cfg = MODEL_CONFIGS[model_key]
         self.model_key = model_key
@@ -351,6 +425,11 @@ class ProviderClient:
         self.reasoning_effort = cfg.get("reasoning_effort")
         self.gemini_thinking_level = cfg.get("thinking_level")
         self.gemini_thinking_budget = cfg.get("thinking_budget")
+        self.quantization = str(cfg.get("quantization", ""))
+        self.context_window = int(cfg.get("context_window", 8192))
+        self.max_new_tokens = int(cfg.get("max_new_tokens", 2048))
+        self.seed = int(cfg.get("seed", 42))
+        self.openrouter_require_parameters = bool(cfg.get("openrouter_require_parameters", True))
         self.usage = usage
 
         if self.provider == "openai":
@@ -363,6 +442,19 @@ class ProviderClient:
             if not api_key:
                 raise ValueError("DEEPSEEK_API_KEY is missing. Please set it in .env.")
             self.client = OpenAI(base_url="https://api.deepseek.com", api_key=api_key)
+        elif self.provider == "openrouter":
+            api_key = os.getenv("OPENROUTER_API_KEY", "")
+            if not api_key:
+                raise ValueError(
+                    "OPENROUTER_API_KEY is missing. Set it in the current PowerShell session "
+                    "before starting the runner."
+                )
+            self.client = OpenAI(
+                base_url="https://openrouter.ai/api/v1",
+                api_key=api_key,
+                timeout=180.0,
+                max_retries=3,
+            )
         elif self.provider == "gemini":
             api_key = os.getenv("GEMINI_API_KEY", "")
             if not api_key:
@@ -374,6 +466,8 @@ class ProviderClient:
                 raise ImportError("Please install google-genai: pip install google-genai") from exc
             self.genai_types = genai_types
             self.client = genai.Client(api_key=api_key, http_options=genai_types.HttpOptions(timeout=120000))
+        elif self.provider == "local_hf":
+            self.client = None
         else:
             raise ValueError(f"Unknown provider: {self.provider}")
 
@@ -389,7 +483,14 @@ class ProviderClient:
     ) -> str:
         started = time.perf_counter()
         cached_prompt_tokens = 0
-        if self.provider == "gemini":
+        if self.provider == "local_hf":
+            content, prompt_tokens, completion_tokens, total_tokens = self._local_hf_chat(
+                stage=stage,
+                messages=messages,
+                response_format=response_format,
+                temperature=temperature,
+            )
+        elif self.provider == "gemini":
             content, prompt_tokens, completion_tokens, total_tokens = self._gemini_chat(
                 messages=messages,
                 response_format=response_format,
@@ -404,6 +505,15 @@ class ProviderClient:
                 params["temperature"] = temperature
             if response_format is not None:
                 params["response_format"] = response_format
+            if self.provider == "openrouter":
+                params["max_tokens"] = self.max_new_tokens
+                params["seed"] = self.seed
+                params["extra_body"] = {
+                    "provider": {
+                        "sort": "throughput",
+                        "require_parameters": self.openrouter_require_parameters,
+                    }
+                }
             if self.provider == "deepseek" and self.thinking_type:
                 params["extra_body"] = {"thinking": {"type": str(self.thinking_type)}}
                 if self.thinking_type == "enabled" and self.reasoning_effort:
@@ -433,6 +543,87 @@ class ProviderClient:
             cached_prompt_tokens=cached_prompt_tokens if self.provider != "gemini" else 0,
         )
         return content
+
+    def _load_local_hf(self) -> tuple[Any, Any]:
+        cached = self._local_hf_cache.get(self.model)
+        if cached is not None:
+            return cached
+        try:
+            import torch
+            from transformers import AutoModelForCausalLM, AutoTokenizer, BitsAndBytesConfig
+        except ImportError as exc:
+            raise ImportError(
+                "Local Hugging Face inference requires torch, transformers, accelerate, and bitsandbytes. "
+                "Install requirements-local-llm.txt in .venv-local-llm."
+            ) from exc
+        if not torch.cuda.is_available():
+            raise RuntimeError("The local-HF ATLAS backend requires a CUDA GPU for these 7B/8B models.")
+        quantization_config = None
+        if self.quantization == "8bit":
+            quantization_config = BitsAndBytesConfig(load_in_8bit=True)
+        elif self.quantization:
+            raise ValueError(f"Unsupported local-HF quantization: {self.quantization!r}")
+        print(f"[local_hf] loading {self.model} ({self.quantization or 'unquantized'}) ...", flush=True)
+        tokenizer = AutoTokenizer.from_pretrained(self.model, use_fast=True)
+        model = AutoModelForCausalLM.from_pretrained(
+            self.model,
+            device_map="auto",
+            quantization_config=quantization_config,
+            torch_dtype="auto",
+            low_cpu_mem_usage=True,
+        )
+        model.eval()
+        if tokenizer.pad_token_id is None:
+            tokenizer.pad_token_id = tokenizer.eos_token_id
+        cached = (tokenizer, model)
+        self._local_hf_cache[self.model] = cached
+        return cached
+
+    def _local_hf_chat(
+        self,
+        *,
+        stage: str,
+        messages: list[dict[str, str]],
+        response_format: dict[str, Any] | None,
+        temperature: float,
+    ) -> tuple[str, int, int, int]:
+        import torch
+
+        tokenizer, model = self._load_local_hf()
+        local_messages = [dict(message) for message in messages]
+        if response_format is not None:
+            json_instruction = (
+                "Return only one valid JSON object. Do not use Markdown fences or add text before or after JSON."
+            )
+            if local_messages and local_messages[0].get("role") == "system":
+                local_messages[0]["content"] = str(local_messages[0].get("content", "")).rstrip() + "\n\n" + json_instruction
+            else:
+                local_messages.insert(0, {"role": "system", "content": json_instruction})
+        prompt = tokenizer.apply_chat_template(local_messages, tokenize=False, add_generation_prompt=True)
+        encoded = tokenizer(prompt, return_tensors="pt", add_special_tokens=False)
+        prompt_tokens = int(encoded["input_ids"].shape[-1])
+        max_input_tokens = self.context_window - self.max_new_tokens
+        if prompt_tokens > max_input_tokens:
+            raise ValueError(
+                f"Local-HF prompt exceeds the configured safe context for {self.model}: "
+                f"stage={stage} prompt_tokens={prompt_tokens} limit={max_input_tokens}. "
+                "The prompt was not silently truncated."
+            )
+        device = next(model.parameters()).device
+        inputs = {key: value.to(device) for key, value in encoded.items()}
+        generate_kwargs: dict[str, Any] = {
+            "max_new_tokens": self.max_new_tokens,
+            "pad_token_id": tokenizer.pad_token_id,
+            "do_sample": temperature > 0,
+        }
+        if temperature > 0:
+            generate_kwargs["temperature"] = max(float(temperature), 1e-5)
+        with torch.inference_mode():
+            output_ids = model.generate(**inputs, **generate_kwargs)
+        generated_ids = output_ids[0, prompt_tokens:]
+        completion_tokens = int(generated_ids.shape[-1])
+        content = tokenizer.decode(generated_ids, skip_special_tokens=True).strip()
+        return content, prompt_tokens, completion_tokens, prompt_tokens + completion_tokens
 
     def _gemini_chat(
         self,

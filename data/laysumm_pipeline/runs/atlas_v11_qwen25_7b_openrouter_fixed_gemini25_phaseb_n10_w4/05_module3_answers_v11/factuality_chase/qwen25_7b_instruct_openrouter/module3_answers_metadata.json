@@ -1,0 +1,81 @@
+{
+  "time": "2026-07-26T23:53:17",
+  "run_name": "atlas_v11_qwen25_7b_openrouter_fixed_gemini25_phaseb_n10_w4",
+  "stage": "V11_05_answers",
+  "mode": "factuality_chase",
+  "model_key": "qwen25_7b_instruct_openrouter",
+  "questions_total": 101,
+  "answers_total": 101,
+  "wrong_total": 18,
+  "accuracy": 0.8218,
+  "wrong_check_type_counts": {
+    "high_risk": 10,
+    "core": 8
+  },
+  "wrong_slot_type_counts": {
+    "measurement": 1,
+    "method": 3,
+    "causality": 2,
+    "core_claim": 8,
+    "comparison": 1,
+    "number": 3
+  },
+  "usage_summary": {
+    "api_calls": 129,
+    "prompt_tokens": 191644,
+    "cached_prompt_tokens": 0,
+    "billable_prompt_tokens": 191644,
+    "completion_tokens": 48206,
+    "billable_output_tokens": 48206,
+    "total_tokens": 239850,
+    "api_elapsed_seconds": 739.9847,
+    "cost_currencies": [
+      "USD"
+    ],
+    "estimated_cost": 0.012486,
+    "by_stage": {
+      "V11.answer_questions.factuality_chase:qwen25_7b_instruct_openrouter": {
+        "api_calls": 101,
+        "prompt_tokens": 79557,
+        "cached_prompt_tokens": 0,
+        "billable_prompt_tokens": 79557,
+        "completion_tokens": 26617,
+        "billable_output_tokens": 26617,
+        "total_tokens": 106174,
+        "api_elapsed_seconds": 438.9937,
+        "cost_currencies": [
+          "USD"
+        ],
+        "estimated_cost": 0.005844
+      },
+      "V11.generate_summary.factuality_chase:qwen25_7b_instruct_openrouter": {
+        "api_calls": 10,
+        "prompt_tokens": 42006,
+        "cached_prompt_tokens": 0,
+        "billable_prompt_tokens": 42006,
+        "completion_tokens": 7261,
+        "billable_output_tokens": 7261,
+        "total_tokens": 49267,
+        "api_elapsed_seconds": 111.4338,
+        "cost_currencies": [
+          "USD"
+        ],
+        "estimated_cost": 0.002406
+      },
+      "V11.generate_summary.qwen25_7b_instruct_openrouter.expand_length.factuality_chase": {
+        "api_calls": 18,
+        "prompt_tokens": 70081,
+        "cached_prompt_tokens": 0,
+        "billable_prompt_tokens": 70081,
+        "completion_tokens": 14328,
+        "billable_output_tokens": 14328,
+        "total_tokens": 84409,
+        "api_elapsed_seconds": 189.5572,
+        "cost_currencies": [
+          "USD"
+        ],
+        "estimated_cost": 0.004236
+      }
+    }
+  }
+}

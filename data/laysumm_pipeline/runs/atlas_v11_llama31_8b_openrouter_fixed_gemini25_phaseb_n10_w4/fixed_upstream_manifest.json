@@ -1,0 +1,58 @@
+{
+  "design": "fixed_gemini25_upstream_phase_b_backbone_ablation",
+  "run_name": "atlas_v11_llama31_8b_openrouter_fixed_gemini25_phaseb_n10_w4",
+  "target_model_key": "llama31_8b_instruct_openrouter",
+  "target_model_config": {
+    "provider": "openrouter",
+    "model": "meta-llama/llama-3.1-8b-instruct",
+    "quantization": "provider_managed",
+    "context_window": 131072,
+    "max_new_tokens": 2048,
+    "seed": 42,
+    "input_price_per_1m": 0.02,
+    "output_price_per_1m": 0.03,
+    "currency": "USD",
+    "pricing_note": "OpenRouter minimum list price recorded 2026-07-27; actual routed-provider price may vary. Off-the-shelf Llama 3.1 Instruct checkpoint; no BioLaySumm task-specific fine-tuning. Used as an availability-driven proxy, not as the exact official Llama 3 baseline backbone."
+  },
+  "source_run": "pilot_n20_v11_fixed_m12_gemini25_same_model_phaseb_factuality_chase",
+  "upstream_model_key": "gemini25_flash_non_thinking",
+  "mode": "factuality_chase",
+  "articles_per_source": 5,
+  "selection_strategy": "Within each source, select the five articles with the fewest fixed Gemini 2.5 verification questions; break ties by original_index. This bounds local Phase-B runtime and is fixed before running Qwen or Llama.",
+  "article_count": 10,
+  "article_ids": [
+    "laysumm_plos_0051",
+    "laysumm_plos_0209",
+    "laysumm_plos_0563",
+    "laysumm_plos_0285",
+    "laysumm_plos_0228",
+    "laysumm_elife_0163",
+    "laysumm_elife_0006",
+    "laysumm_elife_0035",
+    "laysumm_elife_0057",
+    "laysumm_elife_0189"
+  ],
+  "question_counts_by_article": {
+    "laysumm_elife_0006": 10,
+    "laysumm_elife_0035": 10,
+    "laysumm_elife_0057": 10,
+    "laysumm_elife_0163": 8,
+    "laysumm_elife_0189": 10,
+    "laysumm_plos_0051": 10,
+    "laysumm_plos_0209": 10,
+    "laysumm_plos_0228": 12,
+    "laysumm_plos_0285": 11,
+    "laysumm_plos_0563": 10
+  },
+  "copied_counts": {
+    "core_keep_af.jsonl": 68,
+    "check_af.jsonl": 101,
+    "evidence_table.jsonl": 10,
+    "questions_1t3f_nota.jsonl": 101
+  },
+  "model_specific_stages": [
+    "generate-summary",
+    "answer-questions",
+    "rewrite-summaries"
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "time": "2026-07-27T00:40:49",
+  "comparison_type": "descriptive_mixed_sample_sizes",
+  "method_note": "This is a descriptive mixed-sample table, not a controlled head-to-head comparison: Qwen uses 5 PLOS + 5 eLife articles (n=10), whereas Llama 3.1 uses all 10 PLOS + 10 eLife pilot articles (n=20). Meta-Llama-3.1-8B-Instruct is an availability-driven proxy rather than the exact Meta-Llama-3-8B-Instruct official baseline backbone.",
+  "systems": [
+    {
+      "system": "ATLAS Phase B + Qwen2.5-7B-Instruct (OpenRouter, off-the-shelf)",
+      "run_name": "atlas_v11_qwen25_7b_openrouter_fixed_gemini25_phaseb_n10_w4",
+      "model_key": "qwen25_7b_instruct_openrouter",
+      "article_count": 10,
+      "PLOS_count": 5,
+      "eLife_count": 5,
+      "score_path": "C:\\Users\\user\\Desktop\\chiehshukou_master\\results\\laysumm_pipeline\\runs\\atlas_v11_qwen25_7b_openrouter_fixed_gemini25_phaseb_n10_w4\\qwen25_7b_instruct_openrouter\\rewritten_scores.json",
+      "scores": {
+        "ROUGE": 0.3355659029005668,
+        "BLEU": 9.51099782268458,
+        "METEOR": 0.2826013450585504,
+        "BERTScore": 0.8533789396286011,
+        "FKGL": 14.214037277588162,
+        "DCRS": 13.549701216289566,
+        "CLI": 17.244884579920097,
+        "LENS": 48.448255415450376,
+        "AlignScore": 0.8839764952659608,
+        "SummaC": 0.9009768545627594
+      }
+    },
+    {
+      "system": "ATLAS Phase B + Meta-Llama-3.1-8B-Instruct (OpenRouter proxy, off-the-shelf)",
+      "run_name": "atlas_v11_llama31_8b_openrouter_fixed_gemini25_phaseb_n20_w4",
+      "model_key": "llama31_8b_instruct_openrouter",
+      "article_count": 20,
+      "PLOS_count": 10,
+      "eLife_count": 10,
+      "score_path": "C:\\Users\\user\\Desktop\\chiehshukou_master\\results\\laysumm_pipeline\\runs\\atlas_v11_llama31_8b_openrouter_fixed_gemini25_phaseb_n20_w4\\llama31_8b_instruct_openrouter\\rewritten_scores.json",
+      "scores": {
+        "ROUGE": 0.3226494334438485,
+        "BLEU": 7.8298443390731105,
+        "METEOR": 0.2631527192363604,
+        "BERTScore": 0.8489247292280198,
+        "FKGL": 13.933546526766989,
+        "DCRS": 13.351798545290613,
+        "CLI": 16.840021853250946,
+        "LENS": 54.761536204166376,
+        "AlignScore": 0.9029532819986343,
+        "SummaC": 0.8633714601397515
+      }
+    }
+  ]
+}

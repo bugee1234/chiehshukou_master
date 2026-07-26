@@ -22,7 +22,20 @@ from src.thesis_laysumm_direct_baseline.paths import (
     run_results_dir,
     summaries_path,
 )
-from src.utils import load_json, load_jsonl, save_json
+
+
+def load_json(path: Path) -> dict[str, Any]:
+    return json.loads(path.read_text(encoding="utf-8"))
+
+
+def load_jsonl(path: Path) -> list[dict[str, Any]]:
+    with path.open("r", encoding="utf-8") as handle:
+        return [json.loads(line) for line in handle if line.strip()]
+
+
+def save_json(payload: Any, path: Path) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
 
 METRICS = ["ROUGE", "BLEU", "METEOR", "BERTScore", "FKGL", "DCRS", "CLI", "LENS", "AlignScore", "SummaC"]
@@ -190,6 +203,7 @@ def run_evaluation(
     pipeline_run: str | None,
     save_per_article: bool,
     leaderboard_path: Path,
+    skip_leaderboard: bool = False,
 ) -> None:
     _require_eval_environment()
     result = _evaluate(run_name, model_key)
@@ -214,7 +228,8 @@ def run_evaluation(
                 )
     if pipeline_run:
         _compare_pipeline(direct=result, pipeline_run=pipeline_run, model_key=model_key, out_dir=out_dir)
-    _write_leaderboard_files(scores_path=out_dir / "generated_scores.json", leaderboard_path=leaderboard_path)
+    if not skip_leaderboard:
+        _write_leaderboard_files(scores_path=out_dir / "generated_scores.json", leaderboard_path=leaderboard_path)
     save_json(
         {
             "time": datetime.now().isoformat(timespec="seconds"),
@@ -223,6 +238,7 @@ def run_evaluation(
             "design": "direct_zero_shot_full_article",
             "article_count": result["article_count"],
             "pipeline_comparison_run": pipeline_run,
+            "leaderboard_comparison_written": not skip_leaderboard,
         },
         out_dir / "evaluation_metadata.json",
     )
@@ -236,6 +252,11 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--compare-pipeline-run")
     parser.add_argument("--save-per-article", action="store_true")
     parser.add_argument("--leaderboard", type=Path, default=DEFAULT_LEADERBOARD)
+    parser.add_argument(
+        "--skip-leaderboard",
+        action="store_true",
+        help="Do not compare this validation subset with the published hidden-test leaderboard.",
+    )
     parser.add_argument(
         "--leaderboard-only",
         action="store_true",
@@ -259,6 +280,7 @@ def main() -> None:
         pipeline_run=args.compare_pipeline_run,
         save_per_article=args.save_per_article,
         leaderboard_path=args.leaderboard,
+        skip_leaderboard=args.skip_leaderboard,
     )
 
 

@@ -13,7 +13,6 @@ ROOT_DIR = Path(__file__).resolve().parents[2]
 if str(ROOT_DIR) not in sys.path:
     sys.path.insert(0, str(ROOT_DIR))
 
-from src.experiment_2.run_three_model_exp2 import MODEL_CONFIGS, UsageTracker
 from src.thesis_laysumm.paths import run_data_dir as pipeline_run_data_dir
 from src.thesis_laysumm_direct_baseline.paths import (
     inputs_path,
@@ -21,7 +20,23 @@ from src.thesis_laysumm_direct_baseline.paths import (
     run_data_dir,
     summaries_path,
 )
-from src.utils import load_jsonl, save_json, save_jsonl
+
+
+def load_jsonl(path: Path) -> list[dict[str, Any]]:
+    with path.open("r", encoding="utf-8") as handle:
+        return [json.loads(line) for line in handle if line.strip()]
+
+
+def save_jsonl(rows: list[dict[str, Any]], path: Path) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with path.open("w", encoding="utf-8") as handle:
+        for row in rows:
+            handle.write(json.dumps(row, ensure_ascii=False) + "\n")
+
+
+def save_json(payload: dict[str, Any], path: Path) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
 
 DEFAULT_SOURCE_RUN = "v11_constellation_validation284_fixed_m12_pilot20"
@@ -129,6 +144,10 @@ def _load_usage_rows(path: Path) -> list[dict[str, str]]:
 
 
 def seed_pilot(*, pilot_run: str, full_run: str, models: list[str]) -> None:
+    # API model configuration and cost tracking are needed only by the legacy
+    # API seed workflow, not by the local/off-the-shelf create workflow.
+    from src.experiment_2.run_three_model_exp2 import MODEL_CONFIGS, UsageTracker
+
     full_ids = {str(row["id"]) for row in load_jsonl(inputs_path(full_run))}
     pilot_ids = {str(row["id"]) for row in load_jsonl(inputs_path(pilot_run))}
     if len(full_ids) != 284 or len(pilot_ids) != 20 or not pilot_ids.issubset(full_ids):

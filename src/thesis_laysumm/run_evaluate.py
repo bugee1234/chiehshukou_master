@@ -13,9 +13,7 @@ ROOT_DIR = Path(__file__).resolve().parents[2]
 if str(ROOT_DIR) not in sys.path:
     sys.path.insert(0, str(ROOT_DIR))
 
-from src.thesis_laysumm.llm_utils import load_articles
 from src.thesis_laysumm.paths import run_data_dir, run_results_dir
-from src.utils import load_jsonl, save_json
 
 DEFAULT_MODEL_KEY = "gemini3_flash_preview_minimal"
 VARIANTS = {
@@ -36,8 +34,28 @@ VARIANTS = {
 }
 
 
+def load_jsonl(path: str | Path) -> list[Any]:
+    file_path = Path(path)
+    with file_path.open("r", encoding="utf-8") as handle:
+        return [json.loads(line) for line in handle if line.strip()]
+
+
+def save_json(data: Any, path: str | Path) -> None:
+    file_path = Path(path)
+    file_path.parent.mkdir(parents=True, exist_ok=True)
+    with file_path.open("w", encoding="utf-8") as handle:
+        json.dump(data, handle, indent=2, ensure_ascii=False)
+
+
+def load_articles(run_name: str) -> list[dict[str, Any]]:
+    path = run_data_dir(run_name) / "00_articles" / "articles.jsonl"
+    if not path.exists():
+        raise FileNotFoundError(f"Missing articles file: {path}")
+    return load_jsonl(path)
+
+
 def _require_eval_environment() -> None:
-    """Official metrics need torch/CUDA; use .venv-eval, not the LLM .venv."""
+    """Official metrics need torch/CUDA; use the project's evaluation venv, not the local-LLM venv."""
     try:
         import torch  # noqa: F401
     except ModuleNotFoundError as exc:
@@ -45,10 +63,10 @@ def _require_eval_environment() -> None:
             "Evaluation dependencies are not available in the active Python environment.\n"
             "Use the evaluation venv on this machine:\n"
             "  deactivate\n"
-            "  .\\.venv-eval\\Scripts\\Activate.ps1\n"
+            "  .\\.venv\\Scripts\\Activate.ps1\n"
             "  $env:NLTK_DATA=\"$PWD\\.nltk_data\"\n"
             "  $env:HF_HOME=\"C:\\hf_cache\"\n"
-            "  .\\.venv-eval\\Scripts\\python.exe -m src.thesis_laysumm.run_evaluate ...\n"
+            "  .\\.venv\\Scripts\\python.exe -m src.thesis_laysumm.run_evaluate ...\n"
             "See evaluation/LOCAL_TEST_MACHINE_SETUP.md for details."
         ) from exc
 

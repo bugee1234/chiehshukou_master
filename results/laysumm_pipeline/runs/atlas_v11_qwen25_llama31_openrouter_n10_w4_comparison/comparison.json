@@ -1,0 +1,43 @@
+{
+  "time": "2026-07-27T00:20:05",
+  "article_count": 10,
+  "subset": "BioLaySumm 2025 validation: 5 PLOS + 5 eLife, identical article IDs",
+  "max_workers": 4,
+  "method_note": "Both systems use off-the-shelf Instruct checkpoints through OpenRouter without BioLaySumm-specific fine-tuning. Meta-Llama-3.1-8B-Instruct is an availability-driven proxy because the original Meta-Llama-3-8B-Instruct endpoint was unavailable at run time; it is not the exact official baseline backbone. The systems use the same 5 PLOS + 5 eLife articles and the same precomputed Gemini 2.5 evidence tables and verification questions. Only each backbone's Phase-B generation, question answering, and rewriting are model-specific. Gemini outputs are not evaluated in this run.",
+  "systems": [
+    {
+      "system": "ATLAS Phase B + Qwen2.5-7B-Instruct (OpenRouter, off-the-shelf)",
+      "run_name": "atlas_v11_qwen25_7b_openrouter_fixed_gemini25_phaseb_n10_w4",
+      "model_key": "qwen25_7b_instruct_openrouter",
+      "scores": {
+        "ROUGE": 0.3355659029005668,
+        "BLEU": 9.51099782268458,
+        "METEOR": 0.2826013450585504,
+        "BERTScore": 0.8533789396286011,
+        "FKGL": 14.214037277588162,
+        "DCRS": 13.549701216289566,
+        "CLI": 17.244884579920097,
+        "LENS": 48.448255415450376,
+        "AlignScore": 0.8839764952659608,
+        "SummaC": 0.9009768545627594
+      }
+    },
+    {
+      "system": "ATLAS Phase B + Meta-Llama-3.1-8B-Instruct (OpenRouter proxy, off-the-shelf)",
+      "run_name": "atlas_v11_llama31_8b_openrouter_fixed_gemini25_phaseb_n10_w4",
+      "model_key": "llama31_8b_instruct_openrouter",
+      "scores": {
+        "ROUGE": 0.3398677712403817,
+        "BLEU": 9.264838747835142,
+        "METEOR": 0.277547686245902,
+        "BERTScore": 0.8524509489536285,
+        "FKGL": 14.304135327448941,
+        "DCRS": 13.1893012338939,
+        "CLI": 16.54618037253693,
+        "LENS": 56.65750234817586,
+        "AlignScore": 0.8853619873523713,
+        "SummaC": 0.8190040916204453
+      }
+    }
+  ]
+}

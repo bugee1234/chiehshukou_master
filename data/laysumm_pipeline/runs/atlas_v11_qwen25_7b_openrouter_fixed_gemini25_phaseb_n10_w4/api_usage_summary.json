@@ -1,0 +1,86 @@
+{
+  "api_calls": 148,
+  "prompt_tokens": 277664,
+  "cached_prompt_tokens": 0,
+  "billable_prompt_tokens": 277664,
+  "completion_tokens": 65582,
+  "billable_output_tokens": 65582,
+  "total_tokens": 343246,
+  "api_elapsed_seconds": 1011.869,
+  "cost_currencies": [
+    "USD"
+  ],
+  "estimated_cost": 0.017665,
+  "by_stage": {
+    "V11.answer_questions.factuality_chase:qwen25_7b_instruct_openrouter": {
+      "api_calls": 101,
+      "prompt_tokens": 79557,
+      "cached_prompt_tokens": 0,
+      "billable_prompt_tokens": 79557,
+      "completion_tokens": 26617,
+      "billable_output_tokens": 26617,
+      "total_tokens": 106174,
+      "api_elapsed_seconds": 438.9937,
+      "cost_currencies": [
+        "USD"
+      ],
+      "estimated_cost": 0.005844
+    },
+    "V11.generate_summary.factuality_chase:qwen25_7b_instruct_openrouter": {
+      "api_calls": 10,
+      "prompt_tokens": 42006,
+      "cached_prompt_tokens": 0,
+      "billable_prompt_tokens": 42006,
+      "completion_tokens": 7261,
+      "billable_output_tokens": 7261,
+      "total_tokens": 49267,
+      "api_elapsed_seconds": 111.4338,
+      "cost_currencies": [
+        "USD"
+      ],
+      "estimated_cost": 0.002406
+    },
+    "V11.generate_summary.qwen25_7b_instruct_openrouter.expand_length.factuality_chase": {
+      "api_calls": 18,
+      "prompt_tokens": 70081,
+      "cached_prompt_tokens": 0,
+      "billable_prompt_tokens": 70081,
+      "completion_tokens": 14328,
+      "billable_output_tokens": 14328,
+      "total_tokens": 84409,
+      "api_elapsed_seconds": 189.5572,
+      "cost_currencies": [
+        "USD"
+      ],
+      "estimated_cost": 0.004236
+    },
+    "V11.rewrite_summary.factuality_chase:qwen25_7b_instruct_openrouter": {
+      "api_calls": 9,
+      "prompt_tokens": 48246,
+      "cached_prompt_tokens": 0,
+      "billable_prompt_tokens": 48246,
+      "completion_tokens": 9478,
+      "billable_output_tokens": 9478,
+      "total_tokens": 57724,
+      "api_elapsed_seconds": 150.3358,
+      "cost_currencies": [
+        "USD"
+      ],
+      "estimated_cost": 0.002878
+    },
+    "V11.rewrite_summary.qwen25_7b_instruct_openrouter.expand_length.factuality_chase": {
+      "api_calls": 10,
+      "prompt_tokens": 37774,
+      "cached_prompt_tokens": 0,
+      "billable_prompt_tokens": 37774,
+      "completion_tokens": 7898,
+      "billable_output_tokens": 7898,
+      "total_tokens": 45672,
+      "api_elapsed_seconds": 121.5485,
+      "cost_currencies": [
+        "USD"
+      ],
+      "estimated_cost": 0.002301
+    }
+  }
+}

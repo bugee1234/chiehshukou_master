@@ -1,0 +1,57 @@
+{
+  "time": "2026-07-26T23:51:25",
+  "run_name": "atlas_v11_qwen25_7b_openrouter_fixed_gemini25_phaseb_n10_w4",
+  "stage": "V11_04_summaries",
+  "mode": "factuality_chase",
+  "model_key": "qwen25_7b_instruct_openrouter",
+  "prompt_file": "C:\\Users\\user\\Desktop\\chiehshukou_master\\src\\thesis_laysumm_v11\\prompts\\generate_summary_v11.txt",
+  "prompt_sha256": "f6054d407b2b00c19755156e8ac58d7f5223362d29bbea420dbaa7cae5fc88d2",
+  "summaries_total": 10,
+  "parse_error_count": 0,
+  "below_min_length_count": 6,
+  "above_max_length_count": 0,
+  "usage_summary": {
+    "api_calls": 28,
+    "prompt_tokens": 112087,
+    "cached_prompt_tokens": 0,
+    "billable_prompt_tokens": 112087,
+    "completion_tokens": 21589,
+    "billable_output_tokens": 21589,
+    "total_tokens": 133676,
+    "api_elapsed_seconds": 300.991,
+    "cost_currencies": [
+      "USD"
+    ],
+    "estimated_cost": 0.006642,
+    "by_stage": {
+      "V11.generate_summary.factuality_chase:qwen25_7b_instruct_openrouter": {
+        "api_calls": 10,
+        "prompt_tokens": 42006,
+        "cached_prompt_tokens": 0,
+        "billable_prompt_tokens": 42006,
+        "completion_tokens": 7261,
+        "billable_output_tokens": 7261,
+        "total_tokens": 49267,
+        "api_elapsed_seconds": 111.4338,
+        "cost_currencies": [
+          "USD"
+        ],
+        "estimated_cost": 0.002406
+      },
+      "V11.generate_summary.qwen25_7b_instruct_openrouter.expand_length.factuality_chase": {
+        "api_calls": 18,
+        "prompt_tokens": 70081,
+        "cached_prompt_tokens": 0,
+        "billable_prompt_tokens": 70081,
+        "completion_tokens": 14328,
+        "billable_output_tokens": 14328,
+        "total_tokens": 84409,
+        "api_elapsed_seconds": 189.5572,
+        "cost_currencies": [
+          "USD"
+        ],
+        "estimated_cost": 0.004236
+      }
+    }
+  }
+}

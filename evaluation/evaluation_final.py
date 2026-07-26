@@ -115,13 +115,18 @@ def evaluate_all(preds,refs_dicts,task_name,summac_docs=None):
   score_dict = {}
 
   # Relevance scores
+  print("[evaluation 1/10] ROUGE", flush=True)
   score_dict['ROUGE'] = calc_rouge(preds, refs)
+  print("[evaluation 2/10] BLEU", flush=True)
   score_dict['BLEU'] = cal_bleu(preds, refs)
+  print("[evaluation 3/10] METEOR", flush=True)
   score_dict['METEOR'] = cal_meteor(preds, refs)  
+  print("[evaluation 4/10] BERTScore", flush=True)
   score_dict['BERTScore'] = calc_bertscore(preds, refs)
   
 
   # # Readability scores
+  print("[evaluation 5-7/10] FKGL, DCRS, CLI", flush=True)
   fkgl_score, cli_score, dcrs_score = calc_readability(preds)
   score_dict['FKGL'] = fkgl_score
   score_dict['DCRS'] = dcrs_score
@@ -129,8 +134,11 @@ def evaluate_all(preds,refs_dicts,task_name,summac_docs=None):
 
   # Factuality scores
   if task_name == "lay_summ":
+    print("[evaluation 8/10] LENS", flush=True)
     score_dict['LENS'] = calc_lens(preds, refs, docs)
+    print("[evaluation 9/10] AlignScore", flush=True)
     score_dict['AlignScore'] = calc_alignscore(preds, docs)   
+    print("[evaluation 10/10] SummaC", flush=True)
     score_dict['SummaC'] = cal_summac(preds, summac_docs)
   else:
     score_dict['similarity'] = cal_similarity(preds, refs)

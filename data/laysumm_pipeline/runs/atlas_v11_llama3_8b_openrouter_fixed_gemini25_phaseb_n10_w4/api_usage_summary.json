@@ -1,0 +1,13 @@
+{
+  "api_calls": 0,
+  "prompt_tokens": 0,
+  "cached_prompt_tokens": 0,
+  "billable_prompt_tokens": 0,
+  "completion_tokens": 0,
+  "billable_output_tokens": 0,
+  "total_tokens": 0,
+  "api_elapsed_seconds": 0,
+  "cost_currencies": [],
+  "estimated_cost": 0,
+  "by_stage": {}
+}

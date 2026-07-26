@@ -1,0 +1,86 @@
+{
+  "api_calls": 148,
+  "prompt_tokens": 288181,
+  "cached_prompt_tokens": 40384,
+  "billable_prompt_tokens": 247797,
+  "completion_tokens": 74607,
+  "billable_output_tokens": 74607,
+  "total_tokens": 362788,
+  "api_elapsed_seconds": 495.13,
+  "cost_currencies": [
+    "USD"
+  ],
+  "estimated_cost": 0.008002,
+  "by_stage": {
+    "V11.answer_questions.factuality_chase:llama31_8b_instruct_openrouter": {
+      "api_calls": 101,
+      "prompt_tokens": 84036,
+      "cached_prompt_tokens": 35424,
+      "billable_prompt_tokens": 48612,
+      "completion_tokens": 26827,
+      "billable_output_tokens": 26827,
+      "total_tokens": 110863,
+      "api_elapsed_seconds": 211.2547,
+      "cost_currencies": [
+        "USD"
+      ],
+      "estimated_cost": 0.002486
+    },
+    "V11.generate_summary.factuality_chase:llama31_8b_instruct_openrouter": {
+      "api_calls": 10,
+      "prompt_tokens": 41641,
+      "cached_prompt_tokens": 32,
+      "billable_prompt_tokens": 41609,
+      "completion_tokens": 7723,
+      "billable_output_tokens": 7723,
+      "total_tokens": 49364,
+      "api_elapsed_seconds": 64.5971,
+      "cost_currencies": [
+        "USD"
+      ],
+      "estimated_cost": 0.001065
+    },
+    "V11.generate_summary.llama31_8b_instruct_openrouter.expand_length.factuality_chase": {
+      "api_calls": 16,
+      "prompt_tokens": 62647,
+      "cached_prompt_tokens": 1856,
+      "billable_prompt_tokens": 60791,
+      "completion_tokens": 14442,
+      "billable_output_tokens": 14442,
+      "total_tokens": 77089,
+      "api_elapsed_seconds": 117.9699,
+      "cost_currencies": [
+        "USD"
+      ],
+      "estimated_cost": 0.001686
+    },
+    "V11.rewrite_summary.factuality_chase:llama31_8b_instruct_openrouter": {
+      "api_calls": 10,
+      "prompt_tokens": 55179,
+      "cached_prompt_tokens": 64,
+      "billable_prompt_tokens": 55115,
+      "completion_tokens": 13714,
+      "billable_output_tokens": 13714,
+      "total_tokens": 68893,
+      "api_elapsed_seconds": 44.9792,
+      "cost_currencies": [
+        "USD"
+      ],
+      "estimated_cost": 0.001515
+    },
+    "V11.rewrite_summary.llama31_8b_instruct_openrouter.expand_length.factuality_chase": {
+      "api_calls": 11,
+      "prompt_tokens": 44678,
+      "cached_prompt_tokens": 3008,
+      "billable_prompt_tokens": 41670,
+      "completion_tokens": 11901,
+      "billable_output_tokens": 11901,
+      "total_tokens": 56579,
+      "api_elapsed_seconds": 56.3291,
+      "cost_currencies": [
+        "USD"
+      ],
+      "estimated_cost": 0.001251
+    }
+  }
+}

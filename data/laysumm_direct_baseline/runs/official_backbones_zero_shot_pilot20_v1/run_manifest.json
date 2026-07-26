@@ -1,0 +1,25 @@
+{
+  "time": "2026-07-26T21:46:50",
+  "design": "direct_zero_shot_full_article",
+  "run_name": "official_backbones_zero_shot_pilot20_v1",
+  "scope": "pilot20",
+  "source_run": "v11_constellation_validation284_fixed_m12_pilot20",
+  "pilot_source_run": "pilot_n20_v11_factuality_chase",
+  "article_count": 20,
+  "by_source": {
+    "PLOS": 10,
+    "eLife": 10
+  },
+  "generation_visible_fields": [
+    "article"
+  ],
+  "reference_storage_separated": true,
+  "forbidden_generation_inputs": [
+    "expert_summary",
+    "evidence",
+    "questions",
+    "answers",
+    "module outputs",
+    "pipeline summaries"
+  ]
+}

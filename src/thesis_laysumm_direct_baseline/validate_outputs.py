@@ -1,6 +1,9 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
+import json
+import re
 import statistics
 import sys
 from pathlib import Path
@@ -11,15 +14,39 @@ ROOT_DIR = Path(__file__).resolve().parents[2]
 if str(ROOT_DIR) not in sys.path:
     sys.path.insert(0, str(ROOT_DIR))
 
-from src.thesis_laysumm.llm_utils import sha256_text
-from src.thesis_laysumm_v11.common import find_mojibake, safe_word_count
 from src.thesis_laysumm_direct_baseline.paths import (
     PROMPT_PATH,
     inputs_path,
     references_path,
     summaries_path,
 )
-from src.utils import load_jsonl
+
+
+def load_jsonl(path: Path) -> list[dict[str, Any]]:
+    with path.open("r", encoding="utf-8") as handle:
+        return [json.loads(line) for line in handle if line.strip()]
+
+
+def sha256_text(text: str) -> str:
+    return hashlib.sha256(text.encode("utf-8")).hexdigest()
+
+
+def safe_word_count(text: str) -> int:
+    return len(re.findall(r"\S+", str(text or "").strip()))
+
+
+def find_mojibake(text: str) -> list[str]:
+    value = str(text or "")
+    hits: list[str] = []
+    if "\ufffd" in value:
+        hits.append("replacement_character")
+    if re.search(r"[\uE000-\uF8FF]", value):
+        hits.append("private_use_character")
+    if re.search(r"[\u4E00-\u9FFF\u3040-\u30FF\uAC00-\uD7AF]", value):
+        hits.append("cjk_character")
+    for match in re.finditer(r"[\x00-\x08\x0B\x0C\x0E-\x1F]", value):
+        hits.append(f"control_char_U+{ord(match.group(0)):04X}")
+    return hits[:20]
 
 
 FORBIDDEN_INPUT_KEYS = {

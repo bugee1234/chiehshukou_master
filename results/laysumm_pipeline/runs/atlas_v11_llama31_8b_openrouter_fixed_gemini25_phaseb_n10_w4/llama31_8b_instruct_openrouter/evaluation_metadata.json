@@ -1,0 +1,20 @@
+{
+  "time": "2026-07-27T00:16:44",
+  "run_name": "atlas_v11_llama31_8b_openrouter_fixed_gemini25_phaseb_n10_w4",
+  "model_key": "llama31_8b_instruct_openrouter",
+  "summac_document": "original",
+  "variants": {
+    "rewritten": {
+      "ROUGE": 0.3398677712403817,
+      "BLEU": 9.264838747835142,
+      "METEOR": 0.277547686245902,
+      "BERTScore": 0.8524509489536285,
+      "FKGL": 14.304135327448941,
+      "DCRS": 13.1893012338939,
+      "CLI": 16.54618037253693,
+      "LENS": 56.65750234817586,
+      "AlignScore": 0.8853619873523713,
+      "SummaC": 0.8190040916204453
+    }
+  }
+}

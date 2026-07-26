@@ -1,0 +1,83 @@
+{
+  "time": "2026-07-27T00:29:46",
+  "run_name": "atlas_v11_llama31_8b_openrouter_fixed_gemini25_phaseb_n20_w4",
+  "stage": "V11_05_answers",
+  "mode": "factuality_chase",
+  "model_key": "llama31_8b_instruct_openrouter",
+  "questions_total": 242,
+  "answers_total": 242,
+  "wrong_total": 43,
+  "accuracy": 0.8223,
+  "wrong_check_type_counts": {
+    "core": 22,
+    "high_risk": 21
+  },
+  "wrong_slot_type_counts": {
+    "core_claim": 22,
+    "number": 6,
+    "method": 3,
+    "direction": 2,
+    "causality": 5,
+    "entity": 3,
+    "organism": 1,
+    "comparison": 1
+  },
+  "usage_summary": {
+    "api_calls": 295,
+    "prompt_tokens": 434007,
+    "cached_prompt_tokens": 129152,
+    "billable_prompt_tokens": 304855,
+    "completion_tokens": 112436,
+    "billable_output_tokens": 112436,
+    "total_tokens": 546443,
+    "api_elapsed_seconds": 344.8845,
+    "cost_currencies": [
+      "USD"
+    ],
+    "estimated_cost": 0.012053,
+    "by_stage": {
+      "V11.answer_questions.factuality_chase:llama31_8b_instruct_openrouter": {
+        "api_calls": 242,
+        "prompt_tokens": 206547,
+        "cached_prompt_tokens": 86656,
+        "billable_prompt_tokens": 119891,
+        "completion_tokens": 64643,
+        "billable_output_tokens": 64643,
+        "total_tokens": 271190,
+        "api_elapsed_seconds": 244.0736,
+        "cost_currencies": [
+          "USD"
+        ],
+        "estimated_cost": 0.00607
+      },
+      "V11.generate_summary.factuality_chase:llama31_8b_instruct_openrouter": {
+        "api_calls": 20,
+        "prompt_tokens": 88837,
+        "cached_prompt_tokens": 20992,
+        "billable_prompt_tokens": 67845,
+        "completion_tokens": 16649,
+        "billable_output_tokens": 16649,
+        "total_tokens": 105486,
+        "api_elapsed_seconds": 37.7854,
+        "cost_currencies": [
+          "USD"
+        ],
+        "estimated_cost": 0.002276
+      },
+      "V11.generate_summary.llama31_8b_instruct_openrouter.expand_length.factuality_chase": {
+        "api_calls": 33,
+        "prompt_tokens": 138623,
+        "cached_prompt_tokens": 21504,
+        "billable_prompt_tokens": 117119,
+        "completion_tokens": 31144,
+        "billable_output_tokens": 31144,
+        "total_tokens": 169767,
+        "api_elapsed_seconds": 63.0255,
+        "cost_currencies": [
+          "USD"
+        ],
+        "estimated_cost": 0.003707
+      }
+    }
+  }
+}

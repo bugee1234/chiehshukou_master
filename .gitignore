@@ -15,6 +15,7 @@ results/experiment_0/*.json
 results/experiment_0/*.csv
 
 .venv-eval/
+.venv-local-llm/
 .cache/
 .nltk_data/
 AlignScore/

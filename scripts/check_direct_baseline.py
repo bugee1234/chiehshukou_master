@@ -9,7 +9,13 @@ if str(ROOT_DIR) not in sys.path:
     sys.path.insert(0, str(ROOT_DIR))
 
 from src.thesis_laysumm_direct_baseline.paths import PROMPT_PATH
-from src.thesis_laysumm_direct_baseline.run_generate import ALLOWED_PROMPT_FIELDS, build_prompt
+
+
+ALLOWED_PROMPT_FIELDS = ("article",)
+
+
+def build_prompt(article: dict[str, str], template: str) -> str:
+    return template.replace("{article}", str(article.get("article") or ""))
 
 
 def main() -> None:
