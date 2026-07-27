@@ -1,0 +1,9 @@
+﻿dataset,text_type,system,n,mean_words,sd_words,min_words,max_words
+Overall,Source article,Human-authored source,284,8351.44,3351.21,1990,23048
+Overall,Reference lay summary,Human-written reference,284,290.57,112.63,77,672
+Overall,Direct-generation summary,GPT-4.1 Mini,284,322.24,65.96,187,785
+Overall,Direct-generation summary,Gemini 2.5 Flash,284,503.39,97.22,240,782
+Overall,Direct-generation summary,Gemini 3 Flash Preview,284,429.45,46.23,319,567
+Overall,ATLAS final summary,GPT-4.1 Mini,284,188.81,10.08,175,245
+Overall,ATLAS final summary,Gemini 2.5 Flash,284,190.06,10.84,175,242
+Overall,ATLAS final summary,Gemini 3 Flash Preview,284,203.48,16.10,175,244

@@ -1,0 +1,9 @@
+{
+  "time": "2026-07-27T12:49:30",
+  "run_name": "direct_zero_shot_pilot20_gpt54mini_raw_article",
+  "model_key": "gpt54_mini",
+  "design": "direct_zero_shot_full_article",
+  "article_count": 20,
+  "pipeline_comparison_run": null,
+  "leaderboard_comparison_written": true
+}

@@ -157,6 +157,19 @@ MODEL_CONFIGS: dict[str, dict[str, Any]] = {
         "currency": "USD",
         "pricing_note": "Reasoning tokens are billed as output tokens when used.",
     },
+    "gpt54_mini": {
+        "provider": "openai",
+        "model": "gpt-5.4-mini-2026-03-17",
+        "reasoning_effort": "medium",
+        "input_price_per_1m": 0.0,
+        "cached_input_price_per_1m": 0.0,
+        "output_price_per_1m": 0.0,
+        "currency": "USD",
+        "pricing_note": (
+            "Used to match the LLM-as-a-judge model. Prices are intentionally set to 0 "
+            "because this local registry has not been updated with a verified price."
+        ),
+    },
     "gemini31_flash_lite": {
         "provider": "gemini",
         "model": "gemini-3.1-flash-lite",
@@ -518,14 +531,28 @@ class ProviderClient:
                 params["extra_body"] = {"thinking": {"type": str(self.thinking_type)}}
                 if self.thinking_type == "enabled" and self.reasoning_effort:
                     params["reasoning_effort"] = str(self.reasoning_effort)
-            response = self.client.chat.completions.create(**params)
-            content = response.choices[0].message.content or ""
-            usage_obj = response.usage
-            prompt_tokens = int(getattr(usage_obj, "prompt_tokens", 0) or 0)
-            completion_tokens = int(getattr(usage_obj, "completion_tokens", 0) or 0)
-            total_tokens = int(getattr(usage_obj, "total_tokens", 0) or 0)
-            prompt_details = getattr(usage_obj, "prompt_tokens_details", None)
-            cached_prompt_tokens = int(getattr(prompt_details, "cached_tokens", 0) or 0)
+            if self.provider == "openai" and self.model.startswith("gpt-5.4"):
+                response_params: dict[str, Any] = {
+                    "model": self.model,
+                    "input": messages,
+                }
+                if self.reasoning_effort:
+                    response_params["reasoning"] = {"effort": str(self.reasoning_effort)}
+                response = self.client.responses.create(**response_params)
+                content = str(getattr(response, "output_text", "") or "")
+                usage_obj = response.usage
+                prompt_tokens = int(getattr(usage_obj, "input_tokens", 0) or 0)
+                completion_tokens = int(getattr(usage_obj, "output_tokens", 0) or 0)
+                total_tokens = int(getattr(usage_obj, "total_tokens", 0) or 0)
+            else:
+                response = self.client.chat.completions.create(**params)
+                content = response.choices[0].message.content or ""
+                usage_obj = response.usage
+                prompt_tokens = int(getattr(usage_obj, "prompt_tokens", 0) or 0)
+                completion_tokens = int(getattr(usage_obj, "completion_tokens", 0) or 0)
+                total_tokens = int(getattr(usage_obj, "total_tokens", 0) or 0)
+                prompt_details = getattr(usage_obj, "prompt_tokens_details", None)
+                cached_prompt_tokens = int(getattr(prompt_details, "cached_tokens", 0) or 0)
         elapsed = time.perf_counter() - started
         self.usage.add(
             stage=stage,

@@ -1,0 +1,44 @@
+{
+  "time": "2026-07-27T12:27:48",
+  "run_name": "direct_zero_shot_pilot20_gpt54mini_raw_article",
+  "stage": "direct_zero_shot_generation",
+  "model_key": "gpt54_mini",
+  "article_count": 20,
+  "new_article_count": 20,
+  "prompt_sha256": "f4f7a93129c28d08940e8c7f1aa198daf86163a395c6c2c0485c85b0afd3edc7",
+  "visible_input_fields": [
+    "article"
+  ],
+  "postprocessing": "strip_outer_whitespace_only",
+  "max_summary_words": null,
+  "usage_summary": {
+    "api_calls": 20,
+    "prompt_tokens": 233636,
+    "cached_prompt_tokens": 0,
+    "billable_prompt_tokens": 233636,
+    "completion_tokens": 10538,
+    "billable_output_tokens": 10538,
+    "total_tokens": 244174,
+    "api_elapsed_seconds": 103.6605,
+    "cost_currencies": [
+      "USD"
+    ],
+    "estimated_cost": 0.0,
+    "by_stage": {
+      "direct_zero_shot.generate:gpt54_mini": {
+        "api_calls": 20,
+        "prompt_tokens": 233636,
+        "cached_prompt_tokens": 0,
+        "billable_prompt_tokens": 233636,
+        "completion_tokens": 10538,
+        "billable_output_tokens": 10538,
+        "total_tokens": 244174,
+        "api_elapsed_seconds": 103.6605,
+        "cost_currencies": [
+          "USD"
+        ],
+        "estimated_cost": 0.0
+      }
+    }
+  }
+}

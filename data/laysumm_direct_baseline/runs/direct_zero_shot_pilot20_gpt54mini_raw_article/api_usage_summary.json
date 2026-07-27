@@ -1,0 +1,30 @@
+{
+  "api_calls": 20,
+  "prompt_tokens": 233636,
+  "cached_prompt_tokens": 0,
+  "billable_prompt_tokens": 233636,
+  "completion_tokens": 10538,
+  "billable_output_tokens": 10538,
+  "total_tokens": 244174,
+  "api_elapsed_seconds": 103.6605,
+  "cost_currencies": [
+    "USD"
+  ],
+  "estimated_cost": 0.0,
+  "by_stage": {
+    "direct_zero_shot.generate:gpt54_mini": {
+      "api_calls": 20,
+      "prompt_tokens": 233636,
+      "cached_prompt_tokens": 0,
+      "billable_prompt_tokens": 233636,
+      "completion_tokens": 10538,
+      "billable_output_tokens": 10538,
+      "total_tokens": 244174,
+      "api_elapsed_seconds": 103.6605,
+      "cost_currencies": [
+        "USD"
+      ],
+      "estimated_cost": 0.0
+    }
+  }
+}

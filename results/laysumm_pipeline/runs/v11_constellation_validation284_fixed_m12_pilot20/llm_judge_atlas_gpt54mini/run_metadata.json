@@ -1,0 +1,104 @@
+{
+  "created_or_updated_at": "2026-07-26T18:29:49Z",
+  "pipeline_run": "v11_constellation_validation284_fixed_m12_pilot20",
+  "judge_model": "gpt-5.4-mini-2026-03-17",
+  "reasoning_effort": "medium",
+  "structured_outputs": true,
+  "responses_api": true,
+  "system_keys": [
+    "gemini25_flash_non_thinking",
+    "gemini3_flash_preview_minimal",
+    "gpt41_mini"
+  ],
+  "total_requested_items": 852,
+  "already_done_items": 0,
+  "todo_items": 852,
+  "prompt_sha256": "dfd077dc55a053d3a7b4622ed2f31caa42a725cb59fef1031a2abb1c34265ce9",
+  "response_schema": {
+    "type": "json_schema",
+    "name": "biomedical_lay_summary_judge",
+    "description": "Scores a candidate biomedical lay summary on relevance, readability, and factuality.",
+    "strict": true,
+    "schema": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "relevance": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "score": {
+              "type": "integer",
+              "enum": [
+                1,
+                2,
+                3,
+                4,
+                5
+              ]
+            },
+            "reason": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "score",
+            "reason"
+          ]
+        },
+        "readability": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "score": {
+              "type": "integer",
+              "enum": [
+                1,
+                2,
+                3,
+                4,
+                5
+              ]
+            },
+            "reason": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "score",
+            "reason"
+          ]
+        },
+        "factuality": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "score": {
+              "type": "integer",
+              "enum": [
+                1,
+                2,
+                3,
+                4,
+                5
+              ]
+            },
+            "reason": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "score",
+            "reason"
+          ]
+        }
+      },
+      "required": [
+        "relevance",
+        "readability",
+        "factuality"
+      ]
+    }
+  },
+  "source_articles_written_to_outputs": false
+}

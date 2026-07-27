@@ -1,0 +1,107 @@
+{
+  "caution": "Direct zero-shot validation sample (20 articles) versus the published official-test leaderboard; metric positions and normalized Final rank are descriptive only.",
+  "comparisons": {
+    "direct_generated": [
+      {
+        "variant": "direct_generated",
+        "metric": "ROUGE",
+        "value": 0.30061937641982805,
+        "direction": "higher",
+        "metric_rank_among_17": 10,
+        "nearest_team": "MIRAGES",
+        "nearest_team_score": 0.288,
+        "difference_from_nearest": 0.012619376419828077
+      },
+      {
+        "variant": "direct_generated",
+        "metric": "BLEU",
+        "value": 3.257255496655238,
+        "direction": "higher",
+        "metric_rank_among_17": 13,
+        "nearest_team": "CUTN_Bio",
+        "nearest_team_score": 3.25,
+        "difference_from_nearest": 0.007255496655238058
+      },
+      {
+        "variant": "direct_generated",
+        "metric": "METEOR",
+        "value": 0.2861872167394779,
+        "direction": "higher",
+        "metric_rank_among_17": 7,
+        "nearest_team": "MetinOZU",
+        "nearest_team_score": 0.29,
+        "difference_from_nearest": -0.00381278326052209
+      },
+      {
+        "variant": "direct_generated",
+        "metric": "BERTScore",
+        "value": 0.8383447974920273,
+        "direction": "higher",
+        "metric_rank_among_17": 14,
+        "nearest_team": "RainCityNLP",
+        "nearest_team_score": 0.84,
+        "difference_from_nearest": -0.0016552025079726862
+      },
+      {
+        "variant": "direct_generated",
+        "metric": "FKGL",
+        "value": 12.093389317938936,
+        "direction": "lower",
+        "metric_rank_among_17": 4,
+        "nearest_team": "Baseline-llama3-8B-sft",
+        "nearest_team_score": 12.2,
+        "difference_from_nearest": -0.1066106820610635
+      },
+      {
+        "variant": "direct_generated",
+        "metric": "DCRS",
+        "value": 11.257193548191621,
+        "direction": "lower",
+        "metric_rank_among_17": 14,
+        "nearest_team": "MetinOZU",
+        "nearest_team_score": 11.22,
+        "difference_from_nearest": 0.03719354819162035
+      },
+      {
+        "variant": "direct_generated",
+        "metric": "CLI",
+        "value": 12.964700458860626,
+        "direction": "lower",
+        "metric_rank_among_17": 5,
+        "nearest_team": "Baseline-llama3-8B-sft",
+        "nearest_team_score": 12.98,
+        "difference_from_nearest": -0.015299541139373929
+      },
+      {
+        "variant": "direct_generated",
+        "metric": "LENS",
+        "value": 70.04378304935504,
+        "direction": "higher",
+        "metric_rank_among_17": 9,
+        "nearest_team": "MIRAGES",
+        "nearest_team_score": 71.27,
+        "difference_from_nearest": -1.2262169506449538
+      },
+      {
+        "variant": "direct_generated",
+        "metric": "AlignScore",
+        "value": 0.479285454750061,
+        "direction": "higher",
+        "metric_rank_among_17": 16,
+        "nearest_team": "CUTN_Bio",
+        "nearest_team_score": 0.589,
+        "difference_from_nearest": -0.10971454524993896
+      },
+      {
+        "variant": "direct_generated",
+        "metric": "SummaC",
+        "value": 0.5309603855013847,
+        "direction": "higher",
+        "metric_rank_among_17": 11,
+        "nearest_team": "SXZ",
+        "nearest_team_score": 0.528,
+        "difference_from_nearest": 0.002960385501384666
+      }
+    ]
+  }
+}
