@@ -1,0 +1,26 @@
+You are given a biomedical lay summary and one atomic fact.
+
+Determine whether the atomic fact is supported by the information
+contained in the lay summary. Use only the lay summary as evidence
+and do not use outside knowledge.
+
+Lay Summary:
+{test_summary}
+
+Atomic Fact:
+{atomic_fact}
+
+Question:
+Is the atomic fact supported by the lay summary?
+
+Return only one of the following answers:
+
+{
+  "supported": "yes"
+}
+
+or
+
+{
+  "supported": "no"
+}

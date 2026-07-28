@@ -1,0 +1,22 @@
+You are given the article abstract and a list of final atomic facts selected by Module 1 and Module 2.
+
+Write a plain-language lay summary for a general audience.
+
+Use the final atomic facts as the factual checklist for the summary. Each selected fact represents information that should be preserved in the generated lay summary.
+
+The summary should:
+- cover the core scientific claims represented by the final atomic facts;
+- follow the general order of the abstract;
+- explain the article’s main background, method, findings, and implications when supported by the selected facts;
+- use clear and concise language for non-expert readers;
+- preserve important entities, conditions, comparisons, directions of effect, numbers, and qualifiers;
+- avoid adding claims that are not supported by the final atomic facts or the abstract.
+
+Do not simply copy the atomic facts into the summary. Rewrite them into coherent lay-language sentences.
+
+Input:
+- Article abstract.
+- Final atomic facts selected after Module 1 and Module 2.
+
+Output:
+A lay summary grounded in the selected atomic facts.

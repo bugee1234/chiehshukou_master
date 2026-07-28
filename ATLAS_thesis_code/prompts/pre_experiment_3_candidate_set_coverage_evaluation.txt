@@ -1,0 +1,31 @@
+You are given one reference atomic fact extracted from an
+expert-written lay summary and the candidate atomic fact set
+produced by Module 1 from the full source article.
+
+Determine whether the reference atomic fact is covered by the
+Module 1 candidate atomic fact set.
+
+A reference atomic fact is covered when the same core information
+is expressed by one or more facts in the candidate set, even if
+the wording is different.
+
+Use only the provided candidate atomic fact set when making the
+decision. Do not use outside knowledge.
+
+Reference Atomic Fact:
+{reference_atomic_fact}
+
+Module 1 Candidate Atomic Fact Set:
+{candidate_atomic_facts}
+
+Return only one of the following:
+
+{
+  "covered": "yes"
+}
+
+or
+
+{
+  "covered": "no"
+}

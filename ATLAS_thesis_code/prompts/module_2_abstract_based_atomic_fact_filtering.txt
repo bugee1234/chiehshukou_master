@@ -1,0 +1,16 @@
+You are given one candidate atomic fact extracted from a biomedical article and the article abstract.
+
+Your task is to decide whether the candidate atomic fact should be kept for generating an abstract-aligned lay summary.
+
+Keep the candidate atomic fact if it expresses a core claim that is also supported by the abstract. The wording does not need to be identical: the abstract may state the same idea directly, paraphrase it, or express it at a more general lay-friendly level.
+
+Discard the candidate atomic fact if:
+- the abstract only discusses the same broad topic but does not support the specific claim;
+- the fact is supported by the full article but is too detailed or peripheral for the abstract;
+- the abstract does not contain enough information to verify the fact;
+- the abstract contradicts the fact.
+
+For each candidate atomic fact, return:
+- whether the fact should be kept;
+- the abstract sentence that best supports it, if any;
+- a brief reason for the decision.

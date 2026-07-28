@@ -1,0 +1,7 @@
+Using the full article and the Module 1 candidate atomic facts, write an English biomedical lay summary for a general audience.
+
+Article:
+{article}
+
+Module 1 Candidate Atomic Facts:
+{candidate_facts}

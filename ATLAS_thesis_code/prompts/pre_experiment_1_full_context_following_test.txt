@@ -1,0 +1,32 @@
+In this test, {altered_expert_summary} represents the complete expert summary after the original statement has been replaced so that the summary supports one of the originally false options.
+
+You are given a complete biomedical lay summary and a
+1T3F+NOTA multiple-choice question.
+
+Answer the question using only the information provided in the
+complete summary. Do not use outside biomedical knowledge.
+
+Exactly one of Options A–D should be supported by the complete
+summary. Select Option E (None of the above) only if none of
+Options A–D is supported.
+
+Complete Summary:
+{altered_expert_summary}
+
+Question:
+Which of the following statements is supported by the complete summary?
+
+A. {option_A}
+B. {option_B}
+C. {option_C}
+D. {option_D}
+E. None of the above.
+
+Return only the selected option and a brief explanation based on
+the complete summary.
+
+Output:
+{
+  "answer": "<A, B, C, D, or E>",
+  "reasoning": "<brief explanation based only on the complete summary>"
+}

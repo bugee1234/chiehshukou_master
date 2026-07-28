@@ -1,0 +1,36 @@
+You are given one final atomic fact.
+
+Create a multiple-choice verification question for checking whether a generated lay summary preserves this fact.
+
+The question should contain:
+- one true option that preserves the meaning of the atomic fact;
+- three plausible but false options;
+- one “none of the above” option.
+
+The true option should be a faithful statement of the atomic fact.
+
+For the three false options, choose three of the following four distractor-generation strategies:
+
+1. Numerical or condition perturbation:
+Change a number, percentage, time point, sample size, statistical result, condition, scope, or qualifier in the atomic fact.
+
+2. Entity swap:
+Replace a key entity with a plausible but incorrect entity, such as a disease, gene, protein, drug, organism, cell type, method, population, or experimental target.
+
+3. Predicate or direction reversal:
+Reverse or alter the main relation, direction of effect, causal relation, comparison, increase/decrease pattern, or functional role.
+
+4. Unsupported detail addition:
+Add a plausible mechanism, cause, condition, explanation, or consequence that is not stated in the atomic fact or supported by the source.
+
+Each false option should use a different strategy when possible. The false options should be plausible and close to the true option, but they must not be equivalent to the atomic fact.
+
+Input:
+One final atomic fact.
+
+Output:
+A 1T3F+NOTA multiple-choice question, including:
+- the true option;
+- three false options;
+- the distractor-generation strategy used for each false option;
+- the “none of the above” option.

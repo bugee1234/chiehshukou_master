@@ -1,0 +1,27 @@
+You are given one reference atomic fact extracted from an expert-written lay summary and one target text.
+
+Determine whether the reference atomic fact is covered by the target text.
+
+A reference atomic fact is covered when the target text expresses the same core information, even if it uses different wording, simplification, compression, or lay terminology.
+
+Mentioning only the same broad topic or entity is not sufficient. The main finding, outcome, mechanism, relationship, comparison, or direction expressed by the reference atomic fact must be present.
+
+Use only the target text when making the decision. Do not use outside knowledge.
+
+Reference Atomic Fact:
+{reference_atomic_fact}
+
+Target Text:
+{target_text}
+
+Return only one of the following:
+
+{
+  "covered": "yes"
+}
+
+or
+
+{
+  "covered": "no"
+}

@@ -1,0 +1,33 @@
+You are given a complete expert-written biomedical lay summary, one target atomic fact, and one controlled experimental condition.
+
+Rewrite the complete summary so that it remains natural and coherent while changing only the status of the target atomic fact.
+
+For F_keep:
+- preserve the target atomic fact unchanged;
+- preserve all other factual content.
+
+For F_delete:
+- remove the target atomic fact completely;
+- remove both explicit statements and implicit support for that fact;
+- preserve all other factual content.
+
+For F_alter:
+- replace the target atomic fact with the supplied altered statement;
+- remove or adjust any statement that conflicts with the altered statement;
+- preserve all other factual content.
+
+Do not add unrelated information or change claims unrelated to the target atomic fact.
+
+Complete Expert Summary:
+{expert_summary}
+
+Target Atomic Fact:
+{atomic_fact}
+
+Condition:
+{condition}
+
+Altered Statement:
+{altered_statement}
+
+Return the complete rewritten summary.

@@ -1,0 +1,28 @@
+You are given a biomedical lay summary and a 1T3F+NOTA
+multiple-choice question.
+
+Answer the question using only the information contained in the
+lay summary. Do not use outside knowledge.
+
+Select Option A, B, C, or D only when the lay summary clearly
+supports that statement. If the lay summary does not support any
+of these statements, select Option E (None of the above).
+
+Lay Summary:
+{test_summary}
+
+Question:
+Which of the following statements is supported by the lay summary?
+
+A. {option_A}
+B. {option_B}
+C. {option_C}
+D. {option_D}
+E. None of the above.
+
+Return only the selected option.
+
+Output:
+{
+  "answer": "<A, B, C, D, or E>"
+}

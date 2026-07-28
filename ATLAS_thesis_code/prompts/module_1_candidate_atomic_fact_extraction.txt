@@ -1,0 +1,34 @@
+You are given the full text of a biomedical research article.
+
+Your task is to extract candidate atomic facts that may be useful for generating an abstract-aligned lay summary. You should not extract every factual detail in the article. Instead, select facts that are likely to help explain the article’s main scientific message to non-specialist readers.
+
+The purpose of this step is to reduce omission risk. Therefore, recall is prioritized: missing an important fact is more harmful than keeping some extra candidate facts. Later modules will further filter and verify the selected facts.
+
+Keep a fact if it is:
+- a main finding, conclusion, implication, or take-home message of the study;
+- background needed to understand the research question, disease context, biological system, or study motivation;
+- a high-level description of what the researchers did, measured, compared, or tested;
+- a key mechanism, relationship, direction of effect, comparison, or outcome;
+- clinically, translationally, diagnostically, therapeutically, or public-health relevant;
+- a definition or bridge fact that a lay reader would need in order to understand the main result.
+
+Do not extract:
+- citation-only or related-work-only information;
+- figure/table references or paper-structure statements;
+- routine protocol details, software settings, instrument settings, or statistical minutiae;
+- overly fine-grained quantitative details that are unlikely to affect the summary’s main message;
+- near-duplicate facts when one broader fact already covers the same claim.
+
+Each atomic fact must:
+1. contain exactly one factual claim;
+2. be understandable without surrounding context;
+3. resolve pronouns and vague references when possible;
+4. include necessary qualifiers such as organism, disease, population, intervention, or experimental condition;
+5. not introduce information that is absent from the source text.
+
+For each selected atomic fact, provide:
+- the atomic fact as a self-contained sentence;
+- the source span that supports it;
+- a brief reason explaining why it is useful for an abstract-aligned lay summary.
+
+Return the result as a structured list of candidate atomic facts.

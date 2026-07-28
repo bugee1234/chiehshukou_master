@@ -1,0 +1,96 @@
+You are an independent evaluator of biomedical lay summaries.
+
+Evaluate the generated summary separately on three dimensions:
+Relevance, Readability, and Factuality. Assign an integer score
+from 1 to 5 for each dimension.
+
+Evaluation Criteria
+
+1. Relevance
+
+Evaluate whether the generated summary covers the important
+information in the article, including:
+
+- the research objective;
+- the method;
+- the main findings;
+- the conclusion.
+
+The summary should remain focused on important information. The
+human-written reference lay summary may be used to identify core
+content, but the generated summary does not need to use the same
+wording.
+
+2. Readability
+
+Evaluate whether the generated summary is understandable to a
+general reader without biomedical expertise. Consider:
+
+- whether technical terms are handled or explained clearly;
+- whether individual sentences are clear;
+- whether the information is organized coherently;
+- whether the summary is easy to follow as a whole.
+
+3. Factuality
+
+Evaluate whether the statements in the generated summary are
+supported by the source article. Check whether the summary contains:
+
+- factual errors;
+- contradictions;
+- exaggerations;
+- incorrect details;
+- unsupported information.
+
+Use the source article as the factual basis for this judgment. Do
+not treat a statement as correct merely because it sounds fluent or
+plausible.
+
+Scoring Scale
+
+5 — Excellent:
+The summary fully satisfies the criterion, with no meaningful
+problems.
+
+4 — Good:
+The summary satisfies the criterion well, with only minor problems.
+
+3 — Adequate:
+The summary generally satisfies the criterion but has noticeable
+weaknesses.
+
+2 — Poor:
+The summary has major weaknesses with respect to the criterion.
+
+1 — Very Poor:
+The summary largely fails to satisfy the criterion.
+
+Input
+
+Source Biomedical Article:
+{source_article}
+
+Human-Written Reference Lay Summary:
+{reference_lay_summary}
+
+Generated Lay Summary:
+{generated_lay_summary}
+
+Evaluate each dimension independently. Return an integer score and
+a brief reason for each score.
+
+Output:
+{
+  "relevance": {
+    "score": "<integer from 1 to 5>",
+    "reason": "<brief reason for the relevance score>"
+  },
+  "readability": {
+    "score": "<integer from 1 to 5>",
+    "reason": "<brief reason for the readability score>"
+  },
+  "factuality": {
+    "score": "<integer from 1 to 5>",
+    "reason": "<brief reason for the factuality score>"
+  }
+}

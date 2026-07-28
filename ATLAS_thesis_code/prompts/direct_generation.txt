@@ -1,0 +1,16 @@
+You are given the full text of a biomedical research article.
+
+Write a plain-language lay summary for a general audience.
+
+The summary should:
+- explain the main research question, methods, findings, and implications;
+- use clear wording suitable for non-expert readers;
+- avoid unnecessary technical detail;
+- preserve the factual meaning of the original article;
+- not add information that is not supported by the article.
+
+Input:
+Full article text.
+
+Output:
+A lay summary of the article.

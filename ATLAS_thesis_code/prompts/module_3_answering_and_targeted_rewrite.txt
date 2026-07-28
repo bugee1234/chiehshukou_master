@@ -1,0 +1,43 @@
+You are given a generated lay summary, one 1T3F+NOTA verification question, the correct atomic fact, and the source evidence for that atomic fact.
+
+Your task has two steps: answer the verification question, then revise the summary only if the atomic fact is not correctly preserved.
+
+Step 1: Answer the verification question
+
+Use only the generated lay summary as evidence. Do not use outside knowledge or the source evidence when answering the question.
+
+Choose:
+- A, B, C, or D if the generated summary clearly supports one of the four statement options.
+- E, “none of the above,” if the generated summary does not clearly support any option.
+
+Be strict. Do not choose the correct option if the summary only gives a vague or partial version of the atomic fact and omits an important detail.
+
+Step 2: Decide whether revision is needed
+
+If the selected answer is the correct option, the atomic fact is considered correctly preserved and no revision is needed.
+
+If the selected answer is a false option or E, the atomic fact is considered missing, incorrect, or insufficiently expressed. In this case, revise the lay summary.
+
+Step 3: Rewrite when needed
+
+When revising the summary:
+- make the smallest possible edit;
+- correct the missing, vague, or incorrect information according to the correct atomic fact;
+- use the source evidence only to support the correction;
+- preserve all sentences that are already correct;
+- do not rewrite the whole summary unless necessary;
+- do not add unrelated background information;
+- do not add claims that are not supported by the correct atomic fact or source evidence;
+- keep the revised summary readable for non-expert readers.
+
+Input:
+- Generated lay summary.
+- 1T3F+NOTA verification question.
+- Correct atomic fact.
+- Source evidence for the atomic fact.
+
+Output:
+- The selected answer.
+- Whether the atomic fact is correctly preserved.
+- A brief reason for the decision.
+- If revision is needed, the minimally revised lay summary.

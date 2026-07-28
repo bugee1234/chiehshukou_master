@@ -1,0 +1,27 @@
+You are given an expert-written biomedical lay summary.
+
+Decompose the expert summary into atomic facts. Each atomic fact
+must:
+
+- be a short, self-contained sentence;
+- express one independently verifiable piece of information;
+- separate independent claims that appear in the same sentence;
+- replace referential expressions with their explicit entities;
+- expand an abbreviation when it first appears;
+- retain necessary populations, organisms, experimental conditions,
+  interventions, comparisons, directions, numbers, and qualifiers;
+- include only information stated in the expert summary;
+- contain no inference or additional information.
+
+Expert-Written Lay Summary:
+{expert_summary}
+
+Return only the extracted atomic facts.
+
+Output:
+{
+  "reference_atomic_facts": [
+    "<atomic fact 1>",
+    "<atomic fact 2>"
+  ]
+}
