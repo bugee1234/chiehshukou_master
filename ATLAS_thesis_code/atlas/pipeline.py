@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import hashlib
+import json
 import random
 from pathlib import Path
 from typing import Any, Dict, Iterable, List, Mapping, Optional
@@ -8,7 +9,6 @@ from typing import Any, Dict, Iterable, List, Mapping, Optional
 from .clients import StructuredLLM
 from .io import save_jsonl
 from .schemas import (
-    ANSWER_AND_REWRITE,
     ANSWER_ONLY,
     ANSWER_WITH_REASONING,
     CANDIDATE_FACTS,
@@ -16,9 +16,11 @@ from .schemas import (
     DIRECT_SUPPORT_DECISION,
     FILTER_DECISION,
     LLM_JUDGEMENT,
+    MODULE_3_ANSWER,
     QUESTION,
     REFERENCE_ATOMIC_FACTS,
     SUMMARY,
+    TARGETED_REWRITE,
 )
 
 
@@ -27,7 +29,7 @@ OPERATION_PROMPT_DIR = PROMPT_DIR / "experiment_operations"
 
 
 def load_prompt(filename: str) -> str:
-    """Load one prompt transcribed from the thesis appendix."""
+    """Load one prompt used by the thesis pipeline or appendix experiments."""
     path = PROMPT_DIR / filename
     if not path.is_file():
         raise FileNotFoundError("Missing appendix prompt: {}".format(path))
@@ -205,36 +207,48 @@ class AtlasPipeline:
             "false_options": false_rows,
         }
 
-    def answer_and_rewrite(self, summary: str, question: dict) -> dict:
-        response = self.client.generate(
-            load_prompt("module_3_answering_and_targeted_rewrite.txt"),
+    def verify_and_rewrite_if_needed(self, summary: str, question: dict) -> dict:
+        visible_question = {
+            "question": question["question"],
+            "options": question["options"],
+        }
+        answer_instruction = render_prompt(
+            "module_3_answering.txt",
             {
                 "generated_lay_summary": summary,
-                "verification_question": {
-                    "question": question["question"],
-                    "options": question["options"],
-                },
-                "correct_atomic_fact": question["correct_atomic_fact"],
-                "source_evidence": question["source_evidence"],
+                "verification_question": json.dumps(
+                    visible_question, ensure_ascii=False, indent=2
+                ),
             },
-            ANSWER_AND_REWRITE,
         )
-        answer = str(response.get("selected_answer", "")).strip().upper()
+        answer_response = self.client.generate(answer_instruction, {}, MODULE_3_ANSWER)
+        answer = str(answer_response.get("selected_answer", "")).strip().upper()
         if answer not in set("ABCDE"):
             raise ValueError("Module 3 selected_answer must be A, B, C, D, or E")
         preserved = answer == question["correct_letter"]
-        if response.get("correctly_preserved") is not preserved:
-            raise ValueError("Module 3 preservation decision conflicts with its selected answer")
         revised: Optional[str] = None
         if not preserved:
-            revised = _clean_text(response.get("revised_summary"), "minimally revised summary")
+            rewrite_instruction = render_prompt(
+                "module_3_targeted_rewrite.txt",
+                {
+                    "generated_lay_summary": summary,
+                    "correct_atomic_fact": question["correct_atomic_fact"],
+                    "source_evidence": question["source_evidence"],
+                },
+            )
+            rewrite_response = self.client.generate(
+                rewrite_instruction, {}, TARGETED_REWRITE
+            )
+            revised = _clean_text(
+                rewrite_response.get("revised_summary"), "minimally revised summary"
+            )
         return {
             "article_id": question["article_id"],
             "fact_id": question["fact_id"],
             "selected_answer": answer,
             "correct_letter": question["correct_letter"],
             "correctly_preserved": preserved,
-            "reason": _clean_text(response.get("reason"), "answer reason"),
+            "reason": _clean_text(answer_response.get("reason"), "answer reason"),
             "summary_before": summary,
             "summary_after": summary if preserved else revised,
         }
@@ -365,7 +379,7 @@ class AtlasPipeline:
         current_summary = initial_summary
         checks: List[dict] = []
         for question in questions:
-            check = self.answer_and_rewrite(current_summary, question)
+            check = self.verify_and_rewrite_if_needed(current_summary, question)
             checks.append(check)
             current_summary = check["summary_after"]
         return {

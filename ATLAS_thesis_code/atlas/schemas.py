@@ -77,16 +77,21 @@ QUESTION: Dict[str, Any] = {
     "required": ["question", "true_option", "false_options", "none_of_the_above"],
 }
 
-ANSWER_AND_REWRITE: Dict[str, Any] = {
+MODULE_3_ANSWER: Dict[str, Any] = {
     "type": "object",
     "additionalProperties": False,
     "properties": {
         "selected_answer": {"type": "string", "enum": ["A", "B", "C", "D", "E"]},
-        "correctly_preserved": {"type": "boolean"},
         "reason": {"type": "string"},
-        "revised_summary": {"anyOf": [{"type": "string"}, {"type": "null"}]},
     },
-    "required": ["selected_answer", "correctly_preserved", "reason", "revised_summary"],
+    "required": ["selected_answer", "reason"],
+}
+
+TARGETED_REWRITE: Dict[str, Any] = {
+    "type": "object",
+    "additionalProperties": False,
+    "properties": {"revised_summary": {"type": "string"}},
+    "required": ["revised_summary"],
 }
 
 ANSWER_WITH_REASONING: Dict[str, Any] = {

@@ -1,0 +1,25 @@
+You are given a generated lay summary and one 1T3F+NOTA verification question.
+
+Answer the verification question using only the information expressed in the generated lay summary.
+
+Choose:
+- A, B, C, or D only if the generated lay summary clearly supports that option;
+- E, “none of the above,” if the generated lay summary does not clearly support any of Options A–D.
+
+Do not use outside knowledge. Judge only what the generated lay summary actually states.
+
+Be strict. A vague or partial statement does not support an option when an important entity, condition, comparison, direction, number, or qualifier is missing.
+
+Generated Lay Summary:
+{generated_lay_summary}
+
+Verification Question:
+{verification_question}
+
+Return only the selected answer and a brief reason based on the generated lay summary.
+
+Output:
+{
+  "selected_answer": "<A, B, C, D, or E>",
+  "reason": "<brief reason based only on the generated lay summary>"
+}

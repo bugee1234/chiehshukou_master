@@ -1,0 +1,31 @@
+The system has determined that one atomic fact is missing, incorrect, or insufficiently expressed in a generated lay summary.
+
+Revise the generated lay summary so that it correctly preserves the supplied atomic fact.
+
+When revising the summary:
+- make the smallest possible edit;
+- correct only the missing, vague, or incorrect information represented by the atomic fact;
+- use the source evidence only to support that correction;
+- preserve every sentence that is already correct;
+- do not rewrite the whole summary unless necessary;
+- do not add unrelated background information;
+- do not add claims that are not supported by the atomic fact or source evidence;
+- keep the revised summary readable for non-expert readers.
+
+Do not answer or reconsider the verification question. The verification decision has already been made by the system.
+
+Generated Lay Summary:
+{generated_lay_summary}
+
+Atomic Fact to Restore:
+{correct_atomic_fact}
+
+Source Evidence:
+{source_evidence}
+
+Return only the complete minimally revised summary.
+
+Output:
+{
+  "revised_summary": "<complete minimally revised lay summary>"
+}
